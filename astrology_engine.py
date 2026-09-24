@@ -134,7 +134,7 @@ PLANETS = {
     "Pallas":   18,
     "Juno":     19,
     "Vesta":    20,
-    "N.Node":   10,   # True Node
+    "N.Node":   11,   # True (osculating) Node
     "S.Node":   -1,   # Calculated as 180 from N.Node
 }
 
@@ -326,22 +326,9 @@ HOUSE_KEYWORDS = [
 # Planetary hours order (Chaldean sequence)
 CHALDEAN = ["Saturn", "Jupiter", "Mars", "Sun", "Venus", "Mercury", "Moon"]
 DAY_RULERS = {
-    0: "Sun", 1: "Moon", 2: "Mars", 3: "Mercury",
-    4: "Jupiter", 5: "Venus", 6: "Saturn",
-}  # weekday (Mon=0) -> day ruler
-
-# Arabic Lots formulas: (name, day_formula, night_formula)
-# Formula: (from_planet, to_planet, add_asc) -- all longitudes
-# Day: ASC + to - from   Night: ASC + from - to
-LOTS_FORMULAS = [
-    ("Lot of Fortune",    "Moon",    "Sun"),
-    ("Lot of Spirit",     "Sun",     "Moon"),
-    ("Lot of Eros",       "Venus",   "Spirit"),    # Spirit = computed
-    ("Lot of Necessity",  "Mercury", "Fortune"),   # Fortune = computed
-    ("Lot of Courage",    "Mars",    "Fortune"),
-    ("Lot of Victory",    "Jupiter", "Spirit"),
-    ("Lot of Nemesis",    "Saturn",  "Fortune"),
-]
+    0: "Moon", 1: "Mars", 2: "Mercury", 3: "Jupiter",
+    4: "Venus", 5: "Saturn", 6: "Sun",
+}  # Python date.weekday() (Mon=0) -> traditional planetary day ruler
 
 # ---------------------------------------------------------------------------
 # UTILITY FUNCTIONS
@@ -1076,6 +1063,23 @@ def planet_house(planet_lon, cusps):
                 return i + 1
     return 1
 
+def is_applying(lon1, speed1, lon2, speed2, angle):
+    """True if the aspect of `angle` degrees between two bodies is applying
+    (moving toward exactness) rather than separating.
+
+    sep  = signed longitude of body1 minus body2, wrapped to (-180, 180].
+    x    = |sep| - angle        (signed distance from exactness)
+    dx/dt = sign(sep) * (speed1 - speed2)
+    Applying  <=>  x and dx/dt have opposite signs (distance shrinking).
+    """
+    sep = (lon1 - lon2 + 180.0) % 360.0 - 180.0
+    x = abs(sep) - angle
+    if x == 0:
+        return False  # exact right now: parting, not approaching
+    dxdt = math.copysign(1.0, sep) * (speed1 - speed2)
+    return (x * dxdt) < 0
+
+
 def calc_aspects(positions, luminaries=("Sun", "Moon")):
     """Return list of (p1, p2, aspect_name, orb, quality, glyph)."""
     planet_list = [p for p in positions if positions[p].get("longitude") is not None]
@@ -1089,8 +1093,9 @@ def calc_aspects(positions, luminaries=("Sun", "Moon")):
                 orb = orb_lum if (p1 in luminaries or p2 in luminaries) else orb_other
                 actual_orb = abs(diff - angle)
                 if actual_orb <= orb:
-                    # Applying or separating
-                    applying = (positions[p1]["speed"] - positions[p2]["speed"]) > 0
+                    # Applying or separating: is the pair moving toward exactness?
+                    applying = is_applying(lon1, positions[p1]["speed"],
+                                           lon2, positions[p2]["speed"], angle)
                     results.append((p1, p2, asp_name, round(actual_orb, 2), quality, glyph, applying))
     return sorted(results, key=lambda x: x[3])
 
@@ -1195,10 +1200,14 @@ def calc_antiscia(positions):
     return results
 
 def is_day_chart(sun_lon, asc_lon):
-    """Sun above horizon = day chart (Sun between Asc and Desc going via top)."""
-    # Sun is in day if its longitude is within 180° of ASC going counter-clockwise (above horizon)
+    """Sun above horizon = day chart (Sun between Asc and Desc going via MC).
+
+    Diurnal motion runs clockwise in a northern-hemisphere wheel, so the
+    above-horizon half is the 180° of longitude just *before* the ASC:
+    diff = (sun_lon - asc_lon) % 360 falls in (180, 360).
+    """
     diff = (sun_lon - asc_lon) % 360
-    return diff <= 180
+    return diff >= 180
 
 def calc_lots(positions, asc_lon, day_chart):
     """Calculate Arabic Lots. Returns dict of lot_name -> longitude."""
@@ -1216,14 +1225,16 @@ def calc_lots(positions, asc_lon, day_chart):
         except KeyError:
             return None
 
-    # Fortune
-    fl = lot("Moon", "Sun")
+    # Fortune — day: ASC + Moon - Sun (project Sun→Moon from ASC);
+    #          night: ASC + Sun - Moon. lot(from_p, to_p) computes
+    #          ASC + to - from by day, so Fortune = lot("Sun", "Moon").
+    fl = lot("Sun", "Moon")
     if fl is not None:
         lots["Lot of Fortune"] = fl
         fortune_lon = fl
 
-    # Spirit
-    sl = lot("Sun", "Moon")
+    # Spirit (Daimon) — day: ASC + Sun - Moon; night: ASC + Moon - Sun.
+    sl = lot("Moon", "Sun")
     if sl is not None:
         lots["Lot of Spirit"] = sl
 
@@ -1295,20 +1306,43 @@ def calc_lunar_phase(sun_lon, moon_lon):
     return "Dark Moon", "🌑", diff, 0
 
 def next_lunation(jd_start):
-    """Find next New Moon and Full Moon from jd_start."""
+    """Find next New Moon (elongation 0°) and Full Moon (elongation 180°)
+    from jd_start. Brackets the crossing in 1-day steps, then bisects."""
     if not SWE:
         return None, None
-    results = []
-    for phase_type in [0, 2]:  # 0=New Moon, 2=Full Moon
-        try:
-            ret, jd_out = swe.mooncross_ut(phase_type, jd_start, swe.FLG_SWIEPH)
-            if ret >= 0:
-                results.append(jd_out)
-            else:
-                results.append(None)
-        except Exception:
-            results.append(None)
-    return results[0], results[1]
+
+    def elongation(jd):
+        sun = swe.calc_ut(jd, swe.SUN, 0)[0][0]
+        moon = swe.calc_ut(jd, swe.MOON, 0)[0][0]
+        return (moon - sun) % 360
+
+    def signed_dist(e, target):
+        d = (e - target) % 360
+        return d if d <= 180 else d - 360
+
+    def find_next(target):
+        jd = jd_start
+        d_prev = signed_dist(elongation(jd), target)
+        for _ in range(40):  # more than one lunation
+            jd_next = jd + 1.0
+            d_curr = signed_dist(elongation(jd_next), target)
+            if d_prev == 0:
+                return jd
+            # Sign change with small jump = genuine crossing (guards the
+            # ±180° wrap of the signed distance, where |jump| ≈ 360°)
+            if d_prev * d_curr < 0 and abs(d_prev - d_curr) < 90:
+                lo, hi = jd, jd_next
+                for _ in range(30):
+                    mid = (lo + hi) / 2
+                    if signed_dist(elongation(mid), target) * d_prev < 0:
+                        hi = mid
+                    else:
+                        lo = mid
+                return (lo + hi) / 2
+            jd, d_prev = jd_next, d_curr
+        return None
+
+    return find_next(0.0), find_next(180.0)
 
 def void_of_course(jd, moon_lon, positions):
     """Check if Moon is void of course — no applying major aspects before sign ingress.
@@ -1376,27 +1410,26 @@ def planetary_hours(date, lat, lon):
     if not SWE:
         return []
     jd = julian_day(date.year, date.month, date.day, 12.0)
-    # Get sunrise and sunset
+    # Get sunrise and sunset. Chain the searches so each event is the first
+    # one after the previous: sunrise -> sunset -> next sunrise.
     try:
-        ret, sunrise = swe.rise_trans(jd - 0.5, swe.SUN, "", swe.CALC_RISE,
-                                       lat, lon, 0, swe.CALC_DISC_UPPER_LIMB)
-        ret2, sunset = swe.rise_trans(jd - 0.5, swe.SUN, "", swe.CALC_SET,
-                                       lat, lon, 0, swe.CALC_DISC_UPPER_LIMB)
+        _, tret = swe.rise_trans(jd - 0.5, swe.SUN,
+                                 swe.CALC_RISE | swe.BIT_DISC_CENTER,
+                                 (lon, lat, 0))
+        sunrise_jd = tret[0]
+        _, tret = swe.rise_trans(sunrise_jd + 0.01, swe.SUN,
+                                 swe.CALC_SET | swe.BIT_DISC_CENTER,
+                                 (lon, lat, 0))
+        sunset_jd = tret[0]
+        _, tret = swe.rise_trans(sunset_jd + 0.01, swe.SUN,
+                                 swe.CALC_RISE | swe.BIT_DISC_CENTER,
+                                 (lon, lat, 0))
+        next_sunrise_jd = tret[0]
     except Exception:
-        # Fallback: approximate 6am sunrise, 6pm sunset
+        # Fallback: approximate 6am-6pm UTC solar day
         base = julian_day(date.year, date.month, date.day, 0)
-        sunrise = [0, base + 6/24]
-        sunset  = [0, base + 18/24]
-
-    sunrise_jd = sunrise[1] if isinstance(sunrise, (list, tuple)) else sunrise
-    sunset_jd  = sunset[1]  if isinstance(sunset,  (list, tuple)) else sunset
-
-    # Next sunrise
-    try:
-        ret3, next_sunrise = swe.rise_trans(jd + 0.5, swe.SUN, "", swe.CALC_RISE,
-                                             lat, lon, 0, swe.CALC_DISC_UPPER_LIMB)
-        next_sunrise_jd = next_sunrise[1] if isinstance(next_sunrise, (list, tuple)) else next_sunrise
-    except Exception:
+        sunrise_jd = base + 6 / 24
+        sunset_jd = base + 18 / 24
         next_sunrise_jd = sunrise_jd + 1.0
 
     day_len  = (sunset_jd - sunrise_jd) / 12.0   # length of one day planetary hour
@@ -1410,7 +1443,6 @@ def planetary_hours(date, lat, lon):
     for i in range(12):
         hour_start = sunrise_jd + i * day_len
         planet = CHALDEAN[(ruler_idx + i) % 7]
-        start_dt = swe.jdut1_to_utc(hour_start, 0)  # (y,m,d,h,mi,s)
         hours.append(("day", i + 1, planet, hour_start, day_len * 24 * 60))
 
     night_ruler_idx = (ruler_idx + 12) % 7
@@ -1425,11 +1457,11 @@ def jd_to_dt(jd):
     """Convert Julian day to datetime string."""
     if SWE:
         try:
-            y, m, d, h = swe.jdut1_to_utc(jd, 0)[:4]
-            dt = datetime.datetime(int(y), int(m), int(d))
-            hour = int(h)
-            minute = int((h - hour) * 60)
-            return dt.strftime(f"%Y-%m-%d") + f" {hour:02d}:{minute:02d} UTC"
+            # gregflag=1 -> Gregorian calendar (0 would give Julian dates!)
+            # returns (year, month, day, hour, minute, second)
+            y, mo, d, hh, mi, _ss = swe.jdut1_to_utc(jd, 1)[:6]
+            return (f"{int(y):04d}-{int(mo):02d}-{int(d):02d} "
+                    f"{int(hh):02d}:{int(mi):02d} UTC")
         except Exception:
             pass
     return f"JD {jd:.4f}"
@@ -2224,7 +2256,8 @@ def cmd_transit(args):
                 orb = orb_l if t_name in ("Sun","Moon") or n_name in ("Sun","Moon") else orb_o
                 actual_orb = abs(diff - angle)
                 if actual_orb <= orb:
-                    applying = (t_data["speed"] - n_data.get("speed", 0)) > 0
+                    # Natal point is fixed: applying = transit moving toward exactness
+                    applying = is_applying(t_lon, t_data["speed"], n_lon, 0.0, angle)
                     rows.append((actual_orb, t_name, glyph, asp_name, n_name, quality, applying))
     for actual_orb, t_name, glyph, asp_name, n_name, quality, applying in sorted(rows):
         app = "Appl." if applying else "Sep."
@@ -2334,7 +2367,8 @@ def cmd_synastry(args):
                 orb = orb_l if p1 in ("Sun","Moon") or p2 in ("Sun","Moon") else orb_o
                 actual_orb = abs(diff - angle)
                 if actual_orb <= orb:
-                    applying = (d1_data["speed"] - d2_data.get("speed", 0)) > 0
+                    applying = is_applying(d1_data["longitude"], d1_data["speed"],
+                                           d2_data["longitude"], d2_data["speed"], angle)
                     rows.append((actual_orb, p1, glyph, asp_name, p2, quality, applying))
     for actual_orb, p1, glyph, asp_name, p2, quality, applying in sorted(rows):
         app = "Appl." if applying else "Sep."
@@ -2358,9 +2392,13 @@ def cmd_solar_return(args):
     natal_pos = calc_planet_positions(jd_natal)
     natal_sun_lon = natal_pos.get("Sun", {}).get("longitude", 0)
 
-    # Start searching from ~March of target year
-    jd_search = julian_day(target_year, mo - 1 if mo > 1 else 12, d, 0)
-    # Refine with iterative approach
+    # Start searching from ~1 month before the birthday in the target year
+    # (for January birthdays, December of the previous year).
+    start_yr = target_year if mo > 1 else target_year - 1
+    start_mo = mo - 1 if mo > 1 else 12
+    jd_search = julian_day(start_yr, start_mo, min(d, 28), 0)
+    # Refine iteratively: the Sun moves ~0.986°/day, so each degree of
+    # remaining longitude error corresponds to ~1/0.986 days of time.
     for _ in range(50):
         pos = calc_planet_positions(jd_search)
         sun_lon = pos.get("Sun", {}).get("longitude", natal_sun_lon)
@@ -2369,8 +2407,7 @@ def cmd_solar_return(args):
             diff -= 360
         if abs(diff) < 0.001:
             break
-        # Sun moves ~1 degree/day
-        jd_search += diff / 360.0
+        jd_search += diff / 0.9856
 
     sr_pos = calc_planet_positions(jd_search)
     sr_cusps, sr_asc, sr_mc = calc_houses(jd_search, lat, lon)
@@ -2761,7 +2798,8 @@ def cmd_synergy(args):
                 orb = orb_l if p1 in ("Sun","Moon") or p2 in ("Sun","Moon") else orb_o
                 actual_orb = abs(diff - angle)
                 if actual_orb <= orb:
-                    applying = (d1d["speed"] - d2d.get("speed", 0)) > 0
+                    applying = is_applying(d1d["longitude"], d1d["speed"],
+                                           d2d["longitude"], d2d["speed"], angle)
                     cross_rows.append((actual_orb, p1, glyph, asp_name, p2, quality, applying))
     cross_rows.sort()
 
