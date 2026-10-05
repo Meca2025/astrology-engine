@@ -1,4 +1,3 @@
----
 
 ![https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/etre34gdfgd3.png](https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/etre34gdfgd3.png)
 
