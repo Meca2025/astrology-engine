@@ -179,3 +179,20 @@ and fixed in-slice: a parameter shadowing datetime.date, and a wrong test
 fixture (01-28 is Elhaz's start, not Peorth's). Védis recorded the module in
 astroengine/INTERFACE.md and COMPONENT_INDEX.md. No CLI surface (R09). Next: R03
 runic hours + planetary hours.
+
+## 2026-10-06 — R03 Runic Hours + Planetary Hours complete
+
+Extended astroengine/runic.py: runic_hour() on the Ch. 4 solar wheel,
+to_local_apparent_time() with the declared longitude+EoT approximation
+(the book's "real time", midday = sun due south), planetary_hour() on the
+App. 3 grid (hour-to-hour CLOCK divisions), and sele() detecting when the
+hour-rune's deity correspondence contains the planetary deity — Pennick's
+"especially powerful" coincidence. Sólrún verified with
+tests/test_runic_hours.py (7/7 green, full suite 309 green): Ingrid's Rad
+hour (16:45), a constructed true-sele (Saturday 13:05 civil at lon +7.5 ->
+LAT 13:51 Ur/Thor), LAT conversion bounds, grid spot checks, explicit
+CalculationErrors. One wrong test fixture fixed in-slice (LAT at the false-
+sele probe is 03:28 Elhaz, not Tyr). The Kenneth example remains excluded
+as a fixture per the R01 wheel-conflict note. Védis updated INTERFACE.md
+and COMPONENT_INDEX.md. No CLI surface (R09). Next: R04 tides, eightfold
+year, runic names.

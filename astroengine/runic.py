@@ -144,3 +144,176 @@ def runic_date_request(iso_date: str, time: str | None = None,
 
 __all__ = ["RunicDateRequest", "CalculationError", "half_month_rune",
            "runic_date_request"]
+
+
+# ---------------------------------------------------------------------------
+# R03 — runic hours, local apparent time, planetary hours, sele
+# ---------------------------------------------------------------------------
+
+import math
+
+
+@dataclass(frozen=True)
+class RunicHourRequest:
+    """A civil clock instant plus observer longitude, for hour-wheel work."""
+    iso_datetime: str              # ISO YYYY-MM-DDTHH:MM (civil, in `timezone`)
+    longitude: float               # decimal degrees, -180..180
+    timezone: str                  # IANA name or UTC (required)
+
+
+def _parse_iso_datetime(value: str) -> datetime:
+    try:
+        return datetime.fromisoformat(value)
+    except ValueError as exc:
+        raise CalculationError(
+            f"invalid datetime '{value}': expected YYYY-MM-DDTHH:MM") from exc
+
+
+def _check_longitude(value: float) -> float:
+    try:
+        lon = float(value)
+    except (TypeError, ValueError) as exc:
+        raise CalculationError(
+            f"invalid longitude '{value}': expected decimal degrees") from exc
+    if not -180.0 <= lon <= 180.0:
+        raise CalculationError(
+            f"invalid longitude '{value}': expected -180..180")
+    return lon
+
+
+def _equation_of_time_minutes(day_of_year: int) -> float:
+    """Low-precision EoT approximation (minutes). Declared, not exact."""
+    b = math.radians(360.0 / 365.0 * (day_of_year - 81))
+    return (9.87 * math.sin(2 * b) - 7.53 * math.cos(b)
+            - 1.5 * math.sin(b))
+
+
+def to_local_apparent_time(iso_datetime: str, longitude: float,
+                           timezone: str) -> dict:
+    """Convert civil clock time to Local Apparent Time (the book's real time).
+
+    Method (declared): LAT = UTC + longitude/15h + EoT, with the standard
+    low-precision equation-of-time approximation. Midday LAT = sun due south.
+    Accuracy is a few minutes; the book itself averages start times "to the
+    nearest hour".
+    """
+    from datetime import timedelta
+    naive = _parse_iso_datetime(iso_datetime)
+    if naive.tzinfo is not None:
+        raise CalculationError(
+            f"invalid datetime '{iso_datetime}': must be wall time without "
+            "offset; pass the zone separately")
+    lon = _check_longitude(longitude)
+    zone = _zone(timezone)
+    if zone is None:
+        raise CalculationError("timezone is required for apparent-time work")
+    aware = naive.replace(tzinfo=zone)
+    utc = aware.astimezone(ZoneInfo("UTC"))
+    eot = _equation_of_time_minutes(aware.timetuple().tm_yday)
+    lat = utc + timedelta(hours=lon / 15.0, minutes=eot)
+    return {
+        "local_apparent_time": lat.strftime("%H:%M"),
+        "utc": utc.strftime("%Y-%m-%dT%H:%M"),
+        "equation_of_time_minutes": round(eot, 2),
+        "longitude": lon,
+        "method": "longitude+eot-approx",
+    }
+
+
+def runic_hour(local_apparent_time: str) -> dict:
+    """Name the rune ruling a solar hour (HH:MM local apparent time).
+
+    Wheel (Ch. 4): Feoh 12:30-13:30, each futhark rune one solar hour later,
+    Dag 11:30-12:30.
+    """
+    h, m = _parse_time(local_apparent_time)
+    t = h * 60 + m
+    idx = ((t - (12 * 60 + 30)) % (24 * 60)) // 60
+    corpus = _corpus()
+    entry = corpus["runic_hours"]["hours"][idx]
+    return {
+        "rune": entry["rune"],
+        "window": f'{entry["start"]}-{entry["end"]}',
+        "correspondences": _correspondences(corpus, entry["rune"]),
+        "source": corpus["source"],
+        "historical_claim": corpus["historical_claim"],
+    }
+
+
+_WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+             "Saturday", "Sunday"]
+
+
+def planetary_hour(weekday: str, clock_hour: int) -> dict:
+    """Name the deity of a Northern Tradition planetary hour (App. 3).
+
+    The book divides planetary hours hour-to-hour on CLOCK time (unlike the
+    solar runic hours). `weekday`: English name; `clock_hour`: 0-23.
+    """
+    name = weekday.strip().capitalize()
+    if name not in _WEEKDAYS:
+        raise CalculationError(
+            f"invalid weekday '{weekday}': expected one of "
+            + ", ".join(_WEEKDAYS))
+    try:
+        hh = int(clock_hour)
+    except (TypeError, ValueError) as exc:
+        raise CalculationError(
+            f"invalid clock_hour '{clock_hour}': expected 0-23") from exc
+    if not 0 <= hh <= 23:
+        raise CalculationError(
+            f"invalid clock_hour '{clock_hour}': expected 0-23")
+    corpus = _corpus()
+    deity = corpus["planetary_hours"]["grid"][name][hh]
+    return {
+        "weekday": name,
+        "clock_hour": hh,
+        "deity": deity,
+        "note": corpus["planetary_hours"]["note"],
+        "source": corpus["source"],
+        "historical_claim": corpus["historical_claim"],
+    }
+
+
+def sele(iso_datetime: str, longitude: float, timezone: str) -> dict:
+    """Detect sele: runic hour-rune and planetary hour sharing a deity.
+
+    Pennick: "When appropriate runic hours coincide with their planetary
+    equivalents, these are especially powerful." Appropriate = the planetary
+    deity appears in the hour-rune's deity correspondence (App. 1).
+    """
+    lon = _check_longitude(longitude)
+    zone = _zone(timezone)
+    if zone is None:
+        raise CalculationError("timezone is required for sele work")
+    naive = _parse_iso_datetime(iso_datetime)
+    if naive.tzinfo is not None:
+        raise CalculationError(
+            f"invalid datetime '{iso_datetime}': must be wall time without "
+            "offset; pass the zone separately")
+    aware = naive.replace(tzinfo=zone)
+
+    lat = to_local_apparent_time(iso_datetime, lon, timezone)
+    rh = runic_hour(lat["local_apparent_time"])
+    weekday = aware.strftime("%A")
+    ph = planetary_hour(weekday, aware.hour)
+
+    rune_deities = {d.strip() for d in
+                    rh["correspondences"]["deity"].split("/")}
+    is_sele = ph["deity"] in rune_deities
+    return {
+        "sele": is_sele,
+        "runic_hour": {"rune": rh["rune"], "window": rh["window"],
+                       "local_apparent_time": lat["local_apparent_time"],
+                       "deities": sorted(rune_deities)},
+        "planetary_hour": {"weekday": ph["weekday"],
+                           "clock_hour": ph["clock_hour"],
+                           "deity": ph["deity"]},
+        "method": lat["method"],
+        "source": rh["source"],
+        "historical_claim": rh["historical_claim"],
+    }
+
+
+__all__ += ["RunicHourRequest", "to_local_apparent_time", "runic_hour",
+            "planetary_hour", "sele"]

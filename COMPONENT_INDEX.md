@@ -27,6 +27,9 @@ life-periods. Source Pennick (2023), labeled modern synthesis. Verified by
 `astroengine/runic.py` owns runic-cycle computation (R02): `half_month_rune`
 names the ruling half-month rune per Pennick App. 2 with explicit boundary
 and timezone handling; verified by `tests/test_runic_half_months.py`.
+R03 adds the day-wheel: `runic_hour`, `to_local_apparent_time`
+(longitude+EoT method), `planetary_hour` (App. 3 grid), and `sele`
+detection; verified by `tests/test_runic_hours.py`.
 
 `astroengine/vargas.py` owns divisional sign arithmetic; `data/vargas.json` owns
 the sixteen named mappings. Technique discrepancy ledger lives in docs/references.

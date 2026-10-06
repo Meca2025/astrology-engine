@@ -152,3 +152,18 @@ correspondences (data, not interpretation), source and historical_claim.
 Boundary rule per Pennick App. 2: latest start on/before the date; pre-01-13
 dates belong to Eoh; on a start date with a clock time, the new rune begins at
 the book's local-apparent start time. No ephemeris, no interpretation.
+
+## Runic hours (R03)
+
+`runic.RunicHourRequest(iso_datetime, longitude, timezone)` is a frozen
+request. `runic_hour(local_apparent_time)` names the rune ruling a solar
+hour on the Ch. 4 wheel (Feoh 12:30-13:30 … Dag 11:30-12:30).
+`to_local_apparent_time(iso_datetime, longitude, timezone)` converts civil
+clock time to the book's "real time" (sundial time; midday = sun due south)
+via declared method `longitude+eot-approx` (longitude correction plus
+low-precision equation of time; accurate to a few minutes).
+`planetary_hour(weekday, clock_hour)` names the Northern Tradition planetary
+hour deity from the App. 3 grid (hour-to-hour divisions on CLOCK time).
+`sele(iso_datetime, longitude, timezone)` reports whether the runic
+hour-rune's deity correspondence contains the planetary hour's deity —
+Pennick's "especially powerful" coincidence. No interpretation.
