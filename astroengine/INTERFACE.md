@@ -327,3 +327,12 @@ ten new aspects with neutral weight 0 so synergy scoring is unchanged.
 - `astroengine/stars.py`: `load_stars()`, `star_longitude(name, jd_ut)`,
   `star_hits(natal_jd_ut, lat, lon, orb)` — 26 bright stars from
   `data/fixed_stars.json`, IAU 1976 precession to date. CLI: `stars`.
+
+- `astroengine/asteroids.py`: `asteroid_positions(jd_ut)` —
+  Chiron/Ceres/Pallas/Juno/Vesta via Swiss Ephemeris asteroid files;
+  honest CalculationError when the .se1 files are absent. CLI:
+  `asteroids`.
+- `astroengine/midpoints.py`: `midpoint(a, b)`,
+  `all_midpoints(positions)`, `midpoint_hits(natal_jd_ut, lat, lon,
+  orb)` — 45 planetary midpoints and their activations. CLI:
+  `midpoints`.

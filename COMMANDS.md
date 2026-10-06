@@ -289,6 +289,27 @@ python3 astrology_engine.py runic --datetime 2026-05-16T16:45 \
 
 ---
 
+## `asteroids`
+
+Chiron, Ceres, Pallas, Juno, Vesta — when their ephemeris files are
+present. When they are not, the engine says so plainly instead of
+inventing positions.
+
+```bash
+python3 astrology_engine.py asteroids --load volmarr
+```
+
+## `midpoints`
+
+The secret chords: every planetary pair's midpoint, and the planets
+and angles standing upon them.
+
+```bash
+python3 astrology_engine.py midpoints --load volmarr
+```
+
+---
+
 ## `stars`
 
 Fixed stars: the bright ones — Regulus, Spica, Antares — and their

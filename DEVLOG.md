@@ -477,3 +477,20 @@ with a violent edge) — both within 0.6°.
 
 Sólrún: `tests/test_stars.py` 8/8 green plus independent subagent
 verification. Pushed via the PAT tool.
+
+## 2026-10-06 — H08: asteroids and midpoints
+
+Eighth slice of the Horizons program. `astroengine/midpoints.py`
+computes all 45 planetary midpoints (shorter-arc) and reports the
+planets and angles standing on them, either end of the axis. For
+Volmarr: Mars on the Saturn/Neptune midpoint at 0.04° — the
+disciplined warrior indeed. `astroengine/asteroids.py` reaches for
+Chiron, Ceres, Pallas, Juno, Vesta through the Swiss Ephemeris
+asteroid files; this environment ships none, and no reachable mirror
+carries them, so the module raises a clear CalculationError naming
+the missing .se1 file rather than inventing positions — honesty over
+completeness, as the standing rule requires. Both CLIs take `--load`
+and `--json`.
+
+Sólrún: `tests/test_asteroids_midpoints.py` 9/9 green plus
+independent subagent verification. Pushed via the PAT tool.

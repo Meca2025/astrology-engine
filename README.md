@@ -86,6 +86,8 @@ and documented — never merely planned.
 | `watch` | Transit watch — coming outer-planet transits with exact dates |
 | `elect` | Electional astrology — choose the most fortunate windows |
 | `stars` | Fixed stars — the bright ones and their contacts to your chart |
+| `asteroids` | Chiron, Ceres, Pallas, Juno, Vesta — honest about missing ephemeris files |
+| `midpoints` | The 45 planetary midpoints and the planets standing upon them |
 
 ---
 

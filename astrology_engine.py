@@ -2371,6 +2371,91 @@ def _loc_label(req: dict) -> str:
     return " ".join(x for x in (city, nation) if x)
 
 
+def _load_chart_into(args):
+    """Fill birth data from --load; returns the chart title."""
+    from astroengine.charts import load_chart
+    saved = load_chart(args.load, getattr(args, "chart_dir", None))
+    req = saved.get("request", {}) or {}
+    for k in ("date", "time", "lat", "lon", "timezone", "city", "nation"):
+        if getattr(args, k, None) in (None, "") and req.get(k) not in (None, ""):
+            setattr(args, k, req.get(k))
+    return saved.get("name", "Seeker")
+
+
+def cmd_asteroids(args):
+    from astroengine.asteroids import ASTEROIDS, asteroid_positions
+    if args.load:
+        title = _load_chart_into(args)
+    else:
+        apply_chart_load(args)
+        title = "Seeker"
+    require_date(args)
+    y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
+        args.date, args.time, args.city, args.nation,
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None))
+    jd = julian_day(y, mo, d, utc_hour)
+    try:
+        result = asteroid_positions(jd)
+    except CalculationError as exc:
+        unavailable = {"error": str(exc)}
+        if args.json:
+            print(json.dumps({"title": title, "positions": {},
+                              "unavailable": unavailable},
+                             ensure_ascii=False, sort_keys=True))
+            return {"positions": {}, "unavailable": unavailable}
+        header("ASTEROIDS", f"{title}")
+        print(f"  {exc}")
+        print()
+        print("  The asteroid hymn must wait for its ephemeris files.")
+        return {"positions": {}, "unavailable": unavailable}
+    positions, unavailable = result["positions"], result["unavailable"]
+    if args.json:
+        print(json.dumps({"title": title, "positions": positions,
+                          "unavailable": unavailable},
+                         ensure_ascii=False, sort_keys=True))
+        return result
+    header("ASTEROIDS", f"{title}")
+    for name, num, meaning in ASTEROIDS:
+        p = positions.get(name)
+        if p is None:
+            print(f"  {name:<10} unavailable: {unavailable.get(name, '?')[:60]}")
+            continue
+        rx = " R" if p["retrograde"] else ""
+        print(f"  {name:<10} {p['longitude']:7.2f}°{rx}")
+        print(f"      {meaning}")
+    return result
+
+
+def cmd_midpoints(args):
+    from astroengine.midpoints import midpoint_hits
+    if args.load:
+        title = _load_chart_into(args)
+    else:
+        apply_chart_load(args)
+        title = "Seeker"
+    require_date(args)
+    y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
+        args.date, args.time, args.city, args.nation,
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None))
+    jd = julian_day(y, mo, d, utc_hour)
+    hits = midpoint_hits(jd, lat, lon, orb=args.orb)
+    if args.json:
+        print(json.dumps({"title": title, "hits": hits},
+                         ensure_ascii=False, sort_keys=True))
+        return {"hits": hits}
+    header("MIDPOINTS", f"{title}")
+    if not hits:
+        print(f"  No planet or angle on a midpoint within {args.orb}°.")
+    for h in hits:
+        print(f"  {h['activated_by']:<8} on {h['pair']:<16} "
+              f"orb {h['orb']:.2f}°")
+    print()
+    print("  The secret chords between the wanderers.")
+    return {"hits": hits}
+
+
 def cmd_stars(args):
     from astroengine.stars import load_stars, star_hits
     if args.list:
@@ -4030,6 +4115,21 @@ def main():
     num.add_argument("--json", action="store_true")
     add_chart_lib(num, with_load=False)
 
+    ast = sub.add_parser("asteroids", help="Asteroids: Chiron, Ceres, Pallas, Juno, Vesta (honest about missing files)")
+    ast.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
+    ast.add_argument("--time", default=None, help="HH:MM (24h)")
+    ast.add_argument("--json", action="store_true")
+    add_geo(ast)
+    add_chart_lib(ast)
+
+    mdp = sub.add_parser("midpoints", help="Midpoints: the secret chords between every two planets")
+    mdp.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
+    mdp.add_argument("--time", default=None, help="HH:MM (24h)")
+    mdp.add_argument("--orb", type=float, default=1.0)
+    mdp.add_argument("--json", action="store_true")
+    add_geo(mdp)
+    add_chart_lib(mdp)
+
     stc = sub.add_parser("stars", help="Fixed stars: the bright ones and their contacts to the chart")
     stc.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
     stc.add_argument("--time", default=None, help="HH:MM (24h)")
@@ -4156,6 +4256,8 @@ def main():
         "watch":        cmd_watch,
         "elect":        cmd_elect,
         "stars":        cmd_stars,
+        "asteroids":    cmd_asteroids,
+        "midpoints":    cmd_midpoints,
     }
     _TWO_PERSON = {"synastry", "composite", "synergy"}
     _DATE_FIELDS = {

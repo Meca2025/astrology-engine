@@ -108,3 +108,6 @@ body availability/frame/search rules. The monolith owns text uncertainty renderi
   `tests/test_electional.py`.
 - `astroengine/stars.py` + `data/fixed_stars.json` — fixed stars;
   verified by `tests/test_stars.py`.
+- `astroengine/asteroids.py` — asteroids (honest missing-file
+  behavior); `astroengine/midpoints.py` — midpoints; verified by
+  `tests/test_asteroids_midpoints.py`.
