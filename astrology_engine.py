@@ -2466,6 +2466,39 @@ def cmd_yogas(args):
     return {"yogas": report}
 
 
+def cmd_shadbala(args):
+    from astroengine.shadbala import shadbala
+    from astroengine.models import ChartRequest
+    if args.load:
+        title = _load_chart_into(args)
+    else:
+        apply_chart_load(args)
+        title = "Seeker"
+    require_date(args)
+    y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
+        args.date, args.time, args.city, args.nation,
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None))
+    birth = ChartRequest(date=args.date, time=args.time, latitude=lat,
+                         longitude=lon, timezone=tz_name, zodiac="sidereal",
+                         house_system="whole-sign")
+    report = shadbala(birth)
+    if args.json:
+        print(json.dumps({"title": title, "shadbala": report},
+                         ensure_ascii=False, sort_keys=True))
+        return {"shadbala": report}
+    print(f"Shadbala — the sixfold strength of {title} (virupas)")
+    for planet, v in report["planets"].items():
+        c = v["components"]
+        print(f"  {planet:8s} sthana {c['sthana']:6.1f}  dig {c['dig']:5.1f}  "
+              f"kala {c['kala']:6.1f}  chesta {c['chesta']:5.1f}  "
+              f"naisargika {c['naisargika']:5.1f}  drik {c['drik']:6.1f}  |  "
+              f"{v['virupas']:7.1f} = {v['rupas']:.2f} rupas "
+              f"(min {v['minimum_rupas']}) {'STRONG' if v['strong'] else 'weak'}")
+    print("Classical structure, simplified components — see --json limitations.")
+    return {"shadbala": report}
+
+
 def cmd_mantras(args):
     from astroengine.mantras import all_mantras, mantras_for, render_remedies
     if args.planet:
@@ -4396,6 +4429,13 @@ def main():
     add_geo(yg)
     add_chart_lib(yg)
 
+    sb = sub.add_parser("shadbala", help="Shadbala: the sixfold planetary strength in virupas")
+    sb.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
+    sb.add_argument("--time", default=None, help="HH:MM (24h)")
+    sb.add_argument("--json", action="store_true")
+    add_geo(sb)
+    add_chart_lib(sb)
+
     dr = sub.add_parser("draconic", help="Draconic chart: the soul-chart reckoned from the north node")
     dr.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
     dr.add_argument("--time", default=None, help="HH:MM (24h)")
@@ -4580,6 +4620,7 @@ def main():
         "dossier":      cmd_dossier,
         "forecast":     cmd_forecast,
         "yogas":        cmd_yogas,
+        "shadbala":     cmd_shadbala,
         "mantras":      cmd_mantras,
         "midpoints":    cmd_midpoints,
     }

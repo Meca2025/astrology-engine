@@ -315,6 +315,19 @@ python3 astrology_engine.py yogas --load volmarr
 
 ---
 
+## `shadbala`
+
+The sixfold strength of the seven planets in virupas: Sthana, Dig,
+Kala, Chesta, Naisargika, Drik — each component shown, totals in
+rupas against the classical minima. Classical structure with
+honestly simplified components; see `--json` limitations.
+
+```bash
+python3 astrology_engine.py shadbala --load volmarr
+```
+
+---
+
 ## `draconic`
 
 The soul-chart: every position reckoned from the natal north node,

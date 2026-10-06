@@ -650,3 +650,9 @@ variants, sign lords, exaltations) + astroengine/yogas.py
 (detect_yogas, render_yogas) + `yogas` CLI. Volmarr's chart: Hamsa,
 Dhana (Moon+Saturn), Raja (Jupiter+Venus mutual kendra), Sakata;
 Gaja Kesari/Budha-Aditya/Kemadruma absent — all hand-verified.
+
+G02 (2026-10-06): Shadbala — data/shadbala.json (constants, minima,
+limitations) + astroengine/shadbala.py + `shadbala` CLI. Panchadha
+dignity for Saptavargaja; Hora/Vara from planetary hours; Ayana by
+solar declination. Volmarr: Jupiter 8.65 rupas (Hamsa-strong),
+all planets above minima.

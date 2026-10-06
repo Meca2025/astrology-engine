@@ -73,6 +73,17 @@ Sakata. Definitions, sources and variants in data/yogas.json (rule
 version 1.0); each detection carries rule, signification, source.
 Sambandha = conjunction, mutual kendra, or exchange of signs.
 
+## Shadbala (Gambhira G02)
+
+`shadbala.shadbala(request)` computes the sixfold strength in virupas
+for Sun..Saturn: Sthana (Uchcha, Saptavargaja with Panchadha dignity,
+Ojhayugma, Kendradi, Drekkana), Dig (directional, linear by house),
+Kala (Natonnata binary, Paksha, Tribhaga, Vara, Hora via planetary
+hours, Ayana by solar declination), Chesta (8-state speed
+simplification), Naisargika (fixed table), Drik (special aspects,
+benefic minus malefic over 4). Totals compared against the classical
+minima in rupas. Approximations disclosed in `limitations`.
+
 ## Vimshottari (S04)
 
 `dashas.compute_dashas(request, years=None, year_model=None, as_of=None)` returns
