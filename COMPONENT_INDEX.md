@@ -98,3 +98,5 @@ body availability/frame/search rules. The monolith owns text uncertainty renderi
   `tests/test_wheel.py`.
 - `astroengine/houses.py` — five house systems; verified by
   `tests/test_houses.py`.
+- `astroengine/directions.py` — solar arc directions; verified by
+  `tests/test_directions.py`.

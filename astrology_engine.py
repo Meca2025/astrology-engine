@@ -2239,7 +2239,7 @@ def apply_chart_load(args, suffix=""):
             filled.append(key)
     if filled:
         print(f"  Loaded chart '{name}' ({saved.get('chart_type', '?')}) -> "
-              f"{', '.join(filled)}")
+              f"{', '.join(filled)}", file=sys.stderr)
 
 
 def require_date(args, field="date"):
@@ -2369,6 +2369,60 @@ def _loc_label(req: dict) -> str:
         pass
     city, nation = req.get("city"), req.get("nation")
     return " ".join(x for x in (city, nation) if x)
+
+
+def cmd_solar_arc(args):
+    from astroengine.directions import solar_arc, directed_aspects
+    if args.load:
+        from astroengine.charts import load_chart
+        saved = load_chart(args.load, getattr(args, "chart_dir", None))
+        result = saved.get("result") or {}
+        positions = result.get("positions") or result.get("natal") or {}
+        req = saved.get("request", {}) or {}
+        for k in ("date", "time", "lat", "lon", "timezone", "city", "nation"):
+            if getattr(args, k, None) in (None, "") and req.get(k) not in (None, ""):
+                setattr(args, k, req.get(k))
+        title = saved.get("name", "Seeker")
+        print(f"  Solar arcs for saved chart '{args.load}'",
+              file=sys.stderr if args.json else sys.stdout)
+    else:
+        apply_chart_load(args)
+        title = "Seeker"
+    require_date(args)
+    y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
+        args.date, args.time, args.city, args.nation,
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None))
+    jd_natal = julian_day(y, mo, d, utc_hour)
+    target = args.target_date or datetime.date.today().isoformat()
+    try:
+        ty, tm, td = (int(x) for x in target.split("-"))
+        jd_target = julian_day(ty, tm, td, 12.0)
+    except (ValueError, TypeError):
+        raise CalculationError(f"invalid --target-date '{target}': use YYYY-MM-DD")
+    houses_system = getattr(args, "houses", "placidus") or "placidus"
+    positions = calc_planet_positions(jd_natal)
+    arc = solar_arc(jd_natal, jd_target, lat, lon, houses_system)
+    natal_lon = {b: (positions[b]["longitude"] % 360.0) for b in arc["directed"]
+                 if b in positions and positions[b].get("longitude") is not None}
+    hits = directed_aspects(arc["directed"], natal_lon, orb=args.orb,
+                              arc=arc["arc"])
+    _print_house_system(args)
+    if args.json:
+        print(json.dumps({"title": title, "target_date": target,
+                          "arc": arc["arc"], "years": arc["years"],
+                          "aspects": hits}, ensure_ascii=False, sort_keys=True))
+        return {"arc": arc, "aspects": hits}
+    header("SOLAR ARC DIRECTIONS", f"{title}  →  {target}")
+    print(f"  Solar arc: {arc['arc']:.2f}° over {arc['years']:.2f} years\n")
+    if not hits:
+        print(f"  No directed-to-natal aspects within {args.orb}°.")
+    for h in hits:
+        flag = "  ★ EXACT" if h["exact"] else ""
+        print(f"  d.{h['directed']:<8} {h['aspect']:<12} n.{h['natal']:<8} "
+              f"orb {h['orb']:>5.2f}°  {'applying' if h['applying'] else 'separating'}{flag}")
+    print()
+    return {"arc": arc, "aspects": hits}
 
 
 def cmd_wheel(args):
@@ -3787,6 +3841,16 @@ def main():
     num.add_argument("--json", action="store_true")
     add_chart_lib(num, with_load=False)
 
+    sar = sub.add_parser("solar-arc", help="Solar arc directions to a target date")
+    sar.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
+    sar.add_argument("--time", default=None, help="HH:MM (24h)")
+    sar.add_argument("--target-date", default=None, help="Target date YYYY-MM-DD (default: today)")
+    sar.add_argument("--orb", type=float, default=1.0)
+    sar.add_argument("--json", action="store_true")
+    add_geo(sar)
+    add_houses(sar)
+    add_chart_lib(sar)
+
     whl = sub.add_parser("wheel", help="Render a natal chart wheel as SVG")
     whl.add_argument("--date", required=False, help="YYYY-MM-DD (or --load NAME)")
     whl.add_argument("--time", default=None, help="HH:MM (24h)")
@@ -3859,6 +3923,7 @@ def main():
         "iching":       cmd_iching,
         "runecast":     cmd_runecast,
         "wheel":        cmd_wheel,
+        "solar-arc":    cmd_solar_arc,
     }
     _TWO_PERSON = {"synastry", "composite", "synergy"}
     _DATE_FIELDS = {

@@ -302,3 +302,9 @@ ten new aspects with neutral weight 0 so synergy scoring is unchanged.
   regiomontanus; system codes from data/profiles.json; explicit
   CalculationError on unknown systems. Threaded through the monolith
   via `_optional_houses(..., system)` and the `--houses` flag.
+
+- `astroengine/directions.py`: `solar_arc(natal_jd_ut, target_jd_ut,
+  lat, lon, houses)` — arc = progressed-Sun motion (day-for-a-year),
+  all natal longitudes + arc; directed ASC/MC when lat/lon given.
+  `directed_aspects(directed, natal, orb)` — major aspects, tightest
+  first, applying/separating, exact-hit flag. CLI: `solar-arc`.

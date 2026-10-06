@@ -81,6 +81,7 @@ and documented — never merely planned.
 | `runic` | The runic star-program: Pennick's runic astrology as layer flags, text + JSON |
 | `tarot` / `reading` / `numerology` / `iching` / `runecast` | The divination line: tarot spreads, astrology readings, numerology, I-Ching, rune casting |
 | `wheel` | Chart wheels — the sky rendered as beautiful SVG, five house systems via `--houses` |
+| `solar-arc` | Solar arc directions — the great predictive art, directed-to-natal aspects |
 
 ---
 

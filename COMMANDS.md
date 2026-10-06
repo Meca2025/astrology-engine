@@ -289,6 +289,21 @@ python3 astrology_engine.py runic --datetime 2026-05-16T16:45 \
 
 ---
 
+## `solar-arc`
+
+Solar arc directions: the secondary-progressed Sun's arc carried
+across the whole chart, listing directed-to-natal aspects within a
+tight orb — the great modern predictive art.
+
+```bash
+python3 astrology_engine.py solar-arc --load volmarr --target-date 2026-10-23
+python3 astrology_engine.py solar-arc --date 1972-09-01 --time 08:18 \
+  --lat 42.81 --lon -73.94 --timezone America/New_York \
+  --target-date 2027-09-06 --orb 1.5
+```
+
+---
+
 ## `wheel`
 
 Render a natal chart wheel as a beautiful dark-gold SVG: zodiac ring,

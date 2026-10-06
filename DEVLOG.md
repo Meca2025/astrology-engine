@@ -400,3 +400,19 @@ in their request automatically.
 
 Sólrún: `tests/test_houses.py` 8/8 green plus independent subagent
 verification. Pushed via the PAT tool.
+
+## 2026-10-06 — H03: solar arc directions
+
+Third slice of the Horizons program. `astroengine/directions.py`
+computes the solar arc — secondary-progressed Sun motion,
+day-for-a-year — and carries it across every natal longitude plus the
+directed angles. `directed_aspects()` lists directed-to-natal major
+aspects within orb, tightest first, with applying/separating determined
+numerically and an exact-hit flag under 0.1°. The `solar-arc` CLI takes
+`--load` or birth data, `--target-date`, `--orb`, `--houses`, `--json`.
+Also fixed: chart-load notices now go to stderr so `--json` stdout
+stays parseable.
+
+Verified live: directed Mercury conjunct natal Uranus at 0.07° on
+2026-10-23 for Volmarr. Sólrún: `tests/test_directions.py` 6/6 green
+plus independent subagent verification. Pushed via the PAT tool.
