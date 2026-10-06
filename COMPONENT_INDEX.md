@@ -19,6 +19,11 @@ Update this index when new public modules are introduced; their API is recorded 
 `astroengine/vedic.py` owns Jyotisha D1/nakshatras; `data/vedic.json` owns names,
 graha mappings and default profile. Input and astronomy domains stay independent.
 
+`data/runic.json` owns the Northern runic-astrology corpus (R01): 32 runes,
+half-months, runic/planetary hours, tides, 28 mansions, palaces, worlds,
+life-periods. Source Pennick (2023), labeled modern synthesis. Verified by
+`tests/test_runic.py`; no CLI surface yet (capability registration in R09).
+
 `astroengine/vargas.py` owns divisional sign arithmetic; `data/vargas.json` owns
 the sixteen named mappings. Technique discrepancy ledger lives in docs/references.
 

@@ -1,0 +1,1511 @@
+{
+  "version": "1.0",
+  "source": "Pennick (2023)",
+  "historical_claim": "modern synthesis",
+  "edition": "Runes and Astrology: Symbol and Starcraft in the Northern Tradition, Nigel Pennick, 2023, 311 pp",
+  "runes": [
+    {
+      "name": "Feoh",
+      "futhark": "elder",
+      "tree": "elder",
+      "herb": "nettle",
+      "color": "light red",
+      "polarity": "female",
+      "element": "fire/earth",
+      "deity": "Frey/Freyja",
+      "symbolic_meaning": "the primal cow, Audhumla"
+    },
+    {
+      "name": "Ur",
+      "futhark": "elder",
+      "tree": "birch",
+      "herb": "Iceland moss",
+      "color": "dark green",
+      "polarity": "male",
+      "element": "earth",
+      "deity": "Thor/Urd",
+      "symbolic_meaning": "horns of the ox"
+    },
+    {
+      "name": "Thorn",
+      "futhark": "elder",
+      "tree": "oak/thorn",
+      "herb": "houseleek",
+      "color": "bright red",
+      "polarity": "male",
+      "element": "fire",
+      "deity": "Thor",
+      "symbolic_meaning": "the thorn, hammer of Thor"
+    },
+    {
+      "name": "As",
+      "futhark": "elder",
+      "tree": "ash",
+      "herb": "fly agaric",
+      "color": "dark blue",
+      "polarity": "male",
+      "element": "air",
+      "deity": "Odin/Eostre",
+      "symbolic_meaning": "the ash, Yggdrassil"
+    },
+    {
+      "name": "Rad",
+      "futhark": "elder",
+      "tree": "oak",
+      "herb": "mugwort",
+      "color": "bright red",
+      "polarity": "male",
+      "element": "air",
+      "deity": "Ing/Nerthus",
+      "symbolic_meaning": "wheel under cart, fire of the torch"
+    },
+    {
+      "name": "Ken",
+      "futhark": "elder",
+      "tree": "pine",
+      "herb": "cowslip",
+      "color": "light red",
+      "polarity": "female",
+      "element": "fire",
+      "deity": "Heimdall/Freyja/Frey",
+      "symbolic_meaning": "primal fire of Muspellheim"
+    },
+    {
+      "name": "Gyfu",
+      "futhark": "elder",
+      "tree": "ash/elm",
+      "herb": "heartsease",
+      "color": "deep blue",
+      "polarity": "m/f",
+      "element": "air",
+      "deity": "Gefn",
+      "symbolic_meaning": "sacred mark"
+    },
+    {
+      "name": "Wyn",
+      "futhark": "elder",
+      "tree": "ash",
+      "herb": "flax",
+      "color": "yellow",
+      "polarity": "male",
+      "element": "earth",
+      "deity": "Odin/Frigg",
+      "symbolic_meaning": "wind vane, flag"
+    },
+    {
+      "name": "Hagal",
+      "futhark": "elder",
+      "tree": "ash/yew",
+      "herb": "bryony",
+      "color": "light blue",
+      "polarity": "female",
+      "element": "ice",
+      "deity": "Urd/Heimdall",
+      "symbolic_meaning": "structural beams, the world, hailstone, serpent"
+    },
+    {
+      "name": "Nyd",
+      "futhark": "elder",
+      "tree": "beech/rowan",
+      "herb": "snakeroot",
+      "color": "black",
+      "polarity": "female",
+      "element": "fire",
+      "deity": "Skuld",
+      "symbolic_meaning": "fire-bow and block"
+    },
+    {
+      "name": "Is",
+      "futhark": "elder",
+      "tree": "alder",
+      "herb": "henbane",
+      "color": "black",
+      "polarity": "female",
+      "element": "ice",
+      "deity": "Verdandi",
+      "symbolic_meaning": "icicle, primal ice of Niflheim"
+    },
+    {
+      "name": "Jera",
+      "futhark": "elder",
+      "tree": "oak",
+      "herb": "rosemary",
+      "color": "light blue",
+      "polarity": "m/f",
+      "element": "earth",
+      "deity": "Frey/Freyja",
+      "symbolic_meaning": "sacred marriage, heaven/earth"
+    },
+    {
+      "name": "Eoh",
+      "futhark": "elder",
+      "tree": "yew/poplar",
+      "herb": "bryony",
+      "color": "dark blue",
+      "polarity": "male",
+      "element": "all",
+      "deity": "Ullr",
+      "symbolic_meaning": "vertical column of the Yew tree"
+    },
+    {
+      "name": "Peorth",
+      "futhark": "elder",
+      "tree": "beech/aspen",
+      "herb": "aconite",
+      "color": "black",
+      "polarity": "female",
+      "element": "water",
+      "deity": "Frigg",
+      "symbolic_meaning": "the womb, a dice cup, a musical instrument (lyre)"
+    },
+    {
+      "name": "Elhaz",
+      "futhark": "elder",
+      "tree": "yew/service tree",
+      "herb": "sedge",
+      "color": "white",
+      "polarity": "m/f",
+      "element": "air",
+      "deity": "Heimdall",
+      "symbolic_meaning": "the elk, the flying swan, open hand"
+    },
+    {
+      "name": "Sigel",
+      "futhark": "elder",
+      "tree": "juniper/bay",
+      "herb": "mistletoe",
+      "color": "gold",
+      "polarity": "male",
+      "element": "air",
+      "deity": "Balder",
+      "symbolic_meaning": "the holy solar wheel"
+    },
+    {
+      "name": "Tyr",
+      "futhark": "elder",
+      "tree": "oak",
+      "herb": "sage/aconite",
+      "color": "bright red",
+      "polarity": "male",
+      "element": "air",
+      "deity": "Tyr",
+      "symbolic_meaning": "the vault of the heavens over the cosmic pillar"
+    },
+    {
+      "name": "Beorc",
+      "futhark": "elder",
+      "tree": "birch",
+      "herb": "lady's mantle",
+      "color": "dark green",
+      "polarity": "female",
+      "element": "earth",
+      "deity": "Nerthus/Holda",
+      "symbolic_meaning": "breasts of the Earth"
+    },
+    {
+      "name": "Ehwaz",
+      "futhark": "elder",
+      "tree": "oak/ash",
+      "herb": "ragwort",
+      "color": "white",
+      "polarity": "m/f",
+      "element": "earth",
+      "deity": "Frey/Freyja",
+      "symbolic_meaning": "Mother Goddess, two poles bound"
+    },
+    {
+      "name": "Man",
+      "futhark": "elder",
+      "tree": "holly",
+      "herb": "madder",
+      "color": "deep red",
+      "polarity": "m/f",
+      "element": "air",
+      "deity": "Heimdall/Odin/Frigg",
+      "symbolic_meaning": "marriage of earth/heaven"
+    },
+    {
+      "name": "Lagu",
+      "futhark": "elder",
+      "tree": "osier",
+      "herb": "leek",
+      "color": "deep green",
+      "polarity": "female",
+      "element": "water",
+      "deity": "Njord/Nerthus",
+      "symbolic_meaning": "sea wave, waterfall"
+    },
+    {
+      "name": "Ing",
+      "futhark": "elder",
+      "tree": "apple",
+      "herb": "selfheal",
+      "color": "yellow",
+      "polarity": "m/f",
+      "element": "water/earth",
+      "deity": "Ing (Frey)",
+      "symbolic_meaning": "the genitals"
+    },
+    {
+      "name": "Odal",
+      "futhark": "elder",
+      "tree": "hawthorn",
+      "herb": "clover",
+      "color": "deep yellow",
+      "polarity": "male",
+      "element": "earth",
+      "deity": "Odin",
+      "symbolic_meaning": "enclosed estate, land, property"
+    },
+    {
+      "name": "Dag",
+      "futhark": "elder",
+      "tree": "spruce",
+      "herb": "clary",
+      "color": "light blue",
+      "polarity": "male",
+      "element": "fire/air",
+      "deity": "Heimdall",
+      "symbolic_meaning": "balance (night, day)"
+    },
+    {
+      "name": "Ac",
+      "futhark": "anglo-saxon",
+      "tree": "oak",
+      "herb": "hemp",
+      "color": "light green",
+      "polarity": "male",
+      "element": "fire",
+      "deity": "Thor",
+      "symbolic_meaning": "mark tree, boundary oak"
+    },
+    {
+      "name": "Os",
+      "futhark": "anglo-saxon",
+      "tree": "ash",
+      "herb": "magic mushroom",
+      "color": "dark blue",
+      "polarity": "male",
+      "element": "air",
+      "deity": "Odin",
+      "symbolic_meaning": "mouth, speech, eloquence"
+    },
+    {
+      "name": "Yr",
+      "futhark": "anglo-saxon",
+      "tree": "yew",
+      "herb": "bryony/mandrake",
+      "color": "gold",
+      "polarity": "m/f",
+      "element": "all",
+      "deity": "Odin/Frigg",
+      "symbolic_meaning": "yew tree, bow, midpoint"
+    },
+    {
+      "name": "Ior",
+      "futhark": "anglo-saxon",
+      "tree": "linden/ivy",
+      "herb": "kelp",
+      "color": "black",
+      "polarity": "female",
+      "element": "water",
+      "deity": "Njord",
+      "symbolic_meaning": "Jormungand, the world serpent"
+    },
+    {
+      "name": "Ear",
+      "futhark": "anglo-saxon",
+      "tree": "yew",
+      "herb": "hemlock",
+      "color": "brown",
+      "polarity": "female",
+      "element": "earth",
+      "deity": "Hela",
+      "symbolic_meaning": "earth-grave"
+    },
+    {
+      "name": "Cweorth",
+      "futhark": "anglo-saxon",
+      "tree": "bay/beech",
+      "herb": "rue",
+      "color": "tawny",
+      "polarity": "female",
+      "element": "fire",
+      "deity": "Loge (Loki)",
+      "symbolic_meaning": "funeral pyre"
+    },
+    {
+      "name": "Cale",
+      "futhark": "anglo-saxon",
+      "tree": "maple/rowan",
+      "herb": "yarrow",
+      "color": "white",
+      "polarity": "female",
+      "element": "earth",
+      "deity": "Norns",
+      "symbolic_meaning": "grail-cup"
+    },
+    {
+      "name": "Stan",
+      "futhark": "anglo-saxon",
+      "tree": "witch hazel/blackthorn",
+      "herb": "Iceland moss",
+      "color": "gray",
+      "polarity": "male",
+      "element": "earth",
+      "deity": "Nerthus",
+      "symbolic_meaning": "sacred stone"
+    }
+  ],
+  "half_months": [
+    {
+      "rune": "Feoh",
+      "start": "06-29",
+      "start_time": "03:00",
+      "note": ""
+    },
+    {
+      "rune": "Ur",
+      "start": "07-14",
+      "start_time": "08:00",
+      "note": ""
+    },
+    {
+      "rune": "Thorn",
+      "start": "07-29",
+      "start_time": "14:00",
+      "note": ""
+    },
+    {
+      "rune": "As",
+      "start": "08-13",
+      "start_time": "19:00",
+      "note": ""
+    },
+    {
+      "rune": "Rad",
+      "start": "08-29",
+      "start_time": "00:00",
+      "note": ""
+    },
+    {
+      "rune": "Ken",
+      "start": "09-13",
+      "start_time": "06:00",
+      "note": ""
+    },
+    {
+      "rune": "Gyfu",
+      "start": "09-28",
+      "start_time": "11:00",
+      "note": ""
+    },
+    {
+      "rune": "Wyn",
+      "start": "10-13",
+      "start_time": "16:00",
+      "note": ""
+    },
+    {
+      "rune": "Hagal",
+      "start": "10-28",
+      "start_time": "22:00",
+      "note": ""
+    },
+    {
+      "rune": "Nyd",
+      "start": "11-13",
+      "start_time": "03:00",
+      "note": ""
+    },
+    {
+      "rune": "Is",
+      "start": "11-28",
+      "start_time": "08:00",
+      "note": ""
+    },
+    {
+      "rune": "Jera",
+      "start": "12-13",
+      "start_time": "14:00",
+      "note": ""
+    },
+    {
+      "rune": "Eoh",
+      "start": "12-28",
+      "start_time": "19:00",
+      "note": ""
+    },
+    {
+      "rune": "Peorth",
+      "start": "01-13",
+      "start_time": "01:00",
+      "note": ""
+    },
+    {
+      "rune": "Elhaz",
+      "start": "01-28",
+      "start_time": "05:00",
+      "note": ""
+    },
+    {
+      "rune": "Sigel",
+      "start": "02-12",
+      "start_time": "10:00",
+      "note": ""
+    },
+    {
+      "rune": "Tyr",
+      "start": "02-27",
+      "start_time": "16:00",
+      "note": ""
+    },
+    {
+      "rune": "Beorc",
+      "start": "03-14",
+      "start_time": "21:00",
+      "note": "printed as 'Beare' in the half-month table"
+    },
+    {
+      "rune": "Ehwaz",
+      "start": "03-30",
+      "start_time": "02:00",
+      "note": ""
+    },
+    {
+      "rune": "Man",
+      "start": "04-14",
+      "start_time": "07:00",
+      "note": ""
+    },
+    {
+      "rune": "Lagu",
+      "start": "04-29",
+      "start_time": "12:00",
+      "note": ""
+    },
+    {
+      "rune": "Ing",
+      "start": "05-14",
+      "start_time": "18:00",
+      "note": ""
+    },
+    {
+      "rune": "Odal",
+      "start": "05-29",
+      "start_time": "23:00",
+      "note": ""
+    },
+    {
+      "rune": "Dag",
+      "start": "06-14",
+      "start_time": "04:00",
+      "note": ""
+    }
+  ],
+  "runic_hours": {
+    "note": "Wheel defined Ch. 4: Feoh 12:30-13:30, each futhark rune one solar hour later, Dag 11:30-12:30; cross-confirmed by the tide breakdown (Midnight 22:30-01:30 contains Is, Jera, Eoh). PRINT INCONSISTENCY: the Kenneth worked example (Ch. 5) states 'Odal is the hour-rune from 10:30 to 11:30 p.m.' for a birth at 11 p.m.; under the defined wheel 22:30-23:30 is Is, and Odal is 10:30-11:30 a.m. The systematic wheel is encoded; the example is preserved here, not silently corrected.",
+    "hours": [
+      {
+        "rune": "Feoh",
+        "start": "12:30",
+        "end": "13:30"
+      },
+      {
+        "rune": "Ur",
+        "start": "13:30",
+        "end": "14:30"
+      },
+      {
+        "rune": "Thorn",
+        "start": "14:30",
+        "end": "15:30"
+      },
+      {
+        "rune": "As",
+        "start": "15:30",
+        "end": "16:30"
+      },
+      {
+        "rune": "Rad",
+        "start": "16:30",
+        "end": "17:30"
+      },
+      {
+        "rune": "Ken",
+        "start": "17:30",
+        "end": "18:30"
+      },
+      {
+        "rune": "Gyfu",
+        "start": "18:30",
+        "end": "19:30"
+      },
+      {
+        "rune": "Wyn",
+        "start": "19:30",
+        "end": "20:30"
+      },
+      {
+        "rune": "Hagal",
+        "start": "20:30",
+        "end": "21:30"
+      },
+      {
+        "rune": "Nyd",
+        "start": "21:30",
+        "end": "22:30"
+      },
+      {
+        "rune": "Is",
+        "start": "22:30",
+        "end": "23:30"
+      },
+      {
+        "rune": "Jera",
+        "start": "23:30",
+        "end": "00:30"
+      },
+      {
+        "rune": "Eoh",
+        "start": "00:30",
+        "end": "01:30"
+      },
+      {
+        "rune": "Peorth",
+        "start": "01:30",
+        "end": "02:30"
+      },
+      {
+        "rune": "Elhaz",
+        "start": "02:30",
+        "end": "03:30"
+      },
+      {
+        "rune": "Sigel",
+        "start": "03:30",
+        "end": "04:30"
+      },
+      {
+        "rune": "Tyr",
+        "start": "04:30",
+        "end": "05:30"
+      },
+      {
+        "rune": "Beorc",
+        "start": "05:30",
+        "end": "06:30"
+      },
+      {
+        "rune": "Ehwaz",
+        "start": "06:30",
+        "end": "07:30"
+      },
+      {
+        "rune": "Man",
+        "start": "07:30",
+        "end": "08:30"
+      },
+      {
+        "rune": "Lagu",
+        "start": "08:30",
+        "end": "09:30"
+      },
+      {
+        "rune": "Ing",
+        "start": "09:30",
+        "end": "10:30"
+      },
+      {
+        "rune": "Odal",
+        "start": "10:30",
+        "end": "11:30"
+      },
+      {
+        "rune": "Dag",
+        "start": "11:30",
+        "end": "12:30"
+      }
+    ]
+  },
+  "planetary_hours": {
+    "note": "Transcribed exactly as printed. Hours 00:00-11:00 follow a rotated deity sequence; hours 12:00-23:00 follow the classical Chaldean order from each day's ruling deity (the 12:00 hour of each day carries that day's ruler). This noon discontinuity appears consistently in all seven columns and is preserved rather than silently corrected. Friday 19:00 is printed 'Prigg', read as 'Frigg'.",
+    "grid": {
+      "Sunday": [
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki"
+      ],
+      "Monday": [
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól"
+      ],
+      "Tuesday": [
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni"
+      ],
+      "Wednesday": [
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr"
+      ],
+      "Thursday": [
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin"
+      ],
+      "Friday": [
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor"
+      ],
+      "Saturday": [
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg",
+        "Odin",
+        "Máni",
+        "Loki",
+        "Thor",
+        "Tyr",
+        "Sól",
+        "Frigg"
+      ]
+    }
+  },
+  "weekdays": [
+    {
+      "day": "Sunday",
+      "deity": "Sól",
+      "planet": "Sun",
+      "rune": "Sigel",
+      "tree": "Birch",
+      "herb": "Polygonium",
+      "element": "Fire",
+      "esoteric_number": 1,
+      "magic_square": 36
+    },
+    {
+      "day": "Monday",
+      "deity": "Mani",
+      "planet": "Moon",
+      "rune": "Lagu",
+      "tree": "Willow",
+      "herb": "Chickweed",
+      "element": "Water",
+      "esoteric_number": 5,
+      "magic_square": 81
+    },
+    {
+      "day": "Tuesday",
+      "deity": "Tyr",
+      "planet": "Mars",
+      "rune": "Tyr",
+      "tree": "Holly",
+      "herb": "Plantain",
+      "element": "Fire",
+      "esoteric_number": 2,
+      "magic_square": 25
+    },
+    {
+      "day": "Wednesday",
+      "deity": "Odin",
+      "planet": "Mercury",
+      "rune": "Odal",
+      "tree": "Ash",
+      "herb": "Cinquefoil",
+      "element": "Air",
+      "esoteric_number": 6,
+      "magic_square": 64
+    },
+    {
+      "day": "Thursday",
+      "deity": "Thor",
+      "planet": "Jupiter",
+      "rune": "Thorn",
+      "tree": "Oak",
+      "herb": "Henbane",
+      "element": "Fire",
+      "esoteric_number": 3,
+      "magic_square": 16
+    },
+    {
+      "day": "Friday",
+      "deity": "Frigg",
+      "planet": "Venus",
+      "rune": "Peorth",
+      "tree": "Apple",
+      "herb": "Vervain",
+      "element": "Earth",
+      "esoteric_number": 7,
+      "magic_square": 49
+    },
+    {
+      "day": "Saturday",
+      "deity": "Loki",
+      "planet": "Saturn",
+      "rune": "Dag",
+      "tree": "Alder",
+      "herb": "Daffodil",
+      "element": "Earth",
+      "esoteric_number": 4,
+      "magic_square": 9
+    }
+  ],
+  "zodiac": [
+    {
+      "sign": "Aries",
+      "planet": "Mars",
+      "deity": "Tyr",
+      "day": "Tuesday",
+      "stone": "Diamond",
+      "animal": "Sheep",
+      "rune": "Eh",
+      "variant": "classical"
+    },
+    {
+      "sign": "Taurus",
+      "planet": "Venus",
+      "deity": "Frigg",
+      "day": "Friday",
+      "stone": "Sapphire",
+      "animal": "Bull",
+      "rune": "Ing",
+      "variant": "classical"
+    },
+    {
+      "sign": "Gemini",
+      "planet": "Mercury",
+      "deity": "Odin",
+      "day": "Wednesday",
+      "stone": "Emerald",
+      "animal": "Twin Ravens",
+      "rune": "Dag",
+      "variant": "classical"
+    },
+    {
+      "sign": "Cancer",
+      "planet": "Moon",
+      "deity": "Máni",
+      "day": "Monday",
+      "stone": "Agate",
+      "animal": "Crab",
+      "rune": "Ur",
+      "variant": "classical"
+    },
+    {
+      "sign": "Leo",
+      "planet": "Sun",
+      "deity": "Sól",
+      "day": "Sunday",
+      "stone": "Ruby",
+      "animal": "Lion",
+      "rune": "As",
+      "variant": "classical"
+    },
+    {
+      "sign": "Virgo",
+      "planet": "Mercury",
+      "deity": "Odin",
+      "day": "Wednesday",
+      "stone": "Sardonyx",
+      "animal": "Cat",
+      "rune": "Ken",
+      "variant": "classical"
+    },
+    {
+      "sign": "Libra",
+      "planet": "Venus",
+      "deity": "Frigg",
+      "day": "Friday",
+      "stone": "Chrysolite",
+      "animal": "Serpent",
+      "rune": "Wyn",
+      "variant": "classical"
+    },
+    {
+      "sign": "Scorpio",
+      "planet": "Mars",
+      "deity": "Tyr",
+      "day": "Tuesday",
+      "stone": "Opal",
+      "animal": "Scorpion",
+      "rune": "Nyd",
+      "variant": "classical"
+    },
+    {
+      "sign": "Sagittarius",
+      "planet": "Jupiter",
+      "deity": "Thor",
+      "day": "Thursday",
+      "stone": "Topaz",
+      "animal": "Aurochs",
+      "rune": "Jera",
+      "variant": "classical"
+    },
+    {
+      "sign": "Capricorn",
+      "planet": "Jupiter",
+      "deity": "Thor",
+      "day": "Thursday",
+      "stone": "Turquoise",
+      "animal": "Goat",
+      "rune": "Peorth",
+      "variant": "classical"
+    },
+    {
+      "sign": "Aquarius",
+      "planet": "Saturn",
+      "deity": "Loki",
+      "day": "Saturday",
+      "stone": "Amethyst",
+      "animal": "Eagle",
+      "rune": "Sigel",
+      "variant": "classical"
+    },
+    {
+      "sign": "Pisces",
+      "planet": "Jupiter",
+      "deity": "Thor",
+      "day": "Thursday",
+      "stone": "Bloodstone",
+      "animal": "Fish",
+      "rune": "Beorc",
+      "variant": "classical"
+    },
+    {
+      "sign": "Capricorn",
+      "planet": "Saturn",
+      "deity": "Loki",
+      "day": "Saturday",
+      "stone": "Turquoise",
+      "animal": "Goat",
+      "rune": "Peorth",
+      "variant": "modern alternative"
+    },
+    {
+      "sign": "Aquarius",
+      "planet": "Uranus",
+      "deity": "Urd",
+      "day": "Saturday",
+      "stone": "Amethyst",
+      "animal": "Eagle",
+      "rune": "Sigel",
+      "variant": "modern alternative"
+    },
+    {
+      "sign": "Pisces",
+      "planet": "Neptune",
+      "deity": "Aegir",
+      "day": "Thursday",
+      "stone": "Bloodstone",
+      "animal": "Fish",
+      "rune": "Beorc",
+      "variant": "modern alternative"
+    }
+  ],
+  "tides": {
+    "tides": [
+      {
+        "english": "Morntide",
+        "old_english": "morgen",
+        "old_norse": "morginn",
+        "start": "04:30",
+        "end": "07:30"
+      },
+      {
+        "english": "Daytide (Undernoon)",
+        "old_english": "dægmæl, dægtid",
+        "old_norse": "dagtími",
+        "start": "07:30",
+        "end": "10:30"
+      },
+      {
+        "english": "Midday (Noontide)",
+        "old_english": "Middæg, nontid",
+        "old_norse": "nóntið, miðdagr",
+        "start": "10:30",
+        "end": "13:30"
+      },
+      {
+        "english": "Afternoon (Undorne)",
+        "old_english": "ofernón",
+        "old_norse": "ofanverðr dagr",
+        "start": "13:30",
+        "end": "16:30"
+      },
+      {
+        "english": "Eventide",
+        "old_english": "æfentid",
+        "old_norse": "aftan",
+        "start": "16:30",
+        "end": "19:30"
+      },
+      {
+        "english": "Nighttide",
+        "old_english": "niht",
+        "old_norse": "nótt",
+        "start": "19:30",
+        "end": "22:30"
+      },
+      {
+        "english": "Midnight",
+        "old_english": "midniht",
+        "old_norse": "miðnætti",
+        "start": "22:30",
+        "end": "01:30"
+      },
+      {
+        "english": "Uht",
+        "old_english": "uhta, uhtantid",
+        "old_norse": "ótta",
+        "start": "01:30",
+        "end": "04:30"
+      }
+    ],
+    "day_markers": [
+      {
+        "time": "04:30",
+        "english": "Rising",
+        "old_english": "dægred",
+        "old_norse": "rismál"
+      },
+      {
+        "time": "07:30",
+        "english": "Day mark",
+        "old_english": "dægmæl",
+        "old_norse": "dagmálastaðr"
+      },
+      {
+        "time": "12:00",
+        "english": "Noon",
+        "old_english": "non",
+        "old_norse": "nón"
+      },
+      {
+        "time": "16:30",
+        "english": "Eykt",
+        "old_english": "",
+        "old_norse": "eyktarstaðr"
+      },
+      {
+        "time": "19:30",
+        "english": "Nachtmahlstatt (evening meal stead)",
+        "old_english": "",
+        "old_norse": ""
+      }
+    ]
+  },
+  "mansions": {
+    "note": "Regulus and Denebola are both listed as β Leonis in print; transcribed as printed. 'Eh' is the book's short form of Ehwaz; 'Æsc' is the ash-rune. Mansion 25's star line also names 'The Carrier' with Algenib.",
+    "mansions": [
+      {
+        "number": 1,
+        "rune": "Feoh",
+        "northern_name": "Boars' Throng",
+        "star": "Alcyone",
+        "designation": "η Tauri"
+      },
+      {
+        "number": 2,
+        "rune": "Ur",
+        "northern_name": "The Follower",
+        "star": "Aldebaran",
+        "designation": "α Tauri"
+      },
+      {
+        "number": 3,
+        "rune": "Thorn",
+        "northern_name": "The Shield",
+        "star": "–",
+        "designation": "λ Orionis"
+      },
+      {
+        "number": 4,
+        "rune": "Os",
+        "northern_name": "The Brand",
+        "star": "Alhena",
+        "designation": "γ Geminorum"
+      },
+      {
+        "number": 5,
+        "rune": "Rad",
+        "northern_name": "Thiazi's Eyes",
+        "star": "Castor & Pollux",
+        "designation": "α & β Geminorum"
+      },
+      {
+        "number": 6,
+        "rune": "Ken",
+        "northern_name": "The Bee Skep",
+        "star": "Praesaepe",
+        "designation": "44M Cancri"
+      },
+      {
+        "number": 7,
+        "rune": "Gyfu",
+        "northern_name": "The Giver",
+        "star": "–",
+        "designation": "α Leonis"
+      },
+      {
+        "number": 8,
+        "rune": "Wyn",
+        "northern_name": "The Lord",
+        "star": "Regulus",
+        "designation": "β Leonis"
+      },
+      {
+        "number": 9,
+        "rune": "Hagal",
+        "northern_name": "The Girdle",
+        "star": "Zosma",
+        "designation": "δ Leonis"
+      },
+      {
+        "number": 10,
+        "rune": "Nyd",
+        "northern_name": "The Coming Judge",
+        "star": "Denebola",
+        "designation": "β Leonis"
+      },
+      {
+        "number": 11,
+        "rune": "Is",
+        "northern_name": "The Beautiful One",
+        "star": "Zavijava",
+        "designation": "β Virginis"
+      },
+      {
+        "number": 12,
+        "rune": "Jera",
+        "northern_name": "The Wheatsheaf",
+        "star": "Spica",
+        "designation": "α Virginis"
+      },
+      {
+        "number": 13,
+        "rune": "Eoh",
+        "northern_name": "The Stave",
+        "star": "–",
+        "designation": "ι & κ Virginis"
+      },
+      {
+        "number": 14,
+        "rune": "Peorth",
+        "northern_name": "North & South Scales",
+        "star": "–",
+        "designation": "α & β Librae"
+      },
+      {
+        "number": 15,
+        "rune": "Elhaz",
+        "northern_name": "The Byrnie",
+        "star": "Graffias & Isidis",
+        "designation": "α & β Scorpii"
+      },
+      {
+        "number": 16,
+        "rune": "Sigel",
+        "northern_name": "Fenris-Wolf",
+        "star": "Antares",
+        "designation": "α Scorpii"
+      },
+      {
+        "number": 17,
+        "rune": "Tyr",
+        "northern_name": "The Sword",
+        "star": "Lesath",
+        "designation": "λ Scorpii"
+      },
+      {
+        "number": 18,
+        "rune": "Beorc",
+        "northern_name": "Birka",
+        "star": "Pelagus",
+        "designation": "ζ Sagittarii"
+      },
+      {
+        "number": 19,
+        "rune": "Eh",
+        "northern_name": "Sleipnir",
+        "star": "–",
+        "designation": "π Sagittarii"
+      },
+      {
+        "number": 20,
+        "rune": "Man",
+        "northern_name": "The Slain and Restored Goats",
+        "star": "Giedi & Dabih",
+        "designation": "α & β Capricornii"
+      },
+      {
+        "number": 21,
+        "rune": "Lagu",
+        "northern_name": "The Stream",
+        "star": "–",
+        "designation": "ξ & μ Aquarii"
+      },
+      {
+        "number": 22,
+        "rune": "Ing",
+        "northern_name": "The Lucky Star",
+        "star": "Sadalsuud",
+        "designation": "β Aquarii"
+      },
+      {
+        "number": 23,
+        "rune": "Odal",
+        "northern_name": "The Royal Lucky Star",
+        "star": "Sadalmelik",
+        "designation": "α, etc. Aquarii"
+      },
+      {
+        "number": 24,
+        "rune": "Dag",
+        "northern_name": "The Doornail",
+        "star": "Scheat",
+        "designation": "β Pegasi"
+      },
+      {
+        "number": 25,
+        "rune": "Ac",
+        "northern_name": "The Acorn",
+        "star": "Alpheratz & Algenib",
+        "designation": "α Andromedae & γ Pegasi"
+      },
+      {
+        "number": 26,
+        "rune": "Æsc",
+        "northern_name": "The Key",
+        "star": "Mirach",
+        "designation": "β Andromedae"
+      },
+      {
+        "number": 27,
+        "rune": "Yr",
+        "northern_name": "The Bow",
+        "star": "Sharatan",
+        "designation": "β Arietis"
+      },
+      {
+        "number": 28,
+        "rune": "Ear",
+        "northern_name": "The Last Ones",
+        "star": "–",
+        "designation": "γ & δ Arietis"
+      }
+    ]
+  },
+  "palaces": {
+    "attribution": "after Freya Aswynn (1990), via Pennick (2023)",
+    "palaces": [
+      {
+        "palace": "Bilskírnir",
+        "meaning": "Lightning",
+        "deity": "Thor",
+        "sign": "Aries"
+      },
+      {
+        "palace": "Thrymheim",
+        "meaning": "Thunder-Home",
+        "deity": "Skadi",
+        "sign": "Taurus"
+      },
+      {
+        "palace": "Fólkvangr",
+        "meaning": "Field of Warriors",
+        "deity": "Freya",
+        "sign": "Gemini"
+      },
+      {
+        "palace": "Himinbjörg",
+        "meaning": "Heaven Hall",
+        "deity": "Heimdall",
+        "sign": "Cancer"
+      },
+      {
+        "palace": "Breiðablik",
+        "meaning": "Broad View",
+        "deity": "Balder",
+        "sign": "Leo"
+      },
+      {
+        "palace": "Sökkvabekkr",
+        "meaning": "Stream of Time and Events",
+        "deity": "Saga",
+        "sign": "Virgo"
+      },
+      {
+        "palace": "Glitnir",
+        "meaning": "Hall of Splendor",
+        "deity": "Forseti",
+        "sign": "Libra"
+      },
+      {
+        "palace": "Glaðsheimr",
+        "meaning": "Shining Home (and Valhalla)",
+        "deity": "Odin",
+        "sign": "Scorpio"
+      },
+      {
+        "palace": "Ýdalir",
+        "meaning": "Valley of Yews",
+        "deity": "Ullr",
+        "sign": "Sagittarius"
+      },
+      {
+        "palace": "Landviði",
+        "meaning": "White Land",
+        "deity": "Vidar",
+        "sign": "Capricorn"
+      },
+      {
+        "palace": "Valaskjálf",
+        "meaning": "Halls of Silver",
+        "deity": "Vali",
+        "sign": "Aquarius"
+      },
+      {
+        "palace": "Noatún",
+        "meaning": "Shipyard",
+        "deity": "Njord",
+        "sign": "Pisces"
+      }
+    ]
+  },
+  "worlds": {
+    "note": "the nine non-invertible runes of the Elder Futhark",
+    "worlds": [
+      {
+        "world": "Asgard",
+        "rune": "Gyfu"
+      },
+      {
+        "world": "Muspellheim",
+        "rune": "Dag"
+      },
+      {
+        "world": "Vanaheim",
+        "rune": "Ing"
+      },
+      {
+        "world": "Midgard",
+        "rune": "Jera"
+      },
+      {
+        "world": "Jötunheim",
+        "rune": "Is"
+      },
+      {
+        "world": "Niflheim",
+        "rune": "Nyd"
+      },
+      {
+        "world": "Svartálfaheim",
+        "rune": "Eoh"
+      },
+      {
+        "world": "Ljósálfheim",
+        "rune": "Sigel"
+      },
+      {
+        "world": "Helheim",
+        "rune": "Hagal"
+      }
+    ]
+  },
+  "life_periods": [
+    {
+      "deity": "Máni",
+      "planet": "Moon",
+      "start_age": 0,
+      "end_age": 4,
+      "years": 4
+    },
+    {
+      "deity": "Odin",
+      "planet": "Mercury",
+      "start_age": 4,
+      "end_age": 14,
+      "years": 10
+    },
+    {
+      "deity": "Frigg",
+      "planet": "Venus",
+      "start_age": 14,
+      "end_age": 22,
+      "years": 8
+    },
+    {
+      "deity": "Sól",
+      "planet": "Sun",
+      "start_age": 22,
+      "end_age": 41,
+      "years": 19
+    },
+    {
+      "deity": "Tyr",
+      "planet": "Mars",
+      "start_age": 41,
+      "end_age": 56,
+      "years": 15
+    },
+    {
+      "deity": "Thor",
+      "planet": "Jupiter",
+      "start_age": 56,
+      "end_age": 68,
+      "years": 12
+    },
+    {
+      "deity": "Loki",
+      "planet": "Saturn",
+      "start_age": 68,
+      "end_age": 98,
+      "years": 30
+    }
+  ]
+}

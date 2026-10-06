@@ -150,3 +150,19 @@ W09b2 hosted acceptance: f318383a3488bad685e74b49da4fd4ab95563866, [run 37450000
 (Linux/macOS/Windows, Python 3.11/3.12), with 283 tests. Fresh installed wheel passes
 the ten-resource/astronomy bridge checks outside source. Next: W09b3 longitude
 crossings and solar-return roots, then the remaining event-method migrations.
+
+## 2026-10-06 — R01 Runic Corpus complete (ROADMAP_RUNIC.md slice 1)
+
+Skald named it `data/runic.json`; Rúnhild set the schema; Eldra transcribed
+all eleven table groups from Pennick (2023); Sólrún verified with
+tests/test_runic.py (12/12 green, full suite 295 green). Honest-transcription
+findings preserved in the data: (1) planetary-hours grid has a noon
+discontinuity — hours 00-11 follow a rotated deity sequence while 12-23 follow
+the classical Chaldean order from each day's ruler, consistent across all seven
+columns, transcribed as printed; (2) Friday 19:00 printed 'Prigg', read as
+'Frigg'; (3) the Kenneth worked example's 'Odal 22:30-23:30' conflicts with the
+defined wheel (22:30 is Is; Odal is 10:30-11:30) — the systematic wheel,
+cross-confirmed by the tide breakdown, is encoded. All tables labeled
+historical_claim: modern synthesis. Védis registered the corpus in
+data/README.md and COMPONENT_INDEX.md; no CLI surface in R01 (R09). Next: R02
+runic half-months engine.
