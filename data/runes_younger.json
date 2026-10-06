@@ -1,0 +1,326 @@
+{
+ "version": "1.0",
+ "source": "Younger Futhark — meanings drawn from the Norwegian Rune Poem and the Icelandic Rune Poem (historical); long-branch (Danish) and short-twig (Swedish-Norwegian) glyph variants",
+ "historical_claim": "traditional with modern synthesis",
+ "note": "Hagall, Íss and Sól are symmetric and traditionally read the same face-up or face-down; their merkstave is null. The blank rune is not used here.",
+ "runes": [
+  {
+   "name": "Fé",
+   "glyph": "ᚠ",
+   "glyph_short_twig": "ᚠ",
+   "transliteration": "f",
+   "upright": {
+    "keywords": [
+     "wealth",
+     "resources",
+     "flow"
+    ],
+    "meaning": "Wealth is on the move — the Norwegian poem warns it breeds discord among kinsmen, so let it flow: earn, share, keep it circulating."
+   },
+   "merkstave": {
+    "keywords": [
+     "loss",
+     "greed"
+    ],
+    "meaning": "Murk-stave: clutched wealth rots. Watch for greed — yours or another's — and guard what is earned."
+   }
+  },
+  {
+   "name": "Úr",
+   "glyph": "ᚢ",
+   "glyph_short_twig": "ᚢ",
+   "transliteration": "u",
+   "upright": {
+    "keywords": [
+     "strength",
+     "endurance",
+     "raw force"
+    ],
+    "meaning": "The aurochs' strength, the dross-fire's heat — raw vitality that must be shaped. Endure; shape the slag into iron."
+   },
+   "merkstave": {
+    "keywords": [
+     "weakness",
+     "missed force"
+    ],
+    "meaning": "Murk-stave: strength misapplied or spent. Rest, and do not mistake stubbornness for endurance."
+   }
+  },
+  {
+   "name": "Þurs",
+   "glyph": "ᚦ",
+   "glyph_short_twig": "ᚦ",
+   "transliteration": "þ",
+   "upright": {
+    "keywords": [
+     "catalyst",
+     "reactive force",
+     "the thorn"
+    ],
+    "meaning": "The giant — a thorn that provokes. Thurs causes anguish, says the poem, yet giants are the necessary friction that wakes the gods. Expect provocation; use it."
+   },
+   "merkstave": {
+    "keywords": [
+     "malice",
+     "betrayal"
+    ],
+    "meaning": "Murk-stave: the thorn turns inward — malice, backbiting, a reactive strike you will regret."
+   }
+  },
+  {
+   "name": "Óss",
+   "glyph": "ᚬ",
+   "glyph_short_twig": "ᚭ",
+   "transliteration": "o",
+   "upright": {
+    "keywords": [
+     "divine breath",
+     "wisdom",
+     "word"
+    ],
+    "meaning": "The god's mouth — Óðinn's breath in speech. The estuary poem calls it the way of most journeys: wisdom carried on words. Speak, sing, counsel."
+   },
+   "merkstave": {
+    "keywords": [
+     "empty words",
+     "misunderstanding"
+    ],
+    "meaning": "Murk-stave: words without breath behind them. Misunderstanding spreads; say less, and mean it."
+   }
+  },
+  {
+   "name": "Reið",
+   "glyph": "ᚱ",
+   "glyph_short_twig": "ᚱ",
+   "transliteration": "r",
+   "upright": {
+    "keywords": [
+     "journey",
+     "movement",
+     "rhythm"
+    ],
+    "meaning": "Riding — the road under hoof. Movement with rhythm and purpose; the journey itself orders the traveler. Keep going."
+   },
+   "merkstave": {
+    "keywords": [
+     "standstill",
+     "wrong road"
+    ],
+    "meaning": "Murk-stave: the horse balks. Delay, detour, or a road that leads nowhere — check your direction before riding on."
+   }
+  },
+  {
+   "name": "Kaun",
+   "glyph": "ᚴ",
+   "glyph_short_twig": "ᚴ",
+   "transliteration": "k",
+   "upright": {
+    "keywords": [
+     "illumination",
+     "knowledge",
+     "the burning"
+    ],
+    "meaning": "The ulcer-torch: light that both reveals and burns. Knowledge comes, but it comes with pain — the poem calls it fatal to children, gentle to none. Learn anyway."
+   },
+   "merkstave": {
+    "keywords": [
+     "ignorance",
+     "festering"
+    ],
+    "meaning": "Murk-stave: the wound untended. What you refuse to know festers; false light misleads."
+   }
+  },
+  {
+   "name": "Hagall",
+   "glyph": "ᚼ",
+   "glyph_short_twig": "ᚽ",
+   "transliteration": "h",
+   "upright": {
+    "keywords": [
+     "disruption",
+     "hailstorm",
+     "fate"
+    ],
+    "meaning": "Hail — the coldest grain. The sky's own disruption, beyond bargaining: fate falls like hailstones. Endure it; it passes."
+   },
+   "merkstave": null
+  },
+  {
+   "name": "Nauð",
+   "glyph": "ᚾ",
+   "glyph_short_twig": "ᚿ",
+   "transliteration": "n",
+   "upright": {
+    "keywords": [
+     "need",
+     "endurance",
+     "friction"
+    ],
+    "meaning": "Need — the constraint that gives scant choice. The bondmaid's grief, the friction that teaches the hands their strength. Work with what binds you."
+   },
+   "merkstave": {
+    "keywords": [
+     "despair",
+     "resisted lesson"
+    ],
+    "meaning": "Murk-stave: need curdles into despair when fought. Stop wrestling the constraint; learn its shape."
+   }
+  },
+  {
+   "name": "Íss",
+   "glyph": "ᛁ",
+   "glyph_short_twig": "ᛁ",
+   "transliteration": "i",
+   "upright": {
+    "keywords": [
+     "stillness",
+     "clarity",
+     "suspension"
+    ],
+    "meaning": "Ice — the broad bridge, the bark of rivers. All motion suspended into terrible clarity. Be still; see clearly; wait for the thaw."
+   },
+   "merkstave": null
+  },
+  {
+   "name": "Ár",
+   "glyph": "ᛅ",
+   "glyph_short_twig": "ᛆ",
+   "transliteration": "a",
+   "upright": {
+    "keywords": [
+     "harvest",
+     "fruition",
+     "plenty"
+    ],
+    "meaning": "Plenty — the good year, the harvest home. A boon to men, say both poems: the season's work comes ripe. Reap, give thanks, store wisely."
+   },
+   "merkstave": {
+    "keywords": [
+     "failed harvest",
+     "poor timing"
+    ],
+    "meaning": "Murk-stave: the harvest fails or comes at the wrong hour. Do not force fruition before its season."
+   }
+  },
+  {
+   "name": "Sól",
+   "glyph": "ᛋ",
+   "glyph_short_twig": "ᛌ",
+   "transliteration": "s",
+   "upright": {
+    "keywords": [
+     "wholeness",
+     "victory",
+     "light"
+    ],
+    "meaning": "The sun — light of the world, shield of the clouds. Wholeness that needs no opposite: victory, clarity, the day won."
+   },
+   "merkstave": null
+  },
+  {
+   "name": "Týr",
+   "glyph": "ᛏ",
+   "glyph_short_twig": "ᛐ",
+   "transliteration": "t",
+   "upright": {
+    "keywords": [
+     "honor",
+     "sacrifice",
+     "justice"
+    ],
+    "meaning": "Týr the one-handed god, who bound the wolf at the cost of his hand. Honor kept through sacrifice; justice that costs the judge something."
+   },
+   "merkstave": {
+    "keywords": [
+     "injustice",
+     "cowardice"
+    ],
+    "meaning": "Murk-stave: honor abandoned for safety. A just cause betrayed, or courage failing at the test."
+   }
+  },
+  {
+   "name": "Bjarkan",
+   "glyph": "ᛒ",
+   "glyph_short_twig": "ᛓ",
+   "transliteration": "b",
+   "upright": {
+    "keywords": [
+     "growth",
+     "renewal",
+     "beginnings"
+    ],
+    "meaning": "The birch — greenest of leaves, first tree of spring. Growth, birth, new beginnings pushing through last year's leaf-litter."
+   },
+   "merkstave": {
+    "keywords": [
+     "stagnation",
+     "blocked growth"
+    ],
+    "meaning": "Murk-stave: the sap will not rise. Something blocks renewal — clear the ground before planting."
+   }
+  },
+  {
+   "name": "Maðr",
+   "glyph": "ᛘ",
+   "glyph_short_twig": "ᛙ",
+   "transliteration": "m",
+   "upright": {
+    "keywords": [
+     "self",
+     "community",
+     "humanity"
+    ],
+    "meaning": "Man — the delight of men, the augmentation of the soil. The self among others: community, kinship, the human measure of all things."
+   },
+   "merkstave": {
+    "keywords": [
+     "isolation",
+     "the lonely"
+    ],
+    "meaning": "Murk-stave: the self cut off from the kin. Loneliness, or the crowd's wisdom ignored."
+   }
+  },
+  {
+   "name": "Lögr",
+   "glyph": "ᛚ",
+   "glyph_short_twig": "ᛚ",
+   "transliteration": "l",
+   "upright": {
+    "keywords": [
+     "flow",
+     "emotion",
+     "the deep"
+    ],
+    "meaning": "Water — the swelling stream, the waterfall from the fell. Feeling, dream, the unconscious moving under everything. Go with the current; do not dam it."
+   },
+   "merkstave": {
+    "keywords": [
+     "drowning",
+     "confusion"
+    ],
+    "meaning": "Murk-stave: the current turns dangerous. Confusion, emotional flooding — find shore before swimming on."
+   }
+  },
+  {
+   "name": "Ýr",
+   "glyph": "ᛦ",
+   "glyph_short_twig": "ᛧ",
+   "transliteration": "R",
+   "upright": {
+    "keywords": [
+     "focus",
+     "the drawn bow",
+     "endurance"
+    ],
+    "meaning": "The yew — greenest of wood, bent into the bow. The drawn bow holds its tension without trembling: aim, focus, the long endurance before release."
+   },
+   "merkstave": {
+    "keywords": [
+     "misaimed effort",
+     "snapped bow"
+    ],
+    "meaning": "Murk-stave: the bow drawn at the wrong target, or held till it snaps. Aim true or lower the bow."
+   }
+  }
+ ]
+}

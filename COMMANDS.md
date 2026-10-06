@@ -438,6 +438,15 @@ Spreads: `single`, `three`, `five-cross`, `celtic-cross`, `horseshoe`,
 
 ## `runecast`
 
+Rune casting in three rows: Elder Futhark (24), Younger Futhark (16),
+Anglo-Saxon futhorc (33) — `--system elder|younger|futhorc`.
+
+```bash
+python3 astrology_engine.py runecast --system younger --layout norns
+```
+
+
+
 Rune readings from the 24 Elder Futhark runes, cast in seven layouts —
 from a single rune to the Nine Worlds. Merkstave (reversed) readings
 apply only to the asymmetric runes; the nine symmetric runes read the

@@ -1,9 +1,10 @@
-"""Rune casting: the 24 Elder Futhark runes in a variety of layouts.
+"""Rune casting: Elder Futhark, Younger Futhark, or Anglo-Saxon futhorc
+in a variety of layouts.
 
-Merkstave (murk-stave) readings apply only to the asymmetric runes; the
-nine symmetric runes traditionally read the same face-up or face-down.
+Merkstave (murk-stave) readings apply only to the asymmetric runes;
+symmetric runes traditionally read the same face-up or face-down.
 The optional blank rune is a modern invention (Blum, 1980s) and is
-flagged as such — off by default.
+flagged as such — off by default, Elder Futhark only.
 """
 
 import json as _json
@@ -49,18 +50,51 @@ _BLANK = {
 }
 
 
-@_lru_cache(maxsize=1)
-def _corpus() -> dict:
-    return _json.loads((_Path(__file__).parent.parent / "data" /
-                        "runes.json").read_text(encoding="utf-8"))
+_SYSTEM_FILES = {
+    "elder": "runes.json",
+    "younger": "runes_younger.json",
+    "futhorc": "runes_futhorc.json",
+}
+_SYSTEM_NAMES = {
+    "elder": "Elder Futhark",
+    "younger": "Younger Futhark",
+    "futhorc": "Anglo-Saxon Futhorc",
+}
 
 
-def runes(include_blank: bool = False) -> list[dict]:
-    """The 24 Elder Futhark runes in traditional order."""
-    rs = list(_corpus()["runes"])
+@_lru_cache(maxsize=3)
+def _load_corpus(key: str) -> dict:
+    path = _Path(__file__).parent.parent / "data" / _SYSTEM_FILES[key]
+    if not path.exists():
+        raise CalculationError(
+            f"the {_SYSTEM_NAMES[key]} corpus is not yet forged "
+            f"(expected at data/{_SYSTEM_FILES[key]})")
+    return _json.loads(path.read_text(encoding="utf-8"))
+
+
+def _corpus(system: str = "elder") -> dict:
+    key = system.strip().lower()
+    if key not in _SYSTEM_FILES:
+        raise CalculationError(
+            f"unknown rune system '{system}'; "
+            f"available: {sorted(_SYSTEM_FILES)}")
+    return _load_corpus(key)
+
+
+def runes(include_blank: bool = False, system: str = "elder") -> list[dict]:
+    """The runes of a system in traditional order."""
+    rs = list(_corpus(system)["runes"])
     if include_blank:
+        if system.strip().lower() != "elder":
+            raise CalculationError(
+                "the blank rune is an Elder Futhark modernism only")
         rs = rs + [_BLANK]
     return rs
+
+
+def systems() -> dict[str, str]:
+    """Available rune systems mapped to their display names."""
+    return dict(_SYSTEM_NAMES)
 
 
 def layouts() -> dict[str, list[str]]:
@@ -70,14 +104,19 @@ def layouts() -> dict[str, list[str]]:
 
 def cast(layout: str = "norns", seed: int | None = None,
          merkstave: bool = True, blank: bool = False,
-         question: str | None = None) -> dict:
+         question: str | None = None, system: str = "elder") -> dict:
     """Cast runes for a layout. Same seed -> same cast (reproducible)."""
+    sys_key = system.strip().lower()
+    if sys_key not in _SYSTEM_FILES:
+        raise CalculationError(
+            f"unknown rune system '{system}'; "
+            f"available: {sorted(_SYSTEM_FILES)}")
     key = layout.strip().lower().replace(" ", "-").replace("_", "-")
     if key not in LAYOUTS:
         raise CalculationError(
             f"unknown layout '{layout}'; available: {sorted(LAYOUTS)}")
     rng = _random.Random(seed)
-    pouch = runes(include_blank=blank)
+    pouch = runes(include_blank=blank, system=sys_key)
     rng.shuffle(pouch)
     positions = LAYOUTS[key]
     if len(positions) > len(pouch):
@@ -109,9 +148,10 @@ def cast(layout: str = "norns", seed: int | None = None,
         "seed": seed,
         "question": question,
         "kind": "interpretive",
-        "source": "Elder Futhark",
-        "historical_claim": "modern synthesis",
+        "source": _SYSTEM_NAMES[sys_key],
+        "historical_claim": _corpus(sys_key).get("historical_claim",
+                                                 "modern synthesis"),
     }
 
 
-__all__ = ["LAYOUTS", "runes", "layouts", "cast"]
+__all__ = ["LAYOUTS", "runes", "layouts", "cast", "systems"]

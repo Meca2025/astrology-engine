@@ -346,3 +346,8 @@ ten new aspects with neutral weight 0 so synergy scoring is unchanged.
   birth_iso, target_iso, houses)`, `render_dossier(d)` — the nine-part
   written natal dossier assembled from all Horizons modules. CLI:
   `dossier`.
+
+- `astroengine/runecast.py`: `cast(..., system="elder"|"younger"|"futhorc")`,
+  `runes(include_blank, system)`, `systems()` — corpus files
+  `data/runes.json`, `data/runes_younger.json`, `data/runes_futhorc.json`.
+  CLI: `runecast --system`.

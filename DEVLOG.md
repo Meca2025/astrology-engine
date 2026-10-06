@@ -528,3 +528,15 @@ independent Sólrún verification, green suite, and verified push.
 
 Sólrún: `tests/test_dossier.py` 6/6 green plus independent subagent
 verification. Pushed via the PAT tool.
+
+## 2026-10-06 — O01: Younger Futhark (Oracles begin)
+
+First slice of the Oracles program. `data/runes_younger.json` holds
+the sixteen staves of the Viking Age's own row, with meanings drawn
+from the Norwegian and Icelandic rune poems and both glyph hands —
+long-branch (Danish) and short-twig (Swedish-Norwegian). The cast
+engine is now system-aware: `runecast --system younger` (elder stays
+the default; futhorc arrives in O02). Provenance labeled throughout.
+
+Sólrún: `tests/test_younger_futhark.py` 10/10 green plus independent
+subagent verification. Pushed via the PAT tool.

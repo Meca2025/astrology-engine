@@ -2833,7 +2833,7 @@ def cmd_wheel(args):
 
 
 def cmd_runecast(args):
-    from astroengine.runecast import cast, layouts
+    from astroengine.runecast import cast, layouts, systems
     if args.list_layouts:
         header("RUNE LAYOUTS", f"{len(layouts())} casts")
         for name, positions in sorted(layouts().items()):
@@ -2843,11 +2843,12 @@ def cmd_runecast(args):
         return {"layouts": sorted(layouts())}
     result = cast(layout=args.layout, seed=args.seed,
                   merkstave=not args.no_merkstave, blank=args.blank,
-                  question=args.question)
+                  question=args.question, system=args.system)
     if args.json:
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
         return {"reading": result}
-    header("RUNE CAST", f"{result['layout']}  ·  {len(result['runes'])} runes"
+    header("RUNE CAST",
+           f"{result['source']}  ·  {result['layout']}  ·  {len(result['runes'])} runes"
            + (f"  ·  seed {args.seed}" if args.seed is not None else ""))
     if args.question:
         print(f"  Question: {args.question}\n")
@@ -4276,8 +4277,11 @@ def main():
     add_houses(whl)
     add_chart_lib(whl)
 
-    rnc = sub.add_parser("runecast", help="Rune casting: Elder Futhark readings in many layouts")
+    rnc = sub.add_parser("runecast", help="Rune casting: Elder/Younger Futhark and Anglo-Saxon futhorc readings")
     rnc.add_argument("--layout", default="norns", help="Layout name (see --list-layouts)")
+    rnc.add_argument("--system", default="elder",
+                     choices=["elder", "younger", "futhorc"],
+                     help="Rune row: elder, younger, or futhorc")
     rnc.add_argument("--list-layouts", action="store_true", dest="list_layouts")
     rnc.add_argument("--seed", type=int, default=None)
     rnc.add_argument("--no-merkstave", action="store_true", dest="no_merkstave")

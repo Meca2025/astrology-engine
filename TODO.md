@@ -50,3 +50,4 @@ coverage through an unmodified legacy command. Report exact implementation scope
 - [x] H08 asteroids + midpoints: astroengine/asteroids.py (honest .se1 handling), astroengine/midpoints.py (45 midpoints, activations), `asteroids`/`midpoints` CLIs, tests/test_asteroids_midpoints.py 9/9 green.
 - [x] H09 draconic charts: astroengine/draconic.py (node-reckoned zodiac, contacts), `draconic` CLI, tests/test_draconic.py 6/6 green.
 - [x] H10 written natal dossiers: astroengine/dossier.py (nine sections, render_dossier), `dossier` CLI, capabilities/tool schemas for all nine Horizons commands, tests/test_dossier.py 6/6 green.
+- [x] O01 Younger Futhark: data/runes_younger.json (16 runes, rune-poem meanings, long/short-twig glyphs), runecast --system, tests/test_younger_futhark.py 10/10 green.

@@ -115,3 +115,5 @@ body availability/frame/search rules. The monolith owns text uncertainty renderi
   `tests/test_draconic.py`.
 - `astroengine/dossier.py` — written natal dossiers; verified by
   `tests/test_dossier.py`.
+- `data/runes_younger.json` — Younger Futhark corpus; verified by
+  `tests/test_younger_futhark.py`.
