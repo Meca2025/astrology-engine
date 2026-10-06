@@ -1,0 +1,183 @@
+{
+ "version": "1.0",
+ "source": "Year element/animal, mewa and parkha cycles per published Tibetan almanac tables (year tables 1955-2039 cross-checked between two independent compilations; mewa 1900-2099 tables). Five-force rules per the Tibetan Elemental Astrology (nag rtsis) textual tradition.",
+ "method": {
+  "srog": "The animal's fixed element (unanimous across all published tables checked).",
+  "lus": "The year's element, per the natal year-table in the 'Tibetan Astrology' compilation (year tables 2005-2024: the Health column equals the year's element in all 20 rows). Lineage variation exists: some almanacs (e.g., a published 2024 Tibetan horoscope book) tabulate lus differently, e.g. Body=Metal for natal Wood Ox.",
+  "dbang_thang": "The year's element, per the explicit rule in the Elemental Astrology text ('the power element is the same as the element that rules the year'), confirmed by a second published year-table. Lineage variation exists.",
+  "rlung_ta": "Fixed animal table, confirmed by four independent sources (year tables + the mnemonic verses: Tiger/Horse/Dog -> Iron; Mouse/Dragon/Monkey -> Wood; Bird/Ox/Snake -> Water; Pig/Sheep/Hare -> Fire).",
+  "bla": "The mother element of srog, per the proverb 'Srog gi rna ni bla ru grags' (the ear of srog is known as bla); verified 12/12 against published tables.",
+  "year_boundary": "Tibetan Losar. Computed here from Chinese New Year via lunardate as an approximation: Losar usually coincides with CNY but occasionally differs by days or weeks (e.g., 2022, 2023). Boundary-period results are flagged.",
+  "disclaimer": "Tibetan lineages (monastic almanacs) vary in details; this follows the nag rtsis elemental tradition. Interpretive; not computed fact."
+ },
+ "animals": [
+  {
+   "tibetan": "Mouse",
+   "element": "Water"
+  },
+  {
+   "tibetan": "Ox",
+   "element": "Earth"
+  },
+  {
+   "tibetan": "Tiger",
+   "element": "Wood"
+  },
+  {
+   "tibetan": "Hare",
+   "element": "Wood"
+  },
+  {
+   "tibetan": "Dragon",
+   "element": "Earth"
+  },
+  {
+   "tibetan": "Snake",
+   "element": "Fire"
+  },
+  {
+   "tibetan": "Horse",
+   "element": "Fire"
+  },
+  {
+   "tibetan": "Sheep",
+   "element": "Earth"
+  },
+  {
+   "tibetan": "Monkey",
+   "element": "Iron"
+  },
+  {
+   "tibetan": "Bird",
+   "element": "Iron"
+  },
+  {
+   "tibetan": "Dog",
+   "element": "Earth"
+  },
+  {
+   "tibetan": "Pig",
+   "element": "Water"
+  }
+ ],
+ "mewa": [
+  {
+   "number": 1,
+   "color": "White",
+   "element": "Metal"
+  },
+  {
+   "number": 2,
+   "color": "Black",
+   "element": "Water"
+  },
+  {
+   "number": 3,
+   "color": "Indigo",
+   "element": "Water"
+  },
+  {
+   "number": 4,
+   "color": "Green",
+   "element": "Wood"
+  },
+  {
+   "number": 5,
+   "color": "Yellow",
+   "element": "Earth"
+  },
+  {
+   "number": 6,
+   "color": "White",
+   "element": "Metal"
+  },
+  {
+   "number": 7,
+   "color": "Red",
+   "element": "Fire"
+  },
+  {
+   "number": 8,
+   "color": "White",
+   "element": "Metal"
+  },
+  {
+   "number": 9,
+   "color": "Maroon",
+   "element": "Fire"
+  }
+ ],
+ "parkha": [
+  {
+   "name": "Li",
+   "direction": "South",
+   "element": "Fire"
+  },
+  {
+   "name": "Khon",
+   "direction": "Southwest",
+   "element": "Earth"
+  },
+  {
+   "name": "Dha",
+   "direction": "West",
+   "element": "Iron"
+  },
+  {
+   "name": "Khen",
+   "direction": "Northwest",
+   "element": "Sky"
+  },
+  {
+   "name": "Kham",
+   "direction": "North",
+   "element": "Water"
+  },
+  {
+   "name": "Gin",
+   "direction": "Northeast",
+   "element": "Earth"
+  },
+  {
+   "name": "Zin",
+   "direction": "East",
+   "element": "Wood"
+  },
+  {
+   "name": "Zon",
+   "direction": "Southeast",
+   "element": "Wind"
+  }
+ ],
+ "parkha_year_order": [
+  "Gin",
+  "Zin",
+  "Zon",
+  "Li",
+  "Khon",
+  "Dha",
+  "Khen",
+  "Kham"
+ ],
+ "rlung_ta": {
+  "Mouse": "Wood",
+  "Ox": "Water",
+  "Tiger": "Iron",
+  "Hare": "Fire",
+  "Dragon": "Wood",
+  "Snake": "Water",
+  "Horse": "Iron",
+  "Sheep": "Fire",
+  "Monkey": "Wood",
+  "Bird": "Water",
+  "Dog": "Iron",
+  "Pig": "Fire"
+ },
+ "mothers": {
+  "Wood": "Water",
+  "Fire": "Wood",
+  "Earth": "Fire",
+  "Iron": "Earth",
+  "Water": "Iron"
+ }
+}

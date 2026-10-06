@@ -368,3 +368,8 @@ ten new aspects with neutral weight 0 so synergy scoring is unchanged.
   year/month/day/hour ganzhi + NaYin + Day Master; Lichun year turn
   and jie month branches via Swiss Ephemeris; day ganzhi from JDN;
   Five Tigers / Five Rats stem rules. CLI: `bazi`.
+
+- `astroengine/tibetan.py` + `data/tibetan.json`: `tibetan(iso_date)`,
+  `year_name(lunar_year)`, `forces(lunar_year)` — element-animal year,
+  rabjung position, mewa, parkha, five personal forces; Losar boundary
+  approximated by CNY with uncertainty flag. CLI: `tibetan`.

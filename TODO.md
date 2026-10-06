@@ -55,3 +55,5 @@ coverage through an unmodified legacy command. Report exact implementation scope
 - [x] O03 Ogham readings: data/ogham.json (25 staves, Auraicept kennings per McManus 1988), astroengine/ogham.py + `ogham` CLI (single/triad/aicme/wheel/grove), tests/test_ogham.py 8/8 green.
 - [x] O04 Chinese zodiac: data/chinese_zodiac.json (stems/branches/NaYin/allies/clashes), astroengine/chinese.py + `chinese` CLI (lunardate CNY boundaries, verified 1984 anchor), tests/test_chinese_zodiac.py 5/5 green.
 - [x] O05 Four Pillars/BaZi: astroengine/bazi.py + `bazi` CLI (Lichun year turn, jie month branches via Swiss Ephemeris, Five Tigers/Rats, JDN day pillar from verified anchors), tests/test_bazi.py 6/6 green.
+- [x] O06 Tibetan astrology: data/tibetan.json + astroengine/tibetan.py + `tibetan` CLI (element-animal year, rabjung, mewa, parkha, five forces; Losar approximation disclosed; lineage variation documented), tests/test_tibetan.py 7/7 green.
+- [x] ORACLES ROADMAP COMPLETE — all six slices forged, tested, Sólrún-verified, pushed.

@@ -502,6 +502,20 @@ Five Rats. Requires --time.
 ```bash
 python3 astrology_engine.py bazi --date 1972-09-01 --time 08:18 --timezone America/New_York
 ```
+
+## `tibetan`
+
+Tibetan astrology (nag rtsis elemental tradition) for a birth date:
+the element-animal year with rabjung cycle position, the year's
+mewa, the year's parkha, and the five personal forces — srog, lus,
+dbang-thang, rlung-ta, bla. The Losar year boundary is approximated
+by Chinese New Year (disclosed; boundary births flagged). Lineage
+variation in the force computations is documented, not hidden.
+
+```bash
+python3 astrology_engine.py tibetan 1972-09-01
+python3 astrology_engine.py tibetan 2024-02-09 --json
+```
 `nine-worlds`, `wheel`. The optional `--blank` adds the modern blank
 rune (a 1980s invention, flagged as such); `--no-merkstave` reads all
 runes upright.

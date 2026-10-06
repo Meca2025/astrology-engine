@@ -1,135 +1,136 @@
 {
-  "schema_version": "1.0",
-  "capabilities": [
-    {
-      "id": "chart",
-      "status": "available",
-      "scope": "Tropical/sidereal geocentric chart with explicit UTC, nodes, houses and provenance",
-      "evidence": "automated Swiss Ephemeris comparisons and boundary fixtures"
-    },
-    {
-      "id": "vedic",
-      "status": "available",
-      "scope": "D1 and nakshatras; comprehensive Jyotisha remains a roadmap program",
-      "evidence": "nakshatra boundary fixtures; direct Lahiri planet/house comparison"
-    },
-    {
-      "id": "vargas",
-      "status": "available",
-      "scope": "Named classical divisional charts",
-      "evidence": "classical rule boundaries and published examples with documented D27 correction"
-    },
-    {
-      "id": "dashas",
-      "status": "available",
-      "scope": "Vimshottari maha/antar periods",
-      "evidence": "published balance example; full-cycle and clipped antar boundary tests"
-    },
-    {
-      "id": "panchanga",
-      "status": "available",
-      "scope": "Instant five-limb snapshot; sunrise calendars later",
-      "evidence": "tithi/karana/yoga wrap and fixed-cycle fixtures; civil weekday contract"
-    },
-    {
-      "id": "relationship",
-      "status": "available",
-      "scope": "Structured synastry/composite/synergy with separate locations/zones",
-      "evidence": "separate-zone, circular/swap/antipodal, overlay and score-contribution tests"
-    },
-    {
-      "id": "location",
-      "status": "available",
-      "scope": "Relocation and query-latitude angular lines",
-      "evidence": "geometric horizon/meridian/circumpolar fixtures and relocated Swiss house comparison"
-    },
-    {
-      "id": "western",
-      "status": "available",
-      "scope": "Annual profections, harmonic positions and sensitive midpoints",
-      "evidence": "birthday/leap/ruler, harmonic and midpoint sensitivity fixtures"
-    },
-    {
-      "id": "legacy",
-      "status": "legacy",
-      "scope": "16 text commands with strict time/location, explicit house/body failures, unknown-time rendering and planetary backend diagnostics; event roots and approximate location math still await migration",
-      "evidence": "W09a/W09b1 input/UTC fixtures plus W09b2 polar, optional/required errors, returned flags, node motion and single/paired uncertainty tests"
-    },
-    {
-      "id": "advanced-jyotisha",
-      "status": "planned",
-      "scope": "Shadbala/ashtakavarga/yogas/Jaimini/KP/muhurta/prashna and dasha variants"
-    },
-    {
-      "id": "chinese-tibetan-other",
-      "status": "research",
-      "scope": "Independent calendar and tradition adapters with source/fixture gates"
-    },
-    {
-      "id": "runic",
-      "status": "available",
-      "scope": "Pennick (2023) runic astrology: half-month runes, runic hours, planetary hours, tides, year stations, runic names, zodiac/weekday correspondences, life periods, Metonic cycle, lunar mansions, palaces, nine worlds, and labeled Ch. 8 interpretive synthesis",
-      "evidence": "357-test suite incl. book fixtures, boundary tests, and ephemeris cross-check of the Metonic recurrence"
-    },
-    {
-      "id": "wheel",
-      "status": "available",
-      "scope": "SVG natal chart wheel rendering: zodiac ring, houses, planet glyphs, aspect lines",
-      "evidence": "tests/test_wheel.py, 10/10 green"
-    },
-    {
-      "id": "solar-arc",
-      "status": "available",
-      "scope": "Solar arc directions: directed-to-natal aspects, applying/separating and exact-hit flags",
-      "evidence": "tests/test_directions.py; independent Swiss Ephemeris cross-check <1e-6"
-    },
-    {
-      "id": "profection",
-      "status": "available",
-      "scope": "Annual profections: the Hellenistic time-lord wheel with traditional dignities",
-      "evidence": "tests/test_profections.py 7/7; 30/30 dignity spot-checks"
-    },
-    {
-      "id": "watch",
-      "status": "available",
-      "scope": "Transit watch: outer-planet transits to natal points with refined exact dates",
-      "evidence": "tests/test_watch.py 8/8; raw-swisseph missed-hit audit, zero misses"
-    },
-    {
-      "id": "elect",
-      "status": "available",
-      "scope": "Electional astrology: scored windows by Moon state, Mercury retrograde, planetary hours",
-      "evidence": "tests/test_electional.py 9/9; independent planetary-hour verification"
-    },
-    {
-      "id": "stars",
-      "status": "available",
-      "scope": "Fixed stars: 26 bright stars, precessed, with contacts to natal planets and angles",
-      "evidence": "tests/test_stars.py 9/9; precession verified to 0.002° against raw swisseph"
-    },
-    {
-      "id": "asteroids",
-      "status": "available",
-      "scope": "Asteroids (Chiron, Ceres, Pallas, Juno, Vesta); honest about missing ephemeris files",
-      "evidence": "tests/test_asteroids_midpoints.py; missing-.se1 honesty contract verified"
-    },
-    {
-      "id": "midpoints",
-      "status": "available",
-      "scope": "The 45 planetary midpoints and the planets/angles standing upon them",
-      "evidence": "tests/test_asteroids_midpoints.py 9/9; hand-verified midpoint math"
-    },
-    {
-      "id": "draconic",
-      "status": "available",
-      "scope": "Draconic chart: the soul-chart reckoned from the natal north node",
-      "evidence": "tests/test_draconic.py 6/6; rotation verified to 0.0003° against raw swisseph"
-    },
-    {
-      "id": "dossier",
-      "status": "available",
-      "scope": "Written natal dossier: all Horizons arts woven into one report",
-      "evidence": "tests/test_dossier.py 6/6; full suite green"
-    }
-  ]
+ "schema_version": "1.0",
+ "capabilities": [
+  {
+   "id": "chart",
+   "status": "available",
+   "scope": "Tropical/sidereal geocentric chart with explicit UTC, nodes, houses and provenance",
+   "evidence": "automated Swiss Ephemeris comparisons and boundary fixtures"
+  },
+  {
+   "id": "vedic",
+   "status": "available",
+   "scope": "D1 and nakshatras; comprehensive Jyotisha remains a roadmap program",
+   "evidence": "nakshatra boundary fixtures; direct Lahiri planet/house comparison"
+  },
+  {
+   "id": "vargas",
+   "status": "available",
+   "scope": "Named classical divisional charts",
+   "evidence": "classical rule boundaries and published examples with documented D27 correction"
+  },
+  {
+   "id": "dashas",
+   "status": "available",
+   "scope": "Vimshottari maha/antar periods",
+   "evidence": "published balance example; full-cycle and clipped antar boundary tests"
+  },
+  {
+   "id": "panchanga",
+   "status": "available",
+   "scope": "Instant five-limb snapshot; sunrise calendars later",
+   "evidence": "tithi/karana/yoga wrap and fixed-cycle fixtures; civil weekday contract"
+  },
+  {
+   "id": "relationship",
+   "status": "available",
+   "scope": "Structured synastry/composite/synergy with separate locations/zones",
+   "evidence": "separate-zone, circular/swap/antipodal, overlay and score-contribution tests"
+  },
+  {
+   "id": "location",
+   "status": "available",
+   "scope": "Relocation and query-latitude angular lines",
+   "evidence": "geometric horizon/meridian/circumpolar fixtures and relocated Swiss house comparison"
+  },
+  {
+   "id": "western",
+   "status": "available",
+   "scope": "Annual profections, harmonic positions and sensitive midpoints",
+   "evidence": "birthday/leap/ruler, harmonic and midpoint sensitivity fixtures"
+  },
+  {
+   "id": "legacy",
+   "status": "legacy",
+   "scope": "16 text commands with strict time/location, explicit house/body failures, unknown-time rendering and planetary backend diagnostics; event roots and approximate location math still await migration",
+   "evidence": "W09a/W09b1 input/UTC fixtures plus W09b2 polar, optional/required errors, returned flags, node motion and single/paired uncertainty tests"
+  },
+  {
+   "id": "advanced-jyotisha",
+   "status": "planned",
+   "scope": "Shadbala/ashtakavarga/yogas/Jaimini/KP/muhurta/prashna and dasha variants"
+  },
+  {
+   "id": "chinese-tibetan-other",
+   "status": "available",
+   "scope": "Chinese zodiac (ganzhi year, NaYin, allies/clashes), Four Pillars/BaZi (year/month/day/hour pillars via solar terms), Tibetan astrology (element-animal year, mewa, parkha, five forces); Younger Futhark, Anglo-Saxon futhorc and Ogham readings",
+   "evidence": "tests/test_chinese_zodiac.py 5/5, tests/test_bazi.py 6/6, tests/test_tibetan.py 7/7, tests/test_younger_futhark.py, tests/test_futhorc.py 7/7, tests/test_ogham.py 10/10; independent Sólrún verification per slice; calendrical anchors cross-checked against published tables"
+  },
+  {
+   "id": "runic",
+   "status": "available",
+   "scope": "Pennick (2023) runic astrology: half-month runes, runic hours, planetary hours, tides, year stations, runic names, zodiac/weekday correspondences, life periods, Metonic cycle, lunar mansions, palaces, nine worlds, and labeled Ch. 8 interpretive synthesis",
+   "evidence": "357-test suite incl. book fixtures, boundary tests, and ephemeris cross-check of the Metonic recurrence"
+  },
+  {
+   "id": "wheel",
+   "status": "available",
+   "scope": "SVG natal chart wheel rendering: zodiac ring, houses, planet glyphs, aspect lines",
+   "evidence": "tests/test_wheel.py, 10/10 green"
+  },
+  {
+   "id": "solar-arc",
+   "status": "available",
+   "scope": "Solar arc directions: directed-to-natal aspects, applying/separating and exact-hit flags",
+   "evidence": "tests/test_directions.py; independent Swiss Ephemeris cross-check <1e-6"
+  },
+  {
+   "id": "profection",
+   "status": "available",
+   "scope": "Annual profections: the Hellenistic time-lord wheel with traditional dignities",
+   "evidence": "tests/test_profections.py 7/7; 30/30 dignity spot-checks"
+  },
+  {
+   "id": "watch",
+   "status": "available",
+   "scope": "Transit watch: outer-planet transits to natal points with refined exact dates",
+   "evidence": "tests/test_watch.py 8/8; raw-swisseph missed-hit audit, zero misses"
+  },
+  {
+   "id": "elect",
+   "status": "available",
+   "scope": "Electional astrology: scored windows by Moon state, Mercury retrograde, planetary hours",
+   "evidence": "tests/test_electional.py 9/9; independent planetary-hour verification"
+  },
+  {
+   "id": "stars",
+   "status": "available",
+   "scope": "Fixed stars: 26 bright stars, precessed, with contacts to natal planets and angles",
+   "evidence": "tests/test_stars.py 9/9; precession verified to 0.002° against raw swisseph"
+  },
+  {
+   "id": "asteroids",
+   "status": "available",
+   "scope": "Asteroids (Chiron, Ceres, Pallas, Juno, Vesta); honest about missing ephemeris files",
+   "evidence": "tests/test_asteroids_midpoints.py; missing-.se1 honesty contract verified"
+  },
+  {
+   "id": "midpoints",
+   "status": "available",
+   "scope": "The 45 planetary midpoints and the planets/angles standing upon them",
+   "evidence": "tests/test_asteroids_midpoints.py 9/9; hand-verified midpoint math"
+  },
+  {
+   "id": "draconic",
+   "status": "available",
+   "scope": "Draconic chart: the soul-chart reckoned from the natal north node",
+   "evidence": "tests/test_draconic.py 6/6; rotation verified to 0.0003° against raw swisseph"
+  },
+  {
+   "id": "dossier",
+   "status": "available",
+   "scope": "Written natal dossier: all Horizons arts woven into one report",
+   "evidence": "tests/test_dossier.py 6/6; full suite green"
+  }
+ ]
 }

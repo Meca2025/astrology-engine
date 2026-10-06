@@ -2863,6 +2863,34 @@ def cmd_runecast(args):
     return {"reading": result}
 
 
+def cmd_tibetan(args):
+    from astroengine.tibetan import tibetan
+    result = tibetan(args.date)
+    if args.json:
+        print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+        return {"tibetan": result}
+    header("TIBETAN ASTROLOGY", f"{result['name']}  ·  born {result['date']}")
+    print(f"  Year: {result['name']} — rabjung {result['rabjung_cycle']}, "
+          f"year {result['rabjung_year']} of the 60 (opened {result['year_starts']})")
+    m = result["mewa"]
+    print(f"  Mewa: {m['number']} {m['color']} ({m['element']})")
+    pk = result["parkha"]
+    print(f"  Parkha: {pk['name']} — {pk['direction']}, {pk['element']}")
+    print("  Five forces:")
+    for key, label in (("srog", "Srog (life force)"),
+                       ("lus", "Lus (body)"),
+                       ("dbang_thang", "Dbang-thang (power)"),
+                       ("rlung_ta", "Rlung-ta (luck)"),
+                       ("bla", "Bla (soul)")):
+        print(f"    {label:22} {result['forces'][key]['element']}")
+    if result["boundary_uncertain"]:
+        print("\n  Note: " + result["losar_note"])
+    print()
+    print("  Computed per the nag rtsis elemental tradition; lineage")
+    print("  variation exists — see `tibetan --json` method notes.")
+    return {"tibetan": result}
+
+
 def cmd_bazi(args):
     from astroengine.bazi import pillars
     if args.time is None:
@@ -4346,6 +4374,10 @@ def main():
     add_houses(whl)
     add_chart_lib(whl)
 
+    tb = sub.add_parser("tibetan", help="Tibetan astrology: element-animal year, mewa, parkha, five forces")
+    tb.add_argument("date", help="Gregorian birth date, ISO YYYY-MM-DD")
+    tb.add_argument("--json", action="store_true")
+
     bz = sub.add_parser("bazi", help="Four Pillars: year/month/day/hour ganzhi via solar terms")
     bz.add_argument("--date", required=True, help="Birth date YYYY-MM-DD")
     bz.add_argument("--time", default=None, help="Birth time HH:MM (required)")
@@ -4434,6 +4466,7 @@ def main():
         "ogham":        cmd_ogham,
         "chinese":      cmd_chinese,
         "bazi":         cmd_bazi,
+        "tibetan":      cmd_tibetan,
         "wheel":        cmd_wheel,
         "solar-arc":    cmd_solar_arc,
         "profection":   cmd_profection,

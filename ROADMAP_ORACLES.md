@@ -36,3 +36,11 @@ Each slice: task doc in `tasks/`, corpus/module, CLI, tests,
 COMMANDS.md + INTERFACE.md + README + DEVLOG + TODO, capability/tool
 schema entries, Sólrún subagent verification, push with verified
 remote HEAD, local sync. Then the next slice, without being asked.
+
+## Program complete — 2026-10-06
+
+All six slices forged, tested, independently Sólrún-verified, and
+pushed: O01 Younger Futhark, O02 Anglo-Saxon futhorc, O03 Ogham,
+O04 Chinese zodiac, O05 Four Pillars/BaZi, O06 Tibetan astrology.
+534 tests green. The `chinese-tibetan-other` capability stands at
+`available`.

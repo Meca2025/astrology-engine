@@ -600,3 +600,27 @@ Master Yi Wood.
 
 Sólrún: `tests/test_bazi.py` 6/6 green plus independent subagent
 verification. Pushed via the PAT tool.
+
+## 2026-10-06 — O06: Tibetan astrology — ORACLES COMPLETE
+
+Final slice of the Oracles program. `astroengine/tibetan.py` reads the
+nag rtsis elemental tradition: element-animal year (rabjung 60-year
+position, epoch 1027), the year's mewa (decreasing nine-cycle,
+verified against two published 1900-2099 tables), the year's parkha
+(8-cycle verified on the published 2025-2039 table), and the five
+personal forces — srog (animal's element), lus (year's element),
+dbang-thang (year's element, explicit textual rule), rlung-ta
+(fixed animal table, four sources agree), bla (mother of srog, per
+the proverb). Losar boundary approximated by CNY with an explicit
+disclosure and a boundary-uncertainty flag; lineage variation in
+lus/dbang-thang documented rather than hidden. Volmarr: Water Mouse,
+mewa 1 White, parkha Li; forces Water/Water/Water/Wood/Iron.
+
+Sólrún: `tests/test_tibetan.py` 7/7 green plus independent subagent
+verification (one advisory: the lus lineage source now named in the
+method note). `chinese-tibetan-other` capability flipped
+research -> available. Pushed via the PAT tool.
+
+The Oracles program stands complete: O01 Younger Futhark, O02
+Anglo-Saxon futhorc, O03 Ogham, O04 Chinese zodiac, O05 Four
+Pillars/BaZi, O06 Tibetan astrology — 534 tests green.
