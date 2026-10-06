@@ -14,7 +14,7 @@ Read this first. Current work: 2026-10-06 expansion under Mythic Engineering.
 - [x] S08 — profections, harmonics, midpoint sensitivity.
 
 - [x] A01 — checked-in agent skill, eight tool schemas and local whitelisted routing.
-- [x] W09a — repair legacy UTC date rollover and explicit coordinate certainty; 150 local tests pass.
+- [x] W09a — repair legacy UTC date rollover and explicit coordinate certainty; 150 tests pass locally and across all six hosted jobs.
 - [ ] W09b — strict legacy timezone/house errors, schema migration and event roots.
 - [ ] V09 — expanded classical Jyotisha mechanics, with named rule/source fixtures.
 

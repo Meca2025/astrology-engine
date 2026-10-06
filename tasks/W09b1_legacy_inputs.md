@@ -40,7 +40,7 @@ command remains an explicit documented legacy assumption until its own migration
 
 ## Caller audit prepared during W09a hosted verification
 
-Ten single-chart handlers share add_geo and resolve_birth. Synastry/composite
+Nine single-chart handlers share add_geo and resolve_birth. Synastry/composite
 have separate coordinate fields but no timezone overrides. Synergy still hardcodes
 London and has no location fields, so add the full paired input flags and pass
 them through explicitly. Composite Davison admission also uses coordinate

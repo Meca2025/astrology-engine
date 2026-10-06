@@ -52,3 +52,5 @@ are checked against hand-specified UTC dates with both Swiss and formula paths;
 real natal and geoastrology CLI commands run offline. The 1975 Indiana same-day
 offset/display stays unchanged. Hosted acceptance for this slice is pending its
 implementation push and will be recorded by exact SHA/run.
+
+W09a hosted acceptance: c1c8c2cabf537d9827fcd17d523846fdbf8558d0, [run 37445523298](https://github.com/hrabanazviking/astrology-engine/actions/runs/37445523298), all six jobs successful. All 150 tests pass; W09b1 is next.

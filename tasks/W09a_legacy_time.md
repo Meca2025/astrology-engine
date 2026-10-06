@@ -1,6 +1,6 @@
 # W09a: legacy UTC calendar rollover and explicit coordinate certainty
 
-Status: local acceptance passed; hosted matrix pending, 2026-10-06.
+Status: complete; local and hosted acceptance passed, 2026-10-06.
 Owner: legacy input adapter, under parent W09 migration.
 
 ## Problem and evidence
@@ -63,3 +63,5 @@ local-noon surrogates, explicit zero coordinates, synastry overlay Julian days,
 and real natal/geoastrology CLI output without geocoding network calls. Existing
 normal-day display and ten-item tuple shape remain verified. Hosted matrix is
 tracked separately for the implementation SHA.
+
+Hosted implementation c1c8c2cabf537d9827fcd17d523846fdbf8558d0 passed all six Linux/macOS/Windows Python 3.11/3.12 jobs in [run 37445523298](https://github.com/hrabanazviking/astrology-engine/actions/runs/37445523298). Initial Windows test encoding failure is repaired; no pending implementation checks remain for W09a.

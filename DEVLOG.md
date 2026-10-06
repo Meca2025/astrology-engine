@@ -99,3 +99,5 @@ test subprocess using cp1252. The script entry point normally installs its UTF-8
 wrapper, but the test intentionally imports main to mock timezone discovery.
 Set Python's UTF-8 mode in that child process and retain explicit UTF-8 decoding.
 Computation assertions stay unchanged; repaired hosted acceptance remains pending.
+
+W09a hosted acceptance: c1c8c2cabf537d9827fcd17d523846fdbf8558d0, [run 37445523298](https://github.com/hrabanazviking/astrology-engine/actions/runs/37445523298), all six jobs successful. All 150 tests pass; W09b1 is next.
