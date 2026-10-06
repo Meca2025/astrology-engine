@@ -41,6 +41,9 @@ tests); verified by `tests/test_runic_layers.py`.
 R06 adds the lunar mansions: `lunar_mansion` / `lunar_mansions`
 (Ch. 7, 28 equal sidereal segments anchored at Alcyone, declared
 convention); verified by `tests/test_runic_mansions.py`.
+R07 adds the overlays: `grimnismal_palace`, `world_rune`,
+`nine_worlds` (App. 7, Ch. 6; labeled correspondence overlays);
+verified by `tests/test_runic_palaces.py`.
 
 `astroengine/vargas.py` owns divisional sign arithmetic; `data/vargas.json` owns
 the sixteen named mappings. Technique discrepancy ledger lives in docs/references.

@@ -218,3 +218,10 @@ count (28 with Abhijit), anchored at 0° sidereal Aries (Ashwini), each
 at Alcyone — a different zero point and a different count convention.
 Both are "lunar zodiacs" in their own traditions; the engine computes
 each in its own terms and does not synthesize the two systems.
+
+## Palaces and worlds (R07)
+
+`grimnismal_palace(sign)`, `world_rune(world)`, and `nine_worlds()` are
+fixed correspondence overlays (App. 7, Ch. 6) — sign → palace/meaning/deity
+and world → rune. Results carry `"kind": "correspondence overlay"`: they
+are looked up, not computed.

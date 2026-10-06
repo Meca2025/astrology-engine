@@ -251,3 +251,15 @@ epsilon, else 0.99999… floors into the previous mansion). Védis mapped the
 surface in INTERFACE.md incl. the contrast note vs. Vedic nakshatras (27
 vs 28, Ashwini zero point vs Alcyone — computed separately, never
 synthesized). Pushed via the PAT tool. Next: R07 palaces and nine worlds.
+
+## 2026-10-06 — R07 complete: twelve palaces and nine worlds
+
+The seventh runic slice is forged. `astroengine/runic.py` gains
+`grimnismal_palace()` (App. 7: Bilskírnir→Aries … Noatún→Pisces, with the
+meaning of each palace-name and its deity), `world_rune()`, and
+`nine_worlds()` (Ch. 6: Asgard/Gyfu … Helheim/Hagal). These are fixed
+correspondence overlays — looked up, not computed — and every result says
+so (`"kind": "correspondence overlay"`), honoring the standing
+computation/interpretation split. Sólrún's `tests/test_runic_palaces.py`:
+3/3 green, full suite 353 green. Védis mapped the surface. Pushed via the
+PAT tool. Next: R08 interpretation synthesis.

@@ -629,3 +629,52 @@ def lunar_mansions() -> list[dict]:
 
 __all__ += ["MANSION_ANCHOR_DEG", "MANSION_WIDTH_DEG",
             "lunar_mansion", "lunar_mansions"]
+
+
+# ---------------------------------------------------------------------------
+# R07 — Twelve Palaces (App. 7) and Nine Worlds (Ch. 6): correspondence
+# overlays (fixed tables, not computed quantities)
+# ---------------------------------------------------------------------------
+
+_OVERLAY = {
+    "kind": "correspondence overlay",
+    "source": "Pennick (2023)",
+    "historical_claim": "modern synthesis",
+}
+
+
+def grimnismal_palace(sign: str) -> dict:
+    """Return the Grímnismál palace (App. 7) for a zodiac sign.
+
+    Fixed correspondence overlay: sign → palace, meaning of its name,
+    ruling deity. Not a computed quantity.
+    """
+    corpus = _corpus()
+    for row in corpus["palaces"]["palaces"]:
+        if row["sign"].lower() == sign.strip().lower():
+            return {"sign": row["sign"], "palace": row["palace"],
+                    "meaning": row["meaning"], "deity": row["deity"],
+                    **_OVERLAY}
+    raise CalculationError(
+        f"unknown zodiac sign '{sign}' for the palaces overlay")
+
+
+def world_rune(world: str) -> dict:
+    """Return the rune of a named world (Ch. 6 nine-worlds table)."""
+    corpus = _corpus()
+    for row in corpus["worlds"]["worlds"]:
+        if row["world"].lower() == world.strip().lower():
+            return {"world": row["world"], "rune": row["rune"],
+                    **_OVERLAY}
+    raise CalculationError(
+        f"unknown world '{world}' for the nine-worlds overlay")
+
+
+def nine_worlds() -> list[dict]:
+    """Return the ordered Nine Worlds ↔ rune table (Ch. 6)."""
+    corpus = _corpus()
+    return [{"world": row["world"], "rune": row["rune"], **_OVERLAY}
+            for row in corpus["worlds"]["worlds"]]
+
+
+__all__ += ["grimnismal_palace", "world_rune", "nine_worlds"]
