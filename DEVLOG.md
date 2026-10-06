@@ -300,3 +300,29 @@ edits merged-first always.
 ROADMAP_RUNIC.md is complete. Nine slices, nine pushes, every table
 labeled modern synthesis, computation forever apart from interpretation.
 The runic star-program stands complete. 🌙
+
+## 2026-10-06 — Chart library + full aspect spectrum
+
+Volmarr's commission: saving/loading for every kind of chart, and every
+form of aspect however obscure. Both are forged.
+
+**Chart library** (`astroengine/charts.py`): charts persist as JSON under
+`~/.astroengine/charts` (or `$ASTROENGINE_CHART_DIR` / `--chart-dir`),
+each carrying name, type, save time, engine version, request and result.
+All 16 legacy commands take `--save NAME`; birth-data commands take
+`--load NAME` (`--load1/--load2` for the two-person commands), filling
+any date/time/lat/lon/timezone flags the user did not pass — so
+`transit --load volmarr --transit-date 2026-10-23` just works. The modern
+JSON commands honor `--save` through `run_command` (notice on stderr,
+stdout stays pure JSON). `charts`, `chart-show`, `chart-delete` manage
+the library. Wiring is centralized in `main()`'s dispatch: every command
+returns its headline result, one `maybe_save_chart` call saves it.
+
+**Aspects**: the spectrum grows from 12 to 22 — biseptile, triseptile,
+novile, binovile, quadnovile, decile, undecile, tredecile, quindecile,
+vigintile, with tight 1.5°/1.0° orbs. `ASPECT_FAMILIES` + a `families`
+filter on `calc_aspects`; `aspect-grid --aspects {all,major,minor,
+obscure}`. `data/western.json` mirrors the ten with weight 0, so synergy
+scores do not shift; the high-noise inline loops (transit, synastry,
+predict, progressions) keep their strong-aspect focus. Sólrún's new
+suites: 21/21 green, full suite 384 green. Pushed via the PAT tool.

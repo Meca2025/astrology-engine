@@ -249,3 +249,22 @@ Text output uses the legacy header/section style with a provenance
 footer; JSON output carries computation + optional interpretation +
 provenance. Registered in `data/capabilities.json`,
 `data/tool_schemas.json`, `COMMANDS.md`, and the Hermes `SKILL.md`.
+
+## Chart library (save/load)
+
+`astroengine/charts.py`: `save_chart` / `load_chart` / `list_charts` /
+`delete_chart` / `chart_exists`, rooted at `$ASTROENGINE_CHART_DIR` or
+`~/.astroengine/charts`. `astrology_engine.py` adds `--save NAME` and
+`--load NAME` (`--load1`/`--load2` for two-person commands) to every
+chart-producing subcommand, plus `charts`, `chart-show NAME`,
+`chart-delete NAME`; the modern JSON commands honor `--save` through
+`run_command`. Saved files carry name, chart_type, saved_at,
+engine_version, request and result.
+
+## Aspect families
+
+`ASPECTS` in `astrology_engine.py` now holds 22 aspects; `ASPECT_FAMILIES`
+maps each to major/minor/quintile/septile/novile/harmonic, and
+`calc_aspects(..., families=...)` filters (the pseudo-family "obscure"
+selects the four non-classical families). `data/western.json` mirrors the
+ten new aspects with neutral weight 0 so synergy scoring is unchanged.

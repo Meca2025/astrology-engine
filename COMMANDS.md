@@ -289,6 +289,40 @@ python3 astrology_engine.py runic --datetime 2026-05-16T16:45 \
 
 ---
 
+## Chart library — save, load, reuse
+
+Every chart-producing command accepts `--save NAME`; birth-data commands
+accept `--load NAME` (`--load1`/`--load2` for synastry, composite, synergy).
+
+```bash
+python3 astrology_engine.py natal --date 1972-09-01 --time 08:18 \
+  --lat 42.81 --lon -73.94 --timezone America/New_York --save volmarr
+
+python3 astrology_engine.py transit --load volmarr --transit-date 2026-10-23
+python3 astrology_engine.py charts              # list the library
+python3 astrology_engine.py chart-show volmarr  # inspect a saved chart
+python3 astrology_engine.py chart-delete volmarr
+```
+
+Charts live in `~/.astroengine/charts` (override with `--chart-dir` or
+`$ASTROENGINE_CHART_DIR`). `--load` fills any birth-data flags you did not
+pass yourself — date, time, lat, lon, timezone — from the saved chart's
+request. The modern JSON commands (`chart`, `vedic`, …) honor `--save` too.
+
+## `aspect-grid` aspect families
+
+`aspect-grid` now spans the full spectrum: the 5 major, 4 minor, quintile
+and septile series, the novile series, and the obscure harmonic family
+(decile, undecile, tredecile, quindecile, vigintile — tight 1.5°/1.0°
+orbs, as tradition demands).
+
+```bash
+python3 astrology_engine.py aspect-grid --date 1972-09-01 --aspects obscure
+python3 astrology_engine.py aspect-grid --date 1972-09-01 --aspects major
+```
+
+---
+
 ## `lots`
 
 Arabic Lots / Hermetic Parts.

@@ -225,7 +225,41 @@ ASPECTS = {
     "Quintile":     (72,  2,  2,  "Q", "creative"),
     "Bi-Quintile":  (144, 2,  2,  "bQ","creative"),
     "Septile":      (51.43, 1, 1, "S", "fated"),
+    # --- the obscure harmonic family (tight orbs, as tradition demands) ---
+    "Biseptile":    (102.86, 1.5, 1, "2S", "fated"),
+    "Triseptile":   (154.29, 1.5, 1, "3S", "fated"),
+    "Novile":       (40.0,  1.5, 1, "N",  "completion"),
+    "Binovile":     (80.0,  1.5, 1, "2N", "completion"),
+    "Quadnovile":   (160.0, 1.5, 1, "4N", "completion"),
+    "Decile":       (36.0,  1.5, 1, "D",  "initiative"),
+    "Undecile":     (32.73, 1.5, 1, "U",  "restlessness"),
+    "Tredecile":    (108.0, 1.5, 1, "tD", "breakthrough"),
+    "Quindecile":   (165.0, 1.5, 1, "qD", "obsession"),
+    "Vigintile":    (18.0,  1.5, 1, "V",  "subtle link"),
 }
+
+# Aspect families for filtering ("obscure" = everything not major/minor).
+ASPECT_FAMILIES = {
+    "Conjunction": "major", "Sextile": "major", "Square": "major",
+    "Trine": "major", "Opposition": "major",
+    "Semi-Sextile": "minor", "Semi-Square": "minor",
+    "Sesquisquare": "minor", "Quincunx": "minor",
+    "Quintile": "quintile", "Bi-Quintile": "quintile",
+    "Septile": "septile", "Biseptile": "septile", "Triseptile": "septile",
+    "Novile": "novile", "Binovile": "novile", "Quadnovile": "novile",
+    "Decile": "harmonic", "Undecile": "harmonic", "Tredecile": "harmonic",
+    "Quindecile": "harmonic", "Vigintile": "harmonic",
+}
+
+OBSCURE_FAMILIES = {"quintile", "septile", "novile", "harmonic"}
+
+# Names of the obscure harmonic aspects, kept out of the high-noise
+# inline aspect loops (transit/synastry/predict/progressions) which
+# deliberately show only stronger aspects; aspect-grid shows the full
+# spectrum via calc_aspects().
+OBSCURE_ASPECT_NAMES = ("Biseptile", "Triseptile", "Novile", "Binovile",
+                        "Quadnovile", "Decile", "Undecile", "Tredecile",
+                        "Quindecile", "Vigintile")
 
 # Essential dignities
 DOMICILE = {
@@ -1004,8 +1038,16 @@ def is_applying(lon1, speed1, lon2, speed2, angle):
     return (x * dxdt) < 0
 
 
-def calc_aspects(positions, luminaries=("Sun", "Moon")):
-    """Return list of (p1, p2, aspect_name, orb, quality, glyph)."""
+def calc_aspects(positions, luminaries=("Sun", "Moon"), families=None):
+    """Return list of (p1, p2, aspect_name, orb, quality, glyph).
+
+    families: None (all) or a collection like {"major"} or {"obscure"}.
+    The pseudo-family "obscure" selects quintile/septile/novile/harmonic.
+    """
+    if families is not None:
+        wanted = set(families)
+        if "obscure" in wanted:
+            wanted |= OBSCURE_FAMILIES
     planet_list = [p for p in positions if positions[p].get("longitude") is not None]
     results = []
     for i, p1 in enumerate(planet_list):
@@ -1014,6 +1056,8 @@ def calc_aspects(positions, luminaries=("Sun", "Moon")):
             lon2 = positions[p2]["longitude"]
             diff = angle_diff(lon1, lon2)
             for asp_name, (angle, orb_lum, orb_other, glyph, quality) in ASPECTS.items():
+                if families is not None and ASPECT_FAMILIES.get(asp_name) not in wanted:
+                    continue
                 orb = orb_lum if (p1 in luminaries or p2 in luminaries) else orb_other
                 actual_orb = abs(diff - angle)
                 if actual_orb <= orb:
@@ -2122,6 +2166,123 @@ def _print_transit_houses(positions: dict[str, dict[str, Any]], cusps: list[floa
     print()
 
 
+
+# ---------------------------------------------------------------------------
+# Chart library wiring (--save / --load on every chart-producing command)
+# ---------------------------------------------------------------------------
+
+_LOAD_FIELDS = ("date", "time", "city", "nation", "lat", "lon", "timezone")
+
+
+def add_chart_lib(parser, two_person=False, with_load=True):
+    """Add --save / --load / --chart-dir to a subparser."""
+    parser.add_argument("--save", default=None, metavar="NAME",
+                        help="Save this chart to the chart library under NAME")
+    parser.add_argument("--chart-dir", default=None, dest="chart_dir",
+                        help="Chart library directory (default ~/.astroengine/charts)")
+    if not with_load:
+        return
+    if two_person:
+        parser.add_argument("--load1", default=None, metavar="NAME",
+                            help="Load person 1 birth data from a saved chart")
+        parser.add_argument("--load2", default=None, metavar="NAME",
+                            help="Load person 2 birth data from a saved chart")
+    else:
+        parser.add_argument("--load", default=None, metavar="NAME",
+                            help="Load birth data from a saved chart")
+
+
+def apply_chart_load(args, suffix=""):
+    """Fill missing birth-data args from a saved chart (--load/--load1/--load2)."""
+    from astroengine.charts import load_chart
+    attr = f"load{suffix}" if suffix else "load"
+    name = getattr(args, attr, None)
+    if not name:
+        return
+    saved = load_chart(name, getattr(args, "chart_dir", None))
+    req = saved.get("request", {}) or {}
+    legacy_defaults = load_rules("profiles.json")["legacy_defaults"]
+    filled = []
+    for field in _LOAD_FIELDS:
+        key = f"{field}{suffix}"
+        if not hasattr(args, key):
+            continue
+        current = getattr(args, key)
+        saved_val = req.get(field)
+        if saved_val in (None, ""):
+            continue
+        if field in ("city", "nation"):
+            # only fill when the user left the legacy default in place
+            if current == legacy_defaults.get(field):
+                setattr(args, key, saved_val)
+                filled.append(key)
+        elif current in (None, ""):
+            setattr(args, key, saved_val)
+            filled.append(key)
+    if filled:
+        print(f"  Loaded chart '{name}' ({saved.get('chart_type', '?')}) -> "
+              f"{', '.join(filled)}")
+
+
+def require_date(args, field="date"):
+    if not getattr(args, field, None):
+        raise CalculationError(
+            f"--{field} is required (or use --load NAME to fill it from a saved chart)")
+
+
+def maybe_save_chart(args, chart_type, result):
+    """Save the chart when --save NAME was given."""
+    name = getattr(args, "save", None)
+    if not name:
+        return
+    from astroengine.charts import save_chart
+    skip = {"save", "load", "load1", "load2", "chart_dir", "cmd", "func"}
+    request = {k: v for k, v in vars(args).items() if k not in skip}
+    path = save_chart(name, chart_type, request, result or {},
+                      getattr(args, "chart_dir", None))
+    print(f"  Saved chart '{name}' -> {path}")
+
+
+def cmd_charts(args):
+    from astroengine.charts import list_charts, chart_dir
+    rows = list_charts(getattr(args, "chart_dir", None))
+    header("CHART LIBRARY", str(chart_dir(getattr(args, "chart_dir", None))))
+    if not rows:
+        print("  (empty — save a chart with --save NAME)")
+        print()
+        return
+    print(f"  │  {'Name':<24} {'Type':<16} {'Saved':<20}")
+    print(f"  │  {'─'*24} {'─'*16} {'─'*20}")
+    for r in rows:
+        print(f"  │  {r['name']:<24} {r['chart_type']:<16} {r['saved_at']:<20}")
+    print()
+
+
+def cmd_chart_show(args):
+    from astroengine.charts import load_chart
+    c = load_chart(args.name, getattr(args, "chart_dir", None))
+    header("CHART", f"{c['name']}  ·  {c['chart_type']}  ·  saved {c['saved_at']}")
+    section("REQUEST")
+    for k, v in sorted((c.get("request") or {}).items()):
+        print(f"  │  {k:<14} {v}")
+    section("RESULT (headline keys)")
+    result = c.get("result") or {}
+    if isinstance(result, dict):
+        for k in sorted(result.keys())[:20]:
+            v = result[k]
+            preview = str(v)[:60]
+            print(f"  │  {k:<14} {preview}")
+    else:
+        print(f"  │  {str(result)[:80]}")
+    print()
+
+
+def cmd_chart_delete(args):
+    from astroengine.charts import delete_chart
+    delete_chart(args.name, getattr(args, "chart_dir", None))
+    print(f"  Deleted chart '{args.name}'")
+
+
 def cmd_natal(args):
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, city_default_used = resolve_birth(
         args.date, args.time, args.city, args.nation,
@@ -2189,6 +2350,7 @@ def cmd_natal(args):
     print(f"  Latitude: {abs(lat):.4f}°{lat_dir}  ·  Longitude: {abs(lon):.4f}°{lon_dir}  ·  JD: {jd:.4f}")
 
 
+    return {"positions": positions, "cusps": cusps, "asc": asc, "mc": mc}
 def cmd_transit(args):
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
         args.date, args.time, args.city, args.nation,
@@ -2242,7 +2404,8 @@ def cmd_transit(args):
             n_lon = n_data["longitude"]
             diff = angle_diff(t_lon, n_lon)
             for asp_name, (angle, orb_l, orb_o, glyph, quality) in ASPECTS.items():
-                if asp_name in ("Quintile","Bi-Quintile","Septile","Semi-Sextile"):
+                if asp_name in ("Quintile","Bi-Quintile","Septile","Semi-Sextile") \
+                        or asp_name in OBSCURE_ASPECT_NAMES:
                     continue
                 orb = orb_l if t_name in ("Sun","Moon") or n_name in ("Sun","Moon") else orb_o
                 actual_orb = abs(diff - angle)
@@ -2256,6 +2419,7 @@ def cmd_transit(args):
     print()
 
 
+    return {"natal": natal_pos, "transit": transit_pos}
 def cmd_synastry(args):
     y1, mo1, d1, h1, lat1, lon1, tz1, tzl1, known1, _ = _resolve_paired_birth(args, 1)
     y2, mo2, d2, h2, lat2, lon2, tz2, tzl2, known2, _ = _resolve_paired_birth(args, 2)
@@ -2299,7 +2463,8 @@ def cmd_synastry(args):
                 continue
             diff = angle_diff(d1_data["longitude"], d2_data["longitude"])
             for asp_name, (angle, orb_l, orb_o, glyph, quality) in ASPECTS.items():
-                if asp_name in ("Quintile","Bi-Quintile","Septile","Semi-Sextile"):
+                if asp_name in ("Quintile","Bi-Quintile","Septile","Semi-Sextile") \
+                        or asp_name in OBSCURE_ASPECT_NAMES:
                     continue
                 orb = orb_l if p1 in ("Sun","Moon") or p2 in ("Sun","Moon") else orb_o
                 actual_orb = abs(diff - angle)
@@ -2313,6 +2478,7 @@ def cmd_synastry(args):
     print()
 
 
+    return {"person1": pos1, "person2": pos2}
 def cmd_solar_return(args):
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
         args.date, args.time, args.city, args.nation,
@@ -2361,6 +2527,7 @@ def cmd_solar_return(args):
     print()
 
 
+    return {"natal": natal_pos, "solar_return": sr_pos}
 def cmd_progressions(args):
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
         args.date, args.time, args.city, args.nation,
@@ -2404,7 +2571,8 @@ def cmd_progressions(args):
                 continue
             diff = angle_diff(pd_data["longitude"], nd_data["longitude"])
             for asp_name, (angle, orb_l, orb_o, glyph, quality) in ASPECTS.items():
-                if asp_name in ("Quintile","Bi-Quintile","Septile","Semi-Sextile","Semi-Square","Sesquisquare"):
+                if asp_name in ("Quintile","Bi-Quintile","Septile","Semi-Sextile","Semi-Square","Sesquisquare") \
+                        or asp_name in OBSCURE_ASPECT_NAMES:
                     continue
                 orb = 1.5  # tight orbs for progressions
                 if abs(diff - angle) <= orb:
@@ -2412,6 +2580,7 @@ def cmd_progressions(args):
     print()
 
 
+    return {"progressed": prog_pos}
 def cmd_lunar(args):
     if not SWE:
         raise CalculationError("pyswisseph is required for lunar calculations")
@@ -2470,6 +2639,7 @@ def cmd_lunar(args):
     print()
 
 
+    return {"positions": pos}
 def cmd_planet_hours(args):
     date = parse_civil(args.date).date() if args.date is not None else datetime.date.today()
     pair = coordinate_pair(getattr(args, "lat", None), getattr(args, "lon", None))
@@ -2510,6 +2680,7 @@ def cmd_planet_hours(args):
     print()
 
 
+    return {"hours": hours_data, "day_ruler": day_ruler}
 def cmd_lots(args):
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
         args.date, args.time, args.city, args.nation,
@@ -2529,6 +2700,7 @@ def cmd_lots(args):
     print_lots(lots, cusps)
 
 
+    return {"lots": lots, "positions": positions}
 def cmd_hellenistic(args):
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
         args.date, args.time, args.city, args.nation,
@@ -2547,6 +2719,7 @@ def cmd_hellenistic(args):
     print_antiscia(calc_antiscia(positions))
 
 
+    return {"positions": positions}
 def cmd_aspect_grid(args):
     y, mo, d, hour = parse_date_time(args.date, args.time)
     jd = julian_day(y, mo, d, hour)  # aspect-grid has no location so no TZ conversion
@@ -2555,9 +2728,11 @@ def cmd_aspect_grid(args):
     header("FULL ASPECT GRID", args.date)
     _print_time_certainty(args.time is not None)
     _print_astronomy(positions)
-    print_aspects(calc_aspects(positions), max_show=200)
+    fams = None if args.aspects == "all" else {args.aspects}
+    print_aspects(calc_aspects(positions, families=fams), max_show=200)
 
 
+    return {"aspects": calc_aspects(positions), "positions": positions}
 def cmd_runic(args):
     """The runic star-program: Pennick's runic astrology as one command."""
     from astroengine.runic import runic_reading
@@ -2587,7 +2762,7 @@ def cmd_runic(args):
         if "reading" in layers:
             out["interpretation"] = reading["interpretation"]
         print(json.dumps(out, ensure_ascii=False, sort_keys=True))
-        return
+        return {"reading": reading}
 
     comp = reading["computation"]
     header("RUNIC STAR-PROGRAM",
@@ -2640,6 +2815,7 @@ def cmd_runic(args):
           "and interpretation labeled separately")
 
 
+    return {"reading": reading}
 def cmd_dignity(args):
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
         args.date, args.time, args.city, args.nation,
@@ -2688,6 +2864,7 @@ def cmd_dignity(args):
     print()
 
 
+    return {"positions": positions}
 def cmd_antiscia(args):
     """Gap 1 fix: standalone antiscia subcommand."""
     y, mo, d, hour = parse_date_time(args.date, args.time)
@@ -2732,6 +2909,7 @@ def cmd_antiscia(args):
     print()
 
 
+    return {"antiscia": antiscia_data, "positions": positions}
 def cmd_composite(args):
     """Composite chart (midpoint method) for two people. Optionally show Davison chart too."""
     y1, mo1, d1, h1, _lat1, _lon1, _, tzl1, known1, _ = _resolve_paired_birth(args, 1)
@@ -2776,6 +2954,7 @@ def cmd_composite(args):
         print()
 
 
+    return {"composite": comp}
 def cmd_synergy(args):
     """Full relationship analysis: synastry + composite + synergy score + midpoints."""
     y1, mo1, d1, h1, _la1, _lo1, _, tzl1, _, _ = _resolve_paired_birth(args, 1)
@@ -2806,7 +2985,8 @@ def cmd_synergy(args):
                 continue
             diff = angle_diff(d1d["longitude"], d2d["longitude"])
             for asp_name, (angle, orb_l, orb_o, glyph, quality) in ASPECTS.items():
-                if asp_name in ("Quintile","Bi-Quintile","Septile","Semi-Sextile"):
+                if asp_name in ("Quintile","Bi-Quintile","Septile","Semi-Sextile") \
+                        or asp_name in OBSCURE_ASPECT_NAMES:
                     continue
                 orb = orb_l if p1 in ("Sun","Moon") or p2 in ("Sun","Moon") else orb_o
                 actual_orb = abs(diff - angle)
@@ -2888,6 +3068,7 @@ def cmd_synergy(args):
     print()
 
 
+    return {"composite": comp, "aspects": comp_aspects}
 def cmd_predict(args):
     """Event prediction: exact transit dates, stations, ingresses, eclipses."""
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
@@ -2987,6 +3168,7 @@ def cmd_predict(args):
     print()
 
 
+    return {"events": events}
 def cmd_geoastrology(args):
     """Astrocartography: MC, IC, ASC, DSC lines for a natal chart."""
     query = coordinate_pair(getattr(args, "query_lat", None), getattr(args, "query_lon", None),
@@ -3109,6 +3291,7 @@ def cmd_geoastrology(args):
         print()
 
 
+    return {"lines": lines}
 # ---------------------------------------------------------------------------
 # MAIN
 # ---------------------------------------------------------------------------
@@ -3144,47 +3327,53 @@ def main():
 
     # natal
     natal = sub.add_parser("natal", help="Full natal chart")
-    natal.add_argument("--date", required=True, help="YYYY-MM-DD")
+    natal.add_argument("--date", required=False, help="YYYY-MM-DD (or --load NAME)")
     natal.add_argument("--time", default=None,  help="HH:MM (24h)")
     natal.add_argument("--name", default=None)
     add_geo(natal)
+    add_chart_lib(natal)
 
     # transit  (gap 2: --transit-date / --transit-time)
     transit = sub.add_parser("transit", help="Transits to natal (default: now; use --transit-date to forecast)")
-    transit.add_argument("--date",         required=True, help="Natal birth date YYYY-MM-DD")
+    transit.add_argument("--date",         required=False, help="Natal birth date YYYY-MM-DD (or --load NAME)")
     transit.add_argument("--time",         default=None,  help="Natal birth time HH:MM")
     transit.add_argument("--transit-date", default=None,  dest="transit_date",
                          help="Sky date to compare (default: now) YYYY-MM-DD")
     transit.add_argument("--transit-time", default=None,  dest="transit_time",
                          help="Sky time HH:MM (default: noon if transit-date given)")
     add_geo(transit)
+    add_chart_lib(transit)
 
     # synastry  (gap 6: --city1/2 --nation1/2 --lat1/2 --lon1/2)
     syn = sub.add_parser("synastry", help="Two-chart synastry with optional house overlays")
-    syn.add_argument("--date1",    required=True)
-    syn.add_argument("--date2",    required=True)
+    syn.add_argument("--date1",    required=False, help="Person 1 date (or --load1 NAME)")
+    syn.add_argument("--date2",    required=False, help="Person 2 date (or --load2 NAME)")
     syn.add_argument("--time1",    default=None)
     syn.add_argument("--time2",    default=None)
     syn.add_argument("--name1",    default="Person A")
     syn.add_argument("--name2",    default="Person B")
     add_pair_geo(syn)
+    add_chart_lib(syn, two_person=True)
 
     # solar return
     sr = sub.add_parser("solar-return", help="Solar return chart")
-    sr.add_argument("--date",  required=True)
+    sr.add_argument("--date",  required=False, help="YYYY-MM-DD (or --load NAME)")
     sr.add_argument("--time",  default=None)
     sr.add_argument("--year",  default=None)
     add_geo(sr)
+    add_chart_lib(sr)
 
     # progressions
     prog = sub.add_parser("progressions", help="Secondary progressions")
-    prog.add_argument("--date",      required=True)
+    prog.add_argument("--date",      required=False, help="YYYY-MM-DD (or --load NAME)")
     prog.add_argument("--time",      default=None)
     prog.add_argument("--prog-date", default=None, dest="prog_date", help="Target date YYYY-MM-DD")
     add_geo(prog)
+    add_chart_lib(prog)
 
     # lunar
-    sub.add_parser("lunar", help="Lunar intelligence — phase, VOC, next lunations")
+    lunar_p = sub.add_parser("lunar", help="Lunar intelligence — phase, VOC, next lunations")
+    add_chart_lib(lunar_p, with_load=False)
 
     # planet-hours
     ph = sub.add_parser("planet-hours", help="Planetary hours for a date and location")
@@ -3193,54 +3382,61 @@ def main():
     ph.add_argument("--lon",  default=None, help="Longitude decimal")
     ph.add_argument("--city",   default=None)
     ph.add_argument("--nation", default=None)
+    add_chart_lib(ph)
 
     # lots
     lots_p = sub.add_parser("lots", help="Arabic Lots / Hermetic Parts")
-    lots_p.add_argument("--date", required=True)
+    lots_p.add_argument("--date", required=False, help="YYYY-MM-DD (or --load NAME)")
     lots_p.add_argument("--time", default=None)
     add_geo(lots_p)
+    add_chart_lib(lots_p)
 
     # hellenistic
     hell = sub.add_parser("hellenistic", help="Hellenistic analysis — sect, bonification, joys")
-    hell.add_argument("--date", required=True)
+    hell.add_argument("--date", required=False, help="YYYY-MM-DD (or --load NAME)")
     hell.add_argument("--time", default=None)
     add_geo(hell)
+    add_chart_lib(hell)
 
     # dignity  (gap 1: new standalone command)
     dig = sub.add_parser("dignity", help="Essential dignities table with scoring and mutual receptions")
-    dig.add_argument("--date", required=True)
+    dig.add_argument("--date", required=False, help="YYYY-MM-DD (or --load NAME)")
     dig.add_argument("--time", default=None)
     add_geo(dig)
+    add_chart_lib(dig)
 
     # antiscia  (gap 1: new standalone command)
     ant = sub.add_parser("antiscia", help="Antiscia and contra-antiscia with connection detection")
-    ant.add_argument("--date", required=True)
+    ant.add_argument("--date", required=False, help="YYYY-MM-DD (or --load NAME)")
     ant.add_argument("--time", default=None)
+    add_chart_lib(ant)
 
     # composite
     comp_p = sub.add_parser("composite", help="Composite chart (midpoints) + optional Davison chart")
-    comp_p.add_argument("--date1",   required=True)
-    comp_p.add_argument("--date2",   required=True)
+    comp_p.add_argument("--date1",   required=False, help="Person 1 date (or --load1 NAME)")
+    comp_p.add_argument("--date2",   required=False, help="Person 2 date (or --load2 NAME)")
     comp_p.add_argument("--time1",   default=None)
     comp_p.add_argument("--time2",   default=None)
     comp_p.add_argument("--name1",   default="Person A")
     comp_p.add_argument("--name2",   default="Person B")
     add_pair_geo(comp_p)
+    add_chart_lib(comp_p, two_person=True)
 
     # synergy
     syne = sub.add_parser("synergy", help="Full relationship analysis: aspects + composite + score + midpoints")
-    syne.add_argument("--date1",   required=True)
-    syne.add_argument("--date2",   required=True)
+    syne.add_argument("--date1",   required=False, help="Person 1 date (or --load1 NAME)")
+    syne.add_argument("--date2",   required=False, help="Person 2 date (or --load2 NAME)")
     syne.add_argument("--time1",   default=None)
     syne.add_argument("--time2",   default=None)
     syne.add_argument("--name1",   default="Person A")
     syne.add_argument("--name2",   default="Person B")
     add_pair_geo(syne)
+    add_chart_lib(syne, two_person=True)
 
     # predict
     pred = sub.add_parser("predict",
         help="Exact transit dates, stations, ingresses, eclipses within a window")
-    pred.add_argument("--date",   required=True, help="Natal birth date YYYY-MM-DD")
+    pred.add_argument("--date",   required=False, help="Natal birth date YYYY-MM-DD (or --load NAME)")
     pred.add_argument("--time",   default=None)
     pred.add_argument("--start",  default=None,  help="Window start YYYY-MM-DD (default: today)")
     pred.add_argument("--end",    default=None,  help="Window end   YYYY-MM-DD (default: 1 year)")
@@ -3249,14 +3445,16 @@ def main():
     pred.add_argument("--natal-planets",   default=None, dest="natal_planets",
                       help="Comma-separated natal points (default: all)")
     add_geo(pred)
+    add_chart_lib(pred)
 
     # geoastrology
     geo_p = sub.add_parser("geoastrology",
         help="Astrocartography MC/IC/ASC/DSC lines; add --query-lat/--query-lon for power-spot analysis")
-    geo_p.add_argument("--date",       required=True)
+    geo_p.add_argument("--date",       required=False, help="YYYY-MM-DD (or --load NAME)")
     geo_p.add_argument("--time",       default=None)
     geo_p.add_argument("--name",       default=None)
     add_geo(geo_p)
+    add_chart_lib(geo_p)
     geo_p.add_argument("--query-lat",  default=None, dest="query_lat",
                        help="Latitude to analyse proximity of lines")
     geo_p.add_argument("--query-lon",  default=None, dest="query_lon",
@@ -3264,8 +3462,12 @@ def main():
 
     # aspect-grid
     ag = sub.add_parser("aspect-grid", help="Full aspect matrix")
-    ag.add_argument("--date", required=True)
+    ag.add_argument("--date", required=False, help="YYYY-MM-DD (or --load NAME)")
     ag.add_argument("--time", default=None)
+    ag.add_argument("--aspects", default="all",
+                    choices=("all", "major", "minor", "obscure"),
+                    help="Aspect family filter (default: all)")
+    add_chart_lib(ag)
 
     # runic — the runic star-program (Pennick 2023)
     runic = sub.add_parser("runic", help="Runic astrology layers and readings (Pennick 2023)")
@@ -3287,6 +3489,21 @@ def main():
                        help="Include the Ch. 8 interpretive statements")
     runic.add_argument("--full", action="store_true", help="All layers (default when no layer flag is given)")
     runic.add_argument("--json", action="store_true", help="JSON output instead of text")
+    add_chart_lib(runic, with_load=False)
+
+    mgmt = sub.add_parser("charts", help="List saved charts in the chart library")
+    mgmt.add_argument("--chart-dir", default=None, dest="chart_dir")
+    mgmt.set_defaults(_mgmt="charts")
+
+    show = sub.add_parser("chart-show", help="Show a saved chart")
+    show.add_argument("name", help="Chart name")
+    show.add_argument("--chart-dir", default=None, dest="chart_dir")
+    show.set_defaults(_mgmt="chart-show")
+
+    dele = sub.add_parser("chart-delete", help="Delete a saved chart")
+    dele.add_argument("name", help="Chart name")
+    dele.add_argument("--chart-dir", default=None, dest="chart_dir")
+    dele.set_defaults(_mgmt="chart-delete")
 
     from astroengine.cli import register_commands, run_command
     register_commands(sub)
@@ -3311,11 +3528,33 @@ def main():
         "geoastrology": cmd_geoastrology,
         "aspect-grid":  cmd_aspect_grid,
         "runic":        cmd_runic,
+        "charts":       cmd_charts,
+        "chart-show":   cmd_chart_show,
+        "chart-delete": cmd_chart_delete,
+    }
+    _TWO_PERSON = {"synastry", "composite", "synergy"}
+    _DATE_FIELDS = {
+        "natal": ("date",), "transit": ("date",),
+        "synastry": ("date1", "date2"), "solar-return": ("date",),
+        "progressions": ("date",), "lots": ("date",),
+        "hellenistic": ("date",), "dignity": ("date",),
+        "antiscia": ("date",), "composite": ("date1", "date2"),
+        "synergy": ("date1", "date2"), "predict": ("date",),
+        "geoastrology": ("date",), "aspect-grid": ("date",),
     }
     fn = dispatch.get(args.cmd)
     if fn:
         try:
-            fn(args)
+            if args.cmd in _TWO_PERSON:
+                apply_chart_load(args, "1")
+                apply_chart_load(args, "2")
+            elif hasattr(args, "load"):
+                apply_chart_load(args)
+            for _field in _DATE_FIELDS.get(args.cmd, ()):
+                require_date(args, _field)
+            result = fn(args)
+            if result is not None:
+                maybe_save_chart(args, args.cmd, result)
         except CalculationError as exc:
             print(f"Calculation error: {exc}", file=sys.stderr)
             raise SystemExit(2) from exc

@@ -83,3 +83,7 @@ astroengine/legacy_astronomy.py owns dict-compatible astronomy snapshots and
 bridges to lock-owned ephemeris.positions_at_jd/houses_at_jd/solar_day_events.
 EphemerisRequest owns immutable UT settings; legacy_astronomy.json owns legacy
 body availability/frame/search rules. The monolith owns text uncertainty rendering.
+- `astroengine/charts.py` — the chart library: save/load/list/delete
+  saved charts (`~/.astroengine/charts`); wired into every
+  chart-producing command via `--save`/`--load`; verified by
+  `tests/test_chart_library.py`.

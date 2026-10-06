@@ -38,9 +38,11 @@ def _register_jyotisha(subparsers: Any) -> None:
     from .vargas import compute_vargas
     defaults = load_rules('vedic.json')['defaults']
     vedic = subparsers.add_parser('vedic', help='Jyotisha D1, navagraha and nakshatras as JSON')
+    _add_save_arguments(vedic)
     add_chart_arguments(vedic)
     vedic.set_defaults(**defaults, modern_handler=lambda args: compute_vedic(request_from_args(args)))
     vargas = subparsers.add_parser('vargas', help='Sixteen named classical divisional charts')
+    _add_save_arguments(vargas)
     add_chart_arguments(vargas)
     vargas.add_argument('--divisions', type=int, nargs='+')
     vargas.set_defaults(**defaults, modern_handler=lambda args: compute_vargas(request_from_args(args), args.divisions))
@@ -51,6 +53,7 @@ def _register_calendars(subparsers: Any) -> None:
     from .panchanga import compute_panchanga
     defaults = load_rules('vedic.json')['defaults']
     dashas = subparsers.add_parser('dashas', help='Vimshottari maha/antar timeline and birth balance')
+    _add_save_arguments(dashas)
     add_chart_arguments(dashas)
     dashas.add_argument('--years', type=float)
     dashas.add_argument('--year-model', choices=load_rules('timing.json')['year_models'])
@@ -58,6 +61,7 @@ def _register_calendars(subparsers: Any) -> None:
     dashas.set_defaults(**defaults, modern_handler=lambda args: compute_dashas(
         request_from_args(args), args.years, args.year_model, args.as_of))
     panchanga = subparsers.add_parser('panchanga', help='Instant panchanga angular elements and civil weekday')
+    _add_save_arguments(panchanga)
     add_chart_arguments(panchanga)
     panchanga.set_defaults(**defaults, modern_handler=lambda args: compute_panchanga(request_from_args(args)))
 
@@ -67,12 +71,14 @@ def _register_comparisons(subparsers: Any) -> None:
     from .locations import compute_location
     relationship = subparsers.add_parser('relationship', aliases=['synergy-json'],
                                          help='Synastry, overlays, composite and explainable synergy')
+    _add_save_arguments(relationship)
     add_chart_arguments(relationship, '1')
     add_chart_arguments(relationship, '2')
     add_profile_arguments(relationship)
     relationship.set_defaults(modern_handler=lambda args: compute_relationship(
         request_from_args(args, '1'), request_from_args(args, '2')))
     location = subparsers.add_parser('location', help='Relocation and geometric angular lines at destination latitude')
+    _add_save_arguments(location)
     add_chart_arguments(location)
     location.add_argument('--query-lat', type=float, required=True)
     location.add_argument('--query-lon', type=float, required=True)
@@ -80,20 +86,31 @@ def _register_comparisons(subparsers: Any) -> None:
         request_from_args(args), args.query_lat, args.query_lon))
 
 
+def _add_save_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--save", default=None, metavar="NAME",
+                        help="Save this chart to the chart library under NAME")
+    parser.add_argument("--chart-dir", default=None, dest="chart_dir",
+                        help="Chart library directory (default ~/.astroengine/charts)")
+
+
 def register_commands(subparsers: Any) -> None:
     from .western import compute_western
     chart = subparsers.add_parser('chart', help='Reproducible chart as JSON (explicit location/zone)')
+    _add_save_arguments(chart)
     add_chart_arguments(chart)
     chart.set_defaults(modern_handler=lambda args: compute_chart(request_from_args(args)))
     discovery = subparsers.add_parser('capabilities', help='Technique availability and scope as JSON')
+    _add_save_arguments(discovery)
     discovery.set_defaults(modern_handler=lambda args: capabilities())
     from .agent import tool_catalog
     tools = subparsers.add_parser('tools', help='Agent tool request schemas as JSON')
+    _add_save_arguments(tools)
     tools.set_defaults(modern_handler=lambda args: tool_catalog())
     _register_jyotisha(subparsers)
     _register_calendars(subparsers)
     _register_comparisons(subparsers)
     western = subparsers.add_parser('western', help='Annual profection, harmonics and sensitive midpoints')
+    _add_save_arguments(western)
     add_chart_arguments(western)
     western.add_argument('--as-of', required=True, help='Civil date YYYY-MM-DD in birth timezone')
     western.add_argument('--harmonic', type=int)
@@ -115,6 +132,15 @@ def request_from_args(args: argparse.Namespace, suffix: str = '') -> ChartReques
 def run_command(args: argparse.Namespace) -> int:
     try:
         result = args.modern_handler(args)
+        save_name = getattr(args, "save", None)
+        if save_name:
+            from .charts import save_chart
+            skip = {"save", "chart_dir", "cmd", "modern_handler"}
+            request = {k: v for k, v in vars(args).items() if k not in skip}
+            path = save_chart(save_name, getattr(args, "cmd", "chart"),
+                              request, result,
+                              getattr(args, "chart_dir", None))
+            sys.stderr.write(f"Saved chart '{save_name}' -> {path}\n")
         sys.stdout.write(json.dumps(result, ensure_ascii=True, allow_nan=False, sort_keys=True) + '\n')
         return 0
     except (CalculationError, OSError, ValueError) as exc:

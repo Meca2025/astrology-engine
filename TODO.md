@@ -35,3 +35,6 @@ coverage through an unmodified legacy command. Report exact implementation scope
 - [x] R08 — runic reading: runic_reading() composes half-month/hour/tide/station/weekday/life-period/mansion/name layers into computation + interpretive statements (Ch. 8 qualities & adverbs, corpus v1.2); golden-output fixture + anti-fabrication check; tests/test_runic_reading.py 4/4 green; full suite 357 green.
 - [x] R09 — runic CLI command: `runic` subcommand with --half-month/--hour/--tide/--station/--weekday/--mansion/--life-period/--name/--reading/--full/--json; registered in capabilities, tool_schemas, COMMANDS.md, INTERFACE.md, SKILL.md; README runic table completed (28 subcommands); tests/test_runic_cli.py 6/6 green; full suite 363 green.
 - [x] ROADMAP_RUNIC.md COMPLETE — all nine slices (R01–R09) forged, tested, and pushed. The runic star-program stands complete.
+- [x] Chart library: --save/--load(--load1/--load2)/--chart-dir on all 16 legacy commands + --save on modern JSON commands; charts/chart-show/chart-delete; astroengine/charts.py; tests/test_chart_library.py green.
+- [x] Full aspect spectrum: 10 obscure aspects (biseptile→vigintile) in ASPECTS + western.json (neutral weights); ASPECT_FAMILIES + calc_aspects families filter; aspect-grid --aspects {all,major,minor,obscure}; tests/test_aspects_full.py green.
+- [x] Full suite 384 green.
