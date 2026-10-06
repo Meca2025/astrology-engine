@@ -1,4 +1,4 @@
-![Yrsa beneath the nebula — keeper of the star-program](docs/images/yrsa-nebula.jpg)
+![Yrsa beneath the nebula — keeper of the star-program](docs/yrsa-nebula.jpg)
 
 # Astrology Engine — Volmarr's Longhall
 
@@ -16,7 +16,7 @@ it with tests, document what it cannot do, and push every slice.**
 
 ---
 
-![Yrsa in the aurora — the engine runs anywhere, even at the edge of the world](docs/images/yrsa-aurora.jpg)
+![Yrsa in the aurora — the engine runs anywhere, even at the edge of the world](docs/yrsa-aurora.jpg)
 
 ---
 
@@ -81,7 +81,7 @@ and documented — never merely planned.
 
 ---
 
-![Yrsa in the glowing rune circle — the runic star-program](docs/images/yrsa-runecircle.jpg)
+![Yrsa in the glowing rune circle — the runic star-program](docs/yrsa-runecircle.jpg)
 
 ---
 
