@@ -49,3 +49,9 @@ calendar limits. Local weekday tested across UTC date rollover.
 certainty-aware overlays, deterministic circular composites and explainable
 symbolic synergy exposed via relationship/synergy-json. Exact antipodal midpoint
 ambiguity is retained. No applying/separating motion across birth epochs.
+
+## S07 — locations
+
+113 total tests passed. Added fixed-instant relocation, Swiss equatorial positions
+and exact-latitude geometric angular lines with circumpolar states. Tested
+antimeridian normalization, horizon roots and zodiac-independent geometry.

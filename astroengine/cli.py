@@ -71,6 +71,13 @@ def register_commands(subparsers: Any) -> None:
     add_profile_arguments(relationship)
     relationship.set_defaults(modern_handler=lambda args: compute_relationship(
         request_from_args(args, "1"), request_from_args(args, "2")))
+    from .locations import compute_location
+    location = subparsers.add_parser("location", help="Relocation and geometric angular lines at destination latitude")
+    add_chart_arguments(location)
+    location.add_argument("--query-lat", type=float, required=True)
+    location.add_argument("--query-lon", type=float, required=True)
+    location.set_defaults(modern_handler=lambda args: compute_location(
+        request_from_args(args), args.query_lat, args.query_lon))
     discovery = subparsers.add_parser("capabilities", help="Technique availability and scope as JSON")
     discovery.set_defaults(modern_handler=lambda args: capabilities())
 

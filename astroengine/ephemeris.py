@@ -83,3 +83,22 @@ def calculate(utc: datetime, request: ChartRequest) -> dict[str, Any]:
                            "backends": sorted({p["backend"] for p in positions.values()}),
                            "rule_version": rules["version"],
                            "time_scale": "UTC supplied as UT; Swiss Ephemeris delta-T model"}}
+
+
+def equatorial_positions(jd: float, request: ChartRequest) -> dict[str, Any]:
+    """Internal location-domain snapshot; equatorial frame is zodiac-independent."""
+    rules = load_rules('profiles.json')
+    path = Path(request.ephemeris_path).expanduser().resolve() if request.ephemeris_path else None
+    with _LOCK:
+        try:
+            swe.set_ephe_path(str(path) if path else '')
+            flags = swe.FLG_SWIEPH | swe.FLG_EQUATORIAL
+            positions = {}
+            for name, identifier in rules['bodies'].items():
+                values, actual = swe.calc_ut(jd, getattr(swe, identifier), flags)
+                positions[name] = {'right_ascension': values[0], 'declination': values[1],
+                                   'backend': backend_name(actual), 'returned_flags': actual}
+            sidereal_time = swe.sidtime(jd) * 15
+        except swe.Error as exc:
+            raise CalculationError(f'Equatorial calculation failed: {exc}') from exc
+    return {'positions': positions, 'greenwich_sidereal_degrees': sidereal_time}

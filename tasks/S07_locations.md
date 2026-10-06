@@ -15,3 +15,9 @@ No sampled-line nearest-distance, map, refraction, parans or local-space claims.
 Gate: original instant and positions unchanged by relocation, direct destination
 Swiss houses, horizon and meridian synthetic geometry, polar/equator edge cases,
 longitude wrap/antimeridian and CLI uncertainty refusal.
+
+## Receipt
+
+113 total tests passed; geometric horizon fixtures, circumpolar/pole/grazing
+states, exact birth-instant preservation, direct destination houses and
+sidereal/tropical equatorial invariance verified. No geodesic accuracy claimed.

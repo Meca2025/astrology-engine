@@ -39,8 +39,9 @@
     },
     {
       "id": "location",
-      "status": "planned",
-      "scope": "Relocation and query-latitude angular lines"
+      "status": "available",
+      "scope": "Relocation and query-latitude angular lines",
+      "evidence": "geometric horizon/meridian/circumpolar fixtures and relocated Swiss house comparison"
     },
     {
       "id": "western",

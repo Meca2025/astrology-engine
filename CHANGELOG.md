@@ -128,3 +128,7 @@ Instant tithi/paksha, repeating/fixed karana, nakshatra and nitya yoga.
 ### S06 additions
 
 Structured relationships and synergy with independent birth locations/timezones.
+
+### S07 additions
+
+Relocation JSON and exact-latitude geometric MC/IC/ASC/DSC location lines.

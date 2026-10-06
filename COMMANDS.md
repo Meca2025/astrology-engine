@@ -464,3 +464,7 @@ weekday. It does not compute sunrise vara, transitions or a festival calendar.
 required `--lat1/2 --lon1/2 --timezone1/2`, plus shared chart profile flags.
 This new command resolves real separate locations/zones; legacy `synergy` remains
 its historical text path. Scores include every contribution and method label.
+
+`location` shares chart flags and requires `--query-lat LAT --query-lon LON`.
+Known birth time is required. Relocation holds birth UTC fixed. Results include
+MC/IC/ASC/DSC longitudes and query residuals in degrees, with circumpolar status.

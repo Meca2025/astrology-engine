@@ -1,0 +1,7 @@
+{
+  "version": "1.0",
+  "geometric_tolerance": 1e-12,
+  "method": "Geocentric apparent equatorial coordinates, zero-altitude geometric horizon; no atmospheric refraction",
+  "residual_units": "degrees of longitude along query latitude; not geodesic distance",
+  "source": "https://www.astro.com/swisseph/swephprg.htm"
+}

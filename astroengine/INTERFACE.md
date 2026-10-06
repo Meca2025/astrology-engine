@@ -69,3 +69,13 @@ flagged noon surrogates when time is missing. Composite houses are null. Antipod
 midpoints are null with ambiguity metadata. `relationships.synergy(aspects)` uses
 versioned modern symbolic weights. It is not a compatibility probability.
 `aspects` owns signed arcs, symmetric midpoint, cusp assignment and cross-aspects.
+
+## Location astrology (S07)
+
+`locations.compute_location(request, latitude, longitude)` requires a known birth
+time and returns natal/relocated charts at identical UTC, plus geocentric
+equatorial angular lines at the exact destination latitude.
+`angular_lines(ra, declination, sidereal_degrees, latitude)` solves the zero-altitude
+geometric horizon and meridians. Circumpolar/grazing/polar states are explicit.
+Residuals are signed longitude differences at that latitude, not km or shortest
+distances to curves. Equatorial coordinates never use sidereal zodiac offsets.
