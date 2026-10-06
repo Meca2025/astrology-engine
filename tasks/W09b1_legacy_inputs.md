@@ -1,6 +1,6 @@
 # W09b1: strict legacy time and location input contracts
 
-Status: next ready slice; documented before code, 2026-10-06.
+Status: implementing; documented before code, 2026-10-06.
 Owner: legacy input adapter and CLI; part of W09b.
 
 ## Problem and intended behavior
@@ -51,3 +51,31 @@ antiscia explicitly consume UTC without locations; planet-hours is a distinct
 civil-date/sunrise interface requiring its own migration review. Keep main's
 error handler before any successful output and avoid a broad catch-all that
 would hide computation defects.
+
+## Chosen adapter and reproduced evidence
+
+Add `inputs.parse_civil` as the shared civil validator and
+`legacy_inputs` as the typed compatibility adapter; the legacy monolith imports
+these domains, never the reverse. `resolve_birth` adds only the optional final
+`timezone_override` argument, retaining all older positional arguments and the
+ten-item result. `local_to_utc` retains signed relative hours and its two-item
+result, now using the strict ZoneInfo path. Historical offset seconds are retained
+when present; ordinary minute-offset display stays unchanged. Empty supplied
+times reject in both legacy and typed APIs rather than silently becoming noon.
+
+Geocode results must be finite/in-range; invalid explicit pairs reject before
+any network call. Unresolved locations raise CalculationError rather than return
+a Greenwich fallback; unresolved timezone discovery requests an explicit IANA
+override. All legacy CLI CalculationErrors go to stderr with status 2. Single
+and paired handlers propagate the new flags. Paired chart headers expose each
+resolved time/zone and label the pre-existing London assumption if no location
+was supplied; callers can now provide real independent locations for synergy.
+Davison admission requires location inputs for both people and accepts (0,0).
+Planet-hours still owns sunrise/date behavior, but this slice also routes its
+explicit coordinate and date validation through the shared boundary so partial
+or zero coordinates cannot silently select Indianapolis.
+
+Before code, reproduced New York fold 2024-11-03 01:30 and gap 2024-03-10 02:30
+silently returning standard-time UTC; missing zone returning a successful UTC
+chart; Feb 30, 24:00 and empty time accepted by parse_date_time; and explicit NaN
+coordinates accepted as resolved. New regression fixtures must reject those paths.
