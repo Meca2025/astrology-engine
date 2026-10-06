@@ -1,6 +1,6 @@
 # W09b3: precise astronomical event roots
 
-Status: next ready program after W09b2 acceptance; documented 2026-10-06.
+Status: active program; first longitude/solar-return slice, documented 2026-10-06.
 Owner: typed event domain, serialized ephemeris and legacy event adapters.
 
 ## Problem and required end state
@@ -63,3 +63,49 @@ all existing functions, registry data and historical docs. No AI/network/persist
 or ephemeris provisioning is introduced by this work.
 
 Primary astronomy reference: https://www.astro.com/swisseph/swephprg.htm
+
+## W09b3a chosen contract, before code
+
+Reproduced two old defects with synthetic continuous direct motion: a crossing at
+the exact t=1 sample returns no event; an interior conjunction appears twice.
+The current implementation/doc commit is 4b1b7e7; W09b2 code f318383 passed all six
+jobs. The published next work order is now activated without another approval.
+
+Add data-owned solver settings and frozen scalar/motion/window inputs. The pure
+root owner uses bracketed bisection with both residual and time-width acceptance,
+half-open windows, local unwrapped longitude, and strict nonconvergence errors.
+Adaptive cells use declared speed/acceleration/jerk envelopes: derivative-sign
+or acceleration-sign certificates isolate monotonic segments/unique stations;
+Taylor exclusion skips provably root-free cells under those assumptions. Split
+at speed-zero before looking for near-station recrossings. Subdivide uncertain
+cells; unresolved cells fail rather than imply event-free coverage. A stationary
+contact within angular tolerance is labeled separately from a proven crossing.
+Deduplicate shared endpoints/root brackets, never all events within five days.
+
+Numerical envelopes are conservative declared model assumptions, checked at
+samples; they are not an independently certified all-epochs planetary bound.
+Reports must expose that condition and distinguish root residual/temporal bracket
+from ephemeris accuracy. Independent motion-bound/source-corpus certification is
+I04 work. Tests use known analytic functions satisfying their declared envelopes.
+Swiss Sun/Moon crossing functions provide additional same-library checks only.
+
+Add EventWindowRequest(start, end, zodiac, ayanamsa, node_type, ephemeris_path)
+with explicit-offset ISO instants or date-only UTC midnight. End is exclusive.
+events.compute_events(window, body, longitude) returns roots, contacts, settings,
+window and actual sample backends. CLI events exposes this exact contract.
+events.compute_solar_return(ChartRequest, year) requires known time, finds/proves
+a Sun crossing in the requested local civil year, and returns natal/return chart,
+root evidence and local/UTC instant. It retains natal coordinates; relocated
+returns are W11. CLI returns and two whitelisted agent tools/schemas/catalog
+capability entries are wired in this same slice. Unknown/selected unavailable
+bodies and invalid input fail with explicit errors.
+
+Preserve find_exact_transit_dates tuple lists through a typed adapter carrying
+provenance/unavailable diagnostics outside tuple iteration; invalid names reject.
+Adapt solar-return text output to the proven Sun root. Prediction longitude
+aspects use the new owner; stations/ingresses/eclipse sections still have their
+old owner until subsequent slices. Close the CLI end date at next UTC midnight,
+not 23.9 hours; print refined timestamps and scoped aspect precision. No whole-
+prediction provenance claim is made until its remaining sections are migrated.
+All new APIs, resources, schema routes, CLI help/output/errors and installed-wheel
+imports have meaningful acceptance before push. Next: W09b3b stations/ingresses.
