@@ -63,3 +63,24 @@ def test_unknown_time_raises_cleanly():
             date="1972-09-01", time=None, latitude=42.8142,
             longitude=-73.9396, timezone="America/New_York",
             zodiac="sidereal", house_system="whole-sign"))
+
+
+def test_trikona_ekadhipatya_reductions_raman():
+    from astroengine.ashtakavarga import apply_reductions
+    result = bhinna(RAMAN_SIGNS, RAMAN_LAGNA)
+    occupied = set(RAMAN_SIGNS.values()) | {RAMAN_LAGNA}
+    red = apply_reductions(result["bhinna"], occupied)
+    # Sun's BAV hand-reduced: trikona then ekadhipatya (Jupiter pair 8/11)
+    assert red["bhinna_reduced"]["Sun"] == [1, 3, 2, 0, 0, 4, 0, 1, 0, 0, 2, 0]
+    assert red["reduced_total"] == sum(
+        sum(row) for row in red["bhinna_reduced"].values())
+    assert red["reduced_total"] < 337
+
+
+def test_reductions_present_in_compute():
+    report = compute_ashtakavarga(__import__("astroengine.models", fromlist=["ChartRequest"]).ChartRequest(
+        date="1972-09-01", time="08:18", latitude=42.8142,
+        longitude=-73.9396, timezone="America/New_York",
+        zodiac="sidereal", house_system="whole-sign"))
+    assert "sarvashtakavarga_reduced" in report
+    assert report["reduced_total"] < 337

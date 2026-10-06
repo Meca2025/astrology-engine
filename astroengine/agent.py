@@ -48,6 +48,22 @@ def _dispatch(name: str, parameters: dict[str, Any], defaults: dict[str, Any]) -
         if parameters.get('planet'):
             return mantras_for(parameters['planet'])
         return {'grahas': all_mantras()}
+    if name == 'yogas':
+        from .yogas import detect_yogas
+        return detect_yogas(ChartRequest(**{**defaults,
+                                            **parameters['request']}))
+    if name == 'shadbala':
+        from .shadbala import shadbala
+        return shadbala(ChartRequest(**{**defaults,
+                                        **parameters['request']}))
+    if name == 'ashtakavarga':
+        from .ashtakavarga import compute_ashtakavarga
+        return compute_ashtakavarga(ChartRequest(**{**defaults,
+                                                   **parameters['request']}))
+    if name == 'jaimini':
+        from .jaimini import compute_jaimini
+        return compute_jaimini(ChartRequest(**{**defaults,
+                                               **parameters['request']}))
     if name == 'forecast':
         from datetime import datetime
         from zoneinfo import ZoneInfo

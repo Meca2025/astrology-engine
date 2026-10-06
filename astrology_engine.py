@@ -2396,13 +2396,24 @@ def cmd_dossier(args):
         getattr(args, "timezone", None))
     jd = julian_day(y, mo, d, utc_hour)
     target = args.target_date or datetime.date.today().isoformat()
+    from astroengine.models import ChartRequest as _CR
+    vedic_request = _CR(date=args.date, time=args.time, latitude=lat,
+                        longitude=lon, timezone=tz_name, zodiac="sidereal",
+                        house_system="whole-sign")
     dossier = natal_dossier(jd, lat, lon, title, args.date, target,
-                            houses=args.houses)
+                            houses=args.houses, vedic_request=vedic_request)
     text = render_dossier(dossier)
     if args.json:
         print(json.dumps({"title": title, "dossier": dossier},
                          ensure_ascii=False, sort_keys=True))
         return {"dossier": dossier}
+    if args.out:
+        with open(args.out, "w", encoding="utf-8") as f:
+            f.write(text + "\n")
+        print(f"  Dossier written to {args.out}")
+    else:
+        print(text)
+    return {"dossier": dossier}
 
 
 def cmd_forecast(args):
@@ -2544,7 +2555,7 @@ def cmd_jaimini(args):
                          house_system="whole-sign")
     karakas = chara_karakas(birth)
     padas = arudha_padas(birth)
-    dasha = chara_dasha(birth)
+    dasha = chara_dasha(birth, as_of=args.as_of)
     if args.json:
         print(json.dumps({"title": title, "karakas": karakas,
                           "arudha_padas": padas, "chara_dasha": dasha},
@@ -2572,13 +2583,6 @@ def cmd_mantras(args):
         return {"remedies": remedies}
     print(render_remedies(remedies))
     return {"remedies": remedies}
-    if args.out:
-        with open(args.out, "w", encoding="utf-8") as f:
-            f.write(text + "\n")
-        print(f"  Dossier written to {args.out}")
-    else:
-        print(text)
-    return {"dossier": dossier}
 
 
 def cmd_draconic(args):
@@ -4502,6 +4506,7 @@ def main():
     jm = sub.add_parser("jaimini", help="Jaimini foundations: karakas, arudha padas, Chara dasha")
     jm.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
     jm.add_argument("--time", default=None, help="HH:MM (24h)")
+    jm.add_argument("--as-of", default=None, help="Date YYYY-MM-DD for the Chara dasha lookup (default: today)")
     jm.add_argument("--json", action="store_true")
     add_geo(jm)
     add_chart_lib(jm)

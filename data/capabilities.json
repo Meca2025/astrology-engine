@@ -143,6 +143,30 @@
    "status": "available",
    "scope": "Remedial Vedic mantras for the nine grahas; traditional public-domain verses only, devotional framing",
    "evidence": "tests/test_mantras.py 5/5; full suite green"
+  },
+  {
+   "id": "yogas",
+   "status": "available",
+   "scope": "The great yogas: Pancha Mahapurusha, Gaja Kesari, Budha-Aditya, Dhana, Raja, Kemadruma, Sakata",
+   "evidence": "hand-verified detections on Volmarr's chart plus positive/negative fixtures"
+  },
+  {
+   "id": "shadbala",
+   "status": "available",
+   "scope": "Shadbala: the sixfold planetary strength in virupas against the classical minima",
+   "evidence": "component bounds, spot values, and minima comparison fixtures"
+  },
+  {
+   "id": "ashtakavarga",
+   "status": "available",
+   "scope": "Ashtakavarga: the 337 bindus per B.V. Raman",
+   "evidence": "Raman's Standard Horoscope worked example; 337 constant on every chart"
+  },
+  {
+   "id": "jaimini",
+   "status": "available",
+   "scope": "Jaimini foundations: Chara karakas, Arudha padas, Chara dasha",
+   "evidence": "hand-verified karaka order, Arudha Lagna, and Chara sequence fixtures"
   }
  ]
 }

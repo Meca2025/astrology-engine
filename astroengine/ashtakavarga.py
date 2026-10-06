@@ -56,6 +56,8 @@ def compute_ashtakavarga(request: ChartRequest) -> dict[str, Any]:
         raise ValueError("Ashtakavarga needs a known birth time (Lagna)")
     lagna_sign = int((lagna_lon % 360) // 30)
     result = bhinna(signs, lagna_sign)
+    occupied = set(signs.values()) | {lagna_sign}
+    result.update(apply_reductions(result["bhinna"], occupied))
     lore = corpus["reading_lore"]
     weak = [(_SIGNS[i], v) for i, v in enumerate(result["sarvashtakavarga"])
             if v < 28]
@@ -75,6 +77,40 @@ def compute_ashtakavarga(request: ChartRequest) -> dict[str, Any]:
                         "strong_note": lore["sav_strong"]}}
 
 
+_TRIKONA_GROUPS = [(0, 4, 8), (1, 5, 9), (2, 6, 10), (3, 7, 11)]
+_EKADHIPATYA_PAIRS = [(0, 7), (1, 6), (2, 5), (8, 11), (9, 10)]  # Mars, Venus, Mercury, Jupiter, Saturn
+
+
+def apply_reductions(bavs: dict[str, list[int]],
+                     occupied: set[int]) -> dict[str, Any]:
+    """Trikona then Ekadhipatya reductions (shodhana) per B.V. Raman.
+
+    Trikona: in each trikona triad, subtract the triad's minimum
+    from all three signs. Ekadhipatya: for each same-lord pair with
+    bindus in both signs and no planet in either, subtract the
+    smaller from the larger. Returns reduced BAVs and reduced SAV.
+    """
+    reduced = {}
+    for planet, row in bavs.items():
+        row = list(row)
+        for triad in _TRIKONA_GROUPS:
+            minimum = min(row[i] for i in triad)
+            for i in triad:
+                row[i] -= minimum
+        for a, b in _EKADHIPATYA_PAIRS:
+            if a in occupied or b in occupied:
+                continue
+            if row[a] and row[b]:
+                smaller = min(row[a], row[b])
+                row[a] -= smaller
+                row[b] -= smaller
+        reduced[planet] = row
+    sav = [sum(reduced[p][i] for p in _PLANETS) for i in range(12)]
+    return {"bhinna_reduced": reduced,
+            "sarvashtakavarga_reduced": sav,
+            "reduced_total": sum(sav)}
+
+
 def render_ashtakavarga(report: dict) -> str:
     lines = ["Ashtakavarga — the 337 bindus", "",
              "Sign      " + " ".join(f"{s[:3]:>4}" for s in _SIGNS)]
@@ -85,6 +121,9 @@ def render_ashtakavarga(report: dict) -> str:
     sav = report["sarvashtakavarga"]
     lines.append(f"{'SAV':8s}  " + " ".join(f"{v:>4}" for v in sav)
                  + f"  = {sum(sav)}")
+    rsav = report["sarvashtakavarga_reduced"]
+    lines.append(f"{'SAV-red':8s}  " + " ".join(f"{v:>4}" for v in rsav)
+                 + f"  = {sum(rsav)}  (after Trikona + Ekadhipatya)")
     weak = ", ".join(f"{s} ({v})" for s, v in report["reading"]["weak_signs"])
     strong = ", ".join(f"{s} ({v})" for s, v in report["reading"]["strong_signs"])
     lines += ["", f"Weak signs (SAV<28): {weak or 'none'}",

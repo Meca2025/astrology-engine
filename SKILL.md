@@ -15,10 +15,11 @@ is a separate installation action, not claimed by its presence here.
 
 Run `astroengine capabilities` for availability and `astroengine tools` for full
 JSON request schemas. Planned/research/legacy states are not new safe-path methods.
-Twenty-two computation tools currently exist: chart, vedic, vargas, dashas,
+Twenty-six computation tools currently exist: chart, vedic, vargas, dashas,
 panchanga, relationship (CLI alias synergy-json), location, western, runic,
 wheel, solar-arc, profection, watch, elect, stars, asteroids, midpoints,
-draconic, dossier, chinese-tibetan-other, forecast and mantras. Catalog schemas and
+draconic, dossier, chinese-tibetan-other, forecast, mantras, yogas,
+shadbala, ashtakavarga and jaimini. Catalog schemas and
 Python routing are local contracts, not an already-running MCP/HTTP server.
 
 ## Required input and profiles

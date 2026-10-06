@@ -178,3 +178,11 @@ def render_jaimini(karakas: dict, padas: dict, dasha: dict) -> str:
                        f"({cur['start']} → {cur['end']}), "
                        f"antardasha {cur['current_antardasha']}"]
     return "\n".join(lines)
+
+
+def compute_jaimini(request: ChartRequest,
+                    as_of: str | None = None) -> dict[str, Any]:
+    """All three Jaimini foundations in one call (for the agent tool)."""
+    return {"karakas": chara_karakas(request),
+            "arudha_padas": arudha_padas(request),
+            "chara_dasha": chara_dasha(request, as_of=as_of)}

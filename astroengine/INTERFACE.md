@@ -52,7 +52,8 @@ scheme); D11 uses the new `scaled-relative` target mode.
 gathers computed facts for one day — Western transits (active, exact,
 stations, ingresses), panchanga, Vimshottari dasha position, BaZi day
 pillar with pillar relations, Tibetan day-element relation, runic
-half-month, zodiac day ties — and renders a labeled symbolic reading.
+half-month, zodiac day ties, and the Jaimini Chara dasha position
+(labeled by school) — and renders a labeled symbolic reading.
 `computed` and `reading` are separate keys; `afflictions` exposes
 pressured planets, dasha lords and clashing pillars for F02.
 
@@ -90,17 +91,21 @@ minima in rupas. Approximations disclosed in `limitations`.
 planetary sign indices + lagna -> the seven Bhinnashtakavarga
 charts and the Sarvashtakavarga (always 337). Tables per B.V.
 Raman in data/ashtakavarga.json (rule version 1.0); Lagna is the
-eighth contributor. `compute_ashtakavarga(request)` wraps D1.
-Trikona/Ekadhipatya reductions are future work, disclosed.
+eighth contributor. `compute_ashtakavarga(request)` wraps D1 and
+adds `apply_reductions()` — Trikona then Ekadhipatya shodhana
+(classical exception: Ekadhipatya skipped when a planet occupies
+either sign of the pair).
 
 ## Jaimini foundations (Gambhira G04)
 
 `jaimini.chara_karakas(request)` (Atmakaraka..Darakaraka by
 intra-sign degree), `jaimini.arudha_padas(request)` (twelve padas,
 1.1.30-32 with the 1st/7th -> 10th exceptions),
-`jaimini.chara_dasha(request)` (Lagna start, direction by
-9th-from-Lagna, years = forward sign-to-lord count minus one).
-Rules + variants in data/jaimini.json (rule version 1.0); the
+`jaimini.chara_dasha(request, as_of=None)` (Lagna start, direction by
+9th-from-Lagna, years = forward sign-to-lord count minus one;
+`as_of` pins the current mahadasha/antardasha to a date).
+`jaimini.compute_jaimini(request)` bundles all three for the agent
+tool. Rules + variants in data/jaimini.json (rule version 1.0); the
 Jaimini school is never mixed silently with Parashari timing.
 
 ## Vimshottari (S04)
@@ -403,8 +408,10 @@ ten new aspects with neutral weight 0 so synergy scoring is unchanged.
   zodiac reckoned from the true north node. CLI: `draconic`.
 
 - `astroengine/dossier.py`: `natal_dossier(natal_jd_ut, lat, lon, name,
-  birth_iso, target_iso, houses)`, `render_dossier(d)` — the nine-part
-  written natal dossier assembled from all Horizons modules. CLI:
+  birth_iso, target_iso, houses, vedic_request=None)`, `render_dossier(d)` —
+  the written natal dossier assembled from all Horizons modules, plus an
+  optional Vedic Depths section (great yogas, Shadbala strongest/weakest)
+  when a sidereal request is passed. CLI:
   `dossier`.
 
 - `astroengine/runecast.py`: `cast(..., system="elder"|"younger"|"futhorc")`,

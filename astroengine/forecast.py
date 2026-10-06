@@ -153,6 +153,14 @@ def daily_forecast(natal_jd_ut: float, lat: float, lon: float, name: str,
                             tzinfo=_dt.timezone.utc)
     dasha = active_period(timeline, noon_utc) or {"mahadasa": "unknown",
                                                   "antardasha": "unknown"}
+    from .jaimini import chara_dasha
+    _chara = chara_dasha(birth, as_of=target_iso)
+    _chara_cur = _chara.get("current") or {}
+    jaimini_dasha = {"mahadasha": _chara_cur.get("sign", "unknown"),
+                     "antardasha": _chara_cur.get("current_antardasha",
+                                                  "unknown"),
+                     "direction": _chara.get("direction", ""),
+                     "school": "Jaimini"}
 
     natal_pillars = bazi_pillars(birth.date, birth.time or "12:00", tz)
     day_pillar = bazi_pillars(target_iso, "12:00", tz)["day"]
@@ -216,6 +224,7 @@ def daily_forecast(natal_jd_ut: float, lat: float, lon: float, name: str,
                       "yoga": _elname(pan.get("yoga")),
                       "karana": _elname(pan.get("karana"))},
         "dasha": dasha,
+        "jaimini_dasha": jaimini_dasha,
         "bazi_day": {"stem_branch": f"{day_stem}-{day_branch}",
                      "element": day_element, "animal": day_animal,
                      "pillar_relations": pillar_relations,
@@ -245,7 +254,7 @@ def daily_forecast(natal_jd_ut: float, lat: float, lon: float, name: str,
         "note": "Symbolic reading — an interpretive synthesis of computed "
                 "facts, not a prediction of events.",
         "western": _western_reading(sky, n_hard),
-        "vedic": _vedic_reading(pan, dasha, vara),
+        "vedic": _vedic_reading(pan, dasha, vara, jaimini_dasha),
         "chinese": _chinese_reading(day_stem, day_branch, day_animal,
                                     pillar_relations, day_element,
                                     master_element),
@@ -300,12 +309,17 @@ def _element_name(el):
     return str(el)
 
 
-def _vedic_reading(pan: dict, dasha: dict | None, vara: str = "") -> str:
+def _vedic_reading(pan: dict, dasha: dict | None, vara: str = "",
+                   jaimini: dict | None = None) -> str:
     bits = []
     if dasha:
         bits.append(f"You walk in {dasha['mahadasa']} mahadasha, "
                     f"{dasha['antardasha']} antardasha — the {dasha['mahadasa']} "
                     "themes color everything.")
+    if jaimini and jaimini.get("mahadasha") != "unknown":
+        bits.append(f"In the Jaimini school, the Chara dasha runs "
+                    f"{jaimini['direction']}: {jaimini['mahadasha']} "
+                    f"mahadasha, {jaimini['antardasha']} antardasha.")
     bits.append(f"{_element_name(pan.get('tithi'))} tithi, {vara}, Moon in "
                 f"{_element_name(pan.get('nakshatra'))} nakshatra, "
                 f"{_element_name(pan.get('yoga'))} yoga, "
@@ -371,6 +385,8 @@ def render_forecast(report: dict) -> str:
         lines.append(f"  - {g['body']} enters {g['sign']}")
     lines += ["",
               f"Vedic: {c['dasha']['mahadasa']}/{c['dasha']['antardasha']} | "
+              f"Jaimini Chara: {c['jaimini_dasha']['mahadasha']}/"
+              f"{c['jaimini_dasha']['antardasha']} | "
               f"{c['panchanga']['tithi']} tithi, {c['panchanga']['vara']}, "
               f"{c['panchanga']['nakshatra']}",
               f"Chinese: day pillar {c['bazi_day']['stem_branch']} "

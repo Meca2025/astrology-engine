@@ -667,3 +667,14 @@ G04 (2026-10-06): Jaimini foundations — data/jaimini.json (rules +
 disclosed variants) + astroengine/jaimini.py (chara_karakas,
 arudha_padas, chara_dasha) + `jaimini` CLI. Volmarr: Venus AK,
 AL Taurus, Chara from Virgo backward. ROADMAP_GAMBHIRA complete.
+
+Refinements (2026-10-06): R1 registered yogas/shadbala/ashtakavarga/
+jaimini as agent tools (26 tools / 26 capabilities, run_tool dispatch;
+test_agent count 22->26). R2 forecast gains the Jaimini Chara dasha
+block (computed + reading + one-line summary). R3 `jaimini --as-of
+DATE`. R4 Ashtakavarga Trikona + Ekadhipatya reductions implemented
+(hand-verified on Raman's fixture; data/ashtakavarga.json documents
+the rules). R5 dossier gains the Vedic Depths section (yogas +
+Shadbala strongest/weakest); also fixed a pre-existing bug where
+`dossier` printed nothing in text mode and --out was orphaned dead
+code inside cmd_mantras. R6 SKILL.md 26 tools.
