@@ -82,6 +82,7 @@ and documented — never merely planned.
 | `tarot` / `reading` / `numerology` / `iching` / `runecast` | The divination line: tarot spreads, astrology readings, numerology, I-Ching, rune casting |
 | `wheel` | Chart wheels — the sky rendered as beautiful SVG, five house systems via `--houses` |
 | `solar-arc` | Solar arc directions — the great predictive art, directed-to-natal aspects |
+| `profection` | Annual profections — the Hellenistic time-lord wheel |
 
 ---
 

@@ -416,3 +416,16 @@ stays parseable.
 Verified live: directed Mercury conjunct natal Uranus at 0.07° on
 2026-10-23 for Volmarr. Sólrún: `tests/test_directions.py` 6/6 green
 plus independent subagent verification. Pushed via the PAT tool.
+
+## 2026-10-06 — H04: annual profections
+
+Fourth slice of the Horizons program. `astroengine/profections.py`
+turns the Hellenistic wheel: the Ascendant profects one whole sign per
+year of life, and the traditional domicile lord of that sign becomes
+lord of the year, with its natal dignity (domicile/exaltation/
+detriment/fall/peregrine) reported. The `profection` CLI takes `--load`
+or birth data and `--target-date`. For Volmarr at 54: profected Aries,
+lord Mars — the warrior's year, fitting for a book-birthing.
+
+Sólrún: `tests/test_profections.py` 7/7 green plus independent
+subagent verification. Pushed via the PAT tool.

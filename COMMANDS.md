@@ -289,6 +289,18 @@ python3 astrology_engine.py runic --datetime 2026-05-16T16:45 \
 
 ---
 
+## `profection`
+
+Annual profections — the Hellenistic time-lord wheel. Each year of
+life the Ascendant profects one whole sign; that sign's traditional
+lord becomes lord of the year.
+
+```bash
+python3 astrology_engine.py profection --load volmarr --target-date 2026-10-23
+```
+
+---
+
 ## `solar-arc`
 
 Solar arc directions: the secondary-progressed Sun's arc carried

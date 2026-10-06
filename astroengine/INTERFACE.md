@@ -308,3 +308,8 @@ ten new aspects with neutral weight 0 so synergy scoring is unchanged.
   all natal longitudes + arc; directed ASC/MC when lat/lon given.
   `directed_aspects(directed, natal, orb)` — major aspects, tightest
   first, applying/separating, exact-hit flag. CLI: `solar-arc`.
+
+- `astroengine/profections.py`: `profection(asc_longitude, birth_iso,
+  target_iso, lord_longitude)` — annual profection (whole-sign houses
+  assumed); `essential_dignity(planet, sign)` — traditional domicile /
+  exaltation / detriment / fall / peregrine. CLI: `profection`.

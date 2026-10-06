@@ -43,3 +43,4 @@ coverage through an unmodified legacy command. Report exact implementation scope
 - [x] H01 chart wheels: astroengine/wheel.py (pure SVG, ASC at 9 o'clock, aspect chords), `wheel` CLI (--load/-o), tests/test_wheel.py 10/10 green.
 - [x] H02 house systems: astroengine/houses.py (placidus/whole-sign/equal/koch/regiomontanus), --houses on natal/transit/synastry/solar-return/composite/wheel/reading, tests/test_houses.py 8/8 green.
 - [x] H03 solar arc directions: astroengine/directions.py (arc from progressed Sun, directed ASC/MC, applying/separating), `solar-arc` CLI, tests/test_directions.py 6/6 green.
+- [x] H04 annual profections: astroengine/profections.py (time-lord wheel, traditional rulers/dignities), `profection` CLI, tests/test_profections.py 7/7 green.

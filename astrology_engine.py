@@ -2371,6 +2371,61 @@ def _loc_label(req: dict) -> str:
     return " ".join(x for x in (city, nation) if x)
 
 
+def cmd_profection(args):
+    from astroengine.profections import profection
+    if args.load:
+        from astroengine.charts import load_chart
+        saved = load_chart(args.load, getattr(args, "chart_dir", None))
+        result = saved.get("result") or {}
+        positions = result.get("positions") or result.get("natal") or {}
+        req = saved.get("request", {}) or {}
+        if not getattr(args, "date", None) and req.get("date"):
+            args.date = req.get("date")
+        title = saved.get("name", "Seeker")
+        print(f"  Profections for saved chart '{args.load}'",
+              file=sys.stderr if args.json else sys.stdout)
+    else:
+        apply_chart_load(args)
+        positions = None
+        title = "Seeker"
+    if not getattr(args, "date", None):
+        raise CalculationError("--date is required (or --load NAME)")
+    y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
+        args.date, args.time, args.city, args.nation,
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None))
+    jd_natal = julian_day(y, mo, d, utc_hour)
+    if positions is None:
+        positions = calc_planet_positions(jd_natal)
+    houses_system = getattr(args, "houses", "placidus") or "placidus"
+    cusps, asc, mc = _optional_houses(jd_natal, lat, lon, time_known,
+                                      houses_system)
+    if asc is None:
+        raise CalculationError("profections need a known birth time for the Ascendant")
+    target = args.target_date or datetime.date.today().isoformat()
+    # the time lord's natal longitude, for its condition
+    prof = profection(asc, args.date, target)
+    lord_pos = positions.get(prof["time_lord"]) or {}
+    lord_lon = lord_pos.get("longitude")
+    prof = profection(asc, args.date, target, lord_longitude=lord_lon)
+    _print_house_system(args)
+    if args.json:
+        print(json.dumps({"title": title, "target_date": target,
+                          **prof}, ensure_ascii=False, sort_keys=True))
+        return prof
+    header("ANNUAL PROFECTION", f"{title}  →  {target}")
+    print(f"  Age {prof['age']}: profected {prof['profected_sign']} "
+          f"(house {prof['profected_house']})")
+    print(f"  Lord of the year: {prof['time_lord']}", end="")
+    if prof["lord_sign"]:
+        print(f" — natal {prof['lord_sign']}, {prof['lord_dignity']}")
+    else:
+        print()
+    print(f"  ({prof['method']})")
+    print()
+    return prof
+
+
 def cmd_solar_arc(args):
     from astroengine.directions import solar_arc, directed_aspects
     if args.load:
@@ -3841,6 +3896,15 @@ def main():
     num.add_argument("--json", action="store_true")
     add_chart_lib(num, with_load=False)
 
+    prf = sub.add_parser("profection", help="Annual profections: the Hellenistic time-lord wheel")
+    prf.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
+    prf.add_argument("--time", default=None, help="HH:MM (24h)")
+    prf.add_argument("--target-date", default=None, help="Target date YYYY-MM-DD (default: today)")
+    prf.add_argument("--json", action="store_true")
+    add_geo(prf)
+    add_houses(prf)
+    add_chart_lib(prf)
+
     sar = sub.add_parser("solar-arc", help="Solar arc directions to a target date")
     sar.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
     sar.add_argument("--time", default=None, help="HH:MM (24h)")
@@ -3924,6 +3988,7 @@ def main():
         "runecast":     cmd_runecast,
         "wheel":        cmd_wheel,
         "solar-arc":    cmd_solar_arc,
+        "profection":   cmd_profection,
     }
     _TWO_PERSON = {"synastry", "composite", "synergy"}
     _DATE_FIELDS = {
