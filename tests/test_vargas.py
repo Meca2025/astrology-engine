@@ -49,7 +49,7 @@ def test_unequal_trimsamsa_boundaries(longitude, expected):
 def test_entire_classical_set_and_missing_lagna():
     request = ChartRequest('2000-01-01', 0, 0, 'UTC', zodiac='sidereal', house_system='whole-sign')
     report = compute_vargas(request)
-    assert len(report['divisions']) == 16
+    assert len(report['divisions']) == 20  # 16 classical + D5/D6/D8/D11 (V01)
     for chart in report['divisions'].values():
         assert chart['lagna'] is None
         assert len(chart['placements']) == 9

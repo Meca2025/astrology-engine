@@ -1,24 +1,237 @@
 {
-  "version": "1.0",
-  "method": "classical-rao-2000",
-  "source": "https://www.vedicastrologer.org/articles/vedic_astro_textbook.pdf",
-  "source_section": "6.2, printed pages 52-60; later author revisions are separate profiles",
-  "divisions": {
-    "1": {"name": "Rasi", "mode": "relative", "step": 1},
-    "2": {"name": "Hora", "mode": "parity-table", "table": [[4, 3], [3, 4]]},
-    "3": {"name": "Drekkana", "mode": "relative", "step": 4},
-    "4": {"name": "Chaturthamsa", "mode": "relative", "step": 3},
-    "7": {"name": "Saptamsa", "mode": "relative-parity", "offsets": [0, 6]},
-    "9": {"name": "Navamsa", "mode": "element", "starts": [0, 9, 6, 3]},
-    "10": {"name": "Dasamsa", "mode": "relative-parity", "offsets": [0, 8]},
-    "12": {"name": "Dwadasamsa", "mode": "relative", "step": 1},
-    "16": {"name": "Shodasamsa", "mode": "modality", "starts": [0, 4, 8]},
-    "20": {"name": "Vimsamsa", "mode": "modality", "starts": [0, 8, 4]},
-    "24": {"name": "Chaturvimsamsa", "mode": "parity", "starts": [4, 3]},
-    "27": {"name": "Nakshatramsa", "mode": "element", "starts": [0, 3, 6, 9]},
-    "30": {"name": "Trimsamsa", "mode": "unequal-parity", "segments": [[[0, 5, 0], [5, 10, 10], [10, 18, 8], [18, 25, 2], [25, 30, 6]], [[0, 5, 1], [5, 12, 5], [12, 20, 11], [20, 25, 9], [25, 30, 7]]]},
-    "40": {"name": "Khavedamsa", "mode": "parity", "starts": [0, 6]},
-    "45": {"name": "Akshavedamsa", "mode": "modality", "starts": [0, 4, 8]},
-    "60": {"name": "Shashtyamsa", "mode": "relative", "step": 1}
+ "version": "1.1",
+ "method": "classical-rao-2000 Extended 2026-10-06 (V01): D5/D6/D8/D11 added per the Jaimini/Tajika tradition as implemented in Jagannatha Hora (JHora Traditional method, cross-verified by hora-prakash against JHora reference charts). These four are NOT part of Parasara's Shodasha-varga scheme; significations vary by lineage and are labeled per-source.",
+ "source": "https://www.vedicastrologer.org/articles/vedic_astro_textbook.pdf",
+ "source_section": "6.2, printed pages 52-60; later author revisions are separate profiles",
+ "divisions": {
+  "1": {
+   "name": "Rasi",
+   "mode": "relative",
+   "step": 1
+  },
+  "2": {
+   "name": "Hora",
+   "mode": "parity-table",
+   "table": [
+    [
+     4,
+     3
+    ],
+    [
+     3,
+     4
+    ]
+   ]
+  },
+  "3": {
+   "name": "Drekkana",
+   "mode": "relative",
+   "step": 4
+  },
+  "4": {
+   "name": "Chaturthamsa",
+   "mode": "relative",
+   "step": 3
+  },
+  "7": {
+   "name": "Saptamsa",
+   "mode": "relative-parity",
+   "offsets": [
+    0,
+    6
+   ]
+  },
+  "9": {
+   "name": "Navamsa",
+   "mode": "element",
+   "starts": [
+    0,
+    9,
+    6,
+    3
+   ]
+  },
+  "10": {
+   "name": "Dasamsa",
+   "mode": "relative-parity",
+   "offsets": [
+    0,
+    8
+   ]
+  },
+  "12": {
+   "name": "Dwadasamsa",
+   "mode": "relative",
+   "step": 1
+  },
+  "16": {
+   "name": "Shodasamsa",
+   "mode": "modality",
+   "starts": [
+    0,
+    4,
+    8
+   ]
+  },
+  "20": {
+   "name": "Vimsamsa",
+   "mode": "modality",
+   "starts": [
+    0,
+    8,
+    4
+   ]
+  },
+  "24": {
+   "name": "Chaturvimsamsa",
+   "mode": "parity",
+   "starts": [
+    4,
+    3
+   ]
+  },
+  "27": {
+   "name": "Nakshatramsa",
+   "mode": "element",
+   "starts": [
+    0,
+    3,
+    6,
+    9
+   ]
+  },
+  "30": {
+   "name": "Trimsamsa",
+   "mode": "unequal-parity",
+   "segments": [
+    [
+     [
+      0,
+      5,
+      0
+     ],
+     [
+      5,
+      10,
+      10
+     ],
+     [
+      10,
+      18,
+      8
+     ],
+     [
+      18,
+      25,
+      2
+     ],
+     [
+      25,
+      30,
+      6
+     ]
+    ],
+    [
+     [
+      0,
+      5,
+      1
+     ],
+     [
+      5,
+      12,
+      5
+     ],
+     [
+      12,
+      20,
+      11
+     ],
+     [
+      20,
+      25,
+      9
+     ],
+     [
+      25,
+      30,
+      7
+     ]
+    ]
+   ]
+  },
+  "40": {
+   "name": "Khavedamsa",
+   "mode": "parity",
+   "starts": [
+    0,
+    6
+   ]
+  },
+  "45": {
+   "name": "Akshavedamsa",
+   "mode": "modality",
+   "starts": [
+    0,
+    4,
+    8
+   ]
+  },
+  "60": {
+   "name": "Shashtyamsa",
+   "mode": "relative",
+   "step": 1
+  },
+  "5": {
+   "name": "Panchamsha",
+   "mode": "parity-table",
+   "table": [
+    [
+     0,
+     10,
+     8,
+     2,
+     6
+    ],
+    [
+     1,
+     5,
+     11,
+     9,
+     7
+    ]
+   ],
+   "signification": "Fame and power; innate morality and spiritual orientation",
+   "source": "Jaimini/Tajika tradition; JHora Traditional method (odd: Aries, Aquarius, Sagittarius, Gemini, Libra; even: Taurus, Virgo, Pisces, Capricorn, Scorpio)"
+  },
+  "6": {
+   "name": "Shashthamsha",
+   "mode": "parity",
+   "starts": [
+    0,
+    6
+   ],
+   "signification": "Health and disease; enemies and debts",
+   "source": "Jaimini/Tajika tradition; JHora Traditional method (odd signs count from Aries, even from Libra)"
+  },
+  "8": {
+   "name": "Ashtamsha",
+   "mode": "modality",
+   "starts": [
+    0,
+    8,
+    4
+   ],
+   "signification": "Unexpected troubles; accidents and longevity",
+   "source": "Jaimini/Tajika tradition; JHora Traditional method (movable from Aries, fixed from Sagittarius, dual from Leo)"
+  },
+  "11": {
+   "name": "Rudramsha",
+   "mode": "scaled-relative",
+   "scale": 11,
+   "step": 1,
+   "signification": "Gains, unearned wealth, honors and titles; social network",
+   "source": "Jaimini/Tajika tradition (Ekadashamsha); JHora Traditional Parivritti: ((sign)*11 + part) mod 12. Some lineages read D11 as destructive — variant disclosed, not adopted."
   }
+ }
 }

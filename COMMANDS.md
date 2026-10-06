@@ -804,8 +804,10 @@ nodes. Output contains navagraha, Moon nakshatra, pada, rasi houses and lagna.
 Unknown time suppresses lagna/houses; explicit tropical input rejects.
 
 `vargas` shares Vedic chart flags. Optional `--divisions 9 10 30` selects charts;
-omit it for all sixteen. Mapping profile: classical-rao-2000, with D27 source
-example discrepancy recorded in docs/references/technique-sources.md.
+omit it for all twenty. Mapping profile: classical-rao-2000 extended 2026-10-06
+(V01: D5/D6/D8/D11 per Jaimini/Tajika via JHora Traditional; not Parasara's
+scheme), with D27 source example discrepancy recorded in
+docs/references/technique-sources.md.
 
 `dashas` shares Vedic flags and accepts `--years NUMBER`, `--year-model
 tropical|julian|savana` and `--as-of ISO_TIMESTAMP_WITH_OFFSET`. Defaults: 120 years

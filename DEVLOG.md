@@ -624,3 +624,9 @@ research -> available. Pushed via the PAT tool.
 The Oracles program stands complete: O01 Younger Futhark, O02
 Anglo-Saxon futhorc, O03 Ogham, O04 Chinese zodiac, O05 Four
 Pillars/BaZi, O06 Tibetan astrology — 534 tests green.
+
+V01 (2026-10-06): extended divisional charts D5 Panchamsha, D6 Shashthamsha,
+D8 Ashtamsha, D11 Rudramsha added to data/vargas.json (rule version 1.1) per
+the Jaimini/Tajika tradition, JHora Traditional method cross-verified by
+hora-prakash against JHora reference charts. New `scaled-relative` target mode
+for D11. 60 varga tests green; default vargas set is now 20.

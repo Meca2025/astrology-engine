@@ -13,6 +13,8 @@ def _target(sign: int, part: int, rule: dict[str, Any]) -> int:
     mode = rule['mode']
     if mode == 'relative':
         return (sign + part * rule['step']) % 12
+    if mode == 'scaled-relative':
+        return (sign * rule['scale'] + part * rule.get('step', 1)) % 12
     if mode == 'relative-parity':
         return (sign + rule['offsets'][sign % 2] + part) % 12
     if mode == 'parity-table':

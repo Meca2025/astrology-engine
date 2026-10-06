@@ -40,8 +40,11 @@ No interpretation, yoga, strength or marriage scoring is inferred.
 `vargas.varga_position(longitude, division)` returns a classical mapped sign and
 source subdivision/fraction, with unsupported divisions rejected.
 `vargas.compute_vargas(request, divisions=None)` requires sidereal input, defaults
-to sixteen charts, and returns named method/source and optional divisional lagna.
-No physical varga longitude is asserted; D30 uses unequal segments.
+to twenty charts (sixteen classical + D5/D6/D8/D11, V01), and returns named
+method/source and optional divisional lagna. No physical varga longitude is
+asserted; D30 uses unequal segments. The four extra vargas follow the
+Jaimini/Tajika tradition per the JHora Traditional method (not Parasara's
+scheme); D11 uses the new `scaled-relative` target mode.
 
 ## Vimshottari (S04)
 
