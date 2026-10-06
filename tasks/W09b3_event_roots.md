@@ -109,3 +109,21 @@ not 23.9 hours; print refined timestamps and scoped aspect precision. No whole-
 prediction provenance claim is made until its remaining sections are migrated.
 All new APIs, resources, schema routes, CLI help/output/errors and installed-wheel
 imports have meaningful acceptance before push. Next: W09b3b stations/ingresses.
+
+## Return-year correction discovered during implementation
+
+The proposed one-crossing-per-civil-year admission is incorrect near New Year:
+the real 2000-01-01 noon natal Sun has two crossings during leap year 2000, one
+during 2001 (December 31), and none during 2002. Selecting a civil-year crossing
+can therefore choose the following birthday's return or fail a valid request.
+The target year must identify the local Gregorian birthday anniversary. Search
+around that birthday (local noon anchor, February 29 clamped to February 28), then
+select the nearest proven Sun crossing; report the exact local/UTC instant, which
+may belong to an adjacent calendar year. Equidistant candidates, failed brackets
+or unavailable supported-calendar windows reject. The broad declared annual
+search window also accommodates sidereal profiles; no silent tropical substitution.
+This corrects the earlier proposed civil-year restriction before acceptance.
+
+Astrodienst's own return-chart FAQ explains selecting a solar-return year and
+birthday/place conventions: https://www.astro.com/faq/fq_fh_return_e.htm
+This is method semantics, separate from independently verified astronomy.
