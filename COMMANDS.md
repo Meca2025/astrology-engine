@@ -306,6 +306,27 @@ Spreads: `single`, `three`, `five-cross`, `celtic-cross`, `horseshoe`,
 
 ---
 
+## `runecast`
+
+Rune readings from the 24 Elder Futhark runes, cast in seven layouts —
+from a single rune to the Nine Worlds. Merkstave (reversed) readings
+apply only to the asymmetric runes; the nine symmetric runes read the
+same face-up or face-down, as tradition holds. Casts are seeded and
+reproducible.
+
+```bash
+python3 astrology_engine.py runecast --layout nine-worlds --seed 7
+python3 astrology_engine.py runecast --list-layouts
+python3 astrology_engine.py runecast --layout norns --question "What of my path?"
+```
+
+Layouts: `single`, `norns`, `elements`, `cross`, `hammer`,
+`nine-worlds`, `wheel`. The optional `--blank` adds the modern blank
+rune (a 1980s invention, flagged as such); `--no-merkstave` reads all
+runes upright.
+
+---
+
 ## `reading`
 
 Interpretive astrology readings — general, love, or career — woven from a

@@ -284,3 +284,9 @@ ten new aspects with neutral weight 0 so synergy scoring is unchanged.
 - `astroengine/iching.py` + `data/iching.json`: 64 hexagrams (King Wen
   order, original renderings); `cast(question, method, seed)` by coins
   or yarrow with changing lines + relating hexagram. CLI: `iching`.
+
+- `astroengine/runecast.py` + `data/runes.json`: 24 Elder Futhark runes
+  (original one-line meanings; nine symmetric runes have null
+  merkstave); `cast(layout, seed, merkstave, blank, question)` across
+  seven layouts (single, norns, elements, cross, hammer, nine-worlds,
+  wheel); optional modern blank rune, off by default. CLI: `runecast`.

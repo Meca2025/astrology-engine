@@ -355,3 +355,17 @@ true changing lines and the relating hexagram.
 
 Sólrún's `tests/test_divination.py`: 17/17 green, full suite 401 green.
 Pushed via the PAT tool.
+
+## 2026-10-06 — Rune casting joins the divination line
+
+Volmarr asked for rune readings in a variety of layouts, and the runes
+answered: `runecast` casts the 24 Elder Futhark runes (original one-line
+meanings, `data/runes.json`) across seven layouts — single, the Norns,
+the elements, the cross, Thor's hammer, the Nine Worlds, and the
+twelve-month wheel. Merkstave readings apply only to asymmetric runes;
+the nine symmetric ones read the same either way, as tradition holds.
+The blank rune is available via `--blank`, honestly flagged as a modern
+invention. Seeded and reproducible like its tarot sibling.
+
+Sólrún's `tests/test_runecast.py`: 7/7 green, full suite 408 green.
+Pushed via the PAT tool.

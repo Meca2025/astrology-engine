@@ -1,0 +1,434 @@
+{
+  "version": "1.0",
+  "source": "Elder Futhark",
+  "historical_claim": "modern synthesis",
+  "note": "Runes whose glyphs are symmetric (Gebo, Hagalaz, Nauthiz, Isa, Jera, Eihwaz, Sowilo, Ingwaz, Dagaz) traditionally read the same face-up or face-down; their merkstave is null.",
+  "runes": [
+    {
+      "name": "Fehu",
+      "glyph": "ᚠ",
+      "transliteration": "fehu",
+      "upright": {
+        "keywords": [
+          "wealth",
+          "prosperity",
+          "resources"
+        ],
+        "meaning": "Earned wealth flows in — share it to keep it moving."
+      },
+      "merkstave": {
+        "keywords": [
+          "loss",
+          "greed"
+        ],
+        "meaning": "Guard resources; haste with money now turns to loss."
+      }
+    },
+    {
+      "name": "Uruz",
+      "glyph": "ᚢ",
+      "transliteration": "uruz",
+      "upright": {
+        "keywords": [
+          "strength",
+          "vitality",
+          "will"
+        ],
+        "meaning": "Raw vital force surges — shape circumstances by strength of will."
+      },
+      "merkstave": {
+        "keywords": [
+          "depletion",
+          "force"
+        ],
+        "meaning": "Strength is spent — rest and mend rather than forcing."
+      }
+    },
+    {
+      "name": "Thurisaz",
+      "glyph": "ᚦ",
+      "transliteration": "thurisaz",
+      "upright": {
+        "keywords": [
+          "thorn",
+          "defense",
+          "reaction"
+        ],
+        "meaning": "A thorn stands guard — pause before striking; defense and wound are one."
+      },
+      "merkstave": {
+        "keywords": [
+          "defensiveness",
+          "provocation"
+        ],
+        "meaning": "The thorn turns inward — beware hasty retaliation."
+      }
+    },
+    {
+      "name": "Ansuz",
+      "glyph": "ᚨ",
+      "transliteration": "ansuz",
+      "upright": {
+        "keywords": [
+          "message",
+          "wisdom",
+          "breath"
+        ],
+        "meaning": "Wisdom spoken or received — listen for the signal in the noise."
+      },
+      "merkstave": {
+        "keywords": [
+          "miscommunication",
+          "hollow words"
+        ],
+        "meaning": "Words ring hollow — verify before you trust."
+      }
+    },
+    {
+      "name": "Raidho",
+      "glyph": "ᚱ",
+      "transliteration": "raidho",
+      "upright": {
+        "keywords": [
+          "journey",
+          "order",
+          "movement"
+        ],
+        "meaning": "The wheel turns in right order — the road opens to steady travel."
+      },
+      "merkstave": {
+        "keywords": [
+          "delay",
+          "wrong direction"
+        ],
+        "meaning": "Delays or a road against the grain — check your direction."
+      }
+    },
+    {
+      "name": "Kenaz",
+      "glyph": "ᚲ",
+      "transliteration": "kenaz",
+      "upright": {
+        "keywords": [
+          "torch",
+          "revelation",
+          "craft"
+        ],
+        "meaning": "The torch is lit — insight that reveals the work ahead."
+      },
+      "merkstave": {
+        "keywords": [
+          "false dawn",
+          "dimmed sight"
+        ],
+        "meaning": "A false dawn — do not trust first impressions."
+      }
+    },
+    {
+      "name": "Gebo",
+      "glyph": "ᚷ",
+      "transliteration": "gebo",
+      "upright": {
+        "keywords": [
+          "gift",
+          "exchange",
+          "balance"
+        ],
+        "meaning": "Sacred exchange — giving and receiving held in balance."
+      },
+      "merkstave": null
+    },
+    {
+      "name": "Wunjo",
+      "glyph": "ᚹ",
+      "transliteration": "wunjo",
+      "upright": {
+        "keywords": [
+          "joy",
+          "harmony",
+          "belonging"
+        ],
+        "meaning": "Joy shared is joy doubled — harmony and belonging gather round."
+      },
+      "merkstave": {
+        "keywords": [
+          "sorrow",
+          "estrangement"
+        ],
+        "meaning": "An empty seat at the feast — sorrow or estrangement."
+      }
+    },
+    {
+      "name": "Hagalaz",
+      "glyph": "ᚺ",
+      "transliteration": "hagalaz",
+      "upright": {
+        "keywords": [
+          "hail",
+          "disruption",
+          "nature"
+        ],
+        "meaning": "Hail from a clear sky — what breaks now clears the field."
+      },
+      "merkstave": null
+    },
+    {
+      "name": "Nauthiz",
+      "glyph": "ᚾ",
+      "transliteration": "nauthiz",
+      "upright": {
+        "keywords": [
+          "need",
+          "endurance",
+          "friction"
+        ],
+        "meaning": "Endurance through constraint — friction that teaches the hands."
+      },
+      "merkstave": null
+    },
+    {
+      "name": "Isa",
+      "glyph": "ᛁ",
+      "transliteration": "isa",
+      "upright": {
+        "keywords": [
+          "ice",
+          "stillness",
+          "waiting"
+        ],
+        "meaning": "Stillness — the river is frozen, not gone; wait."
+      },
+      "merkstave": null
+    },
+    {
+      "name": "Jera",
+      "glyph": "ᛃ",
+      "transliteration": "jera",
+      "upright": {
+        "keywords": [
+          "harvest",
+          "cycles",
+          "reward"
+        ],
+        "meaning": "Right effort ripens in its season — reap what was sown."
+      },
+      "merkstave": null
+    },
+    {
+      "name": "Eihwaz",
+      "glyph": "ᛇ",
+      "transliteration": "eihwaz",
+      "upright": {
+        "keywords": [
+          "yew",
+          "endurance",
+          "the world-tree"
+        ],
+        "meaning": "The yew endures — bend without breaking, rooted deep."
+      },
+      "merkstave": null
+    },
+    {
+      "name": "Perthro",
+      "glyph": "ᛈ",
+      "transliteration": "perthro",
+      "upright": {
+        "keywords": [
+          "lot-cup",
+          "mystery",
+          "chance"
+        ],
+        "meaning": "The dice are in the cup — chance favors the bold."
+      },
+      "merkstave": {
+        "keywords": [
+          "gamble",
+          "addiction"
+        ],
+        "meaning": "Do not gamble what you cannot afford to lose."
+      }
+    },
+    {
+      "name": "Algiz",
+      "glyph": "ᛉ",
+      "transliteration": "algiz",
+      "upright": {
+        "keywords": [
+          "protection",
+          "shelter",
+          "the elk"
+        ],
+        "meaning": "Higher protection — the elk stands guard over you."
+      },
+      "merkstave": {
+        "keywords": [
+          "vulnerability",
+          "exposure"
+        ],
+        "meaning": "The guard is down — check your defenses."
+      }
+    },
+    {
+      "name": "Sowilo",
+      "glyph": "ᛋ",
+      "transliteration": "sowilo",
+      "upright": {
+        "keywords": [
+          "sun",
+          "victory",
+          "wholeness"
+        ],
+        "meaning": "The sun wheels and wins — victory and wholeness shine."
+      },
+      "merkstave": null
+    },
+    {
+      "name": "Tiwaz",
+      "glyph": "ᛏ",
+      "transliteration": "tiwaz",
+      "upright": {
+        "keywords": [
+          "justice",
+          "honor",
+          "sacrifice"
+        ],
+        "meaning": "Tyr's justice — act rightly though it costs you."
+      },
+      "merkstave": {
+        "keywords": [
+          "injustice",
+          "lost cause"
+        ],
+        "meaning": "A crooked scale — do not throw good honor after bad."
+      }
+    },
+    {
+      "name": "Berkana",
+      "glyph": "ᛒ",
+      "transliteration": "berkana",
+      "upright": {
+        "keywords": [
+          "birch",
+          "growth",
+          "beginnings"
+        ],
+        "meaning": "The birch buds — gentle new growth begins."
+      },
+      "merkstave": {
+        "keywords": [
+          "stalled growth",
+          "neglect"
+        ],
+        "meaning": "Growth stalls — tend the roots, do not force the shoot."
+      }
+    },
+    {
+      "name": "Ehwaz",
+      "glyph": "ᛖ",
+      "transliteration": "ehwaz",
+      "upright": {
+        "keywords": [
+          "horse",
+          "trust",
+          "partnership"
+        ],
+        "meaning": "The horse runs true — trust and forward motion in partnership."
+      },
+      "merkstave": {
+        "keywords": [
+          "restlessness",
+          "mistrust"
+        ],
+        "meaning": "A restless steed — do not gallop before the tack is set."
+      }
+    },
+    {
+      "name": "Mannaz",
+      "glyph": "ᛗ",
+      "transliteration": "mannaz",
+      "upright": {
+        "keywords": [
+          "community",
+          "the self",
+          "allies"
+        ],
+        "meaning": "The human web holds you — allies and kin lend strength."
+      },
+      "merkstave": {
+        "keywords": [
+          "isolation",
+          "false friend"
+        ],
+        "meaning": "A false friend or lone road — choose company carefully."
+      }
+    },
+    {
+      "name": "Laguz",
+      "glyph": "ᛚ",
+      "transliteration": "laguz",
+      "upright": {
+        "keywords": [
+          "water",
+          "flow",
+          "intuition"
+        ],
+        "meaning": "Flow with the current — intuition is the rudder."
+      },
+      "merkstave": {
+        "keywords": [
+          "against the tide",
+          "confusion"
+        ],
+        "meaning": "You swim upstream — stop striving and drift."
+      }
+    },
+    {
+      "name": "Ingwaz",
+      "glyph": "ᛜ",
+      "transliteration": "ingwaz",
+      "upright": {
+        "keywords": [
+          "seed",
+          "gestation",
+          "potential"
+        ],
+        "meaning": "The seed sleeps in dark soil — potential held safe, not yet time."
+      },
+      "merkstave": null
+    },
+    {
+      "name": "Dagaz",
+      "glyph": "ᛞ",
+      "transliteration": "dagaz",
+      "upright": {
+        "keywords": [
+          "day",
+          "breakthrough",
+          "dawn"
+        ],
+        "meaning": "Dawn after the long night — breakthrough comes."
+      },
+      "merkstave": null
+    },
+    {
+      "name": "Othala",
+      "glyph": "ᛟ",
+      "transliteration": "othala",
+      "upright": {
+        "keywords": [
+          "homeland",
+          "inheritance",
+          "roots"
+        ],
+        "meaning": "Rooted belonging — what the ancestors kept, you keep."
+      },
+      "merkstave": {
+        "keywords": [
+          "tangled inheritance",
+          "bondage"
+        ],
+        "meaning": "A tangled inheritance — release what binds you."
+      }
+    }
+  ]
+}

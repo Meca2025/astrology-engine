@@ -2333,6 +2333,36 @@ def cmd_numerology(args):
     return {"reading": result}
 
 
+def cmd_runecast(args):
+    from astroengine.runecast import cast, layouts
+    if args.list_layouts:
+        header("RUNE LAYOUTS", f"{len(layouts())} casts")
+        for name, positions in sorted(layouts().items()):
+            print(f"  {name:<12} {len(positions):>2} runes — {', '.join(positions[:3])}"
+                  + ("…" if len(positions) > 3 else ""))
+        print()
+        return {"layouts": sorted(layouts())}
+    result = cast(layout=args.layout, seed=args.seed,
+                  merkstave=not args.no_merkstave, blank=args.blank,
+                  question=args.question)
+    if args.json:
+        print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+        return {"reading": result}
+    header("RUNE CAST", f"{result['layout']}  ·  {len(result['runes'])} runes"
+           + (f"  ·  seed {args.seed}" if args.seed is not None else ""))
+    if args.question:
+        print(f"  Question: {args.question}\n")
+    for r in result["runes"]:
+        murk = " (merkstave)" if r["merkstave"] else ""
+        modern = " — modern invention" if r["modern_invention"] else ""
+        print(f"  {r['position']}:")
+        print(f"    {r['glyph']} {r['rune']}{murk}{modern} — {', '.join(r['keywords'])}")
+        print(f"    {r['meaning']}")
+    print()
+    print("  Interpretive — symbolic counsel, not computed fact.")
+    return {"reading": result}
+
+
 def cmd_iching(args):
     from astroengine.iching import cast
     result = cast(question=args.question, method=args.method, seed=args.seed)
@@ -3631,6 +3661,17 @@ def main():
     num.add_argument("--json", action="store_true")
     add_chart_lib(num, with_load=False)
 
+    rnc = sub.add_parser("runecast", help="Rune casting: Elder Futhark readings in many layouts")
+    rnc.add_argument("--layout", default="norns", help="Layout name (see --list-layouts)")
+    rnc.add_argument("--list-layouts", action="store_true", dest="list_layouts")
+    rnc.add_argument("--seed", type=int, default=None)
+    rnc.add_argument("--no-merkstave", action="store_true", dest="no_merkstave")
+    rnc.add_argument("--blank", action="store_true",
+                     help="Include the modern blank rune")
+    rnc.add_argument("--question", default=None)
+    rnc.add_argument("--json", action="store_true")
+    add_chart_lib(rnc, with_load=False)
+
     ich = sub.add_parser("iching", help="I-Ching oracle: cast a hexagram")
     ich.add_argument("--question", default=None)
     ich.add_argument("--method", default="coins", choices=("coins", "yarrow"))
@@ -3682,6 +3723,7 @@ def main():
         "reading":      cmd_reading,
         "numerology":   cmd_numerology,
         "iching":       cmd_iching,
+        "runecast":     cmd_runecast,
     }
     _TWO_PERSON = {"synastry", "composite", "synergy"}
     _DATE_FIELDS = {

@@ -91,3 +91,6 @@ body availability/frame/search rules. The monolith owns text uncertainty renderi
   `astroengine/numerology.py`, `astroengine/iching.py` — the
   divination quartet (tarot spreads, astrology readings,
   numerology, I-Ching); verified by `tests/test_divination.py`.
+- `astroengine/runecast.py` — rune casting (24 Elder Futhark,
+  seven layouts, merkstave, seeded); verified by
+  `tests/test_runecast.py`.
