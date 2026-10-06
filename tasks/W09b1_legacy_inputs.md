@@ -79,3 +79,12 @@ Before code, reproduced New York fold 2024-11-03 01:30 and gap 2024-03-10 02:30
 silently returning standard-time UTC; missing zone returning a successful UTC
 chart; Feb 30, 24:00 and empty time accepted by parse_date_time; and explicit NaN
 coordinates accepted as resolved. New regression fixtures must reject those paths.
+
+The caller audit also found secondary dates bypassing validation: progression
+targets and prediction windows went directly to Julian-day formulas, and location
+queries used truthiness after printing chart output. This slice admits those
+inputs before output: strict target dates/years, ordered prediction windows,
+paired finite query coordinates (including zero), and transit-time requiring its
+transit-date. The existing default prediction duration remains one civil year;
+February 29 defaults to February 28 the following year. Event-finding mathematics
+and backend/house errors stay in W09b2/W09b3.
