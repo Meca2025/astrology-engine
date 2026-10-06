@@ -89,3 +89,8 @@ optional bodies with actual Moshier flags, same-motion nodes, requested houses a
 polar failure, ordered solar events, unknown-time chart and updated capability
 scope. The wheel ships the typed bridge; the legacy text script still runs from
 the source checkout. Hosted acceptance remains pending the implementation push.
+
+W09b2 hosted acceptance: f318383a3488bad685e74b49da4fd4ab95563866, [run 37450000246](https://github.com/hrabanazviking/astrology-engine/actions/runs/37450000246), all six jobs successful
+(Linux/macOS/Windows, Python 3.11/3.12), with 283 tests. Fresh installed wheel passes
+the ten-resource/astronomy bridge checks outside source. Next: W09b3 longitude
+crossings and solar-return roots, then the remaining event-method migrations.

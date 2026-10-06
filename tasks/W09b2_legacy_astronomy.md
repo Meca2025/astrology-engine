@@ -1,6 +1,6 @@
 # W09b2: legacy house uncertainty and astronomy failures
 
-Status: implemented locally; hosted/install acceptance pending; documented before code, 2026-10-06.
+Status: accepted locally, installed and across all six hosted jobs; documented before code, 2026-10-06.
 Owner: legacy computation adapters and text rendering; part of W09b.
 
 ## Problem and required end state
@@ -79,7 +79,7 @@ Node motion and mirrors latitude, with an explicit derived marker.
 Preflight planets and all requested known-time houses before a chart header.
 Unknown-time natal/transit/progressions retain clearly labeled noon planetary
 surrogates and omit houses and dependent conclusions. Dignity needs no houses.
-Lots/Hellenistic, solar-return, prediction with angle targets and location lines
+Lots/Hellenistic, solar-return, legacy prediction and location lines
 require a known birth time. Synastry evaluates each receiving chart independently;
 one unknown time removes only its own houses/receiving overlay. Midpoint composite
 remains symbolic; Davison is unavailable unless both real locations and times
@@ -108,3 +108,8 @@ optional bodies with actual Moshier flags, same-motion nodes, requested houses a
 polar failure, ordered solar events, unknown-time chart and updated capability
 scope. The wheel ships the typed bridge; the legacy text script still runs from
 the source checkout. Hosted acceptance remains pending the implementation push.
+
+W09b2 hosted acceptance: f318383a3488bad685e74b49da4fd4ab95563866, [run 37450000246](https://github.com/hrabanazviking/astrology-engine/actions/runs/37450000246), all six jobs successful
+(Linux/macOS/Windows, Python 3.11/3.12), with 283 tests. Fresh installed wheel passes
+the ten-resource/astronomy bridge checks outside source. Next: W09b3 longitude
+crossings and solar-return roots, then the remaining event-method migrations.

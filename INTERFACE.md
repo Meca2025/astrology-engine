@@ -53,7 +53,7 @@ Settings/data paths are reset under the same ephemeris lock used by typed charts
 Known requested houses/bodies preflight before chart headers. Unknown-time natal,
 transit/progressions retain flagged noon positions, with no houses/angles/sect/lots
 or house-dependent conclusions. Dignity does not require houses. Lots/Hellenistic,
-solar return, prediction with angle targets and geoastrology require a known time.
+solar return, legacy prediction and geoastrology require a known time.
 Synastry receiving overlays are independent; each needs known time and real location.
 Davison needs both known times/locations, while midpoint composite stays symbolic.
 UTC-only date charts label noon. Planetary-hour rise/set status and ordered times

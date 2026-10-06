@@ -11,7 +11,7 @@ python3 astrology_engine.py <subcommand> [options]
 ## Global Notes
 
 - `--date` always expects `YYYY-MM-DD` format
-- `--time` expects `HH:MM[:SS[.ffffff]]`; if omitted, flagged noon positions have no houses/ASC/MC. Lots, Hellenistic, solar-return, prediction with angles and geoastrology require known time
+- `--time` expects `HH:MM[:SS[.ffffff]]`; if omitted, flagged noon positions have no houses/ASC/MC. Lots, Hellenistic, solar-return, legacy prediction and geoastrology require known time
 - `--city` / `--nation` feed the geocoding pipeline (Nominatim → kerykeion → hardcoded fallback)
 - `--lat` / `--lon` always override geocoding when both are provided
 - `--nation` should be an ISO 2-letter country code (`US`, `GB`, `DE`, `NO`, etc.)
