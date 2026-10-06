@@ -52,3 +52,4 @@ coverage through an unmodified legacy command. Report exact implementation scope
 - [x] H10 written natal dossiers: astroengine/dossier.py (nine sections, render_dossier), `dossier` CLI, capabilities/tool schemas for all nine Horizons commands, tests/test_dossier.py 6/6 green.
 - [x] O01 Younger Futhark: data/runes_younger.json (16 runes, rune-poem meanings, long/short-twig glyphs), runecast --system, tests/test_younger_futhark.py 10/10 green.
 - [x] O02 Anglo-Saxon futhorc: data/runes_futhorc.json (33 runes, OE Rune Poem + Northumbrian tradition), runecast --system futhorc live, tests/test_futhorc.py 7/7 green.
+- [x] O03 Ogham readings: data/ogham.json (25 staves, Auraicept kennings per McManus 1988), astroengine/ogham.py + `ogham` CLI (single/triad/aicme/wheel/grove), tests/test_ogham.py 8/8 green.

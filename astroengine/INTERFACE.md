@@ -351,3 +351,9 @@ ten new aspects with neutral weight 0 so synergy scoring is unchanged.
   `runes(include_blank, system)`, `systems()` — corpus files
   `data/runes.json`, `data/runes_younger.json`, `data/runes_futhorc.json`.
   CLI: `runecast --system`.
+
+- `astroengine/ogham.py` + `data/ogham.json`: 25 ogham staves
+  (20 feda + 5 forfeda, kennings per the Auraicept via McManus 1988,
+  tree-lore caveat recorded); `cast(layout, seed, question, forfeda)`
+  across five layouts (single, triad, aicme, wheel, grove); the aicme
+  layout draws one stave per aicme. CLI: `ogham`.

@@ -554,3 +554,18 @@ layouts.
 
 Sólrún: `tests/test_futhorc.py` 7/7 green plus independent subagent
 verification. Pushed via the PAT tool.
+
+## 2026-10-06 — O03: Ogham readings
+
+Third slice of the Oracles program. `data/ogham.json` holds the
+twenty-five staves — twenty feda in their four aicmí plus the five
+forfeda — each with its Auraicept kenning (Bríatharogam Morainn mac
+Moín, per McManus, Ériu 39 (1988)) and the Auraicept's tree gloss,
+with the tree-lore caveat honestly recorded (at most eight names are
+true trees; divinatory meanings are modern synthesis). New
+`astroengine/ogham.py` casts seeded readings in five layouts —
+single, triad, aicme, wheel, grove — with a --no-forfeda option.
+`ogham` CLI reads in full.
+
+Sólrún: `tests/test_ogham.py` 8/8 green plus independent subagent
+verification. Pushed via the PAT tool.

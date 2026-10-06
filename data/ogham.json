@@ -1,0 +1,358 @@
+{
+ "version": "1.0",
+ "source": "Auraicept na n-Éces; kennings are Bríatharogam Morainn mac Moín per McManus, Ériu 39 (1988)",
+ "historical_claim": "traditional with modern synthesis",
+ "note": "Modern scholarship holds that at most eight letter-names are truly trees; the Auraicept's tree glosses are medieval. Tree names above follow the Auraicept glosses with the literal name-meanings in parentheses. Divinatory meanings are modern synthesis.",
+ "staves": [
+  {
+   "name": "Beith",
+   "glyph": "ᚁ",
+   "transliteration": "B",
+   "aicme": "Beith",
+   "kenning": "withered foot with fine hair",
+   "tree": "birch",
+   "keywords": [
+    "beginnings",
+    "purification",
+    "the first step"
+   ],
+   "meaning": "The birch — first tree of spring, white-barked and cleansing. Beginnings; purification; the first step taken lightly."
+  },
+  {
+   "name": "Luis",
+   "glyph": "ᚂ",
+   "transliteration": "L",
+   "aicme": "Beith",
+   "kenning": "lustre of the eye",
+   "tree": "rowan (flame/herb)",
+   "keywords": [
+    "vision",
+    "protection",
+    "insight"
+   ],
+   "meaning": "Luis the flame — lustre of the eye. Vision and protection; the rowan's berries bright against trouble. See clearly, and be warded."
+  },
+  {
+   "name": "Fearn",
+   "glyph": "ᚃ",
+   "transliteration": "F",
+   "aicme": "Beith",
+   "kenning": "vanguard of warriors",
+   "tree": "alder",
+   "keywords": [
+    "courage",
+    "the shield-wall",
+    "resolve"
+   ],
+   "meaning": "The alder — vanguard of warriors, wood of shields. Courage at the front; stand in the shield-wall for what matters."
+  },
+  {
+   "name": "Sail",
+   "glyph": "ᚄ",
+   "transliteration": "S",
+   "aicme": "Beith",
+   "kenning": "pallor of a lifeless one",
+   "tree": "willow",
+   "keywords": [
+    "dreams",
+    "grief",
+    "the moon-tide"
+   ],
+   "meaning": "The willow — pallor of the lifeless, sustenance of bees. Dreams, grief, the moon's tide in the blood. Honor the sorrow; it is honey's beginning."
+  },
+  {
+   "name": "Nion",
+   "glyph": "ᚅ",
+   "transliteration": "N",
+   "aicme": "Beith",
+   "kenning": "establishing of peace",
+   "tree": "ash (fork/loft)",
+   "keywords": [
+    "peace",
+    "weaving",
+    "connection"
+   ],
+   "meaning": "The forked branch — establishing of peace. Weaving together what was split; the ash spear-shaft turned to the loom. Make peace."
+  },
+  {
+   "name": "Úath",
+   "glyph": "ᚆ",
+   "transliteration": "H",
+   "aicme": "Huath",
+   "kenning": "assembly of packs of hounds",
+   "tree": "hawthorn (fear)",
+   "keywords": [
+    "trial",
+    "fear",
+    "the thorny hedge"
+   ],
+   "meaning": "The hawthorn hedge — fear itself, the hounds gathering. A thorny trial; fear is the hedge, not the field. Go through, not around."
+  },
+  {
+   "name": "Dair",
+   "glyph": "ᚇ",
+   "transliteration": "D",
+   "aicme": "Huath",
+   "kenning": "highest tree",
+   "tree": "oak",
+   "keywords": [
+    "strength",
+    "endurance",
+    "kingship"
+   ],
+   "meaning": "The oak — highest tree, king of the grove. Strength, endurance, rightful authority. Stand like the oak: deep-rooted, unhurried."
+  },
+  {
+   "name": "Tinne",
+   "glyph": "ᚈ",
+   "transliteration": "T",
+   "aicme": "Huath",
+   "kenning": "one of three parts of a wheel",
+   "tree": "holly (iron bar)",
+   "keywords": [
+    "craft",
+    "structure",
+    "the making"
+   ],
+   "meaning": "The iron bar — one of three parts of a wheel. Craft and structure; the holly's part in the chariot. Build it to last."
+  },
+  {
+   "name": "Coll",
+   "glyph": "ᚉ",
+   "transliteration": "C",
+   "aicme": "Huath",
+   "kenning": "fairest tree",
+   "tree": "hazel",
+   "keywords": [
+    "wisdom",
+    "inspiration",
+    "the nuts of knowledge"
+   ],
+   "meaning": "The hazel — fairest tree, friend of nutshells. Wisdom; the nuts of knowledge dropping into the well. Inspiration is near — catch it."
+  },
+  {
+   "name": "Ceirt",
+   "glyph": "ᚊ",
+   "transliteration": "Q",
+   "aicme": "Huath",
+   "kenning": "shelter of a lunatic",
+   "tree": "apple (bush/rag)",
+   "keywords": [
+    "choice",
+    "beauty",
+    "the otherworld"
+   ],
+   "meaning": "The apple-bush — shelter even for the wild and wandering. Choice; beauty; the otherworld's orchard gate. Choose the beautiful thing."
+  },
+  {
+   "name": "Muin",
+   "glyph": "ᚋ",
+   "transliteration": "M",
+   "aicme": "Muin",
+   "kenning": "strongest in exertion",
+   "tree": "vine (neck/ruse/love)",
+   "keywords": [
+    "effort",
+    "strategy",
+    "love's labor"
+   ],
+   "meaning": "The vine — strongest in exertion, whether by neck, ruse, or love. Effort with strategy; love's labor that climbs. Work cleverly."
+  },
+  {
+   "name": "Gort",
+   "glyph": "ᚌ",
+   "transliteration": "G",
+   "aicme": "Muin",
+   "kenning": "sweetest grass",
+   "tree": "ivy (field)",
+   "keywords": [
+    "growth",
+    "tenacity",
+    "the green tide"
+   ],
+   "meaning": "The ivy-field — sweetest grass, sating of multitudes. Tenacious growth that covers all. Persist; the green tide wins."
+  },
+  {
+   "name": "Ngetal",
+   "glyph": "ᚍ",
+   "transliteration": "NG",
+   "aicme": "Muin",
+   "kenning": "sustenance of a leech",
+   "tree": "broom (slaying)",
+   "keywords": [
+    "healing",
+    "clearing",
+    "the physician"
+   ],
+   "meaning": "The broom — sustenance of the leech, raiment of physicians. Healing by clearing; the physician's broom sweeps clean. Clear it out."
+  },
+  {
+   "name": "Straif",
+   "glyph": "ᚎ",
+   "transliteration": "Z",
+   "aicme": "Muin",
+   "kenning": "strongest reddening",
+   "tree": "blackthorn (sulphur)",
+   "keywords": [
+    "transformation",
+    "alchemy",
+    "the red work"
+   ],
+   "meaning": "The blackthorn — strongest reddening, sulphur's dye. Transformation; the red work of alchemy. Something must burn to change color."
+  },
+  {
+   "name": "Ruis",
+   "glyph": "ᚏ",
+   "transliteration": "R",
+   "aicme": "Muin",
+   "kenning": "most intense blushing",
+   "tree": "elder (red)",
+   "keywords": [
+    "threshold",
+    "ending",
+    "the red door"
+   ],
+   "meaning": "The elder — most intense blushing, glow of anger. Threshold and ending; the red door between worlds. An ending stands open — walk through."
+  },
+  {
+   "name": "Ailm",
+   "glyph": "ᚐ",
+   "transliteration": "A",
+   "aicme": "Ailm",
+   "kenning": "loudest groan",
+   "tree": "pine",
+   "keywords": [
+    "clarity",
+    "vision",
+    "the high note"
+   ],
+   "meaning": "The pine — loudest groan, beginning of calling. Clarity; the high clear note. See from the height; call it plainly."
+  },
+  {
+   "name": "Onn",
+   "glyph": "ᚑ",
+   "transliteration": "O",
+   "aicme": "Ailm",
+   "kenning": "wounder of horses",
+   "tree": "furze (ash)",
+   "keywords": [
+    "movement",
+    "journey",
+    "the wound that moves"
+   ],
+   "meaning": "The furze — wounder of horses, smoothest of craft. Movement; the journey that wounds and teaches. Keep moving; the wound is tuition."
+  },
+  {
+   "name": "Ur",
+   "glyph": "ᚒ",
+   "transliteration": "U",
+   "aicme": "Ailm",
+   "kenning": "in cold dwellings",
+   "tree": "heather (earth)",
+   "keywords": [
+    "grounding",
+    "home",
+    "the cold hearth"
+   ],
+   "meaning": "The heather-earth — in cold dwellings, propagation of plants. Grounding; home, even a cold one. Tend the hearth you have."
+  },
+  {
+   "name": "Eadhadh",
+   "glyph": "ᚓ",
+   "transliteration": "E",
+   "aicme": "Ailm",
+   "kenning": "discerning tree",
+   "tree": "aspen",
+   "keywords": [
+    "discernment",
+    "trembling",
+    "the quaking leaf"
+   ],
+   "meaning": "The aspen — the discerning tree, brother of birch. Discernment; the leaf that trembles at every wind. Listen to the trembling — it knows."
+  },
+  {
+   "name": "Idhadh",
+   "glyph": "ᚔ",
+   "transliteration": "I",
+   "aicme": "Ailm",
+   "kenning": "oldest tree",
+   "tree": "yew",
+   "keywords": [
+    "age",
+    "memory",
+    "the long watch"
+   ],
+   "meaning": "The yew — oldest tree, fairest of the ancients. Age; memory; the long watch. What is old here is wise — consult it."
+  },
+  {
+   "name": "Eabhadh",
+   "glyph": "ᚕ",
+   "transliteration": "EA",
+   "aicme": "Forfeda",
+   "kenning": "fair-swimming letter",
+   "tree": null,
+   "keywords": [
+    "mystery",
+    "the unknown",
+    "crossing over"
+   ],
+   "meaning": "The fair-swimming one — first of the forfeda, the later signs. Mystery; crossing dark water. What comes next is not yet named."
+  },
+  {
+   "name": "Ór",
+   "glyph": "ᚖ",
+   "transliteration": "OI",
+   "aicme": "Forfeda",
+   "kenning": "most venerable substance",
+   "tree": "spindle-tree (gold)",
+   "keywords": [
+    "worth",
+    "value",
+    "the gold"
+   ],
+   "meaning": "Gold — most venerable substance, splendour of form. Worth; true value recognized. What glitters here is actually gold."
+  },
+  {
+   "name": "Uilleann",
+   "glyph": "ᚗ",
+   "transliteration": "UI",
+   "aicme": "Forfeda",
+   "kenning": "fragrant tree",
+   "tree": "honeysuckle (elbow)",
+   "keywords": [
+    "desire",
+    "attraction",
+    "the sweet bind"
+   ],
+   "meaning": "The honeysuckle — fragrant tree, great elbow. Desire; sweet attraction that binds. What draws you is sweet — check the binding."
+  },
+  {
+   "name": "Ifin",
+   "glyph": "ᚘ",
+   "transliteration": "IO",
+   "aicme": "Forfeda",
+   "kenning": "sweetest tree",
+   "tree": "gooseberry (spine/thorn)",
+   "keywords": [
+    "harvest",
+    "sweetness",
+    "the thorny gift"
+   ],
+   "meaning": "The gooseberry — sweetest tree, most wonderful taste. Harvest; sweetness guarded by thorns. The gift is real; mind the thorns."
+  },
+  {
+   "name": "Phagos",
+   "glyph": "ᚙ",
+   "transliteration": "AE",
+   "aicme": "Forfeda",
+   "kenning": "groan of a sick person",
+   "tree": "beech (twin-of-hazel)",
+   "keywords": [
+    "healing",
+    "learning",
+    "the book"
+   ],
+   "meaning": "The beech — twin of hazel, the sick one's groan turning to learning. Healing through knowledge; the book opens. Study it out."
+  }
+ ]
+}

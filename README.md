@@ -79,7 +79,7 @@ and documented — never merely planned.
 | `location` | Relocation and angular lines at a destination |
 | `western` | Annual profections, harmonics, sensitive midpoints |
 | `runic` | The runic star-program: Pennick's runic astrology as layer flags, text + JSON |
-| `tarot` / `reading` / `numerology` / `iching` / `runecast` | The divination line: tarot spreads, astrology readings, numerology, I-Ching, rune casting (Elder/Younger Futhark, futhorc) |
+| `tarot` / `reading` / `numerology` / `iching` / `runecast` / `ogham` | The divination line: tarot spreads, astrology readings, numerology, I-Ching, rune casting (Elder/Younger Futhark, futhorc), ogham readings |
 | `wheel` | Chart wheels — the sky rendered as beautiful SVG, five house systems via `--houses` |
 | `solar-arc` | Solar arc directions — the great predictive art, directed-to-natal aspects |
 | `profection` | Annual profections — the Hellenistic time-lord wheel |

@@ -2863,6 +2863,34 @@ def cmd_runecast(args):
     return {"reading": result}
 
 
+def cmd_ogham(args):
+    from astroengine.ogham import cast, layouts
+    if args.list_layouts:
+        header("OGHAM LAYOUTS", f"{len(layouts())} casts")
+        for name, positions in sorted(layouts().items()):
+            print(f"  {name:<12} {len(positions):>2} staves — {', '.join(positions[:3])}"
+                  + ("…" if len(positions) > 3 else ""))
+        print()
+        return {"layouts": sorted(layouts())}
+    result = cast(layout=args.layout, seed=args.seed,
+                  question=args.question, forfeda=not args.no_forfeda)
+    if args.json:
+        print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+        return {"reading": result}
+    header("OGHAM CAST", f"{result['layout']}  ·  {len(result['staves'])} staves"
+           + (f"  ·  seed {args.seed}" if args.seed is not None else ""))
+    if args.question:
+        print(f"  Question: {args.question}\n")
+    for r in result["staves"]:
+        print(f"  {r['position']}:")
+        print(f"    {r['glyph']} {r['stave']} — {', '.join(r['keywords'])}")
+        print(f"    “{r['kenning']}”")
+        print(f"    {r['meaning']}")
+    print()
+    print("  Interpretive — symbolic counsel, not computed fact.")
+    return {"reading": result}
+
+
 def cmd_iching(args):
     from astroengine.iching import cast
     result = cast(question=args.question, method=args.method, seed=args.seed)
@@ -4277,6 +4305,15 @@ def main():
     add_houses(whl)
     add_chart_lib(whl)
 
+    og = sub.add_parser("ogham", help="Ogham readings: the Irish tree-staves in grove layouts")
+    og.add_argument("--layout", default="triad", help="Layout name (see --list-layouts)")
+    og.add_argument("--list-layouts", action="store_true", dest="list_layouts")
+    og.add_argument("--seed", type=int, default=None)
+    og.add_argument("--question", default=None)
+    og.add_argument("--no-forfeda", action="store_true", dest="no_forfeda",
+                    help="Cast with the twenty feda only")
+    og.add_argument("--json", action="store_true")
+
     rnc = sub.add_parser("runecast", help="Rune casting: Elder/Younger Futhark and Anglo-Saxon futhorc readings")
     rnc.add_argument("--layout", default="norns", help="Layout name (see --list-layouts)")
     rnc.add_argument("--system", default="elder",
@@ -4343,6 +4380,7 @@ def main():
         "numerology":   cmd_numerology,
         "iching":       cmd_iching,
         "runecast":     cmd_runecast,
+        "ogham":        cmd_ogham,
         "wheel":        cmd_wheel,
         "solar-arc":    cmd_solar_arc,
         "profection":   cmd_profection,

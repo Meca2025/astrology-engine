@@ -460,6 +460,23 @@ python3 astrology_engine.py runecast --layout norns --question "What of my path?
 ```
 
 Layouts: `single`, `norns`, `elements`, `cross`, `hammer`,
+
+## `ogham`
+
+Ogham readings — the twenty-five Irish staves: twenty feda in four
+aicmí plus the five forfeda, with kennings from the Auraicept na
+n-Éces (Bríatharogam Morainn mac Moín, per McManus, Ériu 39 (1988)).
+The aicme layout draws a true census — one stave from each aicme.
+Reads by position; no reversed meanings. Interpretive, seeded,
+reproducible.
+
+```bash
+python3 astrology_engine.py ogham --layout aicme --seed 5
+python3 astrology_engine.py ogham --list-layouts
+python3 astrology_engine.py ogham --layout grove --question "What of my path?" --no-forfeda
+```
+
+Layouts: `single`, `triad`, `aicme`, `wheel`, `grove`.
 `nine-worlds`, `wheel`. The optional `--blank` adds the modern blank
 rune (a 1980s invention, flagged as such); `--no-merkstave` reads all
 runes upright.
