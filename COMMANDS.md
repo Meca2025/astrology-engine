@@ -256,6 +256,39 @@ python3 astrology_engine.py planet-hours \
 
 ---
 
+## `runic`
+
+The runic star-program: Nigel Pennick's *Runes and Astrology* (2023) as
+computable layers — a modern synthesis, with computation and
+interpretation labeled separately.
+
+```
+python3 astrology_engine.py runic
+    --datetime   ISO        moment, e.g. 2026-05-16T16:45 (required)
+    --lon        DECIMAL    longitude degrees east (required)
+    --timezone   IANA       e.g. UTC, America/New_York (required)
+    --age        DECIMAL    age in years (enables --life-period)
+    --moon-lon   DECIMAL    Moon's sidereal longitude (enables --mansion)
+    --half-month --hour --tide --station --weekday --mansion
+    --life-period --name    layer flags (no flags implies --full)
+    --reading              include the Ch. 8 interpretive statements
+    --full                 all layers
+    --json                 JSON output instead of text
+```
+
+Layers: half-month rune, runic hour + Northern planetary hour + sele,
+eight tides, eightfold-year stations, runic name pair, zodiac/weekday
+correspondences, planetary life-periods, Metonic Golden Number, 28 lunar
+mansions (declared Alcyone convention), Grímnismál palaces, nine worlds.
+
+**Example:**
+```bash
+python3 astrology_engine.py runic --datetime 2026-05-16T16:45 \
+  --lon 0 --timezone UTC --age 54 --moon-lon 50 --full
+```
+
+---
+
 ## `lots`
 
 Arabic Lots / Hermetic Parts.

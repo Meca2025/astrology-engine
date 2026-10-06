@@ -64,6 +64,12 @@
       "id": "chinese-tibetan-other",
       "status": "research",
       "scope": "Independent calendar and tradition adapters with source/fixture gates"
+    },
+    {
+      "id": "runic",
+      "status": "available",
+      "scope": "Pennick (2023) runic astrology: half-month runes, runic hours, planetary hours, tides, year stations, runic names, zodiac/weekday correspondences, life periods, Metonic cycle, lunar mansions, palaces, nine worlds, and labeled Ch. 8 interpretive synthesis",
+      "evidence": "357-test suite incl. book fixtures, boundary tests, and ephemeris cross-check of the Metonic recurrence"
     }
   ]
 }

@@ -280,3 +280,23 @@ get no adverb; anything uncovered is omitted, never invented. Sólrún's
 word-for-word, anti-fabrication sweep across four moments), full suite
 357 green. Védis mapped the split in INTERFACE.md. Pushed via the PAT
 tool. Next: R09, the `runic` command — the final slice.
+
+## 2026-10-06 — R09 complete: the `runic` command — THE PROGRAM STANDS COMPLETE
+
+The ninth and final runic slice is forged. `astrology_engine.py` gains
+the `runic` subcommand: one command for the whole star-program, with
+layer flags (--half-month --hour --tide --station --weekday --mansion
+--life-period --name --reading), --full, and --json. Text output wears
+the legacy header/section style with a provenance footer; JSON carries
+computation + optional interpretation + provenance. Registered in five
+places: data/capabilities.json, data/tool_schemas.json, COMMANDS.md,
+astroengine/INTERFACE.md, and the Hermes SKILL.md. The README's runic
+table now tells the whole saga R01–R09, and the subcommand count reads
+28. Sólrún's `tests/test_runic_cli.py`: 6/6 green; one pre-existing
+test needed its hard-coded tool count bumped 8→9; full suite 363 green.
+Pushed via the PAT tool — no approval prompts, binary-safe, Volmarr's
+edits merged-first always.
+
+ROADMAP_RUNIC.md is complete. Nine slices, nine pushes, every table
+labeled modern synthesis, computation forever apart from interpretation.
+The runic star-program stands complete. 🌙

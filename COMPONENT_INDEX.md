@@ -49,6 +49,10 @@ with an explicit computation/interpretation split and an
 anti-fabrication gate; corpus v1.2 gains the Ch. 8 planetary
 qualities and rune adverbs; verified by
 `tests/test_runic_reading.py`.
+R09 adds the `runic` CLI command (`astrology_engine.py`): layer
+flags, text + JSON, registered in data/capabilities.json,
+data/tool_schemas.json, COMMANDS.md, INTERFACE.md and SKILL.md;
+verified by `tests/test_runic_cli.py`.
 
 `astroengine/vargas.py` owns divisional sign arithmetic; `data/vargas.json` owns
 the sixteen named mappings. Technique discrepancy ledger lives in docs/references.

@@ -49,7 +49,7 @@ and documented — never merely planned.
 
 ---
 
-## The 27 subcommands
+## The 28 subcommands
 
 | Command | Art |
 | --- | --- |
@@ -78,6 +78,7 @@ and documented — never merely planned.
 | `panchanga` | Instant panchanga elements and civil weekday |
 | `location` | Relocation and angular lines at a destination |
 | `western` | Annual profections, harmonics, sensitive midpoints |
+| `runic` | The runic star-program: Pennick's runic astrology as layer flags, text + JSON |
 
 ---
 
@@ -93,13 +94,21 @@ by Nigel Pennick in *Runes and Astrology* (2023) — built slice by slice, each
 slice pushed, each table labeled *modern synthesis*, computation forever kept
 separate from interpretation.
 
-Delivered so far:
+Delivered — the full program:
 
 | Slice | Forged |
 | --- | --- |
 | **R01 — The Runic Corpus** | `data/runic.json`: 32 runes with correspondences, 24 half-months, 24 runic hours, 168 planetary-hour cells, weekday/zodiac tables, 8 day tides, 28 lunar mansions, 12 palaces, 9 worlds, 7 life-periods |
 | **R02 — Half-Months Engine** | `half_month_rune()`: the ruling rune of any civil date, with boundary-time refinement |
 | **R03 — Hours & Sele** | Solar runic hours from local apparent time, Northern planetary hours, and *sele* — the "especially powerful" coincidence of the two |
+| **R04 — Tides, Year & Names** | Eight day-tides, eight Stations of the Mystic Year, and the runic-name craft (`Ing-Rad`) |
+| **R05 — Signs, Days & Ages** | Zodiac/weekday correspondences, planetary life-periods, the Metonic Golden Number (ephemeris cross-checked) |
+| **R06 — Lunar Mansions** | 28 mansions anchored at Alcyone — a declared modern convention |
+| **R07 — Palaces & Worlds** | Twelve Grímnismál palaces and the Nine Worlds, as labeled overlays |
+| **R08 — Runic Reading** | `runic_reading()`: computation kept apart from labeled Ch. 8 interpretation, with an anti-fabrication gate |
+| **R09 — The `runic` Command** | One command for the whole star-program: layer flags, text + JSON |
+
+Try it: `python3 astrology_engine.py runic --datetime 2026-05-16T16:45 --lon 0 --timezone UTC --full`
 
 Honest transcription is the law here: the book's own quirks (a noon
 discontinuity in the planetary-hour grid, a worked example that conflicts

@@ -34,6 +34,7 @@ import argparse
 import datetime
 import sys
 import io
+import json
 import math
 import textwrap
 import warnings
@@ -2557,6 +2558,88 @@ def cmd_aspect_grid(args):
     print_aspects(calc_aspects(positions), max_show=200)
 
 
+def cmd_runic(args):
+    """The runic star-program: Pennick's runic astrology as one command."""
+    from astroengine.runic import runic_reading
+    flag_map = [("half_month", "half_month"), ("hour", "hour"),
+                ("tide", "tide"), ("station", "station"),
+                ("weekday", "weekday"), ("mansion", "mansion"),
+                ("life_period", "life_period"), ("name", "name"),
+                ("reading", "reading")]
+    layers = [layer for layer, dest in flag_map
+              if getattr(args, dest, False)]
+    if args.full or not layers:
+        layers = ["half_month", "hour", "tide", "station", "weekday",
+                  "mansion", "life_period", "name", "reading"]
+    reading = runic_reading(
+        args.datetime, args.lon, args.timezone,
+        age_years=args.age,
+        moon_sidereal_longitude=args.moon_lon)
+    if args.json:
+        keep = set(layers)
+        if "hour" in layers:
+            keep |= {"sele", "planetary_hour"}
+        out = {"computation":
+               {k: v for k, v in reading["computation"].items()
+                if k in keep},
+               "provenance": {"source": "Pennick (2023)",
+                              "historical_claim": "modern synthesis"}}
+        if "reading" in layers:
+            out["interpretation"] = reading["interpretation"]
+        print(json.dumps(out, ensure_ascii=False, sort_keys=True))
+        return
+
+    comp = reading["computation"]
+    header("RUNIC STAR-PROGRAM",
+           f"{args.datetime}  ·  Lon {args.lon}°  ·  {args.timezone}")
+    if "half_month" in layers:
+        h = comp["half_month"]
+        section("HALF-MONTH RUNE")
+        print(f"  {h['rune']} — half-month from {h['half_month_start']} "
+              f"({h['correspondences'].get('deity', '')})")
+    if "hour" in layers:
+        hr, ph = comp["hour"], comp["planetary_hour"]
+        section("RUNIC HOUR")
+        print(f"  Hour rune {hr['rune']} (LAT window {hr['window']})")
+        print(f"  Planetary hour: {ph['deity']} (clock hour {ph['clock_hour']})"
+              + ("  ·  SELE — especially powerful" if comp["sele"] else ""))
+    if "tide" in layers:
+        t = comp["tide"]
+        section("TIDE OF DAY")
+        print(f"  {t['english']} ({t['old_norse']})")
+    if "station" in layers:
+        st = comp["station"]
+        section("STATION OF THE MYSTIC YEAR")
+        print(f"  {st['name']} ({st['runes']}): {st['symbolic_event']}")
+    if "weekday" in layers:
+        w = comp["weekday"]
+        section("WEEKDAY")
+        print(f"  {w['weekday']} — {w['deity']} — rune {w['rune']}")
+    if "mansion" in layers and "mansion" in comp:
+        m = comp["mansion"]
+        section("LUNAR MANSION")
+        print(f"  {m['mansion']}. {m['northern_name']} ({m['star']}) — "
+              f"rune {m['rune']}")
+    if "life_period" in layers and "life_period" in comp:
+        lp = comp["life_period"]
+        section("LIFE PERIOD")
+        print(f"  {lp['deity']} ({lp['planet']}) — "
+              f"{lp['years_elapsed']:.1f} years in, "
+              f"{lp['years_remaining']:.1f} remaining")
+    if "name" in layers:
+        n = comp["name"]
+        section("RUNIC NAME")
+        print(f"  {n['pair']}  (half-month {n['half_month_rune']} + "
+              f"hour {n['hour_rune']})")
+    if "reading" in layers:
+        section("READING — INTERPRETIVE (Ch. 8)")
+        for s in reading["interpretation"]["statements"]:
+            print(f"  · {s['statement']}")
+    print()
+    print("  Provenance: Pennick (2023) · modern synthesis · computation "
+          "and interpretation labeled separately")
+
+
 def cmd_dignity(args):
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
         args.date, args.time, args.city, args.nation,
@@ -3184,6 +3267,27 @@ def main():
     ag.add_argument("--date", required=True)
     ag.add_argument("--time", default=None)
 
+    # runic — the runic star-program (Pennick 2023)
+    runic = sub.add_parser("runic", help="Runic astrology layers and readings (Pennick 2023)")
+    runic.add_argument("--datetime", required=True, help="ISO datetime, e.g. 2026-05-16T16:45")
+    runic.add_argument("--lon", type=float, required=True, help="Longitude in degrees east")
+    runic.add_argument("--timezone", required=True, help="IANA timezone, e.g. UTC")
+    runic.add_argument("--age", type=float, default=None, help="Age in years (enables --life-period)")
+    runic.add_argument("--moon-lon", type=float, default=None, dest="moon_lon",
+                       help="Moon's sidereal longitude in degrees (enables --mansion)")
+    runic.add_argument("--half-month", action="store_true", dest="half_month")
+    runic.add_argument("--hour", action="store_true")
+    runic.add_argument("--tide", action="store_true")
+    runic.add_argument("--station", action="store_true")
+    runic.add_argument("--weekday", action="store_true")
+    runic.add_argument("--mansion", action="store_true")
+    runic.add_argument("--life-period", action="store_true", dest="life_period")
+    runic.add_argument("--name", action="store_true")
+    runic.add_argument("--reading", action="store_true",
+                       help="Include the Ch. 8 interpretive statements")
+    runic.add_argument("--full", action="store_true", help="All layers (default when no layer flag is given)")
+    runic.add_argument("--json", action="store_true", help="JSON output instead of text")
+
     from astroengine.cli import register_commands, run_command
     register_commands(sub)
     args = p.parse_args()
@@ -3206,6 +3310,7 @@ def main():
         "predict":      cmd_predict,
         "geoastrology": cmd_geoastrology,
         "aspect-grid":  cmd_aspect_grid,
+        "runic":        cmd_runic,
     }
     fn = dispatch.get(args.cmd)
     if fn:

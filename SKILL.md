@@ -15,8 +15,8 @@ is a separate installation action, not claimed by its presence here.
 
 Run `astroengine capabilities` for availability and `astroengine tools` for full
 JSON request schemas. Planned/research/legacy states are not new safe-path methods.
-Eight computation tools currently exist: chart, vedic, vargas, dashas, panchanga,
-relationship (CLI alias synergy-json), location and western. Catalog schemas and
+Nine computation tools currently exist: chart, vedic, vargas, dashas, panchanga,
+relationship (CLI alias synergy-json), location, western and runic. Catalog schemas and
 Python routing are local contracts, not an already-running MCP/HTTP server.
 
 ## Required input and profiles
@@ -44,6 +44,9 @@ Treat interpretations as symbolic and non-deterministic. Synergy is a versioned
 modern heuristic with traceable contributions, not a compatibility probability.
 Norse correspondences are an optional modern cultural overlay, not reconstructed
 historical astrological practice. Keep traditional school disagreements visible.
+The runic tool implements Pennick (2023) as a modern synthesis: lunar mansions use
+the declared Alcyone-anchor convention, and the Ch. 8 interpretive statements are
+labeled as interpretation, never presented as computed fact.
 
 ## Scope boundaries
 

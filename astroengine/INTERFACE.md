@@ -239,3 +239,13 @@ deterministic symbolic statements drawn ONLY from the book's tables
 source Pennick (2023), historical_claim "modern synthesis". Anything the
 tables do not cover is omitted, never invented. The computation
 functions remain importable without the interpretive layer.
+
+## `runic` CLI command (R09)
+
+`python3 astrology_engine.py runic --datetime … --lon … --timezone …`
+with layer flags (`--half-month --hour --tide --station --weekday
+--mansion --life-period --name --reading`), `--full`, and `--json`.
+Text output uses the legacy header/section style with a provenance
+footer; JSON output carries computation + optional interpretation +
+provenance. Registered in `data/capabilities.json`,
+`data/tool_schemas.json`, `COMMANDS.md`, and the Hermes `SKILL.md`.
