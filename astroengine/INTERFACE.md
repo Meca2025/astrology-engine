@@ -290,3 +290,9 @@ ten new aspects with neutral weight 0 so synergy scoring is unchanged.
   merkstave); `cast(layout, seed, merkstave, blank, question)` across
   seven layouts (single, norns, elements, cross, hammer, nine-worlds,
   wheel); optional modern blank rune, off by default. CLI: `runecast`.
+
+- `astroengine/wheel.py`: `wheel_svg(planets, cusps, aspects, meta)` —
+  dependency-free SVG chart wheel (gold zodiac ring, house numbers,
+  planet glyphs, aspect chords colored by kind, ASC rotated to 9
+  o'clock). Pure data in, SVG out; never imports the legacy monolith.
+  CLI: `wheel` (`--load` or birth data, `-o` output file).

@@ -1627,6 +1627,52 @@
         ],
         "additionalProperties": false
       }
+    },
+    {
+      "name": "wheel",
+      "capability_id": "wheel",
+      "description": "Natal chart wheel rendered as SVG: zodiac ring, houses, planet glyphs, aspect lines",
+      "request_defaults": {},
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "datetime": {
+            "type": "string",
+            "description": "ISO datetime, e.g. 1972-09-01T08:18"
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude in degrees north"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude in degrees east"
+          },
+          "timezone": {
+            "type": "string",
+            "description": "IANA timezone, e.g. America/New_York"
+          },
+          "title": {
+            "type": "string",
+            "description": "Name shown at the heart of the wheel"
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "svg"
+            ],
+            "default": "svg"
+          }
+        },
+        "required": [
+          "datetime",
+          "latitude",
+          "longitude",
+          "timezone"
+        ],
+        "additionalProperties": false
+      }
     }
   ]
 }

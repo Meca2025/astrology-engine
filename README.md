@@ -80,6 +80,7 @@ and documented — never merely planned.
 | `western` | Annual profections, harmonics, sensitive midpoints |
 | `runic` | The runic star-program: Pennick's runic astrology as layer flags, text + JSON |
 | `tarot` / `reading` / `numerology` / `iching` / `runecast` | The divination line: tarot spreads, astrology readings, numerology, I-Ching, rune casting |
+| `wheel` | Chart wheels — the sky rendered as beautiful SVG |
 
 ---
 

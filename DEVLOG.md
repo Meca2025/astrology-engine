@@ -369,3 +369,19 @@ invention. Seeded and reproducible like its tarot sibling.
 
 Sólrún's `tests/test_runecast.py`: 7/7 green, full suite 408 green.
 Pushed via the PAT tool.
+
+## 2026-10-06 — H01: chart wheels (SVG)
+
+First slice of the Horizons program. `astroengine/wheel.py` renders a
+natal chart wheel as dependency-free SVG — deep-night background, gold
+zodiac ring with glyphs and degree ticks, house cusps and numbers,
+planet glyphs spread across two rings when crowded, aspect chords
+colored by kind (white/red/orange/blue/green), ASC rotated to 9 o'clock
+and MC near the top as tradition demands, the native's name at the
+heart. The module takes plain data only and never imports the legacy
+monolith (house rule); the `wheel` CLI computes via the legacy boundary
+and passes data in. Also fixed the wheel subtitle to prefer explicit
+coordinates over legacy default city names ("London GB" quirk).
+
+Sólrún: `tests/test_wheel.py` 10/10 green plus independent subagent
+verification. Pushed via the PAT tool.

@@ -94,3 +94,5 @@ body availability/frame/search rules. The monolith owns text uncertainty renderi
 - `astroengine/runecast.py` — rune casting (24 Elder Futhark,
   seven layouts, merkstave, seeded); verified by
   `tests/test_runecast.py`.
+- `astroengine/wheel.py` — SVG natal chart wheels; verified by
+  `tests/test_wheel.py`.

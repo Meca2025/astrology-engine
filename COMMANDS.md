@@ -289,6 +289,20 @@ python3 astrology_engine.py runic --datetime 2026-05-16T16:45 \
 
 ---
 
+## `wheel`
+
+Render a natal chart wheel as a beautiful dark-gold SVG: zodiac ring,
+house cusps and numbers, planet glyphs (collision-spread), colored
+aspect lines, ASC at 9 o'clock as tradition demands, MC near the top.
+
+```bash
+python3 astrology_engine.py wheel --load volmarr -o volmarr.svg
+python3 astrology_engine.py wheel --date 1972-09-01 --time 08:18 \
+  --lat 42.81 --lon -73.94 --timezone America/New_York -o wheel.svg
+```
+
+---
+
 ## `tarot`
 
 Tarot readings from the 78-card Rider-Waite-Smith deck (original

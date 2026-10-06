@@ -2333,6 +2333,76 @@ def cmd_numerology(args):
     return {"reading": result}
 
 
+_WHEEL_BODIES = ("Sun", "Moon", "Mercury", "Venus", "Mars",
+                "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "N.Node")
+
+
+def _loc_label(req: dict) -> str:
+    """Truthful location label: explicit coordinates beat default city names."""
+    lat, lon = req.get("lat"), req.get("lon")
+    try:
+        if lat is not None and lon is not None:
+            la, lo = float(lat), float(lon)
+            return (f"{abs(la):.2f}°{'N' if la >= 0 else 'S'} "
+                    f"{abs(lo):.2f}°{'E' if lo >= 0 else 'W'}")
+    except (TypeError, ValueError):
+        pass
+    city, nation = req.get("city"), req.get("nation")
+    return " ".join(x for x in (city, nation) if x)
+
+
+def cmd_wheel(args):
+    from astroengine.wheel import wheel_svg, PLANET_GLYPHS
+    if args.load:
+        from astroengine.charts import load_chart
+        saved = load_chart(args.load, getattr(args, "chart_dir", None))
+        result = saved.get("result") or {}
+        positions = result.get("positions") or result.get("natal") or {}
+        cusps = result.get("cusps")
+        asc = result.get("asc")
+        mc = result.get("mc")
+        title = saved.get("name", "Natal Chart")
+        req = saved.get("request", {}) or {}
+        subtitle = " ".join(x for x in (
+            req.get("date"), req.get("time"),
+            _loc_label(req)) if x)
+        print(f"  Wheel for saved chart '{args.load}'")
+    else:
+        apply_chart_load(args)
+        require_date(args)
+        y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
+            args.date, args.time, args.city, args.nation,
+            getattr(args, "lat", None), getattr(args, "lon", None),
+            getattr(args, "timezone", None))
+        jd = julian_day(y, mo, d, utc_hour)
+        positions = calc_planet_positions(jd)
+        cusps, asc, mc = _optional_houses(jd, lat, lon, time_known)
+        title = "Natal Chart"
+        subtitle = f"{args.date} {args.time or ''} {_loc_label(vars(args))}".strip()
+    planets = []
+    for body in _WHEEL_BODIES:
+        p = positions.get(body) or {}
+        if p.get("longitude") is None:
+            continue
+        planets.append({"name": body,
+                        "glyph": PLANET_GLYPHS.get(body, "?"),
+                        "longitude": p["longitude"]})
+    aspects = []
+    for p1, p2, name, _orb, _q, _g, _app in calc_aspects(
+            positions, families={"major", "minor"}):
+        if p1 in _WHEEL_BODIES and p2 in _WHEEL_BODIES:
+            aspects.append({"a": p1, "b": p2, "kind": name.lower()})
+    svg = wheel_svg(planets, cusps or [], aspects,
+                    {"title": title, "subtitle": subtitle,
+                     "asc": asc, "mc": mc})
+    out = args.output or "wheel.svg"
+    with open(out, "w", encoding="utf-8") as f:
+        f.write(svg)
+    print(f"  Wheel written to {out} "
+          f"({len(planets)} bodies, {len(aspects)} aspects)")
+    return {"output": out, "bodies": len(planets), "aspects": len(aspects)}
+
+
 def cmd_runecast(args):
     from astroengine.runecast import cast, layouts
     if args.list_layouts:
@@ -3661,6 +3731,13 @@ def main():
     num.add_argument("--json", action="store_true")
     add_chart_lib(num, with_load=False)
 
+    whl = sub.add_parser("wheel", help="Render a natal chart wheel as SVG")
+    whl.add_argument("--date", required=False, help="YYYY-MM-DD (or --load NAME)")
+    whl.add_argument("--time", default=None, help="HH:MM (24h)")
+    whl.add_argument("-o", "--output", default="wheel.svg")
+    add_geo(whl)
+    add_chart_lib(whl)
+
     rnc = sub.add_parser("runecast", help="Rune casting: Elder Futhark readings in many layouts")
     rnc.add_argument("--layout", default="norns", help="Layout name (see --list-layouts)")
     rnc.add_argument("--list-layouts", action="store_true", dest="list_layouts")
@@ -3724,6 +3801,7 @@ def main():
         "numerology":   cmd_numerology,
         "iching":       cmd_iching,
         "runecast":     cmd_runecast,
+        "wheel":        cmd_wheel,
     }
     _TWO_PERSON = {"synastry", "composite", "synergy"}
     _DATE_FIELDS = {
