@@ -1,6 +1,6 @@
 # W09a: legacy UTC calendar rollover and explicit coordinate certainty
 
-Status: implementing; documented before code, 2026-10-06.
+Status: local acceptance passed; hosted matrix pending, 2026-10-06.
 Owner: legacy input adapter, under parent W09 migration.
 
 ## Problem and evidence
@@ -52,3 +52,14 @@ failures visible as remaining W09b work rather than claiming strict migration do
 W09b strict legacy input/house/backend contracts and precision-aware event roots.
 Each sub-slice needs a scoped task and its own acceptance fixtures; do not bundle
 unvalidated event behavior into the time repair.
+
+## Verification receipt
+
+Fourteen focused offline regressions added; thirteen failed on the original code
+and the historical same-day display test passed. After repair, all 150 repository
+tests pass on Linux/Python 3.12. Fixtures cover previous/next UTC day, year and leap
+day, the 1975 Indiana offset, direct Julian day with Swiss and pure formula paths,
+local-noon surrogates, explicit zero coordinates, synastry overlay Julian days,
+and real natal/geoastrology CLI output without geocoding network calls. Existing
+normal-day display and ten-item tuple shape remain verified. Hosted matrix is
+tracked separately for the implementation SHA.

@@ -7,7 +7,7 @@ name = "agent-astrology-engine"
 version = "4.0.0"
 description = "Reproducible astrology computation with explicit tradition profiles"
 requires-python = ">=3.11"
-dependencies = ["pyswisseph==2.10.3.2", "tzdata>=2025.2", "jsonschema>=4.23,<5"]
+dependencies = ["pyswisseph==2.10.3.2", "tzdata>=2025.2", "jsonschema>=4.23,<5", "pytz>=2024"]
 
 [project.optional-dependencies]
 test = ["pytest>=8"]

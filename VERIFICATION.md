@@ -43,3 +43,12 @@ Final wheel was installed into a fresh Python 3.12 environment and run outside t
 source checkout. All eight local tools computed successfully; all nine JSON rule
 resources were present. No external agent-host deployment or physical Pi/mobile
 execution is implied by these checks.
+
+## W09a local receipt
+
+2026-10-06: 150 tests passed on Linux/Python 3.12, including fourteen new legacy
+regressions. Thirteen reproduced failures before the repair. Actual Julian days
+are checked against hand-specified UTC dates with both Swiss and formula paths;
+real natal and geoastrology CLI commands run offline. The 1975 Indiana same-day
+offset/display stays unchanged. Hosted acceptance for this slice is pending its
+implementation push and will be recorded by exact SHA/run.

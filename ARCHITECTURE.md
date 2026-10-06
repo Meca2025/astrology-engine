@@ -10,6 +10,15 @@ New flow: strict request -> full UTC -> serialized ephemeris -> provenance-beari
 chart -> named technique -> versioned JSON/CLI. New rule content lives in data.
 No new module imports the legacy monolith or rewrites global output streams.
 
+W09a migration: the legacy input adapter now preserves UTC calendar rollover.
+Its direct conversion returns hours relative to civil midnight; resolve_birth
+normalizes UTC date/clock for all existing Julian-day callers without changing
+tuple shapes. Local-noon surrogates use the resolved zone. Explicit coordinates
+are resolved and zero-valued coordinates are admitted for synastry overlays.
+pytz is installed as a runtime dependency. The historical reference below still
+describes earlier behavior; unresolved timezones, DST choice, unknown-time houses
+and silent backend fallbacks remain W09b work.
+
 ## Preserved legacy reference
 
 # Architecture — Astrology Engine

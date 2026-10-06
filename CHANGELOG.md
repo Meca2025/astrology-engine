@@ -141,3 +141,11 @@ Annual profections, harmonics and midpoint sensitivity through structured APIs.
 
 Eight validated local agent tools, discoverable request schemas and checked-in
 skill. Exact angular partition floor drift corrected with boundary lookup.
+
+## W09a — 2026-10-06
+
+Fixed legacy UTC calendar rollover and local-noon conversion; preserved tuple
+shapes and normal-day display. Explicit coordinates count as resolved, including
+zero in synastry overlays. Added fourteen offline regressions and required pytz
+for installed legacy conversions. Strict legacy input/house/backend work remains
+tracked in W09b.

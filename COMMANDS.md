@@ -17,6 +17,15 @@ python3 astrology_engine.py <subcommand> [options]
 - `--nation` should be an ISO 2-letter country code (`US`, `GB`, `DE`, `NO`, etc.)
 - All local times are automatically converted to UTC via `timezonefinder` + `pytz`; the resolved timezone is displayed in the output header
 
+W09a preserves the UTC date when conversion crosses midnight. For example, local
+2000-01-01 00:15 in Asia/Kolkata computes 1999-12-31 18:45 UTC and displays that
+UTC date. With time omitted, noon means local noon in the resolved zone; birth
+time remains unknown and legacy houses are still labeled approximate. Explicit
+coordinates, including zero, bypass geocoding and count as resolved. Legacy
+timezone discovery still requires the geo extra; absent/ambiguous-zone behavior
+is a known W09b migration target. The typed `chart` command already requires a
+zone and rejects ambiguous/nonexistent civil times.
+
 ---
 
 ## `natal`

@@ -406,18 +406,20 @@ def resolve_timezone(lat, lon):
     return None
 
 
-def local_to_utc(year, month, day, local_hour, tz_name):
-    """Convert a local datetime to UTC. Returns (utc_hour, utc_offset_str).
+def local_to_utc(year: int, month: int, day: int, local_hour: float,
+                 tz_name: str) -> tuple[float, str]:
+    """Return UTC hours relative to the supplied civil date, and the offset.
 
-    Uses pytz with full historical DST data — handles old/unusual rules correctly.
-    Falls back to local_hour if pytz unavailable.
+    The hour includes the signed UTC day offset: it may be negative or >=24.
+    Use with that civil date in julian_day, or normalize with timedelta. pytz
+    preserves historical rules. Legacy error/DST fallbacks await W09b migration.
     """
     try:
         import pytz
         tz = pytz.timezone(tz_name)
         h  = int(local_hour)
         mi = int(round((local_hour - h) * 60))
-        # localize handles DST ambiguity: is_dst=False = standard time (safe for birth times)
+        # Legacy standard-time fallback is retained here; strict rejection is W09b.
         local_dt = tz.localize(datetime.datetime(year, month, day, h, mi, 0), is_dst=None)
     except Exception:
         try:
@@ -431,7 +433,8 @@ def local_to_utc(year, month, day, local_hour, tz_name):
     try:
         import pytz
         utc_dt = local_dt.astimezone(pytz.utc)
-        utc_hour = utc_dt.hour + utc_dt.minute / 60.0 + utc_dt.second / 3600.0
+        midnight = datetime.datetime(year, month, day, tzinfo=pytz.utc)
+        utc_hour = (utc_dt - midnight).total_seconds() / 3600.0
         offset   = local_dt.utcoffset()
         total_m  = int(offset.total_seconds() / 60)
         sign     = "+" if total_m >= 0 else "-"
@@ -442,9 +445,10 @@ def local_to_utc(year, month, day, local_hour, tz_name):
         return local_hour, "UTC±?"
 
 
-def resolve_birth(date_str, time_str, city, nation="",
-                  lat_override=None, lon_override=None):
-    """One-stop resolution of birth data → (y, mo, d, utc_hour, lat, lon, tz_name, tz_label).
+def resolve_birth(date_str: str, time_str: str | None, city: str, nation: str = "",
+                  lat_override: float | None = None, lon_override: float | None = None
+                  ) -> tuple[int, int, int, float, float, float, str, str, bool, bool]:
+    """Resolve birth inputs into the unchanged ten-item legacy tuple.
 
     Steps:
       1. Parse date/time (local)
@@ -454,12 +458,13 @@ def resolve_birth(date_str, time_str, city, nation="",
       5. Return everything needed for Julian day and display
 
     Returns:
-      y, mo, d       — integers
-      utc_hour       — float (hours in UT/UTC for swe.julday)
+      y, mo, d       — actual UTC calendar date, integers
+      utc_hour       — UTC clock hour in [0,24) for swe.julday
       lat, lon       — floats
       tz_name        — IANA name e.g. "America/Indiana/Indianapolis"
       tz_label       — display string e.g. "14:30 LT  →  19:30 UTC  (UTC-05:00 EST)"
       time_known     — False if time_str was None (noon default used)
+      city_default_used — False for explicit coordinates or a matched city
     """
     y, mo, d, local_hour = parse_date_time(date_str, time_str)
     time_known = time_str is not None
@@ -469,17 +474,23 @@ def resolve_birth(date_str, time_str, city, nation="",
 
     tz_name = resolve_timezone(lat, lon)
 
-    if tz_name and time_known:
-        utc_hour, utc_offset_str = local_to_utc(y, mo, d, local_hour, tz_name)
-        utc_h = int(utc_hour)
-        utc_m = int(round((utc_hour - utc_h) * 60))
-        lh = int(local_hour)
-        lm = int(round((local_hour - lh) * 60))
-        tz_label = (f"{lh:02d}:{lm:02d} LT  →  {utc_h:02d}:{utc_m:02d} UTC  "
-                    f"({utc_offset_str}  {tz_name})")
-    elif tz_name and not time_known:
-        utc_hour = local_hour  # noon is close enough without known time
-        tz_label = f"Time unknown — using 12:00 noon  ({tz_name})"
+    if tz_name:
+        relative_hour, utc_offset_str = local_to_utc(y, mo, d, local_hour, tz_name)
+        civil_midnight = datetime.datetime(y, mo, d)
+        utc_dt = civil_midnight + datetime.timedelta(hours=relative_hour)
+        local_dt = civil_midnight + datetime.timedelta(hours=local_hour)
+        utc_display = utc_dt.strftime("%H:%M")
+        if utc_dt.date() != civil_midnight.date():
+            utc_display = utc_dt.strftime("%Y-%m-%d %H:%M")
+        if time_known:
+            tz_label = (f"{local_dt:%H:%M} LT  →  {utc_display} UTC  "
+                        f"({utc_offset_str}  {tz_name})")
+        else:
+            tz_label = (f"Time unknown — using 12:00 noon  ({tz_name})  →  "
+                        f"{utc_display} UTC  ({utc_offset_str})")
+        y, mo, d = utc_dt.year, utc_dt.month, utc_dt.day
+        utc_hour = (utc_dt - utc_dt.replace(hour=0, minute=0, second=0,
+                                           microsecond=0)).total_seconds() / 3600.0
     else:
         utc_hour = local_hour
         tz_label = "Timezone unknown — treating input as UTC"
@@ -489,7 +500,7 @@ def resolve_birth(date_str, time_str, city, nation="",
 def geocode_city(city, nation="", lat_override=None, lon_override=None):
     """Resolve city → (lat, lon, city_resolved).
     
-    city_resolved is True if the city name was actually matched (not defaulted).
+    city_resolved is True for explicit coordinates or a matched city (not defaulted).
 
     Priority:
       1. Explicit --lat / --lon flags
@@ -499,7 +510,7 @@ def geocode_city(city, nation="", lat_override=None, lon_override=None):
       5. Warn + return (0, 0)
     """
     if lat_override is not None and lon_override is not None:
-        return float(lat_override), float(lon_override), False
+        return float(lat_override), float(lon_override), True
 
     # --- Nominatim (most accurate, works for any city worldwide) ---
     if city:
@@ -525,7 +536,7 @@ def geocode_city(city, nation="", lat_override=None, lon_override=None):
             logging.disable(logging.CRITICAL)
             tmp = AstrologicalSubject("_", 2000, 1, 1, 12, 0, city, nation or "")
             logging.disable(logging.NOTSET)
-            if tmp.lat and tmp.lng:
+            if tmp.lat is not None and tmp.lng is not None:
                 return tmp.lat, tmp.lng, True
         except Exception:
             pass
@@ -2125,10 +2136,7 @@ def cmd_natal(args):
         # When explicit coords are given, use them in the label
         lat_dir_co = 'N' if lat >= 0 else 'S'
         lon_dir_co = 'E' if lon >= 0 else 'W'
-        if city_default_used:
-            loc_label = f"{abs(lat):.4f}°{lat_dir_co} {abs(lon):.4f}°{lon_dir_co}"
-        else:
-            loc_label = f"{args.city}, {args.nation}  ·  {abs(lat):.4f}°{lat_dir_co} {abs(lon):.4f}°{lon_dir_co}"
+        loc_label = f"{abs(lat):.4f}°{lat_dir_co} {abs(lon):.4f}°{lon_dir_co}"
 
     header(
         f"NATAL CHART — {name.upper()}",
@@ -2306,13 +2314,13 @@ def cmd_synastry(args):
     if city1 and nation1:
         _lat1, _lon1, _ = geocode_city(city1, nation1, lat1, lon1)
         cusps1, asc1, mc1 = calc_houses(jd1, _lat1, _lon1)
-    elif lat1 and lon1:
+    elif lat1 is not None and lon1 is not None:
         cusps1, asc1, mc1 = calc_houses(jd1, float(lat1), float(lon1))
 
     if city2 and nation2:
         _lat2, _lon2, _ = geocode_city(city2, nation2, lat2, lon2)
         cusps2, asc2, mc2 = calc_houses(jd2, _lat2, _lon2)
-    elif lat2 and lon2:
+    elif lat2 is not None and lon2 is not None:
         cusps2, asc2, mc2 = calc_houses(jd2, float(lat2), float(lon2))
 
     print_planet_table(pos1, cusps1, title=f"CHART 1 — {n1}")

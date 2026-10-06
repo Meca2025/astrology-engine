@@ -81,3 +81,15 @@ Final implementation 45c7a3e passed all six hosted jobs in run 37443735522.
 Fresh installed wheel outside source exercised all eight tools and nine JSON
 resources. Initial first wave plus local agent contracts are verified; the full
 roadmap remains active. No physical Pi/mobile or external agent deployment claimed.
+
+## W09a — legacy UTC calendar repair and immediate continuation
+
+Published the signed-hour/normalized-date compatibility work order before code.
+Reproduced thirteen failing regressions; fixed date carry in both directions,
+local-noon conversion, explicit coordinate certainty and zero-coordinate synastry
+overlays. All 150 local tests pass. pytz is now a declared runtime dependency.
+Legacy DST ambiguity/gap and unavailable-zone fallbacks remain W09b work.
+
+The user requested immediate next-slice continuation. Activated a continuous
+Codex Goal and paused the prior hourly heartbeat. W09b1 is the next documented
+input-contract slice, followed by house/backend and event-root slices.
