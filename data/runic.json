@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "source": "Pennick (2023)",
   "historical_claim": "modern synthesis",
   "edition": "Runes and Astrology: Symbol and Starcraft in the Northern Tradition, Nigel Pennick, 2023, 311 pp",
@@ -1507,5 +1507,84 @@
       "end_age": 98,
       "years": 30
     }
-  ]
+  ],
+  "stations": {
+    "source_note": "Pennick (2023), Ch.5 'Stations of the Mystic Year' table (p.342). The book defines station order, runes, festivals, day-hours and symbolic events, but NOT exact calendar boundaries; 'festival_date' anchors are a declared engine convention (each station spans [festival_date, next festival_date) in cycle order). The First station has no festival in the book and is conventionally anchored at Aug 13 (start of the As half-month, first of its 'As/Rad' runes).",
+    "boundary_method": "festival-span",
+    "historical_claim": "modern synthesis",
+    "stations": [
+      {
+        "number": 1,
+        "name": "First",
+        "runes": "As/Rad",
+        "festival": null,
+        "day_hour": "16:30",
+        "festival_date": "08-13",
+        "symbolic_event": "Death/Rebirth — parent plant brings forth the seed and then dies."
+      },
+      {
+        "number": 2,
+        "name": "Second",
+        "runes": "Ken",
+        "festival": "Autumn Equinox",
+        "day_hour": "18:00",
+        "festival_date": "09-22",
+        "symbolic_event": "Calling/Summoning — ripening of fruit and harvest."
+      },
+      {
+        "number": 3,
+        "name": "Third",
+        "runes": "Hagal",
+        "festival": "Samhain",
+        "day_hour": "21:00",
+        "festival_date": "10-31",
+        "symbolic_event": "Awakening — letting-go; the seed falls to earth."
+      },
+      {
+        "number": 4,
+        "name": "Fourth",
+        "runes": "Jera",
+        "festival": "Yule",
+        "day_hour": "00:00",
+        "festival_date": "12-21",
+        "symbolic_event": "Enlightenment — rebirth of the light in the darkness; the spark of life burns on."
+      },
+      {
+        "number": 5,
+        "name": "Fifth",
+        "runes": "Beorc",
+        "festival": "Spring Equinox",
+        "day_hour": "06:00",
+        "festival_date": "03-20",
+        "symbolic_event": "Reconciliation — apparently dead, the seed comes to life again."
+      },
+      {
+        "number": 6,
+        "name": "Sixth",
+        "runes": "Lagu",
+        "festival": "Beltane",
+        "day_hour": "09:00",
+        "festival_date": "05-01",
+        "symbolic_event": "Mystical Union — plant in full growth in harmony with the environment."
+      },
+      {
+        "number": 7,
+        "name": "Seventh",
+        "runes": "Dag",
+        "festival": "Midsummer",
+        "day_hour": "12:00",
+        "festival_date": "06-21",
+        "symbolic_event": "Sanctification — flower opens and is fertilized."
+      },
+      {
+        "number": 8,
+        "name": "Eighth",
+        "runes": "Thorn",
+        "festival": "Lammas",
+        "day_hour": "15:00",
+        "festival_date": "08-01",
+        "symbolic_event": "Completion — the circle turns."
+      }
+    ]
+  }
 }

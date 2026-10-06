@@ -196,3 +196,24 @@ sele probe is 03:28 Elhaz, not Tyr). The Kenneth example remains excluded
 as a fixture per the R01 wheel-conflict note. Védis updated INTERFACE.md
 and COMPONENT_INDEX.md. No CLI surface (R09). Next: R04 tides, eightfold
 year, runic names.
+
+## 2026-10-06 — R04 complete: tides, eightfold year, runic names
+
+The fourth runic slice is forged and sealed. Eldra extended
+`astroengine/runic.py` with `tide()` (the 8 App. 6 day-tides on civil clock
+time, Midnight wrapping 22:30-01:30), `year_station()` (the Ch. 5 Stations
+of the Mystic Year: number, runes, festival, day-hour, symbolic event), and
+`runic_name()` (half-month rune + LAT hour-rune pair per Ch. 5). The book
+defines the station table but NOT its calendar boundaries, so boundaries
+are a declared engine convention (`festival-span`): each station spans
+[festival, next festival) at conventional festival dates; the First
+station, festival-less in the book, is conventionally anchored at Aug 13
+(start of the As half-month). `data/runic.json` v1.1 gains the 8-station
+table. Sólrún's `tests/test_runic_tides.py`: 27/27 green, full suite 336
+green. Two honesty findings in-slice: a station boundary bug caught before
+it escaped (Dec 25 must be Fourth/Jera), and the Darwin probe revealed the
+book's example ignores the equation of time (civil 20:27 = Wyn hour; LAT
+20:43 = Hagal) — documented, not corrected. The book's rendered names
+(Kenneth, Ingrid, Darwin) are literary wordplay, not mechanical output.
+Védis mapped the new surface in INTERFACE.md and COMPONENT_INDEX.md. Next:
+R05 lunar mansions + 12 Grímnismál palaces.

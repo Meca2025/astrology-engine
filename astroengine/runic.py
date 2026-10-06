@@ -317,3 +317,120 @@ def sele(iso_datetime: str, longitude: float, timezone: str) -> dict:
 
 __all__ += ["RunicHourRequest", "to_local_apparent_time", "runic_hour",
             "planetary_hour", "sele"]
+
+
+# ---------------------------------------------------------------------------
+# R04 — Tides of day (App. 6), Stations of the year (Ch. 5), runic names
+# ---------------------------------------------------------------------------
+
+def tide(clock_time: str) -> dict:
+    """Return the tide (Pennick App. 6) ruling a clock ``HH:MM`` time.
+
+    The eight tides are fixed clock divisions (04:30–07:30 etc.); they use
+    civil clock time, not local apparent time.
+    """
+    hh, mm = _parse_time(clock_time)
+    corpus = _corpus()
+    tides = corpus["tides"]["tides"]
+
+    def _mins(value: str) -> int:
+        h, m = (int(x) for x in value.split(":"))
+        return h * 60 + m
+
+    now = hh * 60 + mm
+    for entry in tides:
+        start, end = _mins(entry["start"]), _mins(entry["end"])
+        if start <= end:
+            hit = start <= now < end
+        else:  # wraps midnight, e.g. Midnight 22:30–01:30
+            hit = now >= start or now < end
+        if hit:
+            return {
+                "clock_time": clock_time,
+                "english": entry["english"],
+                "old_english": entry["old_english"],
+                "old_norse": entry["old_norse"],
+                "window": f"{entry['start']}–{entry['end']}",
+                "source": "Pennick (2023)",
+                "historical_claim": "modern synthesis",
+            }
+    raise CalculationError(
+        f"no tide covers '{clock_time}' (corpus tides cover the full day)")
+
+
+def year_station(iso_date: str) -> dict:
+    """Return the Station of the Mystic Year (Pennick Ch. 5) for a date.
+
+    Boundary method (declared convention, not book text): each station spans
+    [festival_date, next festival_date) in cycle order
+    Fourth→Fifth→Sixth→Seventh→Eighth→First→Second→Third→Fourth. The First
+    station has no festival in the book; it is conventionally anchored at
+    Aug 13, the start of the As half-month (first of its "As/Rad" runes).
+    """
+    day = _parse_date(iso_date)
+    corpus = _corpus()
+    stations = corpus["stations"]["stations"]
+    # Latest festival anchor on or before the date (wrap: before the first
+    # anchor of the year, the year began with the Fourth station / Yule).
+    anchors = sorted(
+        stations,
+        key=lambda s: (int(s["festival_date"][0:2]),
+                       int(s["festival_date"][3:5])))
+    day_key = (day.month, day.day)
+    chosen = anchors[-1]
+    for station in anchors:
+        mm, dd = (int(x) for x in station["festival_date"].split("-"))
+        if (mm, dd) <= day_key:
+            chosen = station
+    return {
+        "date": iso_date,
+        "station": chosen["number"],
+        "name": chosen["name"],
+        "runes": chosen["runes"],
+        "festival": chosen["festival"],
+        "day_hour": chosen["day_hour"],
+        "symbolic_event": chosen["symbolic_event"],
+        "method": "festival-span (declared engine convention; "
+                  "boundaries are not in the book)",
+        "source": "Pennick (2023)",
+        "historical_claim": "modern synthesis",
+    }
+
+
+def runic_name(iso_datetime: str, longitude: float, timezone: str) -> dict:
+    """Compose the runic-name pair for a birth/name-taking moment (Ch. 5).
+
+    Returns the half-month rune (the person's "name" rune) and the
+    local-apparent hour-rune. The book's rendered names (Kenneth, Ingrid,
+    Darwin) are literary English wordplay on these pairs, not mechanical
+    output — e.g. the printed Kenneth example (Odal hour) conflicts with
+    the systematic wheel (Is hour); see R01 notes. The engine reports the
+    wheel-faithful pair.
+    """
+    lon = _check_longitude(longitude)
+    zone = _zone(timezone)
+    if zone is None:
+        raise CalculationError("timezone is required for runic-name work")
+    naive = _parse_iso_datetime(iso_datetime)
+    if naive.tzinfo is not None:
+        raise CalculationError(
+            f"invalid datetime '{iso_datetime}': must be wall time without "
+            "offset; pass the zone separately")
+    lat = to_local_apparent_time(iso_datetime, lon, timezone)
+    month_rune = half_month_rune(naive.date().isoformat())
+    hour_rune = runic_hour(lat["local_apparent_time"])
+    return {
+        "datetime": iso_datetime,
+        "half_month_rune": month_rune["rune"],
+        "hour_rune": hour_rune["rune"],
+        "pair": f"{month_rune['rune']}-{hour_rune['rune']}",
+        "local_apparent_time": lat["local_apparent_time"],
+        "method": lat["method"],
+        "note": "Book names (Kenneth, Ingrid, Darwin) are literary "
+                "renderings of such pairs, not mechanical output.",
+        "source": "Pennick (2023)",
+        "historical_claim": "modern synthesis",
+    }
+
+
+__all__ += ["tide", "year_station", "runic_name"]

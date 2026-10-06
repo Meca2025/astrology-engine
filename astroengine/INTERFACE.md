@@ -167,3 +167,23 @@ hour deity from the App. 3 grid (hour-to-hour divisions on CLOCK time).
 `sele(iso_datetime, longitude, timezone)` reports whether the runic
 hour-rune's deity correspondence contains the planetary hour's deity —
 Pennick's "especially powerful" coincidence. No interpretation.
+
+## Tides, stations, runic names (R04)
+
+`tide(clock_time)` names the tide ruling a civil HH:MM clock time from the
+App. 6 table (Morntide 04:30-07:30 … Midnight 22:30-01:30, wrapping
+midnight … Uht 01:30-04:30), with English/Old English/Old Norse names.
+`year_station(iso_date)` names the Station of the Mystic Year (Ch. 5):
+station number, rune(s), festival, day-hour, symbolic event. Boundary
+method is a DECLARED engine convention (`festival-span`): each station spans
+[festival_date, next festival_date) in cycle order; festival anchors are
+Yule Dec 21, Spring Equinox Mar 20, Beltane May 1, Midsummer Jun 21,
+Lammas Aug 1, Autumn Equinox Sep 22, Samhain Oct 31. The book gives the
+First station no festival; it is conventionally anchored at Aug 13 (start of
+the As half-month, first of its "As/Rad" runes). `runic_name(iso_datetime,
+longitude, timezone)` composes the birth/name-taking pair: half-month rune
++ local-apparent hour-rune (e.g. Ingrid's Ing-Rad). The book's rendered
+names (Kenneth, Ingrid, Darwin) are literary English wordplay on such
+pairs, not mechanical output; the Kenneth/Odal wheel conflict (R01) and the
+Darwin EoT shift (civil 20:27 Wyn hour vs LAT 20:43 Hagal) are documented
+in tests, not silently corrected. No interpretation.

@@ -30,6 +30,10 @@ and timezone handling; verified by `tests/test_runic_half_months.py`.
 R03 adds the day-wheel: `runic_hour`, `to_local_apparent_time`
 (longitude+EoT method), `planetary_hour` (App. 3 grid), and `sele`
 detection; verified by `tests/test_runic_hours.py`.
+R04 adds the day's tides (`tide`, App. 6), the year's Stations
+(`year_station`, Ch. 5, declared festival-span boundaries), and the
+name-craft pair (`runic_name`); corpus gains the 8-station table
+(v1.1); verified by `tests/test_runic_tides.py`.
 
 `astroengine/vargas.py` owns divisional sign arithmetic; `data/vargas.json` owns
 the sixteen named mappings. Technique discrepancy ledger lives in docs/references.

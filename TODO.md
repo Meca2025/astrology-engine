@@ -28,3 +28,4 @@ house/backend errors and event roots so each has independent acceptance evidence
 See ROADMAP for the complete expansion, including later validation/research gates.
 Legacy paths still have known input/provenance limitations; do not advertise new
 coverage through an unmodified legacy command. Report exact implementation scope.
+- [x] R04 — tides, stations, names: tide() on the App. 6 day-tides (Midnight wraps); year_station() on the Ch. 5 Stations of the Mystic Year (rune/festival/day-hour/symbolism per the book table; declared festival-span boundaries, First station conventionally at Aug 13); runic_name() composing half-month + hour runes (Ingrid's Ing-Rad wheel-consistent; Darwin's 'Darwin' literary; Kenneth/Odal conflict documented); data/runic.json v1.1 with the 8-station table; tests/test_runic_tides.py 27/27 green; full suite 336 green.
