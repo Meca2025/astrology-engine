@@ -7,8 +7,9 @@
 The Astrology Engine is a **reproducible computation forge** for astrology: real
 ephemeris positions, strict time and location handling, and machine-readable
 output — no cloud, no API keys, no lookup tables, no fabricated chart
-positions. Twenty-seven CLI subcommands span Western, Hellenistic, Vedic
-(Jyotisha), and Northern runic traditions, with every technique carrying its
+positions. Thirty-seven CLI subcommands span Western, Hellenistic, Vedic
+(Jyotisha), Northern runic, divination, Chinese, and Tibetan
+traditions, with every technique carrying its
 provenance, its limits, and its evidence.
 
 The project's rule, held since the first commit: **compute it honestly, prove
@@ -49,7 +50,7 @@ and documented — never merely planned.
 
 ---
 
-## The 28 subcommands
+## The 37 subcommands
 
 | Command | Art |
 | --- | --- |
@@ -125,6 +126,34 @@ Honest transcription is the law here: the book's own quirks (a noon
 discontinuity in the planetary-hour grid, a worked example that conflicts
 with the hour-wheel) are preserved in per-section notes, never silently
 "corrected".
+
+---
+
+## The Oracles Program
+
+A second expansion, [ROADMAP_ORACLES.md](ROADMAP_ORACLES.md), gave the
+engine six further divination arts — built slice by slice, each slice
+pushed, each historical claim labeled, computation forever kept
+separate from interpretation.
+
+Delivered — the full program:
+
+| Slice | Forged |
+| --- | --- |
+| **O01 — Younger Futhark** | `runecast --system younger`: the 16 staves in long-branch and short-twig forms, meanings from the Norwegian and Icelandic rune poems |
+| **O02 — Anglo-Saxon Futhorc** | `runecast --system futhorc`: all 33 staves (Wynn restored), Old English Rune Poem meanings, Northumbrian additions labeled |
+| **O03 — Ogham** | `ogham`: the 25 Irish staves with Auraicept kennings (McManus 1988), five layouts from a single stave to the twelve-stave grove |
+| **O04 — Chinese Zodiac** | `chinese`: stem-branch year anchored 1984 = Jia-Zi, NaYin, trine allies, secret friends, clashes — Lunar New Year boundaries, never January 1 |
+| **O05 — Four Pillars** | `bazi`: year/month/day/hour ganzhi — the year turns at Lichun, months at the solar terms (Swiss Ephemeris), day stems from verified anchors |
+| **O06 — Tibetan Astrology** | `tibetan`: element-animal year in its rabjung, mewa, parkha, and the five forces (srog, lus, dbang-thang, rlung-ta, bla) — lineage variation disclosed |
+
+Try it: `python3 astrology_engine.py tibetan 1972-09-01`
+
+Honesty is the law here too: rune-poem meanings are distinguished
+from modern synthesis, tree-lore caveats are recorded, calendrical
+anchors are cross-checked against published tables rather than
+recalled, and where Tibetan lineages disagree the disagreement is
+documented, not smoothed over.
 
 ---
 
@@ -250,7 +279,7 @@ and [RULES.AI.md](RULES.AI.md) before touching code.
 
 | Path | Holds |
 | --- | --- |
-| `astrology_engine.py` | Legacy CLI: 27 text subcommands |
+| `astrology_engine.py` | Legacy CLI: 37 text subcommands |
 | `astroengine/` | Typed package: models, ephemeris, vedic, runic, CLI, agent |
 | `data/` | Immutable rule tables (`runic.json`, `vedic.json`, `western.json`, …) |
 | `tests/` | Offline fixtures and integration checks |

@@ -15,8 +15,10 @@ is a separate installation action, not claimed by its presence here.
 
 Run `astroengine capabilities` for availability and `astroengine tools` for full
 JSON request schemas. Planned/research/legacy states are not new safe-path methods.
-Nine computation tools currently exist: chart, vedic, vargas, dashas, panchanga,
-relationship (CLI alias synergy-json), location, western and runic. Catalog schemas and
+Twenty computation tools currently exist: chart, vedic, vargas, dashas, panchanga,
+relationship (CLI alias synergy-json), location, western, runic, wheel, solar-arc,
+profection, watch, elect, stars, asteroids, midpoints, draconic, dossier and
+chinese-tibetan-other. Catalog schemas and
 Python routing are local contracts, not an already-running MCP/HTTP server.
 
 ## Required input and profiles
@@ -46,7 +48,14 @@ Norse correspondences are an optional modern cultural overlay, not reconstructed
 historical astrological practice. Keep traditional school disagreements visible.
 The runic tool implements Pennick (2023) as a modern synthesis: lunar mansions use
 the declared Alcyone-anchor convention, and the Ch. 8 interpretive statements are
-labeled as interpretation, never presented as computed fact.
+labeled as interpretation, never presented as computed fact. The
+chinese-tibetan-other tool covers the Oracles program's Eastern arts — Chinese
+zodiac (ganzhi year anchored 1984 = Jia-Zi, NaYin, allies/clashes, Lunar New Year
+boundaries), Four Pillars/BaZi (year turning at Lichun, jie month branches via
+ephemeris, day ganzhi from verified anchors), Tibetan astrology (element-animal
+year, rabjung, mewa, parkha, five forces with lineage variation disclosed) — plus
+Younger Futhark, Anglo-Saxon futhorc and Ogham readings. Calendrical anchors are
+cross-checked against published tables rather than recalled.
 
 ## Scope boundaries
 
@@ -57,8 +66,8 @@ civil weekday, no sunrise vara/calendar/festivals yet. Location: relocation and
 geometric angular longitudes at an exact latitude, not kilometer distances or
 parans. Western: civil annual profection, integer harmonics and sensitive midpoints.
 
-Shadbala, ashtakavarga, yoga/dosha engines, Jaimini/KP, alternate dashas, muhurta,
-Chinese/Tibetan calendars and further techniques remain in ROADMAP. Do not report
+Shadbala, ashtakavarga, yoga/dosha engines, Jaimini/KP, alternate dashas, muhurta
+and further techniques remain in ROADMAP. Do not report
 that all astrology or all Jyotisha has already been implemented.
 
 Legacy text compatibility now validates inputs and suppresses unknown-time houses.
