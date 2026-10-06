@@ -4,7 +4,7 @@ Read this first. Current work: 2026-10-06 expansion under Mythic Engineering.
 
 - [x] Inspect real repository and current code; map correctness/agent gaps.
 - [x] Add standard documents and expanded roadmap; publish before code.
-- [ ] S01 — typed chart foundation, strict time/location handling, JSON, discovery, CI.
+- [x] S01 — typed chart foundation, strict time/location handling, JSON, discovery, CI.
 - [ ] S02 — Vedic D1, ayanamsa variants, nodes, nakshatra/pada.
 - [ ] S03 — named classical divisional chart mappings.
 - [ ] S04 — Vimshottari maha/antar periods with balance at birth.

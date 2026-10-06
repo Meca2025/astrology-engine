@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-astrology-engine"
+version = "4.0.0"
+description = "Reproducible astrology computation with explicit tradition profiles"
+requires-python = ">=3.11"
+dependencies = ["pyswisseph==2.10.3.2", "tzdata>=2025.2"]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+geo = ["geopy>=2.4", "timezonefinder>=6", "pytz>=2024"]
+
+[project.scripts]
+astroengine = "astroengine.cli:main"
+
+[tool.setuptools]
+packages = ["astroengine", "astroengine_data"]
+package-dir = {astroengine_data = "data"}
+
+[tool.setuptools.package-data]
+astroengine_data = ["*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

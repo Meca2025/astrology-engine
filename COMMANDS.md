@@ -431,3 +431,16 @@ When using `--lat` / `--lon`:
 ---
 
 *The stars wait for no one's permission.*
+
+## Structured commands (4.0.0)
+
+`chart --date DATE [--time TIME] --lat LAT --lon LON --timezone IANA` emits
+schema-versioned JSON. Optional `--zodiac tropical|sidereal`, `--ayanamsa
+lahiri|raman|krishnamurti|fagan-bradley`, `--house-system` (placidus, whole-sign,
+equal, koch, regiomontanus, campanus, porphyry), `--node-type true|mean`, and
+`--ephemeris-path DIRECTORY`. Same commands via `astroengine` or
+`python -m astroengine`. `capabilities` reports availability, scope and evidence.
+
+Failures: stderr JSON + exit 2; stdout has no partial result. Argument syntax
+errors use argparse's standard stderr/help behavior. Success exit 0. No automatic
+city resolution, zone guessing, persistence or LLM calls in new commands.

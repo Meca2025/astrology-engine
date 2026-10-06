@@ -7,3 +7,9 @@ repository, so work uses a fresh clone of astrology-engine and leaves Ember alon
 Mapped 16 legacy CLI commands and found time-rollover/fallback/agent-contract gaps.
 Added five-layer Mythic Engineering documentation and a dependency-ordered roadmap.
 User authorized implementation/push loops; no repeated approval gate is needed.
+
+## S01 — chart foundation
+
+Implemented the typed/profile/data/provenance/CLI boundaries. 24 tests and wheel
+resource check passed. UTC midnight and DST/polar failures are explicit. Existing
+text commands preserved; their historical gaps remain separately documented.

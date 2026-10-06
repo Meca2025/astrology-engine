@@ -38,7 +38,8 @@ import math
 import textwrap
 import warnings
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+if __name__ == "__main__" and hasattr(sys.stdout, "buffer"):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
 # Suppress verbose kerykeion geonames warning
 warnings.filterwarnings("ignore", message=".*GEONAMES.*")
@@ -3247,7 +3248,11 @@ def main():
     ag.add_argument("--date", required=True)
     ag.add_argument("--time", default=None)
 
+    from astroengine.cli import register_commands, run_command
+    register_commands(sub)
     args = p.parse_args()
+    if hasattr(args, "modern_handler"):
+        raise SystemExit(run_command(args))
     dispatch = {
         "natal":        cmd_natal,
         "transit":      cmd_transit,

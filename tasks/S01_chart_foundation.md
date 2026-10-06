@@ -28,3 +28,10 @@ legacy CLI help/lunar smoke. Hosted Linux/macOS/Windows Python 3.11/3.12 CI.
 
 Today: restore time/input truth and separate calculation from I/O. Preserve existing
 commands, license and source assets. Output schema version 1.0; no LLM provider.
+
+## Acceptance receipt
+
+24 local tests passed on Linux/Python 3.12; wheel built and imported through an
+isolated wheel directory with packaged rules; direct chart computation succeeded.
+Legacy help/import/lunar subprocess checks passed. CI matrix configured; hosted
+results remain pending until checked. No physical Pi/mobile execution claimed.

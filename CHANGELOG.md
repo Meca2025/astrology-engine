@@ -100,3 +100,10 @@ Format: **Added** / **Changed** / **Fixed** / **Removed** for each version.
 ---
 
 *Each version a layer of wyrd laid down in the loom.*
+
+## [4.0.0] — 2026-10-06
+
+Added typed chart requests, explicit tropical/sidereal profiles, full UTC date
+conversion, strict failures, JSON/discovery, packaging, test and cross-platform CI
+configuration. Legacy import no longer rewrites stdout. Mythic Engineering
+document suite and comprehensive method-level expansion roadmap published.

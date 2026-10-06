@@ -1,3 +1,31 @@
+# Reproducible computation expansion (4.0.0)
+
+The new `astroengine` package adds strict, offline, machine-readable chart
+computation alongside the 16 legacy text commands described below. Read
+[ROADMAP.md](ROADMAP.md) for the complete Vedic/Western/location/relationship
+program, [TODO.md](TODO.md) for delivered slices and
+[astroengine/INTERFACE.md](astroengine/INTERFACE.md) for contracts.
+
+Python 3.11+ for the new package:
+
+```bash
+python -m pip install .
+astroengine capabilities
+astroengine chart --date 2000-01-01 --time 12:00 --lat 0 --lon 0 --timezone UTC
+python astrology_engine.py chart --date 2000-01-01 --time 12:00 --lat 0 --lon 0 --timezone UTC --zodiac sidereal --ayanamsa lahiri --house-system whole-sign
+python -m pip install '.[test]'
+python -m pytest -q
+```
+
+Coordinates and IANA timezone are explicit in new commands. Unknown time produces
+flagged local-noon positions and no houses/angles. DST folds/gaps reject. Output
+records actual ephemeris backends; missing data can select disclosed Moshier.
+The historical examples and precision claims below are preserved documentation,
+not independent validation. The original legacy time conversion/fallback limits
+remain until their migration slice; use `chart` for strict input handling.
+
+---
+
 
 ![https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/etre34gdfgd3.png](https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/etre34gdfgd3.png)
 

@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "capabilities": [
+    {"id": "chart", "status": "available", "scope": "Tropical/sidereal geocentric chart with explicit UTC, nodes, houses and provenance", "evidence": "automated Swiss Ephemeris comparisons and boundary fixtures"},
+    {"id": "vedic", "status": "planned", "scope": "D1 and nakshatras; comprehensive Jyotisha remains a roadmap program"},
+    {"id": "vargas", "status": "planned", "scope": "Named classical divisional charts"},
+    {"id": "dashas", "status": "planned", "scope": "Vimshottari maha/antar periods"},
+    {"id": "panchanga", "status": "planned", "scope": "Instant five-limb snapshot; sunrise calendars later"},
+    {"id": "relationship", "status": "planned", "scope": "Structured synastry/composite/synergy with separate locations/zones"},
+    {"id": "location", "status": "planned", "scope": "Relocation and query-latitude angular lines"},
+    {"id": "western", "status": "planned", "scope": "Annual profections, harmonic positions and sensitive midpoints"},
+    {"id": "legacy", "status": "legacy", "scope": "16 text commands; historical input/fallback limitations remain"},
+    {"id": "advanced-jyotisha", "status": "planned", "scope": "Shadbala/ashtakavarga/yogas/Jaimini/KP/muhurta/prashna and dasha variants"},
+    {"id": "chinese-tibetan-other", "status": "research", "scope": "Independent calendar and tradition adapters with source/fixture gates"}
+  ]
+}
