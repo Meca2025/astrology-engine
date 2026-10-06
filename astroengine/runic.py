@@ -434,3 +434,121 @@ def runic_name(iso_datetime: str, longitude: float, timezone: str) -> dict:
 
 
 __all__ += ["tide", "year_station", "runic_name"]
+
+
+# ---------------------------------------------------------------------------
+# R05 — Zodiacal (App. 5), weekday (App. 4), and life-period (Ch. 6) layers
+# ---------------------------------------------------------------------------
+
+def zodiac_rune(sign: str, variant: str = "classical") -> dict:
+    """Return the App. 5 correspondences for a zodiac sign.
+
+    Capricorn, Aquarius and Pisces each have two rows in the book:
+    "classical" and "modern alternative". Every other sign has one row.
+    """
+    corpus = _corpus()
+    rows = [r for r in corpus["zodiac"]
+            if r["sign"].lower() == sign.strip().lower()]
+    if not rows:
+        raise CalculationError(
+            f"unknown zodiac sign '{sign}'")
+    variants = {r["variant"] for r in rows}
+    if variant not in variants:
+        raise CalculationError(
+            f"unknown variant '{variant}' for {rows[0]['sign']}; "
+            f"available: {sorted(variants)}")
+    row = next(r for r in rows if r["variant"] == variant)
+    return {
+        "sign": row["sign"],
+        "variant": row["variant"],
+        "rune": row["rune"],
+        "deity": row["deity"],
+        "planet": row["planet"],
+        "day": row["day"],
+        "stone": row["stone"],
+        "animal": row["animal"],
+        "source": "Pennick (2023)",
+        "historical_claim": "modern synthesis",
+    }
+
+
+def weekday_rune(weekday: str) -> dict:
+    """Return the App. 4 correspondences for an English weekday."""
+    corpus = _corpus()
+    for row in corpus["weekdays"]:
+        if row["day"].lower() == weekday.strip().lower():
+            return {
+                "weekday": row["day"],
+                "deity": row["deity"],
+                "planet": row["planet"],
+                "rune": row["rune"],
+                "tree": row["tree"],
+                "herb": row["herb"],
+                "element": row["element"],
+                "esoteric_number": row["esoteric_number"],
+                "magic_square": row["magic_square"],
+                "source": "Pennick (2023)",
+                "historical_claim": "modern synthesis",
+            }
+    raise CalculationError(f"unknown weekday '{weekday}'")
+
+
+def life_period(age_years: float) -> dict:
+    """Return the Ch. 6 planetary life-period ruling an age in years.
+
+    The book's wheel: Máni 0–4, Odin 4–14, Frigg 14–22, Sól 22–41,
+    Tyr 41–56, Thor 56–68, Loki 68–98 (98 years total).
+    """
+    try:
+        age = float(age_years)
+    except (TypeError, ValueError):
+        raise CalculationError(
+            f"invalid age '{age_years}': must be a number of years")
+    corpus = _corpus()
+    for idx, period in enumerate(corpus["life_periods"]):
+        if period["start_age"] <= age < period["end_age"]:
+            return {
+                "age": age,
+                "period": idx + 1,
+                "deity": period["deity"],
+                "planet": period["planet"],
+                "years_elapsed": round(age - period["start_age"], 6),
+                "years_remaining": round(period["end_age"] - age, 6),
+                "period_span": [period["start_age"], period["end_age"]],
+                "source": "Pennick (2023)",
+                "historical_claim": "modern synthesis",
+            }
+    raise CalculationError(
+        f"age {age} is outside the book's 0–98 year life-period wheel")
+
+
+def metonic_cycle(year: int) -> dict:
+    """Return the year's place in the 19-year Metonic cycle (Ch. 6).
+
+    Golden Number = (year mod 19) + 1, the calendrical count the book
+    describes (golden characters on the Athenian monuments; the Church's
+    later Easter reckoning is derivative). Pure calendrical computation —
+    runic.py stays ephemeris-free by design.
+    """
+    try:
+        y = int(year)
+    except (TypeError, ValueError):
+        raise CalculationError(
+            f"invalid year '{year}': must be an integer")
+    golden = (y % 19) + 1
+    return {
+        "year": y,
+        "golden_number": golden,
+        "year_in_cycle": golden,
+        "years_until_cycle_restart": 19 - golden,
+        "cycle_length_years": 19,
+        "note": "After 310 Julian years the moon takes a step backward — "
+                "the Aun cycle, requiring recalibration of the Metonic "
+                "count (Ch. 6).",
+        "method": "calendrical Golden Number per Pennick Ch. 6",
+        "source": "Pennick (2023)",
+        "historical_claim": "modern synthesis",
+    }
+
+
+__all__ += ["zodiac_rune", "weekday_rune", "life_period", "metonic_cycle"]

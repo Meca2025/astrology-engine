@@ -187,3 +187,17 @@ names (Kenneth, Ingrid, Darwin) are literary English wordplay on such
 pairs, not mechanical output; the Kenneth/Odal wheel conflict (R01) and the
 Darwin EoT shift (civil 20:27 Wyn hour vs LAT 20:43 Hagal) are documented
 in tests, not silently corrected. No interpretation.
+
+## Zodiac, weekday, life-periods (R05)
+
+`zodiac_rune(sign, variant="classical")` returns the App. 5 correspondences
+(rune, deity, planet, day, stone, animal); Capricorn/Aquarius/Pisces carry
+both "classical" and "modern alternative" rows, labeled. `weekday_rune(weekday)`
+returns the App. 4 correspondences (deity, planet, rune, tree, herb,
+element, esoteric number, magic square). `life_period(age_years)` names the
+Ch. 6 planetary life-period ruling an age (Máni 0–4 … Loki 68–98), with
+years elapsed and remaining; ages outside 0–98 raise CalculationError.
+`metonic_cycle(year)` gives the calendrical Golden Number, (year mod 19)+1,
+and the year's place in the 19-year Sun/Moon reconciliation cycle, with the
+Aun 310-year recalibration noted. runic.py stays ephemeris-free by design;
+the Metonic recurrence is cross-checked against the ephemeris in tests.

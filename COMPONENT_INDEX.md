@@ -34,6 +34,10 @@ R04 adds the day's tides (`tide`, App. 6), the year's Stations
 (`year_station`, Ch. 5, declared festival-span boundaries), and the
 name-craft pair (`runic_name`); corpus gains the 8-station table
 (v1.1); verified by `tests/test_runic_tides.py`.
+R05 adds the sign/day/age layers: `zodiac_rune` (App. 5, labeled
+variants), `weekday_rune` (App. 4), `life_period` (Ch. 6, 0–98 wheel),
+and `metonic_cycle` (Ch. 6 Golden Number, ephemeris cross-checked in
+tests); verified by `tests/test_runic_layers.py`.
 
 `astroengine/vargas.py` owns divisional sign arithmetic; `data/vargas.json` owns
 the sixteen named mappings. Technique discrepancy ledger lives in docs/references.

@@ -217,3 +217,20 @@ book's example ignores the equation of time (civil 20:27 = Wyn hour; LAT
 (Kenneth, Ingrid, Darwin) are literary wordplay, not mechanical output.
 Védis mapped the new surface in INTERFACE.md and COMPONENT_INDEX.md. Next:
 R05 lunar mansions + 12 Grímnismál palaces.
+
+## 2026-10-06 — R05 complete: zodiacal, weekday, and life-period layers
+
+The fifth runic slice is forged. `astroengine/runic.py` gains `zodiac_rune()`
+(App. 5: rune/deity/planet/day/stone/animal, with the Capricorn/Aquarius/
+Pisces classical-vs-modern rows labeled), `weekday_rune()` (App. 4: deity/
+planet/rune/tree/herb/element/esoteric number/magic square),
+`life_period()` (the Ch. 6 wheel Máni 0–4 … Loki 68–98, with years elapsed
+and remaining; outside 0–98 is an explicit error), and `metonic_cycle()`
+(the calendrical Golden Number, (year mod 19)+1, with the Aun 310-year
+recalibration noted). No corpus changes were needed — R01 transcribed it
+all. Sólrún's `tests/test_runic_layers.py`: 8/8 green, full suite 344
+green, including the roadmap's ephemeris gate: full moons 19 years apart
+(2007 vs 2026) land within 2 days of each other, as Ch. 6 describes.
+runic.py remains ephemeris-free by design. Védis mapped the surface in
+INTERFACE.md and COMPONENT_INDEX.md. Pushed via the PAT tool — no approval
+prompts, binary-safe. Next: R06 lunar mansions + palaces.
