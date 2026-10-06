@@ -662,3 +662,8 @@ benefic-place tables, canonical totals) + astroengine/
 ashtakavarga.py (pure bhinna() + compute_ashtakavarga()) +
 `ashtakavarga` CLI. Verified against Raman's Standard Horoscope
 worked example; 337 constant holds.
+
+G04 (2026-10-06): Jaimini foundations — data/jaimini.json (rules +
+disclosed variants) + astroengine/jaimini.py (chara_karakas,
+arudha_padas, chara_dasha) + `jaimini` CLI. Volmarr: Venus AK,
+AL Taurus, Chara from Virgo backward. ROADMAP_GAMBHIRA complete.

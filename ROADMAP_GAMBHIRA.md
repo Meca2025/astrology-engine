@@ -32,3 +32,7 @@ Same as all programs: fetch+diff before every push, never
 overwrite Volmarr's edits, never force-push, typed modules only,
 explicit errors, offline tests with IANA zones, computation apart
 from interpretation.
+
+## Status (2026-10-06)
+
+COMPLETE — G01 yoga engine, G02 Shadbala, G03 Ashtakavarga, G04 Jaimini foundations. All forged, tested, pushed.

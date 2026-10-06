@@ -2525,6 +2525,36 @@ def cmd_ashtakavarga(args):
     return {"ashtakavarga": report}
 
 
+def cmd_jaimini(args):
+    from astroengine.jaimini import (arudha_padas, chara_dasha, chara_karakas,
+                                     render_jaimini)
+    from astroengine.models import ChartRequest
+    if args.load:
+        title = _load_chart_into(args)
+    else:
+        apply_chart_load(args)
+        title = "Seeker"
+    require_date(args)
+    y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
+        args.date, args.time, args.city, args.nation,
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None))
+    birth = ChartRequest(date=args.date, time=args.time, latitude=lat,
+                         longitude=lon, timezone=tz_name, zodiac="sidereal",
+                         house_system="whole-sign")
+    karakas = chara_karakas(birth)
+    padas = arudha_padas(birth)
+    dasha = chara_dasha(birth)
+    if args.json:
+        print(json.dumps({"title": title, "karakas": karakas,
+                          "arudha_padas": padas, "chara_dasha": dasha},
+                         ensure_ascii=False, sort_keys=True, default=str))
+        return {"jaimini": (karakas, padas, dasha)}
+    print(f"Jaimini foundations of {title}")
+    print(render_jaimini(karakas, padas, dasha))
+    return {"jaimini": (karakas, padas, dasha)}
+
+
 def cmd_mantras(args):
     from astroengine.mantras import all_mantras, mantras_for, render_remedies
     if args.planet:
@@ -4469,6 +4499,13 @@ def main():
     add_geo(av)
     add_chart_lib(av)
 
+    jm = sub.add_parser("jaimini", help="Jaimini foundations: karakas, arudha padas, Chara dasha")
+    jm.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
+    jm.add_argument("--time", default=None, help="HH:MM (24h)")
+    jm.add_argument("--json", action="store_true")
+    add_geo(jm)
+    add_chart_lib(jm)
+
     dr = sub.add_parser("draconic", help="Draconic chart: the soul-chart reckoned from the north node")
     dr.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
     dr.add_argument("--time", default=None, help="HH:MM (24h)")
@@ -4655,6 +4692,7 @@ def main():
         "yogas":        cmd_yogas,
         "shadbala":     cmd_shadbala,
         "ashtakavarga":   cmd_ashtakavarga,
+        "jaimini":        cmd_jaimini,
         "mantras":      cmd_mantras,
         "midpoints":    cmd_midpoints,
     }

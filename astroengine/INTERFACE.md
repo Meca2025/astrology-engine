@@ -93,6 +93,16 @@ Raman in data/ashtakavarga.json (rule version 1.0); Lagna is the
 eighth contributor. `compute_ashtakavarga(request)` wraps D1.
 Trikona/Ekadhipatya reductions are future work, disclosed.
 
+## Jaimini foundations (Gambhira G04)
+
+`jaimini.chara_karakas(request)` (Atmakaraka..Darakaraka by
+intra-sign degree), `jaimini.arudha_padas(request)` (twelve padas,
+1.1.30-32 with the 1st/7th -> 10th exceptions),
+`jaimini.chara_dasha(request)` (Lagna start, direction by
+9th-from-Lagna, years = forward sign-to-lord count minus one).
+Rules + variants in data/jaimini.json (rule version 1.0); the
+Jaimini school is never mixed silently with Parashari timing.
+
 ## Vimshottari (S04)
 
 `dashas.compute_dashas(request, years=None, year_model=None, as_of=None)` returns

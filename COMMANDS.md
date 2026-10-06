@@ -340,6 +340,19 @@ python3 astrology_engine.py ashtakavarga --load volmarr
 
 ---
 
+## `jaimini`
+
+Jaimini foundations, the other great school: the seven Chara
+karakas, the twelve Arudha padas, and the Chara dasha sequence
+with the current mahadasha and antardasha. Rules and lineage
+variants in `data/jaimini.json`.
+
+```bash
+python3 astrology_engine.py jaimini --load volmarr
+```
+
+---
+
 ## `draconic`
 
 The soul-chart: every position reckoned from the natal north node,
