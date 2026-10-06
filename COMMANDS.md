@@ -448,3 +448,7 @@ city resolution, zone guessing, persistence or LLM calls in new commands.
 `vedic` takes the same chart flags; defaults: sidereal, Lahiri, whole-sign, mean
 nodes. Output contains navagraha, Moon nakshatra, pada, rasi houses and lagna.
 Unknown time suppresses lagna/houses; explicit tropical input rejects.
+
+`vargas` shares Vedic chart flags. Optional `--divisions 9 10 30` selects charts;
+omit it for all sixteen. Mapping profile: classical-rao-2000, with D27 source
+example discrepancy recorded in docs/references/technique-sources.md.

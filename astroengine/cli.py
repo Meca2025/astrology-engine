@@ -39,6 +39,12 @@ def register_commands(subparsers: Any) -> None:
     add_chart_arguments(vedic)
     vedic.set_defaults(**load_rules("vedic.json")["defaults"],
                        modern_handler=lambda args: compute_vedic(request_from_args(args)))
+    from .vargas import compute_vargas
+    vargas = subparsers.add_parser("vargas", help="Sixteen named classical divisional charts")
+    add_chart_arguments(vargas)
+    vargas.add_argument("--divisions", type=int, nargs="+")
+    vargas.set_defaults(**load_rules("vedic.json")["defaults"],
+                        modern_handler=lambda args: compute_vargas(request_from_args(args), args.divisions))
     discovery = subparsers.add_parser("capabilities", help="Technique availability and scope as JSON")
     discovery.set_defaults(modern_handler=lambda args: capabilities())
 

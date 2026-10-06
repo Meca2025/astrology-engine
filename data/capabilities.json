@@ -15,8 +15,9 @@
     },
     {
       "id": "vargas",
-      "status": "planned",
-      "scope": "Named classical divisional charts"
+      "status": "available",
+      "scope": "Named classical divisional charts",
+      "evidence": "classical rule boundaries and published examples with documented D27 correction"
     },
     {
       "id": "dashas",

@@ -18,3 +18,6 @@ Update this index when new public modules are introduced; their API is recorded 
 
 `astroengine/vedic.py` owns Jyotisha D1/nakshatras; `data/vedic.json` owns names,
 graha mappings and default profile. Input and astronomy domains stay independent.
+
+`astroengine/vargas.py` owns divisional sign arithmetic; `data/vargas.json` owns
+the sixteen named mappings. Technique discrepancy ledger lives in docs/references.

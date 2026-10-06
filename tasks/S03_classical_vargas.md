@@ -16,3 +16,9 @@ https://www.vedicastrologer.org/articles/vedic_astro_textbook.pdf
 
 Gate: independent worked examples 11/12/14/16/17/19-26; D2/D30 boundaries; all
 sign/parity/modality partitions; errors for unsupported divisors; CLI integration.
+
+## Receipt
+
+78 total tests passed. Example 23 contains an inclusive-count contradiction;
+D27 Gemini 11° computes Cancer per stated rule, with discrepancy ledger.
+All sixteen mappings accessible from both CLIs; unknown time omits lagna.

@@ -23,3 +23,10 @@ Restored original ignore rules after detecting the initial ignore-file overwrite
 Hosted Windows S01/S02 jobs exposed cp1252 decoding in test subprocesses.
 Explicit UTF-8 decoding and ASCII-safe JSON transport added; Linux/macOS
 computation jobs passed. Follow-up acceptance awaits the repaired hosted matrix.
+
+## S03 — classical vargas
+
+Sixteen sign mappings wired through API/CLI. 78 total tests passed, including
+source worked placements and D2/D30 boundaries. Documented D27 Example 23
+counting error; calculation follows the stated rule. No physical longitudes
+or exhaustive school coverage claimed.

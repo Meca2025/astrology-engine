@@ -112,3 +112,7 @@ document suite and comprehensive method-level expansion roadmap published.
 
 Vedic D1 JSON, 27 nakshatras/108 padas, rasi houses, explicit ayanamsa/node
 variants and classical graha aliases.
+
+### S03 additions
+
+Sixteen classical divisional charts with explicit mappings and source fractions.

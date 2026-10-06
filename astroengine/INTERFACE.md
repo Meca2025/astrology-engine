@@ -34,3 +34,11 @@ positions/nakshatras/rasi houses, optional lagna and underlying chart provenance
 `vedic.nakshatra(longitude)` returns 1-based index/pada, lord and fraction elapsed.
 CLI `vedic` shares chart arguments with sidereal/Lahiri/whole-sign/mean defaults.
 No interpretation, yoga, strength or marriage scoring is inferred.
+
+## Divisional charts (S03)
+
+`vargas.varga_position(longitude, division)` returns a classical mapped sign and
+source subdivision/fraction, with unsupported divisions rejected.
+`vargas.compute_vargas(request, divisions=None)` requires sidereal input, defaults
+to sixteen charts, and returns named method/source and optional divisional lagna.
+No physical varga longitude is asserted; D30 uses unequal segments.
