@@ -108,6 +108,20 @@ intra-sign degree), `jaimini.arudha_padas(request)` (twelve padas,
 tool. Rules + variants in data/jaimini.json (rule version 1.0); the
 Jaimini school is never mixed silently with Parashari timing.
 
+## Self-healing and robustness (S01)
+
+`recovery.heal_date` / `heal_time` mend human forms ("Oct 7 2026",
+"8:18am") with a logged note; `recovery.correct_timezone` fixes
+spacing/case near-misses and suggests on failure (never guessing
+ambiguous abbreviations); `recovery.suggest` is did-you-mean for
+every closed vocabulary (house systems, chart names, ...);
+`recovery.graceful(label, fn)` lets composite readings degrade a
+section to "unavailable" instead of dying. The CLI heals date,
+time and timezone inputs in `main()` before dispatch, prints one
+clean stderr line for unexpected errors (exit 3, traceback only
+with `--debug`), and emits a JSON error object on stdout when
+`--json` is set.
+
 ## Vimshottari (S04)
 
 `dashas.compute_dashas(request, years=None, year_model=None, as_of=None)` returns

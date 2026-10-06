@@ -114,24 +114,30 @@ def natal_dossier(natal_jd_ut: float, lat: float, lon: float,
             natal_jd_ut, target_jd - 2.0, target_jd + 90.0, lat, lon)[:8]
         dossier["target_date"] = target_iso
     if vedic_request is not None:
-        from .shadbala import shadbala
-        from .yogas import detect_yogas
-        yogas = detect_yogas(vedic_request)
-        bala = shadbala(vedic_request)["planets"]
-        present = [{"yoga": y["yoga"], "details": y["details"],
-                    "signification": y["signification"]}
-                   for y in yogas["yogas"] if y["present"]]
-        ranked = sorted(bala.items(), key=lambda kv: kv[1]["ratio"],
-                        reverse=True)
-        dossier["vedic_depths"] = {
-            "yogas": present,
-            "strongest": {"planet": ranked[0][0],
-                          "rupas": ranked[0][1]["rupas"],
-                          "ratio": ranked[0][1]["ratio"]},
-            "weakest": {"planet": ranked[-1][0],
-                        "rupas": ranked[-1][1]["rupas"],
-                        "ratio": ranked[-1][1]["ratio"]},
-        }
+        from .recovery import graceful
+
+        def _depths():
+            from .shadbala import shadbala
+            from .yogas import detect_yogas
+            yogas = detect_yogas(vedic_request)
+            bala = shadbala(vedic_request)["planets"]
+            present = [{"yoga": y["yoga"], "details": y["details"],
+                        "signification": y["signification"]}
+                       for y in yogas["yogas"] if y["present"]]
+            ranked = sorted(bala.items(), key=lambda kv: kv[1]["ratio"],
+                            reverse=True)
+            return {
+                "yogas": present,
+                "strongest": {"planet": ranked[0][0],
+                              "rupas": ranked[0][1]["rupas"],
+                              "ratio": ranked[0][1]["ratio"]},
+                "weakest": {"planet": ranked[-1][0],
+                            "rupas": ranked[-1][1]["rupas"],
+                            "ratio": ranked[-1][1]["ratio"]},
+            }
+
+        ok, depths, error = graceful("Vedic Depths", _depths)
+        dossier["vedic_depths"] = depths if ok else {"unavailable": error}
     return dossier
 
 
@@ -222,17 +228,20 @@ def render_dossier(d: dict) -> str:
         vd = d["vedic_depths"]
         add("")
         add("## The Vedic Depths — yogas and strengths")
-        if vd["yogas"]:
-            for y in vd["yogas"]:
-                add(f"{y['yoga']}: {y['details']} — {y['signification']}.")
+        if "unavailable" in vd:
+            add(f"The Vedic depths are unavailable: {vd['unavailable']}.")
         else:
-            add("No great yogas mark this chart.")
-        add(f"Strongest by Shadbala: {vd['strongest']['planet']} "
-            f"({vd['strongest']['rupas']:.2f} rupas, "
-            f"{vd['strongest']['ratio']:.2f}x the minimum); "
-            f"weakest: {vd['weakest']['planet']} "
-            f"({vd['weakest']['rupas']:.2f} rupas, "
-            f"{vd['weakest']['ratio']:.2f}x the minimum).")
+            if vd["yogas"]:
+                for y in vd["yogas"]:
+                    add(f"{y['yoga']}: {y['details']} — {y['signification']}.")
+            else:
+                add("No great yogas mark this chart.")
+            add(f"Strongest by Shadbala: {vd['strongest']['planet']} "
+                f"({vd['strongest']['rupas']:.2f} rupas, "
+                f"{vd['strongest']['ratio']:.2f}x the minimum); "
+                f"weakest: {vd['weakest']['planet']} "
+                f"({vd['weakest']['rupas']:.2f} rupas, "
+                f"{vd['weakest']['ratio']:.2f}x the minimum).")
     add("")
     add("---")
     add("A symbolic reading, woven from computed positions. The stars "

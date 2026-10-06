@@ -678,3 +678,13 @@ the rules). R5 dossier gains the Vedic Depths section (yogas +
 Shadbala strongest/weakest); also fixed a pre-existing bug where
 `dossier` printed nothing in text mode and --out was orphaned dead
 code inside cmd_mantras. R6 SKILL.md 26 tools.
+
+S01 (2026-10-06): self-healing + robustness — astroengine/
+recovery.py (heal_date/heal_time/correct_timezone/suggest/
+graceful/chart_suggestions) + wiring: CLI pre-dispatch healing
+pass, load_chart did-you-mean, validate_profile suggestions,
+resolve_utc timezone correction, graceful degradation of the
+forecast's Jaimini/Tibetan/runic sections and the dossier's
+Vedic Depths, JSON error objects, --debug flag. Scope note: the
+forecast's BaZi/Chinese core stays strict (pure functions of
+validated input; placeholders would mislead).

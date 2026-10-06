@@ -19,6 +19,7 @@ def validate_coordinates(latitude: float, longitude: float) -> None:
 
 
 def validate_profile(request: ChartRequest) -> None:
+    from .recovery import suggest
     rules = load_rules("profiles.json")
     selections = ((request.zodiac, ("tropical", "sidereal"), "zodiac"),
                   (request.ayanamsa, rules["ayanamsas"], "ayanamsa"),
@@ -26,7 +27,9 @@ def validate_profile(request: ChartRequest) -> None:
                   (request.node_type, rules["nodes"], "node type"))
     for selection, choices, label in selections:
         if selection not in choices:
-            raise CalculationError(f"Unknown {label}: {selection}")
+            hints = suggest(str(selection), list(choices))
+            hint = f"; did you mean {', '.join(hints)}?" if hints else ""
+            raise CalculationError(f"Unknown {label}: {selection}{hint}")
 
 
 def parse_civil(date_string: str, time_string: str | None = None) -> datetime:
@@ -47,8 +50,10 @@ def resolve_utc(request: ChartRequest) -> datetime:
     validate_coordinates(request.latitude, request.longitude)
     validate_profile(request)
     naive = parse_civil(request.date, request.time)
+    from .recovery import correct_timezone
+    zone_name, _note = correct_timezone(request.timezone)
     try:
-        zone = ZoneInfo(request.timezone)
+        zone = ZoneInfo(zone_name)
     except (ValueError, TypeError, ZoneInfoNotFoundError) as exc:
         raise CalculationError(f"Invalid date, time or timezone: {exc}") from exc
     try:

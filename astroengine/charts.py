@@ -66,8 +66,11 @@ def load_chart(name: str, directory: str | None = None) -> dict:
     """Load a saved chart; raises CalculationError when missing."""
     path = _path(name, directory)
     if not path.exists():
+        from .recovery import chart_suggestions
+        hints = chart_suggestions(name, directory)
+        hint = f"; did you mean {', '.join(repr(h) for h in hints)}?" if hints else ""
         raise CalculationError(
-            f"no saved chart named '{name}' in {chart_dir(directory)}")
+            f"no saved chart named '{name}' in {chart_dir(directory)}{hint}")
     return _json.loads(path.read_text(encoding="utf-8"))
 
 

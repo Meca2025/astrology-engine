@@ -153,14 +153,30 @@ def daily_forecast(natal_jd_ut: float, lat: float, lon: float, name: str,
                             tzinfo=_dt.timezone.utc)
     dasha = active_period(timeline, noon_utc) or {"mahadasa": "unknown",
                                                   "antardasha": "unknown"}
-    from .jaimini import chara_dasha
-    _chara = chara_dasha(birth, as_of=target_iso)
-    _chara_cur = _chara.get("current") or {}
-    jaimini_dasha = {"mahadasha": _chara_cur.get("sign", "unknown"),
-                     "antardasha": _chara_cur.get("current_antardasha",
-                                                  "unknown"),
-                     "direction": _chara.get("direction", ""),
-                     "school": "Jaimini"}
+    from .recovery import graceful
+    degraded: list[str] = []
+
+    def _optional(label, fn, fallback):
+        ok, result, error = graceful(label, fn)
+        if not ok:
+            degraded.append(f"{label} unavailable: {error}")
+            return fallback
+        return result
+
+    def _chara_block():
+        from .jaimini import chara_dasha
+        _chara = chara_dasha(birth, as_of=target_iso)
+        _chara_cur = _chara.get("current") or {}
+        return {"mahadasha": _chara_cur.get("sign", "unknown"),
+                "antardasha": _chara_cur.get("current_antardasha",
+                                             "unknown"),
+                "direction": _chara.get("direction", ""),
+                "school": "Jaimini"}
+
+    jaimini_dasha = _optional(
+        "Jaimini Chara dasha", _chara_block,
+        {"mahadasha": "unknown", "antardasha": "unknown",
+         "direction": "", "school": "Jaimini"})
 
     natal_pillars = bazi_pillars(birth.date, birth.time or "12:00", tz)
     day_pillar = bazi_pillars(target_iso, "12:00", tz)["day"]
@@ -196,14 +212,24 @@ def daily_forecast(natal_jd_ut: float, lat: float, lon: float, name: str,
     day_element = stem_el[day_stem]
     master_element = stem_el[day_master]
 
-    natal_tib = tibetan_year(birth.date)
-    day_tib = tibetan_year(target_iso)
-    tib_relation = _element_relation(day_element,
-                                     natal_tib["element"])
+    def _tibetan_block():
+        natal_tib = tibetan_year(birth.date)
+        day_tib = tibetan_year(target_iso)
+        return {"natal": natal_tib, "day": day_tib,
+                "relation": _element_relation(day_element,
+                                              natal_tib["element"])}
 
-    rune_raw = half_month_rune(target_iso)
-    rune = {"name": rune_raw.get("rune"),
-            "meaning": (rune_raw.get("correspondences") or {}).get("symbolic_meaning")}
+    _tib = _optional("Tibetan year", _tibetan_block,
+                     {"natal": {}, "day": {}, "relation": "unknown"})
+    natal_tib, day_tib, tib_relation = _tib["natal"], _tib["day"], _tib["relation"]
+
+    def _runic_block():
+        rune_raw = half_month_rune(target_iso)
+        return {"name": rune_raw.get("rune"),
+                "meaning": (rune_raw.get("correspondences") or {}).get("symbolic_meaning")}
+
+    rune = _optional("runic half-month", _runic_block,
+                     {"name": "unknown", "meaning": None})
 
     animal_tie = branch_tie(
         next(b["name"] for b in zc["branches"] if b["animal"] == day_animal),
@@ -244,6 +270,7 @@ def daily_forecast(natal_jd_ut: float, lat: float, lon: float, name: str,
                  "meaning": rune.get("meaning") or rune.get("summary")},
         "zodiac_day": {"animal": day_animal, "birth_animal": birth_animal,
                        "tie": animal_tie},
+        "degraded": degraded,
         "afflictions": {"pressured_planets": pressured,
                         "dasha_lords": dasha,
                         "clashing_pillars": clashing},
@@ -252,7 +279,9 @@ def daily_forecast(natal_jd_ut: float, lat: float, lon: float, name: str,
     n_hard = sum(1 for h in sky["active"] if h["aspect"] in _HARD_ASPECTS)
     reading = {
         "note": "Symbolic reading — an interpretive synthesis of computed "
-                "facts, not a prediction of events.",
+                "facts, not a prediction of events."
+                + (" Degraded sections: " + "; ".join(degraded) + "."
+                   if degraded else ""),
         "western": _western_reading(sky, n_hard),
         "vedic": _vedic_reading(pan, dasha, vara, jaimini_dasha),
         "chinese": _chinese_reading(day_stem, day_branch, day_animal,
@@ -261,8 +290,12 @@ def daily_forecast(natal_jd_ut: float, lat: float, lon: float, name: str,
         "tibetan": _tibetan_reading(
             day_element, natal_tib.get("element"), tib_relation,
             computed["tibetan"]["natal_mewa"],
-            computed["tibetan"]["natal_parkha"]),
-        "runic": _runic_reading(rune),
+            computed["tibetan"]["natal_parkha"])
+        if not any(d.startswith("Tibetan year") for d in degraded)
+        else "Tibetan astrology unavailable for this day — see the note.",
+        "runic": _runic_reading(rune)
+        if not any(d.startswith("runic half-month") for d in degraded)
+        else "The runes are silent for this day — see the note.",
         "synthesis": _synthesis(sky, dasha, pillar_relations,
                                 tib_relation, rune, n_hard),
     }

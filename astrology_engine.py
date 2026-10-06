@@ -4231,6 +4231,8 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
+    p.add_argument("--debug", action="store_true",
+                   help="Re-raise unexpected errors with a full traceback")
     sub = p.add_subparsers(dest="cmd")
 
     def add_geo(parser: argparse.ArgumentParser, city_default: str | None = None,
@@ -4714,6 +4716,7 @@ def main():
     fn = dispatch.get(args.cmd)
     if fn:
         try:
+            _heal_inputs(args)
             if args.cmd in _TWO_PERSON:
                 apply_chart_load(args, "1")
                 apply_chart_load(args, "2")
@@ -4725,10 +4728,49 @@ def main():
             if result is not None:
                 maybe_save_chart(args, args.cmd, result)
         except CalculationError as exc:
-            print(f"Calculation error: {exc}", file=sys.stderr)
-            raise SystemExit(2) from exc
+            _clean_error(args, exc, kind="calculation", exit_code=2)
+        except Exception as exc:  # noqa: BLE001 — top-level robustness
+            if getattr(args, "debug", False):
+                raise
+            _clean_error(args, exc, kind="unexpected", exit_code=3)
     else:
         p.print_help()
+
+
+def _heal_inputs(args) -> None:
+    """Self-healing pass over CLI inputs: human dates/times and
+    near-miss timezones are mended with a stderr note; anything
+    unhealable raises a suggestion-rich CalculationError."""
+    from astroengine.recovery import correct_timezone, heal_date, heal_time
+    for field in ("date", "date1", "date2", "on", "as_of", "target_date"):
+        value = getattr(args, field, None)
+        if value:
+            healed, note = heal_date(value)
+            if note:
+                print(f"  healed: {note}", file=sys.stderr)
+            setattr(args, field, healed)
+    if getattr(args, "time", None):
+        healed, note = heal_time(args.time)
+        if note:
+            print(f"  healed: {note}", file=sys.stderr)
+        args.time = healed
+    if getattr(args, "timezone", None):
+        healed, note = correct_timezone(args.timezone)
+        if note:
+            print(f"  healed: {note}", file=sys.stderr)
+        args.timezone = healed
+
+
+def _clean_error(args, exc: BaseException, kind: str,
+                 exit_code: int) -> None:
+    """One clean error line; JSON object on stdout when --json."""
+    message = str(exc) or type(exc).__name__
+    if getattr(args, "json", False):
+        print(json.dumps({"error": message, "kind": kind,
+                          "command": getattr(args, "cmd", None)},
+                         ensure_ascii=False))
+    print(f"Error ({kind}): {message}", file=sys.stderr)
+    raise SystemExit(exit_code) from exc
 
 
 if __name__ == "__main__":

@@ -8,6 +8,13 @@ python3 astrology_engine.py <subcommand> [options]
 
 ---
 
+> **Self-healing inputs:** dates accept "Oct 7 2026", "7 Oct 2026",
+> MM/DD/YYYY and "2026.10.07"; times accept "8:18am", "8pm", "0818";
+> near-miss timezones ("America/New Yrok") are mended or answered
+> with a suggestion. `--load` names get did-you-mean. Errors are
+> one clean line (JSON object with `--json`); `--debug` restores
+> full tracebacks.
+
 ## Global Notes
 
 - `--date` always expects `YYYY-MM-DD` format
