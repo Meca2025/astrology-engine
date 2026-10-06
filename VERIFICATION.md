@@ -31,3 +31,15 @@ python astrology_engine.py --help
 Never translate passed arithmetic tests into predictive/scientific validation of
 symbolic astrology, or broad universal-tradition coverage. CI verifies program
 behavior in its tested environment; method authority remains source-scoped.
+
+## Verified hosted and packaging receipt
+
+Implementation commit: 45c7a3e29f3effc3bceefb9a557f2720b74c4531.
+GitHub Actions run 37443735522 completed successfully in all six matrix jobs:
+Linux/macOS/Windows, Python 3.11/3.12. This run includes 136 tests.
+https://github.com/hrabanazviking/astrology-engine/actions/runs/37443735522
+
+Final wheel was installed into a fresh Python 3.12 environment and run outside the
+source checkout. All eight local tools computed successfully; all nine JSON rule
+resources were present. No external agent-host deployment or physical Pi/mobile
+execution is implied by these checks.

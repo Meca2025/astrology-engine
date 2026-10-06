@@ -27,3 +27,8 @@ without arbitrary epsilon snapping. This is a correctness repair, not new scope.
 non-mutation and invented-field/unsupported-tool/non-finite rejection verified.
 Exact boundary audit repaired with neighboring-float evidence. Final wheel and
 hosted matrix receipts follow after the implementation push.
+
+Final receipt: implementation 45c7a3e passed all six hosted matrix jobs in run
+37443735522. Fresh wheel installation outside the checkout executed all eight
+tools and found all nine rule resources. Repository remote HEAD verified after
+push; W09a is the next published work order.
