@@ -20,3 +20,10 @@ floor arithmetic. Add astroengine/partitions.py with explicit half-open boundary
 lookup and apply it to nakshatra/varga/panchanga partitions. Test every exact
 boundary plus neighboring representable floats, preserving genuine side selection
 without arbitrary epsilon snapping. This is a correctness repair, not new scope.
+
+## Receipt
+
+136 tests pass locally. Schema/service availability parity, routing/defaults,
+non-mutation and invented-field/unsupported-tool/non-finite rejection verified.
+Exact boundary audit repaired with neighboring-float evidence. Final wheel and
+hosted matrix receipts follow after the implementation push.

@@ -5,6 +5,7 @@ from typing import Any
 
 from .models import CalculationError, ChartRequest
 from .rules import load_rules
+from .partitions import uniform_partition
 from .vedic import compute_vedic
 
 
@@ -29,9 +30,7 @@ def varga_position(longitude: float, division: int) -> dict[str, Any]:
     rule = rules['divisions'][str(division)]
     sign = int((longitude % 360) // 30)
     degree = longitude % 30
-    coordinate = degree * division / 30
-    part = int(coordinate)
-    fraction = coordinate - part
+    part, fraction = uniform_partition(longitude % 360, division, span=30, origin=sign * 30)
     if rule['mode'] == 'unequal-parity':
         segments = rule['segments'][sign % 2]
         part, (start, end, target) = next((i, segment) for i, segment in enumerate(segments)

@@ -6,11 +6,30 @@ computation alongside the 16 legacy text commands described below. Read
 program, [TODO.md](TODO.md) for delivered slices and
 [astroengine/INTERFACE.md](astroengine/INTERFACE.md) for contracts.
 
+Delivered in the new structured path:
+
+| Command | New capability |
+| --- | --- |
+| `chart`, `capabilities`, `tools` | Strict charts, provenance, capability/schema discovery |
+| `vedic` | D1/navagraha, nakshatras and padas |
+| `vargas` | Sixteen named classical divisional sign charts |
+| `dashas` | Vimshottari maha/antar chronology and birth balance |
+| `panchanga` | Instant tithi/karana/nakshatra/yoga snapshot |
+| `relationship` / `synergy-json` | Separate birth zones, overlays, composite, traceable synergy |
+| `location` | Fixed-instant relocation and exact-latitude angular lines |
+| `western` | Annual profections, integer harmonics, sensitive midpoints |
+
+[SKILL.md](SKILL.md) provides agent usage; [VERIFICATION.md](VERIFICATION.md)
+records evidence and limits. Full Jyotisha, other calendars and later advanced
+methods remain explicit roadmap slices, not present capabilities.
+
 Python 3.11+ for the new package:
 
 ```bash
 python -m pip install .
 astroengine capabilities
+astroengine tools
+astroengine vedic --date 2000-01-01 --time 12:00 --lat 28.6139 --lon 77.209 --timezone Asia/Kolkata
 astroengine chart --date 2000-01-01 --time 12:00 --lat 0 --lon 0 --timezone UTC
 python astrology_engine.py chart --date 2000-01-01 --time 12:00 --lat 0 --lon 0 --timezone UTC --zodiac sidereal --ayanamsa lahiri --house-system whole-sign
 python -m pip install '.[test]'

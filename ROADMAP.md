@@ -220,3 +220,10 @@ These are documented limitations that are not planned to be fixed because the im
 ---
 
 *The Norns weave forward. So do we.*
+
+## 2026-10-06 delivery state
+
+S01-S08 and the local-contract portion of A01 are implemented and pushed with
+verification records. MCP/HTTP hosting and external agent installation remain
+future integration gates. W09 is divided into W09a (legacy time/coordinate truth)
+and W09b (strict inputs/provenance and event solvers). TODO names the next task.

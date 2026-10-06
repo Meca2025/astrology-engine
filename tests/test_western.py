@@ -68,5 +68,5 @@ def test_western_cli_and_command_registry():
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers()
     register_commands(sub)
-    assert set(sub.choices) == {'chart', 'capabilities', 'vedic', 'vargas', 'dashas', 'panchanga',
+    assert set(sub.choices) == {'chart', 'capabilities', 'tools', 'vedic', 'vargas', 'dashas', 'panchanga',
                                  'relationship', 'synergy-json', 'location', 'western'}

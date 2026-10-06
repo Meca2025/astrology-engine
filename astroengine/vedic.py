@@ -5,6 +5,7 @@ from typing import Any
 
 from .models import CalculationError, ChartRequest
 from .rules import load_rules
+from .partitions import uniform_partition
 from .service import compute_chart
 
 
@@ -12,13 +13,13 @@ def nakshatra(longitude: float) -> dict[str, Any]:
     if not math.isfinite(longitude):
         raise CalculationError('Nakshatra longitude must be finite')
     rules = load_rules('vedic.json')
-    # Multiply first, avoiding repeated subtraction across exact 13°20' boundaries.
-    coordinate = (longitude % 360) * len(rules['nakshatras']) / 360
-    index = int(coordinate)
-    fraction = coordinate - index
+    padas = rules['padas_per_nakshatra']
+    pada_index, pada_fraction = uniform_partition(longitude % 360, len(rules['nakshatras']) * padas)
+    index = pada_index // padas
+    fraction = (pada_index % padas + pada_fraction) / padas
     return {'index': index + 1, 'name': rules['nakshatras'][index],
             'lord': rules['vimshottari'][index % len(rules['vimshottari'])]['lord'],
-            'pada': min(4, int(fraction * 4) + 1), 'fraction_elapsed': fraction,
+            'pada': pada_index % padas + 1, 'fraction_elapsed': fraction,
             'degrees_elapsed': fraction * 360 / len(rules['nakshatras'])}
 
 

@@ -136,3 +136,8 @@ Relocation JSON and exact-latitude geometric MC/IC/ASC/DSC location lines.
 ### S08 additions
 
 Annual profections, harmonics and midpoint sensitivity through structured APIs.
+
+### A01 additions and boundary repair
+
+Eight validated local agent tools, discoverable request schemas and checked-in
+skill. Exact angular partition floor drift corrected with boundary lookup.

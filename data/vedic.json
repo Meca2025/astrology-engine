@@ -1,9 +1,93 @@
 {
   "version": "1.0",
   "profile": "27 equal nakshatras, classical navagraha",
-  "defaults": {"zodiac": "sidereal", "ayanamsa": "lahiri", "house_system": "whole-sign", "node_type": "mean"},
-  "nakshatras": ["Ashwini", "Bharani", "Krittika", "Rohini", "Mrigashira", "Ardra", "Punarvasu", "Pushya", "Ashlesha", "Magha", "Purva Phalguni", "Uttara Phalguni", "Hasta", "Chitra", "Swati", "Vishakha", "Anuradha", "Jyeshtha", "Mula", "Purva Ashadha", "Uttara Ashadha", "Shravana", "Dhanishtha", "Shatabhisha", "Purva Bhadrapada", "Uttara Bhadrapada", "Revati"],
-  "vimshottari": [{"lord": "Ketu", "years": 7}, {"lord": "Venus", "years": 20}, {"lord": "Sun", "years": 6}, {"lord": "Moon", "years": 10}, {"lord": "Mars", "years": 7}, {"lord": "Rahu", "years": 18}, {"lord": "Jupiter", "years": 16}, {"lord": "Saturn", "years": 19}, {"lord": "Mercury", "years": 17}],
-  "grahas": {"Sun": "Sun", "Moon": "Moon", "Mercury": "Mercury", "Venus": "Venus", "Mars": "Mars", "Jupiter": "Jupiter", "Saturn": "Saturn", "Rahu": "North Node", "Ketu": "South Node"},
-  "sources": ["https://www.drikpanchang.com/tutorials/nakshatra/nakshatra.html", "https://www.astro.com/swisseph/swephprg.htm"]
+  "defaults": {
+    "zodiac": "sidereal",
+    "ayanamsa": "lahiri",
+    "house_system": "whole-sign",
+    "node_type": "mean"
+  },
+  "nakshatras": [
+    "Ashwini",
+    "Bharani",
+    "Krittika",
+    "Rohini",
+    "Mrigashira",
+    "Ardra",
+    "Punarvasu",
+    "Pushya",
+    "Ashlesha",
+    "Magha",
+    "Purva Phalguni",
+    "Uttara Phalguni",
+    "Hasta",
+    "Chitra",
+    "Swati",
+    "Vishakha",
+    "Anuradha",
+    "Jyeshtha",
+    "Mula",
+    "Purva Ashadha",
+    "Uttara Ashadha",
+    "Shravana",
+    "Dhanishtha",
+    "Shatabhisha",
+    "Purva Bhadrapada",
+    "Uttara Bhadrapada",
+    "Revati"
+  ],
+  "vimshottari": [
+    {
+      "lord": "Ketu",
+      "years": 7
+    },
+    {
+      "lord": "Venus",
+      "years": 20
+    },
+    {
+      "lord": "Sun",
+      "years": 6
+    },
+    {
+      "lord": "Moon",
+      "years": 10
+    },
+    {
+      "lord": "Mars",
+      "years": 7
+    },
+    {
+      "lord": "Rahu",
+      "years": 18
+    },
+    {
+      "lord": "Jupiter",
+      "years": 16
+    },
+    {
+      "lord": "Saturn",
+      "years": 19
+    },
+    {
+      "lord": "Mercury",
+      "years": 17
+    }
+  ],
+  "grahas": {
+    "Sun": "Sun",
+    "Moon": "Moon",
+    "Mercury": "Mercury",
+    "Venus": "Venus",
+    "Mars": "Mars",
+    "Jupiter": "Jupiter",
+    "Saturn": "Saturn",
+    "Rahu": "North Node",
+    "Ketu": "South Node"
+  },
+  "sources": [
+    "https://www.drikpanchang.com/tutorials/nakshatra/nakshatra.html",
+    "https://www.astro.com/swisseph/swephprg.htm"
+  ],
+  "padas_per_nakshatra": 4
 }

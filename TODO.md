@@ -13,6 +13,11 @@ Read this first. Current work: 2026-10-06 expansion under Mythic Engineering.
 - [x] S07 — relocation and exact-latitude angular location lines.
 - [x] S08 — profections, harmonics, midpoint sensitivity.
 
-See ROADMAP for the complete expansion, including later validation/research gates.
+- [x] A01 — checked-in agent skill, eight tool schemas and local whitelisted routing.
+- [ ] W09a — repair legacy UTC date rollover and explicit coordinate certainty.
+- [ ] W09b — strict legacy timezone/house errors, schema migration and event roots.
+- [ ] V09 — expanded classical Jyotisha mechanics, with named rule/source fixtures.
+
+Next ready work order: tasks/W09a_legacy_time.md. See ROADMAP for the complete expansion, including later validation/research gates.
 Legacy paths still have known input/provenance limitations; do not advertise new
 coverage through an unmodified legacy command. Report exact implementation scope.

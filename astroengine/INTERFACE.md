@@ -89,3 +89,13 @@ mathematical harmonic positions and sensitive third-body midpoint hits.
 functions. February 29 birthdays use February 28 in non-leap years. Profection
 clock is calendar birthday, not an exact solar-return instant. Midpoints preserve
 antipodal ambiguities; harmonics invent neither physical instants nor houses.
+
+## Agent routing (A01)
+
+`agent.tool_catalog()` returns fresh versioned JSON schemas for eight available
+computation tools. `agent.run_tool(name, parameters)` validates the declared schema,
+rejects unknown fields/tools/non-finite values, applies declared Jyotisha defaults
+and dispatches directly to internal APIs. No subprocess, cloud or storage.
+`capabilities()` also includes tool schemas. CLI `tools` returns the catalog.
+`partitions.uniform_partition` owns half-open boundary/fraction arithmetic, using
+explicit boundaries to preserve exact nominal and neighboring-float behavior.

@@ -87,6 +87,9 @@ def register_commands(subparsers: Any) -> None:
     chart.set_defaults(modern_handler=lambda args: compute_chart(request_from_args(args)))
     discovery = subparsers.add_parser('capabilities', help='Technique availability and scope as JSON')
     discovery.set_defaults(modern_handler=lambda args: capabilities())
+    from .agent import tool_catalog
+    tools = subparsers.add_parser('tools', help='Agent tool request schemas as JSON')
+    tools.set_defaults(modern_handler=lambda args: tool_catalog())
     _register_jyotisha(subparsers)
     _register_calendars(subparsers)
     _register_comparisons(subparsers)

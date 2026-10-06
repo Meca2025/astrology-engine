@@ -10,7 +10,8 @@ from .rules import load_rules
 
 
 def capabilities() -> dict[str, Any]:
-    return load_rules("capabilities.json")
+    from .agent import tool_catalog
+    return {**load_rules("capabilities.json"), "tools": tool_catalog()["tools"]}
 
 
 def compute_chart(request: ChartRequest) -> dict[str, Any]:

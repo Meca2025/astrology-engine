@@ -35,3 +35,6 @@ relationships.py owns comparisons/composites/synergy; western.json owns rules.
 ephemeris.equatorial_positions supplies zodiac-independent equatorial snapshots.
 
 `astroengine/western.py` owns profections/harmonic/midpoint analysis.
+
+`astroengine/agent.py` owns validated local routing; tool_schemas.json owns requests;
+SKILL.md is the portable agent manifest. partitions.py owns half-open partitions.

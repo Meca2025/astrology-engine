@@ -61,3 +61,11 @@ antimeridian normalization, horizon roots and zodiac-independent geometry.
 122 total tests passed. Added whole-sign annual profections, configurable integer
 harmonics and midpoint sensitivity; CLI registration split by owning domain.
 Birthday/leap/missing-time conventions and mathematical coordinates are explicit.
+
+## A01 — agent contracts and boundary audit
+
+136 total tests passed. Added checked-in skill, data-owned request schemas and
+whitelisted local service routing. Exact-pada audit found nine nominal floor
+partition failures; explicit half-open boundary lookup repaired them, with all
+108 boundaries and every equal-varga subdivision plus neighboring floats checked.
+Agent manifest is provided, not installed into an external host registry.

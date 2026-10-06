@@ -1,0 +1,1568 @@
+{
+  "schema_version": "1.0",
+  "tools": [
+    {
+      "name": "chart",
+      "capability_id": "chart",
+      "description": "Geocentric chart with explicit time/location/profile and provenance",
+      "request_defaults": {},
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "request": {
+            "$ref": "#/$defs/ChartRequest"
+          }
+        },
+        "required": [
+          "request"
+        ],
+        "additionalProperties": false,
+        "$defs": {
+          "ChartRequest": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^\\d{2}:\\d{2}(:\\d{2}(\\.\\d{1,6})?)?$"
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "timezone": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zodiac": {
+                "type": "string",
+                "enum": [
+                  "tropical",
+                  "sidereal"
+                ],
+                "default": "tropical"
+              },
+              "ayanamsa": {
+                "type": "string",
+                "enum": [
+                  "lahiri",
+                  "raman",
+                  "krishnamurti",
+                  "fagan-bradley"
+                ],
+                "default": "lahiri"
+              },
+              "house_system": {
+                "type": "string",
+                "enum": [
+                  "placidus",
+                  "whole-sign",
+                  "equal",
+                  "koch",
+                  "regiomontanus",
+                  "campanus",
+                  "porphyry"
+                ],
+                "default": "placidus"
+              },
+              "node_type": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "mean"
+                ],
+                "default": "true"
+              },
+              "ephemeris_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "latitude",
+              "longitude",
+              "timezone"
+            ],
+            "additionalProperties": false
+          },
+          "VedicRequest": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^\\d{2}:\\d{2}(:\\d{2}(\\.\\d{1,6})?)?$"
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "timezone": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zodiac": {
+                "type": "string",
+                "enum": [
+                  "sidereal"
+                ],
+                "default": "sidereal"
+              },
+              "ayanamsa": {
+                "type": "string",
+                "enum": [
+                  "lahiri",
+                  "raman",
+                  "krishnamurti",
+                  "fagan-bradley"
+                ],
+                "default": "lahiri"
+              },
+              "house_system": {
+                "type": "string",
+                "enum": [
+                  "placidus",
+                  "whole-sign",
+                  "equal",
+                  "koch",
+                  "regiomontanus",
+                  "campanus",
+                  "porphyry"
+                ],
+                "default": "whole-sign"
+              },
+              "node_type": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "mean"
+                ],
+                "default": "mean"
+              },
+              "ephemeris_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "latitude",
+              "longitude",
+              "timezone"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "name": "vedic",
+      "capability_id": "vedic",
+      "description": "Jyotisha D1 navagraha, nakshatras and padas",
+      "request_defaults": {
+        "zodiac": "sidereal",
+        "ayanamsa": "lahiri",
+        "house_system": "whole-sign",
+        "node_type": "mean"
+      },
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "request": {
+            "$ref": "#/$defs/VedicRequest"
+          }
+        },
+        "required": [
+          "request"
+        ],
+        "additionalProperties": false,
+        "$defs": {
+          "ChartRequest": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^\\d{2}:\\d{2}(:\\d{2}(\\.\\d{1,6})?)?$"
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "timezone": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zodiac": {
+                "type": "string",
+                "enum": [
+                  "tropical",
+                  "sidereal"
+                ],
+                "default": "tropical"
+              },
+              "ayanamsa": {
+                "type": "string",
+                "enum": [
+                  "lahiri",
+                  "raman",
+                  "krishnamurti",
+                  "fagan-bradley"
+                ],
+                "default": "lahiri"
+              },
+              "house_system": {
+                "type": "string",
+                "enum": [
+                  "placidus",
+                  "whole-sign",
+                  "equal",
+                  "koch",
+                  "regiomontanus",
+                  "campanus",
+                  "porphyry"
+                ],
+                "default": "placidus"
+              },
+              "node_type": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "mean"
+                ],
+                "default": "true"
+              },
+              "ephemeris_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "latitude",
+              "longitude",
+              "timezone"
+            ],
+            "additionalProperties": false
+          },
+          "VedicRequest": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^\\d{2}:\\d{2}(:\\d{2}(\\.\\d{1,6})?)?$"
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "timezone": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zodiac": {
+                "type": "string",
+                "enum": [
+                  "sidereal"
+                ],
+                "default": "sidereal"
+              },
+              "ayanamsa": {
+                "type": "string",
+                "enum": [
+                  "lahiri",
+                  "raman",
+                  "krishnamurti",
+                  "fagan-bradley"
+                ],
+                "default": "lahiri"
+              },
+              "house_system": {
+                "type": "string",
+                "enum": [
+                  "placidus",
+                  "whole-sign",
+                  "equal",
+                  "koch",
+                  "regiomontanus",
+                  "campanus",
+                  "porphyry"
+                ],
+                "default": "whole-sign"
+              },
+              "node_type": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "mean"
+                ],
+                "default": "mean"
+              },
+              "ephemeris_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "latitude",
+              "longitude",
+              "timezone"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "name": "vargas",
+      "capability_id": "vargas",
+      "description": "Sixteen named classical divisional sign mappings",
+      "request_defaults": {
+        "zodiac": "sidereal",
+        "ayanamsa": "lahiri",
+        "house_system": "whole-sign",
+        "node_type": "mean"
+      },
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "request": {
+            "$ref": "#/$defs/VedicRequest"
+          },
+          "divisions": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                7,
+                9,
+                10,
+                12,
+                16,
+                20,
+                24,
+                27,
+                30,
+                40,
+                45,
+                60
+              ]
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "request"
+        ],
+        "additionalProperties": false,
+        "$defs": {
+          "ChartRequest": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^\\d{2}:\\d{2}(:\\d{2}(\\.\\d{1,6})?)?$"
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "timezone": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zodiac": {
+                "type": "string",
+                "enum": [
+                  "tropical",
+                  "sidereal"
+                ],
+                "default": "tropical"
+              },
+              "ayanamsa": {
+                "type": "string",
+                "enum": [
+                  "lahiri",
+                  "raman",
+                  "krishnamurti",
+                  "fagan-bradley"
+                ],
+                "default": "lahiri"
+              },
+              "house_system": {
+                "type": "string",
+                "enum": [
+                  "placidus",
+                  "whole-sign",
+                  "equal",
+                  "koch",
+                  "regiomontanus",
+                  "campanus",
+                  "porphyry"
+                ],
+                "default": "placidus"
+              },
+              "node_type": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "mean"
+                ],
+                "default": "true"
+              },
+              "ephemeris_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "latitude",
+              "longitude",
+              "timezone"
+            ],
+            "additionalProperties": false
+          },
+          "VedicRequest": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^\\d{2}:\\d{2}(:\\d{2}(\\.\\d{1,6})?)?$"
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "timezone": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zodiac": {
+                "type": "string",
+                "enum": [
+                  "sidereal"
+                ],
+                "default": "sidereal"
+              },
+              "ayanamsa": {
+                "type": "string",
+                "enum": [
+                  "lahiri",
+                  "raman",
+                  "krishnamurti",
+                  "fagan-bradley"
+                ],
+                "default": "lahiri"
+              },
+              "house_system": {
+                "type": "string",
+                "enum": [
+                  "placidus",
+                  "whole-sign",
+                  "equal",
+                  "koch",
+                  "regiomontanus",
+                  "campanus",
+                  "porphyry"
+                ],
+                "default": "whole-sign"
+              },
+              "node_type": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "mean"
+                ],
+                "default": "mean"
+              },
+              "ephemeris_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "latitude",
+              "longitude",
+              "timezone"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "name": "dashas",
+      "capability_id": "dashas",
+      "description": "Moon-based Vimshottari maha/antar chronology",
+      "request_defaults": {
+        "zodiac": "sidereal",
+        "ayanamsa": "lahiri",
+        "house_system": "whole-sign",
+        "node_type": "mean"
+      },
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "request": {
+            "$ref": "#/$defs/VedicRequest"
+          },
+          "years": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "year_model": {
+            "type": "string",
+            "enum": [
+              "tropical",
+              "julian",
+              "savana"
+            ]
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "request"
+        ],
+        "additionalProperties": false,
+        "$defs": {
+          "ChartRequest": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^\\d{2}:\\d{2}(:\\d{2}(\\.\\d{1,6})?)?$"
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "timezone": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zodiac": {
+                "type": "string",
+                "enum": [
+                  "tropical",
+                  "sidereal"
+                ],
+                "default": "tropical"
+              },
+              "ayanamsa": {
+                "type": "string",
+                "enum": [
+                  "lahiri",
+                  "raman",
+                  "krishnamurti",
+                  "fagan-bradley"
+                ],
+                "default": "lahiri"
+              },
+              "house_system": {
+                "type": "string",
+                "enum": [
+                  "placidus",
+                  "whole-sign",
+                  "equal",
+                  "koch",
+                  "regiomontanus",
+                  "campanus",
+                  "porphyry"
+                ],
+                "default": "placidus"
+              },
+              "node_type": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "mean"
+                ],
+                "default": "true"
+              },
+              "ephemeris_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "latitude",
+              "longitude",
+              "timezone"
+            ],
+            "additionalProperties": false
+          },
+          "VedicRequest": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^\\d{2}:\\d{2}(:\\d{2}(\\.\\d{1,6})?)?$"
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "timezone": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zodiac": {
+                "type": "string",
+                "enum": [
+                  "sidereal"
+                ],
+                "default": "sidereal"
+              },
+              "ayanamsa": {
+                "type": "string",
+                "enum": [
+                  "lahiri",
+                  "raman",
+                  "krishnamurti",
+                  "fagan-bradley"
+                ],
+                "default": "lahiri"
+              },
+              "house_system": {
+                "type": "string",
+                "enum": [
+                  "placidus",
+                  "whole-sign",
+                  "equal",
+                  "koch",
+                  "regiomontanus",
+                  "campanus",
+                  "porphyry"
+                ],
+                "default": "whole-sign"
+              },
+              "node_type": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "mean"
+                ],
+                "default": "mean"
+              },
+              "ephemeris_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "latitude",
+              "longitude",
+              "timezone"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "name": "panchanga",
+      "capability_id": "panchanga",
+      "description": "Instant angular elements; not a sunrise calendar",
+      "request_defaults": {
+        "zodiac": "sidereal",
+        "ayanamsa": "lahiri",
+        "house_system": "whole-sign",
+        "node_type": "mean"
+      },
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "request": {
+            "$ref": "#/$defs/VedicRequest"
+          }
+        },
+        "required": [
+          "request"
+        ],
+        "additionalProperties": false,
+        "$defs": {
+          "ChartRequest": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^\\d{2}:\\d{2}(:\\d{2}(\\.\\d{1,6})?)?$"
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "timezone": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zodiac": {
+                "type": "string",
+                "enum": [
+                  "tropical",
+                  "sidereal"
+                ],
+                "default": "tropical"
+              },
+              "ayanamsa": {
+                "type": "string",
+                "enum": [
+                  "lahiri",
+                  "raman",
+                  "krishnamurti",
+                  "fagan-bradley"
+                ],
+                "default": "lahiri"
+              },
+              "house_system": {
+                "type": "string",
+                "enum": [
+                  "placidus",
+                  "whole-sign",
+                  "equal",
+                  "koch",
+                  "regiomontanus",
+                  "campanus",
+                  "porphyry"
+                ],
+                "default": "placidus"
+              },
+              "node_type": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "mean"
+                ],
+                "default": "true"
+              },
+              "ephemeris_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "latitude",
+              "longitude",
+              "timezone"
+            ],
+            "additionalProperties": false
+          },
+          "VedicRequest": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^\\d{2}:\\d{2}(:\\d{2}(\\.\\d{1,6})?)?$"
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "timezone": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zodiac": {
+                "type": "string",
+                "enum": [
+                  "sidereal"
+                ],
+                "default": "sidereal"
+              },
+              "ayanamsa": {
+                "type": "string",
+                "enum": [
+                  "lahiri",
+                  "raman",
+                  "krishnamurti",
+                  "fagan-bradley"
+                ],
+                "default": "lahiri"
+              },
+              "house_system": {
+                "type": "string",
+                "enum": [
+                  "placidus",
+                  "whole-sign",
+                  "equal",
+                  "koch",
+                  "regiomontanus",
+                  "campanus",
+                  "porphyry"
+                ],
+                "default": "whole-sign"
+              },
+              "node_type": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "mean"
+                ],
+                "default": "mean"
+              },
+              "ephemeris_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "latitude",
+              "longitude",
+              "timezone"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "name": "relationship",
+      "capability_id": "relationship",
+      "description": "Static synastry, composite, overlays and symbolic synergy",
+      "request_defaults": {},
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "first": {
+            "$ref": "#/$defs/ChartRequest"
+          },
+          "second": {
+            "$ref": "#/$defs/ChartRequest"
+          }
+        },
+        "required": [
+          "first",
+          "second"
+        ],
+        "additionalProperties": false,
+        "$defs": {
+          "ChartRequest": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^\\d{2}:\\d{2}(:\\d{2}(\\.\\d{1,6})?)?$"
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "timezone": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zodiac": {
+                "type": "string",
+                "enum": [
+                  "tropical",
+                  "sidereal"
+                ],
+                "default": "tropical"
+              },
+              "ayanamsa": {
+                "type": "string",
+                "enum": [
+                  "lahiri",
+                  "raman",
+                  "krishnamurti",
+                  "fagan-bradley"
+                ],
+                "default": "lahiri"
+              },
+              "house_system": {
+                "type": "string",
+                "enum": [
+                  "placidus",
+                  "whole-sign",
+                  "equal",
+                  "koch",
+                  "regiomontanus",
+                  "campanus",
+                  "porphyry"
+                ],
+                "default": "placidus"
+              },
+              "node_type": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "mean"
+                ],
+                "default": "true"
+              },
+              "ephemeris_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "latitude",
+              "longitude",
+              "timezone"
+            ],
+            "additionalProperties": false
+          },
+          "VedicRequest": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^\\d{2}:\\d{2}(:\\d{2}(\\.\\d{1,6})?)?$"
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "timezone": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zodiac": {
+                "type": "string",
+                "enum": [
+                  "sidereal"
+                ],
+                "default": "sidereal"
+              },
+              "ayanamsa": {
+                "type": "string",
+                "enum": [
+                  "lahiri",
+                  "raman",
+                  "krishnamurti",
+                  "fagan-bradley"
+                ],
+                "default": "lahiri"
+              },
+              "house_system": {
+                "type": "string",
+                "enum": [
+                  "placidus",
+                  "whole-sign",
+                  "equal",
+                  "koch",
+                  "regiomontanus",
+                  "campanus",
+                  "porphyry"
+                ],
+                "default": "whole-sign"
+              },
+              "node_type": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "mean"
+                ],
+                "default": "mean"
+              },
+              "ephemeris_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "latitude",
+              "longitude",
+              "timezone"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "name": "location",
+      "capability_id": "location",
+      "description": "Fixed-instant relocation and geometric angular lines",
+      "request_defaults": {},
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "request": {
+            "$ref": "#/$defs/ChartRequest"
+          },
+          "latitude": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "longitude": {
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          }
+        },
+        "required": [
+          "request",
+          "latitude",
+          "longitude"
+        ],
+        "additionalProperties": false,
+        "$defs": {
+          "ChartRequest": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^\\d{2}:\\d{2}(:\\d{2}(\\.\\d{1,6})?)?$"
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "timezone": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zodiac": {
+                "type": "string",
+                "enum": [
+                  "tropical",
+                  "sidereal"
+                ],
+                "default": "tropical"
+              },
+              "ayanamsa": {
+                "type": "string",
+                "enum": [
+                  "lahiri",
+                  "raman",
+                  "krishnamurti",
+                  "fagan-bradley"
+                ],
+                "default": "lahiri"
+              },
+              "house_system": {
+                "type": "string",
+                "enum": [
+                  "placidus",
+                  "whole-sign",
+                  "equal",
+                  "koch",
+                  "regiomontanus",
+                  "campanus",
+                  "porphyry"
+                ],
+                "default": "placidus"
+              },
+              "node_type": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "mean"
+                ],
+                "default": "true"
+              },
+              "ephemeris_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "latitude",
+              "longitude",
+              "timezone"
+            ],
+            "additionalProperties": false
+          },
+          "VedicRequest": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^\\d{2}:\\d{2}(:\\d{2}(\\.\\d{1,6})?)?$"
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "timezone": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zodiac": {
+                "type": "string",
+                "enum": [
+                  "sidereal"
+                ],
+                "default": "sidereal"
+              },
+              "ayanamsa": {
+                "type": "string",
+                "enum": [
+                  "lahiri",
+                  "raman",
+                  "krishnamurti",
+                  "fagan-bradley"
+                ],
+                "default": "lahiri"
+              },
+              "house_system": {
+                "type": "string",
+                "enum": [
+                  "placidus",
+                  "whole-sign",
+                  "equal",
+                  "koch",
+                  "regiomontanus",
+                  "campanus",
+                  "porphyry"
+                ],
+                "default": "whole-sign"
+              },
+              "node_type": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "mean"
+                ],
+                "default": "mean"
+              },
+              "ephemeris_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "latitude",
+              "longitude",
+              "timezone"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "name": "western",
+      "capability_id": "western",
+      "description": "Civil annual profection, harmonics and sensitive midpoints",
+      "request_defaults": {},
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "request": {
+            "$ref": "#/$defs/ChartRequest"
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date"
+          },
+          "harmonic": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "midpoint_orb": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 180
+          }
+        },
+        "required": [
+          "request",
+          "as_of"
+        ],
+        "additionalProperties": false,
+        "$defs": {
+          "ChartRequest": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^\\d{2}:\\d{2}(:\\d{2}(\\.\\d{1,6})?)?$"
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "timezone": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zodiac": {
+                "type": "string",
+                "enum": [
+                  "tropical",
+                  "sidereal"
+                ],
+                "default": "tropical"
+              },
+              "ayanamsa": {
+                "type": "string",
+                "enum": [
+                  "lahiri",
+                  "raman",
+                  "krishnamurti",
+                  "fagan-bradley"
+                ],
+                "default": "lahiri"
+              },
+              "house_system": {
+                "type": "string",
+                "enum": [
+                  "placidus",
+                  "whole-sign",
+                  "equal",
+                  "koch",
+                  "regiomontanus",
+                  "campanus",
+                  "porphyry"
+                ],
+                "default": "placidus"
+              },
+              "node_type": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "mean"
+                ],
+                "default": "true"
+              },
+              "ephemeris_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "latitude",
+              "longitude",
+              "timezone"
+            ],
+            "additionalProperties": false
+          },
+          "VedicRequest": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "time": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^\\d{2}:\\d{2}(:\\d{2}(\\.\\d{1,6})?)?$"
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "timezone": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zodiac": {
+                "type": "string",
+                "enum": [
+                  "sidereal"
+                ],
+                "default": "sidereal"
+              },
+              "ayanamsa": {
+                "type": "string",
+                "enum": [
+                  "lahiri",
+                  "raman",
+                  "krishnamurti",
+                  "fagan-bradley"
+                ],
+                "default": "lahiri"
+              },
+              "house_system": {
+                "type": "string",
+                "enum": [
+                  "placidus",
+                  "whole-sign",
+                  "equal",
+                  "koch",
+                  "regiomontanus",
+                  "campanus",
+                  "porphyry"
+                ],
+                "default": "whole-sign"
+              },
+              "node_type": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "mean"
+                ],
+                "default": "mean"
+              },
+              "ephemeris_path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "latitude",
+              "longitude",
+              "timezone"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  ]
+}
