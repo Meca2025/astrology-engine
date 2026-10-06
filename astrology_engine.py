@@ -2499,6 +2499,32 @@ def cmd_shadbala(args):
     return {"shadbala": report}
 
 
+def cmd_ashtakavarga(args):
+    from astroengine.ashtakavarga import compute_ashtakavarga, render_ashtakavarga
+    from astroengine.models import ChartRequest
+    if args.load:
+        title = _load_chart_into(args)
+    else:
+        apply_chart_load(args)
+        title = "Seeker"
+    require_date(args)
+    y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
+        args.date, args.time, args.city, args.nation,
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None))
+    birth = ChartRequest(date=args.date, time=args.time, latitude=lat,
+                         longitude=lon, timezone=tz_name, zodiac="sidereal",
+                         house_system="whole-sign")
+    report = compute_ashtakavarga(birth)
+    if args.json:
+        print(json.dumps({"title": title, "ashtakavarga": report},
+                         ensure_ascii=False, sort_keys=True))
+        return {"ashtakavarga": report}
+    print(f"Ashtakavarga of {title}")
+    print(render_ashtakavarga(report))
+    return {"ashtakavarga": report}
+
+
 def cmd_mantras(args):
     from astroengine.mantras import all_mantras, mantras_for, render_remedies
     if args.planet:
@@ -4436,6 +4462,13 @@ def main():
     add_geo(sb)
     add_chart_lib(sb)
 
+    av = sub.add_parser("ashtakavarga", help="Ashtakavarga: the 337 bindus across the signs")
+    av.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
+    av.add_argument("--time", default=None, help="HH:MM (24h)")
+    av.add_argument("--json", action="store_true")
+    add_geo(av)
+    add_chart_lib(av)
+
     dr = sub.add_parser("draconic", help="Draconic chart: the soul-chart reckoned from the north node")
     dr.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
     dr.add_argument("--time", default=None, help="HH:MM (24h)")
@@ -4621,6 +4654,7 @@ def main():
         "forecast":     cmd_forecast,
         "yogas":        cmd_yogas,
         "shadbala":     cmd_shadbala,
+        "ashtakavarga":   cmd_ashtakavarga,
         "mantras":      cmd_mantras,
         "midpoints":    cmd_midpoints,
     }

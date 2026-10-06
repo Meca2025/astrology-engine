@@ -328,6 +328,18 @@ python3 astrology_engine.py shadbala --load volmarr
 
 ---
 
+## `ashtakavarga`
+
+The 337 bindus: seven Bhinnashtakavarga charts plus the
+Sarvashtakavarga totals per sign, with the classical weak/strong
+reading notes as labeled lore. Tables per B.V. Raman.
+
+```bash
+python3 astrology_engine.py ashtakavarga --load volmarr
+```
+
+---
+
 ## `draconic`
 
 The soul-chart: every position reckoned from the natal north node,

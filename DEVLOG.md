@@ -656,3 +656,9 @@ limitations) + astroengine/shadbala.py + `shadbala` CLI. Panchadha
 dignity for Saptavargaja; Hora/Vara from planetary hours; Ayana by
 solar declination. Volmarr: Jupiter 8.65 rupas (Hamsa-strong),
 all planets above minima.
+
+G03 (2026-10-06): Ashtakavarga — data/ashtakavarga.json (Raman's
+benefic-place tables, canonical totals) + astroengine/
+ashtakavarga.py (pure bhinna() + compute_ashtakavarga()) +
+`ashtakavarga` CLI. Verified against Raman's Standard Horoscope
+worked example; 337 constant holds.

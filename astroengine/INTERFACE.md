@@ -84,6 +84,15 @@ simplification), Naisargika (fixed table), Drik (special aspects,
 benefic minus malefic over 4). Totals compared against the classical
 minima in rupas. Approximations disclosed in `limitations`.
 
+## Ashtakavarga (Gambhira G03)
+
+`ashtakavarga.bhinna(signs, lagna_sign)` is the pure function:
+planetary sign indices + lagna -> the seven Bhinnashtakavarga
+charts and the Sarvashtakavarga (always 337). Tables per B.V.
+Raman in data/ashtakavarga.json (rule version 1.0); Lagna is the
+eighth contributor. `compute_ashtakavarga(request)` wraps D1.
+Trikona/Ekadhipatya reductions are future work, disclosed.
+
 ## Vimshottari (S04)
 
 `dashas.compute_dashas(request, years=None, year_model=None, as_of=None)` returns
