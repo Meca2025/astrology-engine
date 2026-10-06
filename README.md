@@ -7,7 +7,7 @@
 The Astrology Engine is a **reproducible computation forge** for astrology: real
 ephemeris positions, strict time and location handling, and machine-readable
 output — no cloud, no API keys, no lookup tables, no fabricated chart
-positions. Forty-three CLI subcommands span Western, Hellenistic, Vedic
+positions. Forty-five CLI subcommands span Western, Hellenistic, Vedic
 (Jyotisha), Northern runic, divination, Chinese, and Tibetan
 traditions, with every technique carrying its
 provenance, its limits, and its evidence.
@@ -50,7 +50,7 @@ and documented — never merely planned.
 
 ---
 
-## The 43 subcommands
+## The 45 subcommands
 
 | Command | Art |
 | --- | --- |
@@ -71,6 +71,7 @@ and documented — never merely planned.
 | `geoastrology` | Astrocartography lines and power-spot analysis |
 | `aspect-grid` | Full aspect matrix |
 | `chart` | Reproducible chart as JSON (typed path) |
+| `charts` / `chart-show` / `chart-delete` | Chart library: list, show, and delete saved charts (`--save`/`--load` on chart commands) |
 | `capabilities` | Technique availability and scope as JSON |
 | `tools` | Agent tool request schemas as JSON |
 | `vedic` | Jyotisha D1, navagraha, nakshatras |
@@ -285,7 +286,7 @@ and [RULES.AI.md](RULES.AI.md) before touching code.
 
 | Path | Holds |
 | --- | --- |
-| `astrology_engine.py` | Legacy CLI: 43 text subcommands |
+| `astrology_engine.py` | Legacy CLI: 45 text subcommands |
 | `astroengine/` | Typed package: models, ephemeris, vedic, runic, CLI, agent |
 | `data/` | Immutable rule tables (`runic.json`, `vedic.json`, `western.json`, …) |
 | `tests/` | Offline fixtures and integration checks |
