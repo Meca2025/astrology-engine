@@ -357,3 +357,9 @@ ten new aspects with neutral weight 0 so synergy scoring is unchanged.
   tree-lore caveat recorded); `cast(layout, seed, question, forfeda)`
   across five layouts (single, triad, aicme, wheel, grove); the aicme
   layout draws one stave per aicme. CLI: `ogham`.
+
+- `astroengine/chinese.py` + `data/chinese_zodiac.json`: `zodiac(iso_date)`,
+  `year_pillar(lunar_year)` — ganzhi by (lunar_year-4) mod 10/12,
+  NaYin per the Sixty Jiazi verse, trine allies / secret friend /
+  clash; Lunar New Year boundaries via lunardate (round-trip
+  guarded). CLI: `chinese`.

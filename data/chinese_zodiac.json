@@ -1,0 +1,282 @@
+{
+ "version": "1.0",
+ "source": "Sexagenary cycle of the Chinese calendar; NaYin names per the traditional Sixty Jiazi verse (each pair in ganzhi order)",
+ "stems": [
+  {
+   "name": "Jia",
+   "pinyin": "jiǎ",
+   "element": "Wood",
+   "yin_yang": "yang"
+  },
+  {
+   "name": "Yi",
+   "pinyin": "yǐ",
+   "element": "Wood",
+   "yin_yang": "yin"
+  },
+  {
+   "name": "Bing",
+   "pinyin": "bǐng",
+   "element": "Fire",
+   "yin_yang": "yang"
+  },
+  {
+   "name": "Ding",
+   "pinyin": "dīng",
+   "element": "Fire",
+   "yin_yang": "yin"
+  },
+  {
+   "name": "Wu",
+   "pinyin": "wù",
+   "element": "Earth",
+   "yin_yang": "yang"
+  },
+  {
+   "name": "Ji",
+   "pinyin": "jǐ",
+   "element": "Earth",
+   "yin_yang": "yin"
+  },
+  {
+   "name": "Geng",
+   "pinyin": "gēng",
+   "element": "Metal",
+   "yin_yang": "yang"
+  },
+  {
+   "name": "Xin",
+   "pinyin": "xīn",
+   "element": "Metal",
+   "yin_yang": "yin"
+  },
+  {
+   "name": "Ren",
+   "pinyin": "rén",
+   "element": "Water",
+   "yin_yang": "yang"
+  },
+  {
+   "name": "Gui",
+   "pinyin": "guǐ",
+   "element": "Water",
+   "yin_yang": "yin"
+  }
+ ],
+ "branches": [
+  {
+   "name": "Zi",
+   "animal": "Rat",
+   "element": "Water",
+   "yin_yang": "yang",
+   "keywords": [
+    "quick-witted",
+    "resourceful",
+    "charming"
+   ]
+  },
+  {
+   "name": "Chou",
+   "animal": "Ox",
+   "element": "Earth",
+   "yin_yang": "yin",
+   "keywords": [
+    "diligent",
+    "steadfast",
+    "honest"
+   ]
+  },
+  {
+   "name": "Yin",
+   "animal": "Tiger",
+   "element": "Wood",
+   "yin_yang": "yang",
+   "keywords": [
+    "brave",
+    "fierce",
+    "magnetic"
+   ]
+  },
+  {
+   "name": "Mao",
+   "animal": "Rabbit",
+   "element": "Wood",
+   "yin_yang": "yin",
+   "keywords": [
+    "gentle",
+    "graceful",
+    "cautious"
+   ]
+  },
+  {
+   "name": "Chen",
+   "animal": "Dragon",
+   "element": "Earth",
+   "yin_yang": "yang",
+   "keywords": [
+    "bold",
+    "lucky",
+    "visionary"
+   ]
+  },
+  {
+   "name": "Si",
+   "animal": "Snake",
+   "element": "Fire",
+   "yin_yang": "yin",
+   "keywords": [
+    "wise",
+    "enigmatic",
+    "intuitive"
+   ]
+  },
+  {
+   "name": "Wu",
+   "animal": "Horse",
+   "element": "Fire",
+   "yin_yang": "yang",
+   "keywords": [
+    "free-spirited",
+    "warm",
+    "swift"
+   ]
+  },
+  {
+   "name": "Wei",
+   "animal": "Goat",
+   "element": "Earth",
+   "yin_yang": "yin",
+   "keywords": [
+    "tender",
+    "artistic",
+    "peaceful"
+   ]
+  },
+  {
+   "name": "Shen",
+   "animal": "Monkey",
+   "element": "Metal",
+   "yin_yang": "yang",
+   "keywords": [
+    "clever",
+    "playful",
+    "inventive"
+   ]
+  },
+  {
+   "name": "You",
+   "animal": "Rooster",
+   "element": "Metal",
+   "yin_yang": "yin",
+   "keywords": [
+    "precise",
+    "proud",
+    "observant"
+   ]
+  },
+  {
+   "name": "Xu",
+   "animal": "Dog",
+   "element": "Earth",
+   "yin_yang": "yang",
+   "keywords": [
+    "loyal",
+    "just",
+    "protective"
+   ]
+  },
+  {
+   "name": "Hai",
+   "animal": "Pig",
+   "element": "Water",
+   "yin_yang": "yin",
+   "keywords": [
+    "generous",
+    "sincere",
+    "diligent"
+   ]
+  }
+ ],
+ "nayin": [
+  "Sea Gold",
+  "Furnace Fire",
+  "Great Forest Wood",
+  "Roadside Earth",
+  "Sword Edge Gold",
+  "Mountain Fire",
+  "Stream Water",
+  "City Wall Earth",
+  "White Wax Gold",
+  "Willow Wood",
+  "Spring Water",
+  "House Earth",
+  "Thunderbolt Fire",
+  "Pine and Cypress Wood",
+  "Long Flowing Water",
+  "Sand Gold",
+  "Fire Under the Mountain",
+  "Flat Land Wood",
+  "Wall Earth",
+  "Gold Foil",
+  "Lamp Cover Fire",
+  "Heavenly River Water",
+  "Great Post Earth",
+  "Hairpin Gold",
+  "Mulberry Wood",
+  "Great Stream Water",
+  "Sand Earth",
+  "Sky Fire",
+  "Pomegranate Wood",
+  "Great Ocean Water"
+ ],
+ "trines": [
+  [
+   "Rat",
+   "Dragon",
+   "Monkey"
+  ],
+  [
+   "Ox",
+   "Snake",
+   "Rooster"
+  ],
+  [
+   "Tiger",
+   "Horse",
+   "Dog"
+  ],
+  [
+   "Rabbit",
+   "Goat",
+   "Pig"
+  ]
+ ],
+ "secret_friends": {
+  "Rat": "Ox",
+  "Ox": "Rat",
+  "Tiger": "Pig",
+  "Pig": "Tiger",
+  "Rabbit": "Dog",
+  "Dog": "Rabbit",
+  "Dragon": "Rooster",
+  "Rooster": "Dragon",
+  "Snake": "Monkey",
+  "Monkey": "Snake",
+  "Horse": "Goat",
+  "Goat": "Horse"
+ },
+ "clashes": {
+  "Rat": "Horse",
+  "Horse": "Rat",
+  "Ox": "Goat",
+  "Goat": "Ox",
+  "Tiger": "Monkey",
+  "Monkey": "Tiger",
+  "Rabbit": "Rooster",
+  "Rooster": "Rabbit",
+  "Dragon": "Dog",
+  "Dog": "Dragon",
+  "Snake": "Pig",
+  "Pig": "Snake"
+ }
+}

@@ -2863,6 +2863,26 @@ def cmd_runecast(args):
     return {"reading": result}
 
 
+def cmd_chinese(args):
+    from astroengine.chinese import zodiac
+    result = zodiac(args.date)
+    if args.json:
+        print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+        return {"zodiac": result}
+    header("CHINESE ZODIAC", f"{result['ganzhi']}  ·  born {result['date']}")
+    print(f"  Year of the {result['stem_element']} {result['animal']} "
+          f"({result['yin_yang']}) — lunar year {result['lunar_year']}, "
+          f"opened {result['year_starts']}")
+    print(f"  NaYin: {result['nayin']}")
+    print(f"  Trine allies: {', '.join(result['trine_allies'])}   "
+          f"Secret friend: {result['secret_friend']}   Clash: {result['clash']}")
+    print(f"  Keywords: {', '.join(result['animal_keywords'])}")
+    print()
+    print("  Stem/branch/allies computed from the Chinese calendar;")
+    print("  keywords are interpretive.")
+    return {"zodiac": result}
+
+
 def cmd_ogham(args):
     from astroengine.ogham import cast, layouts
     if args.list_layouts:
@@ -4305,6 +4325,10 @@ def main():
     add_houses(whl)
     add_chart_lib(whl)
 
+    ch = sub.add_parser("chinese", help="Chinese zodiac: stem-branch year, NaYin, allies and clashes")
+    ch.add_argument("date", help="Gregorian birth date, ISO YYYY-MM-DD")
+    ch.add_argument("--json", action="store_true")
+
     og = sub.add_parser("ogham", help="Ogham readings: the Irish tree-staves in grove layouts")
     og.add_argument("--layout", default="triad", help="Layout name (see --list-layouts)")
     og.add_argument("--list-layouts", action="store_true", dest="list_layouts")
@@ -4381,6 +4405,7 @@ def main():
         "iching":       cmd_iching,
         "runecast":     cmd_runecast,
         "ogham":        cmd_ogham,
+        "chinese":      cmd_chinese,
         "wheel":        cmd_wheel,
         "solar-arc":    cmd_solar_arc,
         "profection":   cmd_profection,

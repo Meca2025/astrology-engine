@@ -569,3 +569,18 @@ single, triad, aicme, wheel, grove — with a --no-forfeda option.
 
 Sólrún: `tests/test_ogham.py` 8/8 green plus independent subagent
 verification. Pushed via the PAT tool.
+
+## 2026-10-06 — O04: Chinese zodiac astrology
+
+Fourth slice of the Oracles program. `astroengine/chinese.py` computes
+the year's ganzhi by (lunar_year-4) mod 10/12 — anchored and verified
+so 1984 = Jia-Zi — with Lunar New Year boundaries from the lunardate
+package (cross-checked against 16 published CNY dates; it corrected my
+own faulty memory of 2000-02-07 to the true 2000-02-05, and its silent
+out-of-range clamping is now caught by a round-trip guard). NaYin per
+the traditional Sixty Jiazi verse, independently spot-checked. Trine
+allies, secret friends, clashes. Volmarr: Ren-Zi Water Rat, NaYin
+Mulberry Wood, allies Dragon/Monkey, secret friend Ox, clash Horse.
+
+Sólrún: `tests/test_chinese_zodiac.py` 5/5 green plus independent
+subagent verification. Pushed via the PAT tool.

@@ -477,6 +477,19 @@ python3 astrology_engine.py ogham --layout grove --question "What of my path?" -
 ```
 
 Layouts: `single`, `triad`, `aicme`, `wheel`, `grove`.
+
+## `chinese`
+
+Chinese zodiac for a Gregorian birth date: the year's heavenly stem
+and earthly branch (anchored so 1984 = Jia-Zi), its NaYin, yin/yang,
+trine allies, secret friend, and clash animal. The zodiac year opens
+at Lunar New Year (1900–2100 supported), not January 1. Stem/branch/
+allies are computed calendar math; animal keywords are interpretive.
+
+```bash
+python3 astrology_engine.py chinese 1972-09-01
+python3 astrology_engine.py chinese 2024-02-09 --json
+```
 `nine-worlds`, `wheel`. The optional `--blank` adds the modern blank
 rune (a 1980s invention, flagged as such); `--no-merkstave` reads all
 runes upright.
