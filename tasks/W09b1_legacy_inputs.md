@@ -1,6 +1,6 @@
 # W09b1: strict legacy time and location input contracts
 
-Status: implementing; documented before code, 2026-10-06.
+Status: local acceptance passed; hosted matrix pending, 2026-10-06.
 Owner: legacy input adapter and CLI; part of W09b.
 
 ## Problem and intended behavior
@@ -88,3 +88,16 @@ paired finite query coordinates (including zero), and transit-time requiring its
 transit-date. The existing default prediction duration remains one civil year;
 February 29 defaults to February 28 the following year. Event-finding mathematics
 and backend/house errors stay in W09b2/W09b3.
+
+## Local verification receipt
+
+223 tests pass on Linux/Python 3.12, retaining all 150 previous cases. New evidence
+covers each single-chart timezone/help path, all three paired commands with actual
+independent Julian days, CLI error status/stderr/no output, DST folds/gaps, explicit
+discovery bypass, unresolved/invalid locations, zero/partial/nonfinite/enormous
+coordinates, historical offset and supplied seconds, secondary date/year/window
+admission, typed empty-time rejection and civil-calendar overflow. An AST comparison
+confirms all 75 existing legacy function names remain. New typed functions are
+under fifty lines. The IANA Paris record supports the historical seconds fixture;
+no broader certainty for historical birth records is claimed. Hosted/wheel evidence
+is tracked separately for the pushed implementation.

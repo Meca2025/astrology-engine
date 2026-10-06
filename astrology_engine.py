@@ -38,6 +38,13 @@ import math
 import textwrap
 import warnings
 
+from astroengine.inputs import parse_civil
+from astroengine.legacy_inputs import (
+    BirthTuple, birth_tuple, coordinate_pair, date_window, local_hour_to_utc, return_year,
+)
+from astroengine.models import CalculationError, ChartRequest
+from astroengine.rules import load_rules
+
 if __name__ == "__main__" and hasattr(sys.stdout, "buffer"):
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
@@ -385,14 +392,11 @@ def julian_day(year, month, day, hour=12.0):
     jdn = day + (153 * m + 2) // 5 + 365 * y + y // 4 - y // 100 + y // 400 - 32045
     return float(jdn) + (hour - 12.0) / 24.0
 
-def parse_date_time(date_str, time_str=None):
-    """Parse date/time strings. Returns (y, mo, d, local_hour). No timezone conversion."""
-    y, mo, d = map(int, date_str.split("-"))
-    hour = 12.0
-    if time_str:
-        parts = time_str.split(":")
-        hour = float(parts[0]) + float(parts[1]) / 60.0
-    return y, mo, d, hour
+def parse_date_time(date_str: str, time_str: str | None = None) -> tuple[int, int, int, float]:
+    """Validate a civil date/clock without timezone conversion; omitted time is noon."""
+    civil = parse_civil(date_str, time_str)
+    hour = (civil - civil.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds() / 3600
+    return civil.year, civil.month, civil.day, hour
 
 
 def resolve_timezone(lat, lon):
@@ -408,96 +412,32 @@ def resolve_timezone(lat, lon):
 
 def local_to_utc(year: int, month: int, day: int, local_hour: float,
                  tz_name: str) -> tuple[float, str]:
-    """Return UTC hours relative to the supplied civil date, and the offset.
-
-    The hour includes the signed UTC day offset: it may be negative or >=24.
-    Use with that civil date in julian_day, or normalize with timedelta. pytz
-    preserves historical rules. Legacy error/DST fallbacks await W09b migration.
-    """
-    try:
-        import pytz
-        tz = pytz.timezone(tz_name)
-        h  = int(local_hour)
-        mi = int(round((local_hour - h) * 60))
-        # Legacy standard-time fallback is retained here; strict rejection is W09b.
-        local_dt = tz.localize(datetime.datetime(year, month, day, h, mi, 0), is_dst=None)
-    except Exception:
-        try:
-            import pytz
-            tz = pytz.timezone(tz_name)
-            h  = int(local_hour)
-            mi = int(round((local_hour - h) * 60))
-            local_dt = tz.localize(datetime.datetime(year, month, day, h, mi, 0), is_dst=False)
-        except Exception:
-            return local_hour, "UTC±?"
-    try:
-        import pytz
-        utc_dt = local_dt.astimezone(pytz.utc)
-        midnight = datetime.datetime(year, month, day, tzinfo=pytz.utc)
-        utc_hour = (utc_dt - midnight).total_seconds() / 3600.0
-        offset   = local_dt.utcoffset()
-        total_m  = int(offset.total_seconds() / 60)
-        sign     = "+" if total_m >= 0 else "-"
-        abs_m    = abs(total_m)
-        utc_offset_str = f"UTC{sign}{abs_m//60:02d}:{abs_m%60:02d}"
-        return utc_hour, utc_offset_str
-    except Exception:
-        return local_hour, "UTC±?"
+    """Strict UTC conversion, retaining signed hours relative to civil midnight."""
+    return local_hour_to_utc(year, month, day, local_hour, tz_name)
 
 
 def resolve_birth(date_str: str, time_str: str | None, city: str, nation: str = "",
-                  lat_override: float | None = None, lon_override: float | None = None
-                  ) -> tuple[int, int, int, float, float, float, str, str, bool, bool]:
-    """Resolve birth inputs into the unchanged ten-item legacy tuple.
+                  lat_override: float | str | None = None, lon_override: float | str | None = None,
+                  timezone_override: str | None = None) -> BirthTuple:
+    """Resolve actual UTC date/clock in the unchanged ten-item legacy tuple.
 
-    Steps:
-      1. Parse date/time (local)
-      2. Geocode city → (lat, lon)
-      3. Lookup IANA timezone for that location
-      4. Convert local time → UTC
-      5. Return everything needed for Julian day and display
-
-    Returns:
-      y, mo, d       — actual UTC calendar date, integers
-      utc_hour       — UTC clock hour in [0,24) for swe.julday
-      lat, lon       — floats
-      tz_name        — IANA name e.g. "America/Indiana/Indianapolis"
-      tz_label       — display string e.g. "14:30 LT  →  19:30 UTC  (UTC-05:00 EST)"
-      time_known     — False if time_str was None (noon default used)
-      city_default_used — False for explicit coordinates or a matched city
+    An explicit zone bypasses optional discovery. Unresolved locations/zones,
+    invalid inputs and DST folds/gaps raise CalculationError. Unknown time stays
+    a flagged local-noon surrogate. Houses/backend migration is owned by W09b2.
     """
-    y, mo, d, local_hour = parse_date_time(date_str, time_str)
-    time_known = time_str is not None
+    parse_civil(date_str, time_str)
+    lat, lon, resolved = geocode_city(city, nation, lat_override, lon_override)
+    if not resolved:
+        raise CalculationError("Location unresolved; supply both --lat and --lon")
+    coordinate_pair(lat, lon)
+    zone = timezone_override if timezone_override is not None else resolve_timezone(lat, lon)
+    if zone is None:
+        raise CalculationError("Timezone unresolved; supply --timezone with an IANA zone or explicit UTC")
+    return birth_tuple(ChartRequest(date_str, lat, lon, zone, time_str))
 
-    lat, lon, city_resolved = geocode_city(city, nation, lat_override, lon_override)
-    city_default_used = not city_resolved
 
-    tz_name = resolve_timezone(lat, lon)
-
-    if tz_name:
-        relative_hour, utc_offset_str = local_to_utc(y, mo, d, local_hour, tz_name)
-        civil_midnight = datetime.datetime(y, mo, d)
-        utc_dt = civil_midnight + datetime.timedelta(hours=relative_hour)
-        local_dt = civil_midnight + datetime.timedelta(hours=local_hour)
-        utc_display = utc_dt.strftime("%H:%M")
-        if utc_dt.date() != civil_midnight.date():
-            utc_display = utc_dt.strftime("%Y-%m-%d %H:%M")
-        if time_known:
-            tz_label = (f"{local_dt:%H:%M} LT  →  {utc_display} UTC  "
-                        f"({utc_offset_str}  {tz_name})")
-        else:
-            tz_label = (f"Time unknown — using 12:00 noon  ({tz_name})  →  "
-                        f"{utc_display} UTC  ({utc_offset_str})")
-        y, mo, d = utc_dt.year, utc_dt.month, utc_dt.day
-        utc_hour = (utc_dt - utc_dt.replace(hour=0, minute=0, second=0,
-                                           microsecond=0)).total_seconds() / 3600.0
-    else:
-        utc_hour = local_hour
-        tz_label = "Timezone unknown — treating input as UTC"
-
-    return y, mo, d, utc_hour, lat, lon, tz_name or "UTC", tz_label, time_known, city_default_used
-
-def geocode_city(city, nation="", lat_override=None, lon_override=None):
+def geocode_city(city: str, nation: str = "", lat_override: float | str | None = None,
+                 lon_override: float | str | None = None) -> tuple[float, float, bool]:
     """Resolve city → (lat, lon, city_resolved).
     
     city_resolved is True for explicit coordinates or a matched city (not defaulted).
@@ -507,10 +447,13 @@ def geocode_city(city, nation="", lat_override=None, lon_override=None):
       2. Nominatim (OpenStreetMap, no API key, requires internet)
       3. kerykeion built-in geonames DB
       4. Hardcoded ~120-city fallback table
-      5. Warn + return (0, 0)
+      5. Raise CalculationError when location is unresolved
     """
-    if lat_override is not None and lon_override is not None:
-        return float(lat_override), float(lon_override), True
+    pair = coordinate_pair(lat_override, lon_override)
+    if pair is not None:
+        return pair[0], pair[1], True
+    if not isinstance(city, str) or not isinstance(nation, str):
+        raise CalculationError("City and nation must be text; or supply explicit coordinates")
 
     # --- Nominatim (most accurate, works for any city worldwide) ---
     if city:
@@ -520,12 +463,20 @@ def geocode_city(city, nation="", lat_override=None, lon_override=None):
             try:
                 loc = geo.geocode(query)
                 if loc:
-                    return loc.latitude, loc.longitude, True
+                    pair = coordinate_pair(loc.latitude, loc.longitude)
+                    if pair is None:
+                        raise CalculationError("Geocoder returned no coordinates")
+                    return pair[0], pair[1], True
                 # Retry without nation code in case nation is a 2-letter code that confuses it
                 if nation and len(nation) == 2:
                     loc2 = geo.geocode(city)
                     if loc2:
-                        return loc2.latitude, loc2.longitude, True
+                        pair = coordinate_pair(loc2.latitude, loc2.longitude)
+                        if pair is None:
+                            raise CalculationError("Geocoder returned no coordinates")
+                        return pair[0], pair[1], True
+            except CalculationError:
+                raise
             except Exception:
                 pass
 
@@ -537,7 +488,10 @@ def geocode_city(city, nation="", lat_override=None, lon_override=None):
             tmp = AstrologicalSubject("_", 2000, 1, 1, 12, 0, city, nation or "")
             logging.disable(logging.NOTSET)
             if tmp.lat is not None and tmp.lng is not None:
-                return tmp.lat, tmp.lng, True
+                pair = coordinate_pair(tmp.lat, tmp.lng)
+                return pair[0], pair[1], True
+        except CalculationError:
+            raise
         except Exception:
             pass
 
@@ -991,10 +945,9 @@ def geocode_city(city, nation="", lat_override=None, lon_override=None):
     }
     result = CITIES.get(city.lower())
     if result:
-        return result[0], result[1], True
-    print(f"  WARNING: city '{city}' not in fallback table — defaulting to 0°N 0°E. Use --lat/--lon for accuracy.",
-          file=sys.stderr)
-    return (0.0, 0.0, False)
+        pair = coordinate_pair(*result)
+        return pair[0], pair[1], True
+    raise CalculationError(f"Location '{city}' unresolved; supply both --lat and --lon")
 
 # ---------------------------------------------------------------------------
 # CORE CALCULATION ENGINE
@@ -2122,10 +2075,39 @@ def print_hellenistic(positions, cusps, asc_lon):
 # COMMAND HANDLERS
 # ---------------------------------------------------------------------------
 
+def _paired_location_provided(args: argparse.Namespace, index: int) -> bool:
+    return bool(getattr(args, f"city{index}", None)) or (
+        getattr(args, f"lat{index}", None) is not None and
+        getattr(args, f"lon{index}", None) is not None)
+
+
+def _resolve_paired_birth(args: argparse.Namespace, index: int) -> BirthTuple:
+    defaults = load_rules("profiles.json")["legacy_defaults"]
+    city = getattr(args, f"city{index}", None)
+    nation = getattr(args, f"nation{index}", None)
+    coordinate_pair(getattr(args, f"lat{index}", None), getattr(args, f"lon{index}", None),
+                    (f"--lat{index}", f"--lon{index}"))
+    return resolve_birth(
+        getattr(args, f"date{index}"), getattr(args, f"time{index}", None),
+        city or defaults["city"], nation or (defaults["nation"] if not city else ""),
+        getattr(args, f"lat{index}", None), getattr(args, f"lon{index}", None),
+        getattr(args, f"timezone{index}", None))
+
+
+def _print_pair_times(args: argparse.Namespace, first: str, second: str) -> None:
+    defaults = load_rules("profiles.json")["legacy_defaults"]
+    for index, label in ((1, first), (2, second)):
+        assumption = "" if _paired_location_provided(args, index) else (
+            f"  ·  default location: {defaults['city']}, {defaults['nation']}")
+        print(f"  Time {index}: {label}{assumption}")
+    print()
+
+
 def cmd_natal(args):
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, city_default_used = resolve_birth(
         args.date, args.time, args.city, args.nation,
-        getattr(args, "lat", None), getattr(args, "lon", None)
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None)
     )
     jd = julian_day(y, mo, d, utc_hour)
     name = args.name or "Seeker"
@@ -2205,19 +2187,22 @@ def cmd_natal(args):
 def cmd_transit(args):
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
         args.date, args.time, args.city, args.nation,
-        getattr(args, "lat", None), getattr(args, "lon", None)
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None)
     )
     jd_natal = julian_day(y, mo, d, utc_hour)
 
     # Gap 2 fix: --transit-date overrides "now"
     transit_date_str = getattr(args, "transit_date", None)
-    if transit_date_str:
+    if transit_date_str is not None:
         ty, tmo, td, thour = parse_date_time(transit_date_str,
                                               getattr(args, "transit_time", None))
         jd_sky = julian_day(ty, tmo, td, thour)
         ttime = getattr(args, "transit_time", None) or "12:00"
         sky_label = f"{transit_date_str} {ttime} UTC"
     else:
+        if getattr(args, "transit_time", None) is not None:
+            raise CalculationError("Supply --transit-date with --transit-time")
         now = datetime.datetime.utcnow()
         jd_sky = julian_day(now.year, now.month, now.day,
                              now.hour + now.minute / 60.0)
@@ -2275,18 +2260,8 @@ def cmd_transit(args):
 
 
 def cmd_synastry(args):
-    c1, n1a = getattr(args,"city1",None), getattr(args,"nation1",None)
-    c2, n2a = getattr(args,"city2",None), getattr(args,"nation2",None)
-    y1, mo1, d1, h1, lat1, lon1, tz1, tzl1, _, _ = resolve_birth(
-        args.date1, getattr(args,"time1",None),
-        c1 or "London", n1a or "GB",
-        getattr(args,"lat1",None), getattr(args,"lon1",None)
-    )
-    y2, mo2, d2, h2, lat2, lon2, tz2, tzl2, _, _ = resolve_birth(
-        args.date2, getattr(args,"time2",None),
-        c2 or "London", n2a or "GB",
-        getattr(args,"lat2",None), getattr(args,"lon2",None)
-    )
+    y1, mo1, d1, h1, lat1, lon1, tz1, tzl1, _, _ = _resolve_paired_birth(args, 1)
+    y2, mo2, d2, h2, lat2, lon2, tz2, tzl2, _, _ = _resolve_paired_birth(args, 2)
     jd1 = julian_day(y1, mo1, d1, h1)
     jd2 = julian_day(y2, mo2, d2, h2)
 
@@ -2297,31 +2272,15 @@ def cmd_synastry(args):
     n2 = getattr(args, "name2", "Person B")
 
     header("SYNASTRY CHART", f"{n1}  ×  {n2}")
+    _print_pair_times(args, tzl1, tzl2)
 
-    # Gap 6: house overlays — only available if birth location provided
-    city1   = getattr(args, "city1",   None)
-    nation1 = getattr(args, "nation1", None)
-    city2   = getattr(args, "city2",   None)
-    nation2 = getattr(args, "nation2", None)
-    lat1 = getattr(args, "lat1", None)
-    lon1 = getattr(args, "lon1", None)
-    lat2 = getattr(args, "lat2", None)
-    lon2 = getattr(args, "lon2", None)
-
+    # Use locations already validated once, including zero coordinates.
     cusps1, asc1, mc1 = None, None, None
     cusps2, asc2, mc2 = None, None, None
-
-    if city1 and nation1:
-        _lat1, _lon1, _ = geocode_city(city1, nation1, lat1, lon1)
-        cusps1, asc1, mc1 = calc_houses(jd1, _lat1, _lon1)
-    elif lat1 is not None and lon1 is not None:
-        cusps1, asc1, mc1 = calc_houses(jd1, float(lat1), float(lon1))
-
-    if city2 and nation2:
-        _lat2, _lon2, _ = geocode_city(city2, nation2, lat2, lon2)
-        cusps2, asc2, mc2 = calc_houses(jd2, _lat2, _lon2)
-    elif lat2 is not None and lon2 is not None:
-        cusps2, asc2, mc2 = calc_houses(jd2, float(lat2), float(lon2))
+    if _paired_location_provided(args, 1):
+        cusps1, asc1, mc1 = calc_houses(jd1, lat1, lon1)
+    if _paired_location_provided(args, 2):
+        cusps2, asc2, mc2 = calc_houses(jd2, lat2, lon2)
 
     print_planet_table(pos1, cusps1, title=f"CHART 1 — {n1}")
     print_planet_table(pos2, cusps2, title=f"CHART 2 — {n2}")
@@ -2388,10 +2347,11 @@ def cmd_synastry(args):
 def cmd_solar_return(args):
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
         args.date, args.time, args.city, args.nation,
-        getattr(args, "lat", None), getattr(args, "lon", None)
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None)
     )
     jd_natal = julian_day(y, mo, d, utc_hour)
-    target_year = int(args.year) if hasattr(args, "year") and args.year else datetime.datetime.utcnow().year
+    target_year = return_year(getattr(args, "year", None))
 
     if not SWE:
         print("pyswisseph required for solar return calculation.")
@@ -2433,13 +2393,15 @@ def cmd_solar_return(args):
 def cmd_progressions(args):
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
         args.date, args.time, args.city, args.nation,
-        getattr(args, "lat", None), getattr(args, "lon", None)
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None)
     )
     jd_natal = julian_day(y, mo, d, utc_hour)
 
-    prog_date_str = args.prog_date if hasattr(args, "prog_date") and args.prog_date \
-        else datetime.datetime.utcnow().strftime("%Y-%m-%d")
-    py, pmo, pd = map(int, prog_date_str.split("-"))
+    prog_date_str = getattr(args, "prog_date", None)
+    if prog_date_str is None:
+        prog_date_str = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+    py, pmo, pd, _ = parse_date_time(prog_date_str)
     jd_prog_target = julian_day(py, pmo, pd, 12.0)
 
     # Secondary progressions: 1 day = 1 year
@@ -2535,19 +2497,17 @@ def cmd_lunar(args):
 
 
 def cmd_planet_hours(args):
-    if args.date:
-        y, mo, d = map(int, args.date.split("-"))
-        date = datetime.date(y, mo, d)
+    date = parse_civil(args.date).date() if args.date is not None else datetime.date.today()
+    pair = coordinate_pair(getattr(args, "lat", None), getattr(args, "lon", None))
+    if pair is not None:
+        lat, lon = pair
+    elif getattr(args, "city", None):
+        lat, lon, _ = geocode_city(args.city, args.nation or "")
+    elif getattr(args, "nation", None):
+        raise CalculationError("Supply a city with --nation, or both --lat and --lon")
     else:
-        date = datetime.date.today()
-
-    # Resolve location: explicit lat/lon > city/nation geocode > Indianapolis default
-    if getattr(args, "lat", None) and getattr(args, "lon", None):
-        lat, lon = float(args.lat), float(args.lon)
-    elif getattr(args, "city", None) and getattr(args, "nation", None):
-        lat, lon, _ = geocode_city(args.city, args.nation)
-    else:
-        lat, lon = 39.7684, -86.1581  # Indianapolis default
+        defaults = load_rules("profiles.json")["legacy_defaults"]
+        lat, lon = defaults["planet_hours_latitude"], defaults["planet_hours_longitude"]
 
     try:
         hours_data, day_ruler, sunrise_jd, sunset_jd = planetary_hours(date, lat, lon)
@@ -2583,7 +2543,8 @@ def cmd_planet_hours(args):
 def cmd_lots(args):
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
         args.date, args.time, args.city, args.nation,
-        getattr(args, "lat", None), getattr(args, "lon", None)
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None)
     )
     jd = julian_day(y, mo, d, utc_hour)
     positions = calc_planet_positions(jd)
@@ -2599,7 +2560,8 @@ def cmd_lots(args):
 def cmd_hellenistic(args):
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
         args.date, args.time, args.city, args.nation,
-        getattr(args, "lat", None), getattr(args, "lon", None)
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None)
     )
     jd = julian_day(y, mo, d, utc_hour)
     positions = calc_planet_positions(jd)
@@ -2623,7 +2585,8 @@ def cmd_aspect_grid(args):
 def cmd_dignity(args):
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
         args.date, args.time, args.city, args.nation,
-        getattr(args, "lat", None), getattr(args, "lon", None)
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None)
     )
     jd = julian_day(y, mo, d, utc_hour)
     positions = calc_planet_positions(jd)
@@ -2710,18 +2673,8 @@ def cmd_antiscia(args):
 
 def cmd_composite(args):
     """Composite chart (midpoint method) for two people. Optionally show Davison chart too."""
-    c1, n1a = getattr(args,"city1",None), getattr(args,"nation1",None)
-    c2, n2a = getattr(args,"city2",None), getattr(args,"nation2",None)
-    y1, mo1, d1, h1, _lat1, _lon1, _, tzl1, _, _ = resolve_birth(
-        args.date1, getattr(args,"time1",None),
-        c1 or "London", n1a or "GB",
-        getattr(args,"lat1",None), getattr(args,"lon1",None)
-    )
-    y2, mo2, d2, h2, _lat2, _lon2, _, tzl2, _, _ = resolve_birth(
-        args.date2, getattr(args,"time2",None),
-        c2 or "London", n2a or "GB",
-        getattr(args,"lat2",None), getattr(args,"lon2",None)
-    )
+    y1, mo1, d1, h1, _lat1, _lon1, _, tzl1, _, _ = _resolve_paired_birth(args, 1)
+    y2, mo2, d2, h2, _lat2, _lon2, _, tzl2, _, _ = _resolve_paired_birth(args, 2)
     jd1 = julian_day(y1, mo1, d1, h1)
     jd2 = julian_day(y2, mo2, d2, h2)
     n1 = getattr(args, "name1", "Person A")
@@ -2732,31 +2685,14 @@ def cmd_composite(args):
     comp = calc_composite(pos1, pos2)
 
     header("COMPOSITE CHART", f"{n1}  +  {n2}  (Midpoint Method)")
+    _print_pair_times(args, tzl1, tzl2)
     print_planet_table(comp, title="COMPOSITE PLANETS")
     print_aspects(calc_aspects(comp))
     print_dignity_table(comp)
 
-    # Davison chart
-    c1   = getattr(args, "city1", None)
-    nat1 = getattr(args, "nation1", None)
-    c2   = getattr(args, "city2", None)
-    nat2 = getattr(args, "nation2", None)
-    l1   = getattr(args, "lat1", None)
-    lo1  = getattr(args, "lon1", None)
-    l2   = getattr(args, "lat2", None)
-    lo2  = getattr(args, "lon2", None)
-
-    if (c1 and nat1) or (l1 and lo1):
-        lat1, lon1, _ = geocode_city(c1 or "", nat1 or "", l1, lo1)
-    else:
-        lat1, lon1 = 0.0, 0.0
-    if (c2 and nat2) or (l2 and lo2):
-        lat2, lon2, _ = geocode_city(c2 or "", nat2 or "", l2, lo2)
-    else:
-        lat2, lon2 = 0.0, 0.0
-
-    if lat1 != 0.0 or lat2 != 0.0:
-        jd_dav, lat_dav, lon_dav = calc_davison(jd1, jd2, lat1, lon1, lat2, lon2)
+    # Davison requires both actual location inputs; zero is not an absence sentinel.
+    if _paired_location_provided(args, 1) and _paired_location_provided(args, 2):
+        jd_dav, lat_dav, lon_dav = calc_davison(jd1, jd2, _lat1, _lon1, _lat2, _lon2)
         dav_pos = calc_planet_positions(jd_dav)
         dav_cusps, dav_asc, dav_mc = calc_houses(jd_dav, lat_dav, lon_dav)
         dav_dt   = jd_to_dt(jd_dav)
@@ -2774,12 +2710,8 @@ def cmd_composite(args):
 
 def cmd_synergy(args):
     """Full relationship analysis: synastry + composite + synergy score + midpoints."""
-    y1, mo1, d1, h1, _la1, _lo1, _, tzl1, _, _ = resolve_birth(
-        args.date1, getattr(args,"time1",None), "London", "GB"
-    )
-    y2, mo2, d2, h2, _la2, _lo2, _, tzl2, _, _ = resolve_birth(
-        args.date2, getattr(args,"time2",None), "London", "GB"
-    )
+    y1, mo1, d1, h1, _la1, _lo1, _, tzl1, _, _ = _resolve_paired_birth(args, 1)
+    y2, mo2, d2, h2, _la2, _lo2, _, tzl2, _, _ = _resolve_paired_birth(args, 2)
     jd1 = julian_day(y1, mo1, d1, h1)
     jd2 = julian_day(y2, mo2, d2, h2)
     n1 = getattr(args, "name1", "Person A")
@@ -2790,6 +2722,7 @@ def cmd_synergy(args):
     comp = calc_composite(pos1, pos2)
 
     header("SYNERGY ANALYSIS", f"{n1}  ×  {n2}")
+    _print_pair_times(args, tzl1, tzl2)
 
     # Cross-aspects and score
     core = ("Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Chiron","N.Node")
@@ -2888,8 +2821,24 @@ def cmd_predict(args):
     """Event prediction: exact transit dates, stations, ingresses, eclipses."""
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
         args.date, args.time, args.city, args.nation,
-        getattr(args, "lat", None), getattr(args, "lon", None)
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None)
     )
+    start_str = getattr(args, "start", None)
+    if start_str is None:
+        start_str = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+    start_date, end_date = date_window(start_str, getattr(args, "end", None))
+    start_str, end_str = start_date.isoformat(), end_date.isoformat()
+    sy, smo, sd = start_date.year, start_date.month, start_date.day
+    ey, emo, ed = end_date.year, end_date.month, end_date.day
+    start_jd = julian_day(sy, smo, sd, 0.0)
+    end_jd   = julian_day(ey, emo, ed, 23.9)
+
+    t_planets = (getattr(args, "transit_planets", None) or
+                 "Jupiter,Saturn,Uranus,Neptune,Pluto,Chiron,N.Node,Mars,Sun,Venus,Mercury").split(",")
+    n_planets = (getattr(args, "natal_planets",   None) or
+                 "Sun,Moon,Mercury,Venus,Mars,Jupiter,Saturn,Chiron,N.Node,Asc,MC").split(",")
+
     jd_natal = julian_day(y, mo, d, utc_hour)
     natal_pos = calc_planet_positions(jd_natal)
     cusps, asc, mc = calc_houses(jd_natal, lat, lon)
@@ -2903,21 +2852,6 @@ def cmd_predict(args):
     natal_pos["MC"]  = {"longitude": mc,  "sign": mc_sign,  "sign_idx": msidx,
                         "degree": mc_deg,  "minutes": mc_min,
                         "latitude": 0, "speed": 0, "retrograde": False}
-
-    start_str = getattr(args, "start", None) or datetime.datetime.utcnow().strftime("%Y-%m-%d")
-    end_str   = getattr(args, "end",   None) or (
-        datetime.datetime(int(start_str[:4]) + 1, int(start_str[5:7]), int(start_str[8:10]))
-        .strftime("%Y-%m-%d")
-    )
-    sy, smo, sd = map(int, start_str.split("-"))
-    ey, emo, ed = map(int, end_str.split("-"))
-    start_jd = julian_day(sy, smo, sd, 0.0)
-    end_jd   = julian_day(ey, emo, ed, 23.9)
-
-    t_planets = (getattr(args, "transit_planets", None) or
-                 "Jupiter,Saturn,Uranus,Neptune,Pluto,Chiron,N.Node,Mars,Sun,Venus,Mercury").split(",")
-    n_planets = (getattr(args, "natal_planets",   None) or
-                 "Sun,Moon,Mercury,Venus,Mars,Jupiter,Saturn,Chiron,N.Node,Asc,MC").split(",")
 
     header("EVENT PREDICTION", f"Natal: {args.date}  ·  Window: {start_str} → {end_str}")
 
@@ -2981,11 +2915,15 @@ def cmd_predict(args):
 
 def cmd_geoastrology(args):
     """Astrocartography: MC, IC, ASC, DSC lines for a natal chart."""
+    query = coordinate_pair(getattr(args, "query_lat", None), getattr(args, "query_lon", None),
+                            ("--query-lat", "--query-lon"))
+    defaults = load_rules("profiles.json")["legacy_defaults"]
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
         args.date, args.time,
-        getattr(args, "city", None) or "London",
-        getattr(args, "nation", None) or "GB",
-        getattr(args, "lat", None), getattr(args, "lon", None)
+        getattr(args, "city", None) or defaults["city"],
+        getattr(args, "nation", None) or defaults["nation"],
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None)
     )
     jd = julian_day(y, mo, d, utc_hour)
     positions = calc_planet_positions(jd)
@@ -3054,11 +2992,8 @@ def cmd_geoastrology(args):
     print()
 
     # Power spot finder: where is a user-specified location relative to chart lines?
-    query_lat = getattr(args, "query_lat", None)
-    query_lon = getattr(args, "query_lon", None)
-    if query_lat and query_lon:
-        qlat = float(query_lat)
-        qlon = float(query_lon)
+    if query is not None:
+        qlat, qlon = query
         section(f"POWER SPOT ANALYSIS  ({qlat:.2f}°N, {qlon:.2f}°E)")
         print(f"  Nearest astrocartography lines to this location:")
         print()
@@ -3111,12 +3046,25 @@ def main():
     )
     sub = p.add_subparsers(dest="cmd")
 
-    def add_geo(parser, city_default="London", nation_default="GB"):
-        """Add --city/--nation/--lat/--lon to a subparser."""
-        parser.add_argument("--city",   default=city_default)
-        parser.add_argument("--nation", default=nation_default)
-        parser.add_argument("--lat",    default=None, help="Override latitude (decimal)")
-        parser.add_argument("--lon",    default=None, help="Override longitude (decimal)")
+    def add_geo(parser: argparse.ArgumentParser, city_default: str | None = None,
+                nation_default: str | None = None) -> None:
+        """Add legacy location and explicit IANA timezone controls."""
+        defaults = load_rules("profiles.json")["legacy_defaults"]
+        parser.add_argument("--city", default=city_default or defaults["city"],
+                            help=f"Birth city (legacy default: {defaults['city']})")
+        parser.add_argument("--nation", default=nation_default or defaults["nation"])
+        parser.add_argument("--lat", default=None, help="Override latitude (decimal)")
+        parser.add_argument("--lon", default=None, help="Override longitude (decimal)")
+        parser.add_argument("--timezone", default=None,
+                            help="Explicit IANA zone, bypassing optional discovery; UTC for known UTC input")
+
+    def add_pair_geo(parser: argparse.ArgumentParser) -> None:
+        for index in (1, 2):
+            parser.add_argument(f"--city{index}", default=None, help=f"Person {index} birth city")
+            parser.add_argument(f"--nation{index}", default=None)
+            parser.add_argument(f"--lat{index}", default=None)
+            parser.add_argument(f"--lon{index}", default=None)
+            parser.add_argument(f"--timezone{index}", default=None, help=f"Person {index} explicit IANA zone")
 
     # natal
     natal = sub.add_parser("natal", help="Full natal chart")
@@ -3143,14 +3091,7 @@ def main():
     syn.add_argument("--time2",    default=None)
     syn.add_argument("--name1",    default="Person A")
     syn.add_argument("--name2",    default="Person B")
-    syn.add_argument("--city1",    default=None, help="Person A birth city (enables house overlays)")
-    syn.add_argument("--nation1",  default=None)
-    syn.add_argument("--city2",    default=None, help="Person B birth city (enables house overlays)")
-    syn.add_argument("--nation2",  default=None)
-    syn.add_argument("--lat1",     default=None)
-    syn.add_argument("--lon1",     default=None)
-    syn.add_argument("--lat2",     default=None)
-    syn.add_argument("--lon2",     default=None)
+    add_pair_geo(syn)
 
     # solar return
     sr = sub.add_parser("solar-return", help="Solar return chart")
@@ -3208,14 +3149,7 @@ def main():
     comp_p.add_argument("--time2",   default=None)
     comp_p.add_argument("--name1",   default="Person A")
     comp_p.add_argument("--name2",   default="Person B")
-    comp_p.add_argument("--city1",   default=None)
-    comp_p.add_argument("--nation1", default=None)
-    comp_p.add_argument("--city2",   default=None)
-    comp_p.add_argument("--nation2", default=None)
-    comp_p.add_argument("--lat1",    default=None)
-    comp_p.add_argument("--lon1",    default=None)
-    comp_p.add_argument("--lat2",    default=None)
-    comp_p.add_argument("--lon2",    default=None)
+    add_pair_geo(comp_p)
 
     # synergy
     syne = sub.add_parser("synergy", help="Full relationship analysis: aspects + composite + score + midpoints")
@@ -3225,6 +3159,7 @@ def main():
     syne.add_argument("--time2",   default=None)
     syne.add_argument("--name1",   default="Person A")
     syne.add_argument("--name2",   default="Person B")
+    add_pair_geo(syne)
 
     # predict
     pred = sub.add_parser("predict",
@@ -3281,7 +3216,11 @@ def main():
     }
     fn = dispatch.get(args.cmd)
     if fn:
-        fn(args)
+        try:
+            fn(args)
+        except CalculationError as exc:
+            print(f"Input error: {exc}", file=sys.stderr)
+            raise SystemExit(2) from exc
     else:
         p.print_help()
 

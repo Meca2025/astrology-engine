@@ -19,6 +19,15 @@ pytz is installed as a runtime dependency. The historical reference below still
 describes earlier behavior; unresolved timezones, DST choice, unknown-time houses
 and silent backend fallbacks remain W09b work.
 
+W09b1 current input flow supersedes the historical fallback descriptions below:
+legacy flags -> shared parse_civil/coordinate validation -> explicit or discovered
+IANA zone -> strict resolve_utc -> legacy_inputs compatibility tuple -> existing
+calculation handler. The monolith imports the typed domains; they never import it.
+Repeated paired geocoding was replaced by the already admitted coordinates.
+Typed profile data owns input format and legacy default settings. Known input
+errors are handled at the CLI boundary with stderr/nonzero status. Unknown-time
+houses and legacy astronomy fallback/provenance remain the next migration slice.
+
 ## Preserved legacy reference
 
 # Architecture — Astrology Engine

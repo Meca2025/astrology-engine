@@ -54,3 +54,14 @@ offset/display stays unchanged. Hosted acceptance for this slice is pending its
 implementation push and will be recorded by exact SHA/run.
 
 W09a hosted acceptance: c1c8c2cabf537d9827fcd17d523846fdbf8558d0, [run 37445523298](https://github.com/hrabanazviking/astrology-engine/actions/runs/37445523298), all six jobs successful. All 150 tests pass; W09b1 is next.
+
+## W09b1 local receipt
+
+2026-10-06: 223 tests pass on Linux/Python 3.12; all 150 prior tests remain. New
+coverage exercises API and actual CLI input-error status/stderr/empty-stdout, nine
+birth handlers' override/help wiring, three paired commands' distinct actual Julian
+days, explicit zero admission, absent discovery, invalid geocoding results, typed
+empty-time errors, civil/UTC calendar boundaries, secondary dates and leap windows.
+The Paris 1890 offset +00:09:21 comes from IANA's Europe/Paris zone record, and the
+expected UTC 11:50:39 is separately subtracted. Hosted acceptance and fresh wheel
+resource/import evidence are recorded separately after implementation push.

@@ -32,3 +32,13 @@ Basic whole-sign time-lord description by Chris Brennan:
 https://theastrologypodcast.com/2018/04/26/annual-profections-a-basic-time-lord-technique/
 The implemented clock is explicit civil birthday age; solar-return timing remains
 a distinct option for a later timing slice.
+
+## Historical civil time
+
+IANA Time Zone Database europe file (accessed 2026-10-06):
+https://data.iana.org/time-zones/tzdb/europe
+Europe/Paris specifies +00:09:21 LMT before 1891-03-16, then the same PMT offset
+through 1911-03-11. The 1890 fixture subtracts 9 minutes 21 seconds from local noon
+to expect UTC 11:50:39. This verifies handling of IANA's rule, not the historical
+certainty of every supplied birth record. ZoneInfo uses installed system tzdb or
+the packaged tzdata fallback; freezing/digesting that source remains I01 work.

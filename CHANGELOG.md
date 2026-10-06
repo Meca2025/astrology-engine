@@ -149,3 +149,12 @@ shapes and normal-day display. Explicit coordinates count as resolved, including
 zero in synastry overlays. Added fourteen offline regressions and required pytz
 for installed legacy conversions. Strict legacy input/house/backend work remains
 tracked in W09b.
+
+## W09b1 — 2026-10-06
+
+Strict shared civil time/coordinate validation and ZoneInfo conversion replace
+legacy DST/UTC/Greenwich guesses. Add explicit single/per-person timezone controls
+and full paired location flags for synergy. Preserve tuple shapes and normal-day
+behavior; expose inherited default locations. Reject invalid secondary dates,
+years, ordered windows and query pairs before chart output. Retain historical
+offset seconds. House/backend/root migration continues in W09b2/W09b3.

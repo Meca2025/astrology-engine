@@ -101,3 +101,20 @@ Set Python's UTF-8 mode in that child process and retain explicit UTF-8 decoding
 Computation assertions stay unchanged; repaired hosted acceptance remains pending.
 
 W09a hosted acceptance: c1c8c2cabf537d9827fcd17d523846fdbf8558d0, [run 37445523298](https://github.com/hrabanazviking/astrology-engine/actions/runs/37445523298), all six jobs successful. All 150 tests pass; W09b1 is next.
+
+## W09b1 — strict legacy input contracts
+
+Published and pushed work-order revisions before implementation. Added shared
+parse_civil and a typed legacy_inputs adapter; preserved entry-point names, tuple
+shapes, UTC rollover and normal historical same-day display. Replaced standard-time
+DST guesses and unresolved UTC/Greenwich fallbacks with explicit input errors.
+Wired single-chart zone overrides and independent paired location/zone controls
+including synergy; paired output exposes inherited London defaults. Davison
+admission now requires both locations and accepts zero. Secondary date/year/window
+and query/planet-hour coordinate admission is strict, including leap-window rules.
+
+223 local tests pass, including 73 added cases for DST, uncertainty, discovery
+bypass, numeric overflow, every birth handler's zone propagation, independent
+paired Julian days, real subprocess errors and historical IANA seconds. Agent
+schemas already declare these date/time formats; no new tool is needed. Legacy
+house/backend failures and astronomical root solving remain W09b2/W09b3.

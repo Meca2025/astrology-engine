@@ -11,20 +11,20 @@ python3 astrology_engine.py <subcommand> [options]
 ## Global Notes
 
 - `--date` always expects `YYYY-MM-DD` format
-- `--time` always expects `HH:MM` 24-hour format; if omitted, noon (12:00) is used and houses/ASC are marked approximate
+- `--time` expects `HH:MM[:SS[.ffffff]]`; if omitted, local noon is used and legacy houses/ASC are still marked approximate pending W09b2
 - `--city` / `--nation` feed the geocoding pipeline (Nominatim → kerykeion → hardcoded fallback)
 - `--lat` / `--lon` always override geocoding when both are provided
 - `--nation` should be an ISO 2-letter country code (`US`, `GB`, `DE`, `NO`, etc.)
-- All local times are automatically converted to UTC via `timezonefinder` + `pytz`; the resolved timezone is displayed in the output header
+- Birth-aware local times use an explicit `--timezone` or optional timezonefinder discovery, then strict ZoneInfo UTC conversion; unresolved zones and DST folds/gaps reject
 
 W09a preserves the UTC date when conversion crosses midnight. For example, local
 2000-01-01 00:15 in Asia/Kolkata computes 1999-12-31 18:45 UTC and displays that
 UTC date. With time omitted, noon means local noon in the resolved zone; birth
 time remains unknown and legacy houses are still labeled approximate. Explicit
 coordinates, including zero, bypass geocoding and count as resolved. Legacy
-timezone discovery still requires the geo extra; absent/ambiguous-zone behavior
-is a known W09b migration target. The typed `chart` command already requires a
-zone and rejects ambiguous/nonexistent civil times.
+timezone discovery still requires the geo extra. W09b1 provides explicit timezone
+overrides and rejects unresolved/ambiguous/nonexistent inputs in both text and
+typed commands. House/backend and event-root migration remains W09b2/W09b3.
 
 ---
 
@@ -485,3 +485,34 @@ Whole-sign annual profection uses civil birthday age and traditional rulership.
 `tools` emits the eight agent request schemas. Python callers use
 `astroengine.agent.run_tool(name, parameters)`; schemas reject invented fields and
 unsupported techniques. The checked-in SKILL.md documents safe agent invocation.
+
+## Strict legacy inputs — W09b1
+
+Birth-aware `natal`, `transit`, `solar-return`, `progressions`, `lots`, `hellenistic`,
+`dignity`, `predict` and `geoastrology` accept `--timezone IANA_ZONE`. The explicit
+zone bypasses optional timezone discovery, so explicit coordinates plus timezone
+work offline without the geo extra. Supply `UTC` for input already expressed in
+UTC. Missing/unresolved zones now fail; ambiguous or nonexistent DST clocks require
+the known UTC instant supplied as UTC date/time. Dates use YYYY-MM-DD and times use
+HH:MM[:SS[.ffffff]]. Empty time is an error; omitted time stays flagged local noon.
+
+`synastry`, `composite` and `synergy` each accept `--city1/--nation1/--lat1/--lon1/
+--timezone1` and corresponding person-2 flags. Their output exposes each resolved
+UTC time and any inherited London location default. Both locations must be supplied
+for Davison; a partial location no longer manufactures the other person's (0,0).
+Explicit zero coordinates work for overlays, Davison admission and location queries.
+
+```bash
+python astrology_engine.py synergy --date1 2000-01-01 --time1 00:15 \
+  --lat1 19.076 --lon1 72.8777 --timezone1 Asia/Kolkata \
+  --date2 2000-01-01 --time2 23:45 --lat2 40.7128 --lon2 -74.006 \
+  --timezone2 America/New_York
+```
+
+Invalid dates/years, nonfinite/out-of-range or incomplete coordinate pairs, failed
+location resolution, DST folds/gaps and invalid zones produce stderr/status 2
+before chart output. `--transit-time` needs `--transit-date`; prediction end must
+follow start, and its one-civil-year default clamps February 29 to February 28.
+`planet-hours` still has its documented Indianapolis default and legacy sunrise
+engine, while its explicit date/coordinate admission is now strict. Legacy house,
+optional-body/backend and event-root behavior is still being migrated separately.

@@ -5,5 +5,7 @@
   "houses": {"placidus": "P", "whole-sign": "W", "equal": "A", "koch": "K", "regiomontanus": "R", "campanus": "C", "porphyry": "O"},
   "bodies": {"Sun": "SUN", "Moon": "MOON", "Mercury": "MERCURY", "Venus": "VENUS", "Mars": "MARS", "Jupiter": "JUPITER", "Saturn": "SATURN", "Uranus": "URANUS", "Neptune": "NEPTUNE", "Pluto": "PLUTO"},
   "nodes": {"true": "TRUE_NODE", "mean": "MEAN_NODE"},
+  "input_formats": {"date": "[0-9]{4}-[0-9]{2}-[0-9]{2}", "time": "[0-9]{2}:[0-9]{2}(:[0-9]{2}(\\.[0-9]{1,6})?)?", "unknown_time_surrogate": "12:00"},
+  "legacy_defaults": {"city": "London", "nation": "GB", "planet_hours_latitude": 39.7684, "planet_hours_longitude": -86.1581, "prediction_years": 1},
   "defaults": {"zodiac": "tropical", "ayanamsa": "lahiri", "house_system": "placidus", "node_type": "true"}
 }

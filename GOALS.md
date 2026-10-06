@@ -5,8 +5,8 @@ computation, CLI/API wiring, tests and evidence. The full expansion remains an
 ongoing roadmap, with method-level readiness and independent validation gates.
 
 W09a legacy UTC rollover/explicit coordinate certainty is implemented.
-Next: W09b1 strict legacy time/location inputs, then W09b2 house/backend error
-migration and W09b3 robust astronomical event root solving.
+W09b1 strict legacy time/location inputs are implemented with local acceptance.
+Next: W09b2 house/backend error migration and W09b3 robust astronomical event root solving.
 V09 follows for additional classical Jyotisha mechanics. Continue the roadmap
 in dependency order with document -> code -> tests -> docs -> push -> remote-check.
 

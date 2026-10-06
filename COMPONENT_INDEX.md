@@ -38,3 +38,8 @@ ephemeris.equatorial_positions supplies zodiac-independent equatorial snapshots.
 
 `astroengine/agent.py` owns validated local routing; tool_schemas.json owns requests;
 SKILL.md is the portable agent manifest. partitions.py owns half-open partitions.
+
+`astroengine/legacy_inputs.py` owns typed compatibility tuples, numeric coordinate
+flags and secondary date windows/years. inputs.parse_civil is the shared strict
+civil admission boundary; profiles.json owns input formats and legacy defaults.
+The text CLI owns discovery and exposes explicit per-person location/zone flags.

@@ -52,8 +52,8 @@
     {
       "id": "legacy",
       "status": "legacy",
-      "scope": "16 text commands; UTC date rollover and explicit zero coordinates repaired; strict input/house/backend migration remains",
-      "evidence": "W09a historical offset, rollover Julian day, local-noon, zero-overlay and offline CLI regression fixtures"
+      "scope": "16 text commands with strict time/location admission and per-person overrides; house/backend/event-root migration remains",
+      "evidence": "W09a/W09b1 UTC/DST, coordinate/overflow, every birth-handler propagation, paired Julian day and offline CLI error fixtures"
     },
     {
       "id": "advanced-jyotisha",

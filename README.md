@@ -40,8 +40,11 @@ Coordinates and IANA timezone are explicit in new commands. Unknown time produce
 flagged local-noon positions and no houses/angles. DST folds/gaps reject. Output
 records actual ephemeris backends; missing data can select disclosed Moshier.
 The historical examples and precision claims below are preserved documentation,
-not independent validation. The original legacy time conversion/fallback limits
-remain until their migration slice; use `chart` for strict input handling.
+not independent validation. W09a/W09b1 now give legacy birth-aware commands strict
+UTC/date/coordinate admission and explicit `--timezone` controls; paired commands
+accept per-person locations/zones. Use explicit coordinates and zones for offline
+work. Unknown-time houses, legacy astronomy/backend fallbacks and event-root
+precision remain the next migration slices; see [INTERFACE.md](INTERFACE.md).
 
 ---
 

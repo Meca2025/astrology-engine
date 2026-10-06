@@ -99,3 +99,18 @@ and dispatches directly to internal APIs. No subprocess, cloud or storage.
 `capabilities()` also includes tool schemas. CLI `tools` returns the catalog.
 `partitions.uniform_partition` owns half-open boundary/fraction arithmetic, using
 explicit boundaries to preserve exact nominal and neighboring-float behavior.
+
+## Strict civil and legacy compatibility inputs (W09b1)
+
+`inputs.parse_civil(date_string, time_string=None)` returns a validated naive civil
+datetime. YYYY-MM-DD and HH:MM[:SS[.ffffff]] are required; only omitted time selects
+local noon. `resolve_utc` rejects DST ambiguity/gaps, invalid zones and UTC calendar
+overflow. Coordinate checks include enormous integers without overflow leaks.
+`legacy_inputs.coordinate_pair` converts legacy numeric flags, requiring a complete
+finite pair; absent pairs return None. `local_hour_to_utc` preserves signed hours
+relative to civil midnight; `birth_tuple` converts ChartRequest to the ten-item
+legacy compatibility tuple with actual UTC date/clock, offset and uncertainty.
+`date_window` validates ordered prediction dates and a clamped civil-year default
+end; `return_year` validates integer solar-return years. Offset/clock formatting
+retains historical seconds. None of these adapters imports the legacy monolith,
+geocodes, stores birth data or fabricates houses.
