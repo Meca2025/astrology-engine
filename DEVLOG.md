@@ -494,3 +494,17 @@ and `--json`.
 
 Sólrún: `tests/test_asteroids_midpoints.py` 9/9 green plus
 independent subagent verification. Pushed via the PAT tool.
+
+## 2026-10-06 — H09: draconic charts
+
+Ninth slice of the Horizons program. `astroengine/draconic.py`
+reckons the soul-chart from the natal north node (the engine's true
+node, disclosed — classical work often prefers the mean). The whole
+wheel rotates: planets, ASC, MC. `draconic_contacts()` finds where
+the two zodiacs touch. For Volmarr: draconic Saturn conjunct natal
+Mercury at 1.34° — the soul's discipline laid upon the writer's
+mind, the closest touch between his two charts. The `draconic` CLI
+takes `--load`, `--orb`, `--json`.
+
+Sólrún: `tests/test_draconic.py` 6/6 green plus independent subagent
+verification. Pushed via the PAT tool.

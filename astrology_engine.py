@@ -2382,6 +2382,46 @@ def _load_chart_into(args):
     return saved.get("name", "Seeker")
 
 
+def cmd_draconic(args):
+    from astroengine.draconic import draconic_chart, draconic_contacts
+    if args.load:
+        title = _load_chart_into(args)
+    else:
+        apply_chart_load(args)
+        title = "Seeker"
+    require_date(args)
+    y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
+        args.date, args.time, args.city, args.nation,
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None))
+    jd = julian_day(y, mo, d, utc_hour)
+    chart = draconic_chart(jd, lat, lon)
+    contacts = draconic_contacts(jd, lat, lon, orb=args.orb)
+    if args.json:
+        print(json.dumps({"title": title, "draconic": chart,
+                          "contacts": contacts},
+                         ensure_ascii=False, sort_keys=True))
+        return {"draconic": chart, "contacts": contacts}
+    header("DRACONIC CHART", f"{title} — the soul beneath")
+    print(f"  Draconic zero: natal north node at {chart['node_longitude']:.2f}° "
+          f"({chart['node_kind']})")
+    for body, dlon in chart["positions"].items():
+        print(f"  {body:<8} {dlon:7.2f}° draconic")
+    for ang, dlon in chart["angles"].items():
+        print(f"  {ang:<8} {dlon:7.2f}° draconic")
+    print()
+    if contacts:
+        print(f"  Contacts within {args.orb}° — where soul touches personality:")
+        for h in contacts:
+            print(f"    draconic {h['draconic']:<8} conjunct natal "
+                  f"{h['natal']:<8} orb {h['orb']:.2f}°")
+    else:
+        print(f"  No draconic–natal contacts within {args.orb}°.")
+    print()
+    print("  The inward chart; read it as soul-intent, held lightly.")
+    return {"draconic": chart, "contacts": contacts}
+
+
 def cmd_asteroids(args):
     from astroengine.asteroids import ASTEROIDS, asteroid_positions
     if args.load:
@@ -4115,6 +4155,14 @@ def main():
     num.add_argument("--json", action="store_true")
     add_chart_lib(num, with_load=False)
 
+    dr = sub.add_parser("draconic", help="Draconic chart: the soul-chart reckoned from the north node")
+    dr.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
+    dr.add_argument("--time", default=None, help="HH:MM (24h)")
+    dr.add_argument("--orb", type=float, default=1.0)
+    dr.add_argument("--json", action="store_true")
+    add_geo(dr)
+    add_chart_lib(dr)
+
     ast = sub.add_parser("asteroids", help="Asteroids: Chiron, Ceres, Pallas, Juno, Vesta (honest about missing files)")
     ast.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
     ast.add_argument("--time", default=None, help="HH:MM (24h)")
@@ -4257,6 +4305,7 @@ def main():
         "elect":        cmd_elect,
         "stars":        cmd_stars,
         "asteroids":    cmd_asteroids,
+        "draconic":     cmd_draconic,
         "midpoints":    cmd_midpoints,
     }
     _TWO_PERSON = {"synastry", "composite", "synergy"}

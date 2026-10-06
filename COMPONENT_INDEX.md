@@ -111,3 +111,5 @@ body availability/frame/search rules. The monolith owns text uncertainty renderi
 - `astroengine/asteroids.py` — asteroids (honest missing-file
   behavior); `astroengine/midpoints.py` — midpoints; verified by
   `tests/test_asteroids_midpoints.py`.
+- `astroengine/draconic.py` — draconic charts; verified by
+  `tests/test_draconic.py`.

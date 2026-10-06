@@ -289,6 +289,17 @@ python3 astrology_engine.py runic --datetime 2026-05-16T16:45 \
 
 ---
 
+## `draconic`
+
+The soul-chart: every position reckoned from the natal north node,
+plus the contacts where the draconic and tropical zodiacs touch.
+
+```bash
+python3 astrology_engine.py draconic --load volmarr --orb 2
+```
+
+---
+
 ## `asteroids`
 
 Chiron, Ceres, Pallas, Juno, Vesta — when their ephemeris files are

@@ -336,3 +336,8 @@ ten new aspects with neutral weight 0 so synergy scoring is unchanged.
   `all_midpoints(positions)`, `midpoint_hits(natal_jd_ut, lat, lon,
   orb)` — 45 planetary midpoints and their activations. CLI:
   `midpoints`.
+
+- `astroengine/draconic.py`: `draconic_longitude(tropical_lon,
+  node_lon)`, `draconic_chart(natal_jd_ut, lat, lon)`,
+  `draconic_contacts(natal_jd_ut, lat, lon, orb)` — the draconic
+  zodiac reckoned from the true north node. CLI: `draconic`.
