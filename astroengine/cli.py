@@ -52,7 +52,7 @@ def request_from_args(args: argparse.Namespace, suffix: str = "") -> ChartReques
 def run_command(args: argparse.Namespace) -> int:
     try:
         result = args.modern_handler(args)
-        sys.stdout.write(json.dumps(result, ensure_ascii=False, allow_nan=False, sort_keys=True) + "\n")
+        sys.stdout.write(json.dumps(result, ensure_ascii=True, allow_nan=False, sort_keys=True) + "\n")
         return 0
     except (CalculationError, OSError, ValueError) as exc:
         _LOG.debug("Calculation failed", exc_info=True)

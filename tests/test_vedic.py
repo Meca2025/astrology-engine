@@ -59,7 +59,7 @@ def test_vedic_cli_defaults_are_explicit():
     result = subprocess.run([sys.executable, 'astrology_engine.py', 'vedic',
                              '--date', '2000-01-01', '--time', '12:00',
                              '--lat', '0', '--lon', '0', '--timezone', 'UTC'],
-                            capture_output=True, text=True)
+                            capture_output=True, text=True, encoding="utf-8")
     assert result.returncode == 0, result.stderr
     chart = json.loads(result.stdout)['chart']
     assert chart['request']['zodiac'] == 'sidereal'

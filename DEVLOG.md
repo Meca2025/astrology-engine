@@ -19,3 +19,7 @@ text commands preserved; their historical gaps remain separately documented.
 Added data-defined navagraha/nakshatra profile and wired JSON command. All 34 tests
 passed, including direct Lahiri house/position checks and 108 pada interiors.
 Restored original ignore rules after detecting the initial ignore-file overwrite.
+
+Hosted Windows S01/S02 jobs exposed cp1252 decoding in test subprocesses.
+Explicit UTF-8 decoding and ASCII-safe JSON transport added; Linux/macOS
+computation jobs passed. Follow-up acceptance awaits the repaired hosted matrix.

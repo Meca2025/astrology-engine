@@ -99,11 +99,11 @@ def test_discovery_is_not_mutable_global_state():
 def test_cli_success_and_error_contract():
     args = [sys.executable, '-m', 'astroengine', 'chart', '--date', '2000-01-01',
             '--time', '12:00', '--timezone', 'UTC', '--lat', '0', '--lon', '0']
-    good = subprocess.run(args, capture_output=True, text=True)
+    good = subprocess.run(args, capture_output=True, text=True, encoding="utf-8")
     assert good.returncode == 0, good.stderr
     assert json.loads(good.stdout)['schema_version'] == '1.0'
     args[args.index('0')] = 'nan'
-    bad = subprocess.run(args, capture_output=True, text=True)
+    bad = subprocess.run(args, capture_output=True, text=True, encoding="utf-8")
     assert bad.returncode == 2
     assert bad.stdout == ''
     assert 'latitude' in json.loads(bad.stderr)['error']['message']
@@ -112,13 +112,13 @@ def test_cli_success_and_error_contract():
 def test_legacy_import_and_cli_remain_usable():
     command = [sys.executable, '-c',
                "import sys; old=sys.stdout; import astrology_engine; assert sys.stdout is old"]
-    imported = subprocess.run(command, capture_output=True, text=True)
+    imported = subprocess.run(command, capture_output=True, text=True, encoding="utf-8")
     assert imported.returncode == 0, imported.stderr
     help_result = subprocess.run([sys.executable, 'astrology_engine.py', '--help'],
-                                 capture_output=True, text=True)
+                                 capture_output=True, text=True, encoding="utf-8")
     assert help_result.returncode == 0
     assert all(key in help_result.stdout for key in ('natal', 'geoastrology', 'synergy', 'chart'))
     lunar = subprocess.run([sys.executable, 'astrology_engine.py', 'lunar'],
-                           capture_output=True, text=True)
+                           capture_output=True, text=True, encoding="utf-8")
     assert lunar.returncode == 0, lunar.stderr
     assert 'MOON' in lunar.stdout.upper()
