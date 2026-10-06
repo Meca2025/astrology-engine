@@ -7,7 +7,7 @@ Read this first. Current work: 2026-10-06 expansion under Mythic Engineering.
 - [x] S01 — typed chart foundation, strict time/location handling, JSON, discovery, CI.
 - [x] S02 — Vedic D1, ayanamsa variants, nodes, nakshatra/pada.
 - [x] S03 — named classical divisional chart mappings.
-- [ ] S04 — Vimshottari maha/antar periods with balance at birth.
+- [x] S04 — Vimshottari maha/antar periods with balance at birth.
 - [ ] S05 — instant panchanga elements with named conventions.
 - [ ] S06 — structured relationship analysis with real locations/zones.
 - [ ] S07 — relocation and exact-latitude angular location lines.

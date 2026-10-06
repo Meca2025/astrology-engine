@@ -452,3 +452,7 @@ Unknown time suppresses lagna/houses; explicit tropical input rejects.
 `vargas` shares Vedic chart flags. Optional `--divisions 9 10 30` selects charts;
 omit it for all sixteen. Mapping profile: classical-rao-2000, with D27 source
 example discrepancy recorded in docs/references/technique-sources.md.
+
+`dashas` shares Vedic flags and accepts `--years NUMBER`, `--year-model
+tropical|julian|savana` and `--as-of ISO_TIMESTAMP_WITH_OFFSET`. Defaults: 120 years
+and 365.2425-day tropical clock. Antars are clipped, preserving full boundaries.

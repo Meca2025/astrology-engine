@@ -42,3 +42,12 @@ source subdivision/fraction, with unsupported divisions rejected.
 `vargas.compute_vargas(request, divisions=None)` requires sidereal input, defaults
 to sixteen charts, and returns named method/source and optional divisional lagna.
 No physical varga longitude is asserted; D30 uses unequal segments.
+
+## Vimshottari (S04)
+
+`dashas.compute_dashas(request, years=None, year_model=None, as_of=None)` returns
+D1, Moon-based maha/antar periods, birth balance, chosen continuous day clock and
+optional active pair. `vimshottari_timeline(birth, moon_longitude, years, year_days)`
+is pure period arithmetic with an aware birth datetime; `active_period` uses
+half-open intervals. Antars originate at full maha start before birth, then clip.
+As-of outside the report window returns null; no event interpretation is implied.

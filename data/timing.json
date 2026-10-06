@@ -1,0 +1,8 @@
+{
+  "version": "1.0",
+  "year_models": {"tropical": 365.2425, "julian": 365.25, "savana": 360.0},
+  "default_year_model": "tropical",
+  "default_horizon_years": 120.0,
+  "source": "https://www.vedicastrologer.org/articles/vedic_astro_textbook.pdf",
+  "source_sections": ["16.2", "16.3"]
+}

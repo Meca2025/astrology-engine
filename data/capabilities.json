@@ -21,8 +21,9 @@
     },
     {
       "id": "dashas",
-      "status": "planned",
-      "scope": "Vimshottari maha/antar periods"
+      "status": "available",
+      "scope": "Vimshottari maha/antar periods",
+      "evidence": "published balance example; full-cycle and clipped antar boundary tests"
     },
     {
       "id": "panchanga",

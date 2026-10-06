@@ -45,6 +45,14 @@ def register_commands(subparsers: Any) -> None:
     vargas.add_argument("--divisions", type=int, nargs="+")
     vargas.set_defaults(**load_rules("vedic.json")["defaults"],
                         modern_handler=lambda args: compute_vargas(request_from_args(args), args.divisions))
+    from .dashas import compute_dashas
+    dashas = subparsers.add_parser("dashas", help="Vimshottari maha/antar timeline and birth balance")
+    add_chart_arguments(dashas)
+    dashas.add_argument("--years", type=float)
+    dashas.add_argument("--year-model", choices=load_rules("timing.json")["year_models"])
+    dashas.add_argument("--as-of", help="ISO timestamp with explicit UTC offset")
+    dashas.set_defaults(**load_rules("vedic.json")["defaults"],
+                        modern_handler=lambda args: compute_dashas(request_from_args(args), args.years, args.year_model, args.as_of))
     discovery = subparsers.add_parser("capabilities", help="Technique availability and scope as JSON")
     discovery.set_defaults(modern_handler=lambda args: capabilities())
 

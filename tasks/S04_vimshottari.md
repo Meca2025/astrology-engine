@@ -15,3 +15,8 @@ fraction and chosen continuous day clock rather than unreviewed narrative dates.
 
 Gate: example balance, cycle sum/order, full antar partition, first clipped antar,
 as-of exact boundary, positive finite horizon, date-aware UTC and CLI wiring.
+
+## Receipt
+
+87 total local tests passed; published example balance, cycle/partition/clip
+invariants and CLI as-of request verified. Year-model output is explicit.

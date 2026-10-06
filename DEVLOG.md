@@ -30,3 +30,10 @@ Sixteen sign mappings wired through API/CLI. 78 total tests passed, including
 source worked placements and D2/D30 boundaries. Documented D27 Example 23
 counting error; calculation follows the stated rule. No physical longitudes
 or exhaustive school coverage claimed.
+
+## S04 — Vimshottari
+
+87 total tests passed. Added maha/antar timeline, birth balance, three named year
+clocks and as-of lookup. Example 50 balance matched; subperiods are anchored before
+birth and exact boundary belongs to next period. Hosted repaired Windows matrix
+passed together with Linux/macOS on Python 3.11/3.12.

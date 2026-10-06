@@ -21,3 +21,6 @@ graha mappings and default profile. Input and astronomy domains stay independent
 
 `astroengine/vargas.py` owns divisional sign arithmetic; `data/vargas.json` owns
 the sixteen named mappings. Technique discrepancy ledger lives in docs/references.
+
+`astroengine/dashas.py` owns continuous-day Vimshottari arithmetic; timing.json
+owns year-clock choices and reporting defaults.
