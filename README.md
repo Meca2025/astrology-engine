@@ -1,667 +1,260 @@
-# Reproducible computation expansion (4.0.0)
+![Yrsa beneath the nebula — keeper of the star-program](docs/images/yrsa-nebula.jpg)
 
-The new `astroengine` package adds strict, offline, machine-readable chart
-computation alongside the 16 legacy text commands described below. Read
-[ROADMAP.md](ROADMAP.md) for the complete Vedic/Western/location/relationship
-program, [TODO.md](TODO.md) for delivered slices and
-[astroengine/INTERFACE.md](astroengine/INTERFACE.md) for contracts.
+# Astrology Engine — Volmarr's Longhall
 
-Delivered in the new structured path:
+> **Full-spectrum astrological computation. Swiss Ephemeris on bare metal. Norse sky, Hellenistic roots, Vedic depth.**
 
-| Command | New capability |
+The Astrology Engine is a **reproducible computation forge** for astrology: real
+ephemeris positions, strict time and location handling, and machine-readable
+output — no cloud, no API keys, no lookup tables, no fabricated chart
+positions. Twenty-seven CLI subcommands span Western, Hellenistic, Vedic
+(Jyotisha), and Northern runic traditions, with every technique carrying its
+provenance, its limits, and its evidence.
+
+The project's rule, held since the first commit: **compute it honestly, prove
+it with tests, document what it cannot do, and push every slice.**
+
+---
+
+![Yrsa in the aurora — the engine runs anywhere, even at the edge of the world](docs/images/yrsa-aurora.jpg)
+
+---
+
+## What it does
+
+This is not a keyword reader or a chart-wheel generator. The engine:
+
+- Calculates real **ephemeris positions** via Swiss Ephemeris (`pyswisseph`),
+  with disclosed Moshier fallback when Swiss data is unavailable
+- Converts civil time to UTC with **strict IANA timezone handling** — DST
+  folds and gaps reject rather than guess
+- Casts **natal charts** with houses, angles, aspects (applying/separating),
+  essential dignities, Arabic Lots, antiscia, and Hellenistic analysis
+  (sect, bonification, joys, triplicity, bounds)
+- Runs **Jyotisha**: sidereal D1, 16 classical vargas, Vimshottari dashas,
+  instant panchanga, nakshatras and padas
+- Walks the **Northern runic cycles**: half-month runes, solar runic hours,
+  Northern planetary hours, sele detection — from a fully transcribed,
+  honestly-labeled corpus
+- Finds **exact transit dates, stations, ingresses and eclipses** with a
+  precision-aware event root finder
+- Draws **astrocartography** MC/IC/ASC/DSC lines and relocation charts from
+  spherical geometry, not lookup tables
+- Answers as **JSON or text**, with capability discovery (`capabilities`)
+  and agent tool schemas (`tools`) for the Hermes agent skill
+
+Every result records its conventions, input certainty, backend and version,
+and warnings. A technique is only advertised when it is implemented, tested,
+and documented — never merely planned.
+
+---
+
+## The 27 subcommands
+
+| Command | Art |
 | --- | --- |
-| `chart`, `capabilities`, `tools` | Strict charts, provenance, capability/schema discovery |
-| `vedic` | D1/navagraha, nakshatras and padas |
-| `vargas` | Sixteen named classical divisional sign charts |
-| `dashas` | Vimshottari maha/antar chronology and birth balance |
-| `panchanga` | Instant tithi/karana/nakshatra/yoga snapshot |
-| `relationship` / `synergy-json` | Separate birth zones, overlays, composite, traceable synergy |
-| `location` | Fixed-instant relocation and exact-latitude angular lines |
-| `western` | Annual profections, integer harmonics, sensitive midpoints |
+| `natal` | Full natal chart: positions, houses, aspects, dignities, lots |
+| `transit` | Transits to natal, now or at a forecast date |
+| `synastry` | Two-chart synastry with optional house overlays |
+| `solar-return` | Solar return chart |
+| `progressions` | Secondary progressions |
+| `lunar` | Lunar intelligence: phase, void-of-course, next lunations |
+| `planet-hours` | Planetary hours for a date and location |
+| `lots` | Arabic Lots / Hermetic Parts |
+| `hellenistic` | Sect, bonification, joys, triplicity, bounds |
+| `dignity` | Essential dignities table with scoring and mutual receptions |
+| `antiscia` | Antiscia and contra-antiscia |
+| `composite` | Composite midpoints, optional Davison chart |
+| `synergy` / `synergy-json` / `relationship` | Full relationship analysis with explainable scoring |
+| `predict` | Exact transit dates, stations, ingresses, eclipses in a window |
+| `geoastrology` | Astrocartography lines and power-spot analysis |
+| `aspect-grid` | Full aspect matrix |
+| `chart` | Reproducible chart as JSON (typed path) |
+| `capabilities` | Technique availability and scope as JSON |
+| `tools` | Agent tool request schemas as JSON |
+| `vedic` | Jyotisha D1, navagraha, nakshatras |
+| `vargas` | Sixteen classical divisional charts |
+| `dashas` | Vimshottari maha/antar timeline and birth balance |
+| `panchanga` | Instant panchanga elements and civil weekday |
+| `location` | Relocation and angular lines at a destination |
+| `western` | Annual profections, harmonics, sensitive midpoints |
 
-[SKILL.md](SKILL.md) provides agent usage; [VERIFICATION.md](VERIFICATION.md)
-records evidence and limits. Full Jyotisha, other calendars and later advanced
-methods remain explicit roadmap slices, not present capabilities.
+---
 
-Python 3.11+ for the new package:
+![Yrsa in the glowing rune circle — the runic star-program](docs/images/yrsa-runecircle.jpg)
+
+---
+
+## The Runic Star-Program
+
+A dedicated expansion, [ROADMAP_RUNIC.md](ROADMAP_RUNIC.md), is giving the
+engine the **full runic astrology of the Northern Tradition** as systematized
+by Nigel Pennick in *Runes and Astrology* (2023) — built slice by slice, each
+slice pushed, each table labeled *modern synthesis*, computation forever kept
+separate from interpretation.
+
+Delivered so far:
+
+| Slice | Forged |
+| --- | --- |
+| **R01 — The Runic Corpus** | `data/runic.json`: 32 runes with correspondences, 24 half-months, 24 runic hours, 168 planetary-hour cells, weekday/zodiac tables, 8 day tides, 28 lunar mansions, 12 palaces, 9 worlds, 7 life-periods |
+| **R02 — Half-Months Engine** | `half_month_rune()`: the ruling rune of any civil date, with boundary-time refinement |
+| **R03 — Hours & Sele** | Solar runic hours from local apparent time, Northern planetary hours, and *sele* — the "especially powerful" coincidence of the two |
+
+Honest transcription is the law here: the book's own quirks (a noon
+discontinuity in the planetary-hour grid, a worked example that conflicts
+with the hour-wheel) are preserved in per-section notes, never silently
+"corrected".
+
+---
+
+## Quick start
 
 ```bash
-python -m pip install .
-astroengine capabilities
-astroengine tools
-astroengine vedic --date 2000-01-01 --time 12:00 --lat 28.6139 --lon 77.209 --timezone Asia/Kolkata
-astroengine chart --date 2000-01-01 --time 12:00 --lat 0 --lon 0 --timezone UTC
-python astrology_engine.py chart --date 2000-01-01 --time 12:00 --lat 0 --lon 0 --timezone UTC --zodiac sidereal --ayanamsa lahiri --house-system whole-sign
-python -m pip install '.[test]'
-python -m pytest -q
-```
-
-Coordinates and IANA timezone are explicit in new commands. Unknown time produces
-flagged local-noon positions and no houses/angles. DST folds/gaps reject. Output
-records actual ephemeris backends; missing data can select disclosed Moshier.
-The historical examples and precision claims below are preserved documentation,
-not independent validation. W09a/W09b1 now give legacy birth-aware commands strict
-UTC/date/coordinate admission and explicit `--timezone` controls; paired commands
-accept per-person locations/zones. Use explicit coordinates and zones for offline
-work. W09b2 removes fabricated house/solar-hour fallbacks, suppresses unknown-time
-houses and dependent conclusions, and reports actual planetary backends and
-optional-body unavailability. Legacy event-root precision and approximate location
-helpers still need migration; see [INTERFACE.md](INTERFACE.md).
-
----
-
-
-![https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/etre34gdfgd3.png](https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/etre34gdfgd3.png)
-
----
-
-# AI Agent Astrology Engine — Volmarr's Longhall
-
-> *Full-spectrum astrological computation. Swiss Ephemeris on bare metal. Norse sky, Hellenistic roots.*
-
-A complete astrological engine running on a Raspberry Pi 5 (or any other device) as part of the **Hermes Agent** skill system. No cloud, no API keys, no lookup tables. Real ephemeris positions via `pyswisseph` with 16 CLI subcommands covering every major technique from classical Arabic Lots to astrocartography.
-
----
-
-![https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/1a64a630-c13b-499b-a1c9-4e6f5fc3fee0.jpg](https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/1a64a630-c13b-499b-a1c9-4e6f5fc3fee0.jpg)
-
----
-
-## Contents
-
-- [What It Does](#what-it-does)
-- [Quick Start](#quick-start)
-- [Installation](#installation)
-- [All 16 Subcommands](#all-16-subcommands)
-- [Geocoding & Timezone Pipeline](#geocoding--timezone-pipeline)
-- [Norse & Hellenistic Layer](#norse--hellenistic-layer)
-- [Hermes Agent Integration](#hermes-agent-integration)
-- [WYRD Protocol Hooks](#wyrd-protocol-hooks)
-- [File Structure](#file-structure)
-- [Dependencies](#dependencies)
-- [Further Reading](#further-reading)
-
----
-
-## What It Does
-
-This is not a keyword reader or chart-wheel generator. The engine:
-
-- Calculates real **Julian Day** ephemeris positions using Swiss Ephemeris
-- Derives **Placidus house cusps** via `swe.houses()`
-- Computes **11 aspect types** (conjunction through bi-quintile) with applying/separating detection
-- Scores **essential dignities** through the full Ptolemaic hierarchy: domicile → detriment → exaltation → fall → triplicity → terms → face
-- Calculates all **7 classical Arabic Lots** with day/night chart formulas
-- Detects **void-of-course Moon** via exact aspect targeting
-- Computes **synastry** cross-aspects with house overlays when birth cities are provided
-- Finds **exact transit dates** to 0.01° precision via bisection algorithm
-- Generates **astrocartography** MC/IC/ASC/DSC lines from first principles (not lookup tables)
-- Overlays **Elder Futhark runes** and **Norse deity correspondences** on every chart
-
----
-
-![https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/1e181307-c1c2-4ecb-912e-f88d3980e3e5.jpg](https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/1e181307-c1c2-4ecb-912e-f88d3980e3e5.jpg)
-
----
-
-## Quick Start
-
-```bash
-# Full natal chart
+# Full natal chart (text)
 python3 astrology_engine.py natal \
-  --date 1975-11-22 --time 14:30 \
-  --city Indianapolis --nation US \
-  --name Volmarr
+  --date 1972-09-01 --time 08:18 \
+  --lat 42.8142 --lon -73.9396 --timezone America/New_York
 
-# Current transits to natal
-python3 astrology_engine.py transit \
-  --date 1975-11-22 --time 14:30 \
-  --city Indianapolis --nation US
+# Reproducible chart as JSON (typed path)
+astroengine chart --date 1972-09-01 --time 08:18 \
+  --latitude 42.8142 --longitude -73.9396 --timezone America/New_York
+
+# Vedic D1 with nakshatras
+astroengine vedic --date 1972-09-01 --time 08:18 \
+  --latitude 42.8142 --longitude -73.9396 --timezone America/New_York
+
+# Runic half-month for today
+python3 -c "
+from astroengine.runic import half_month_rune
+import datetime
+print(half_month_rune(datetime.date.today().isoformat()))"
 
 # Lunar intelligence right now
 python3 astrology_engine.py lunar
 
-# Planetary hours today
-python3 astrology_engine.py planet-hours \
-  --city Indianapolis --nation US
-
-# Event prediction — what exact transits hit in the next year?
+# What exact transits hit in the next year?
 python3 astrology_engine.py predict \
-  --date 1975-11-22 --time 14:30 \
-  --city Indianapolis --nation US \
+  --date 1972-09-01 --time 08:18 \
+  --lat 42.8142 --lon -73.9396 --timezone America/New_York \
   --start 2026-01-01 --end 2027-01-01
+
+# What can the engine do, as JSON?
+astroengine capabilities
 ```
 
 ---
 
 ## Installation
 
-### System Requirements
-
-- Python 3.9+
-- Raspberry Pi 5 (16 GB RAM) — or any Linux/macOS machine
-- Internet access for first-use Nominatim geocoding (optional; falls back gracefully offline)
-
-### Dependencies
+**Requirements:** Python 3.11+, and a C compiler for `pyswisseph` only if no
+wheel exists for your platform (wheels cover Linux, macOS, Windows).
 
 ```bash
-pip install pyswisseph kerykeion geopy timezonefinder pytz
+# Core install
+python -m pip install .
+
+# With geo support (timezonefinder) and test tooling
+python -m pip install '.[geo,test]'
+
+# Verify
+astroengine capabilities
+python -m pytest -q        # full suite, offline, explicit coordinates
 ```
 
 | Package | Purpose | Required |
-|---------|---------|----------|
+| --- | --- | --- |
 | `pyswisseph` | Swiss Ephemeris — all celestial positions | **Yes** |
-| `kerykeion` | Supplementary geocoding cache | Recommended |
-| `geopy` | Nominatim geocoder — any world city | Recommended |
-| `timezonefinder` | IANA timezone from lat/lon | Recommended |
-| `pytz` | DST-aware local→UTC conversion | Recommended |
+| `tzdata` / `pytz` | IANA timezone database | **Yes** |
+| `jsonschema` | Agent tool-schema validation | **Yes** |
+| `timezonefinder` | IANA zone from lat/lon (`[geo]`) | Optional |
+| `geopy` | Geocoding (`[geo]`) | Optional |
+| `pytest` | Test suite (`[test]`) | Dev |
 
-The engine degrades gracefully: if `geopy` is absent it falls back to kerykeion then a hardcoded city list. If `timezonefinder` is absent it treats input time as UTC and says so.
-
-### Verify Installation
-
-```bash
-python3 astrology_engine.py lunar
-```
-
-You should see current Moon phase, illumination %, and next lunation dates. If `pyswisseph` is missing you will get a clear error.
+The engine runs on a Raspberry Pi 5, a laptop, or a server — anywhere Python
+3.11+ runs. No network calls are made at runtime; tests are fully offline.
 
 ---
 
-![https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/544f9808-270f-4ba7-9d6a-af48d47a624e.jpg](https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/544f9808-270f-4ba7-9d6a-af48d47a624e.jpg)
+## Provenance and honesty
+
+- **Backends are disclosed.** Every computation reports the actual ephemeris
+  backend (Swiss vs Moshier) and flags. Optional bodies (Chiron, asteroids)
+  report unavailability instead of faking positions.
+- **Time is strict.** Unknown birth times produce flagged local-noon charts
+  with no houses or angles. Ambiguous or nonexistent DST times reject until
+  disambiguated. Timezone input is explicit IANA or UTC.
+- **Techniques are versioned.** `data/*.json` holds immutable rule tables;
+  nothing mutates them at runtime. Capabilities report what is implemented,
+  tested, and documented — roadmap items stay visibly planned.
+- **Interpretation is separate.** The engine computes positions and cycle
+  memberships. Symbolic readings (runic or otherwise) are a distinct, labeled
+  layer. Nothing here is a validated predictor or advice engine.
+- **Evidence is kept.** [VERIFICATION.md](VERIFICATION.md) records test
+  evidence and limits; [DEVLOG.md](DEVLOG.md) is the living build record.
 
 ---
 
-## All 16 Subcommands
+## Hermes agent integration
 
-### `natal` — Full Natal Chart
-
-```bash
-python3 astrology_engine.py natal \
-  --date YYYY-MM-DD [--time HH:MM] \
-  --city CITY --nation CC [--name NAME] \
-  [--lat LAT --lon LON]
-```
-
-Output sections:
-- Planetary positions (longitude, house, speed, retrograde flag)
-- Aspects table with orb, quality, applying/separating
-- Essential dignities (scored hierarchy)
-- Arabic Lots (Fortune, Spirit, Eros, Necessity, Courage, Victory, Nemesis)
-- Antiscia and contra-antiscia
-- Hellenistic analysis (sect, sect light, joys, triplicity)
-- Norse/Rune overlay
-- House overview
+[SKILL.md](SKILL.md) is the checked-in Hermes skill: capability discovery,
+eight tool schemas, local whitelisted routing, and cited explanations. An
+agent asks `astroengine capabilities`, selects a tool, and receives
+JSON-safe, provenance-bearing results — no prompt-engineering folklore
+required. See `data/tool_schemas.json`.
 
 ---
 
-### `transit` — Transits to Natal
+## Mythic Engineering
 
-```bash
-python3 astrology_engine.py transit \
-  --date YYYY-MM-DD [--time HH:MM] \
-  --city CITY --nation CC \
-  [--transit-date YYYY-MM-DD] [--transit-time HH:MM]
-```
+This repo is built with **Mythic Engineering**: vision, domain, interface,
+execution, verification — worked through six roles in order, every slice:
 
-Default sky date is now (UTC). Use `--transit-date` to forecast against any past or future sky.
+| Role | Charge |
+| --- | --- |
+| **Skald** | Vision and true naming |
+| **Rúnhild** | Architecture: boundaries, schemas, interfaces |
+| **Eldra** | The forge: implementation |
+| **Sólrún** | The auditor: tests, fixtures, verification |
+| **Védis** | The cartographer: capability and interface mapping |
+| **Scribe** | Memory: DEVLOG, docs, continuity |
 
----
-
-![https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/8ac34e68-f15a-4c8c-bbcb-690a689d37c5.jpg](https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/8ac34e68-f15a-4c8c-bbcb-690a689d37c5.jpg)
-
----
-
-### `synastry` — Two-Chart Comparison
-
-```bash
-python3 astrology_engine.py synastry \
-  --date1 YYYY-MM-DD [--time1 HH:MM] --name1 NAME \
-  --date2 YYYY-MM-DD [--time2 HH:MM] --name2 NAME \
-  [--city1 CITY --nation1 CC] [--city2 CITY --nation2 CC]
-```
-
-Providing both cities enables house overlay analysis (Person A's planets in Person B's houses and vice versa).
+Each slice follows the loop: **task document → implement → verify →
+update docs → commit → push → confirm remote HEAD → next slice.** No force
+pushes. No deletions without the human's word. Read [AGENTS.md](AGENTS.md)
+and [RULES.AI.md](RULES.AI.md) before touching code.
 
 ---
 
-### `composite` — Composite / Davison Chart
+## File structure
 
-```bash
-python3 astrology_engine.py composite \
-  --date1 YYYY-MM-DD [--time1 HH:MM] \
-  --date2 YYYY-MM-DD [--time2 HH:MM] \
-  [--city1 CITY --nation1 CC] [--city2 CITY --nation2 CC] \
-  [--name1 NAME] [--name2 NAME]
-```
-
-Midpoint composite by default. Providing both cities also generates the Davison relationship chart (average Julian Day + average location).
-
----
-
-### `synergy` — Full Relationship Analysis
-
-```bash
-python3 astrology_engine.py synergy \
-  --date1 YYYY-MM-DD [--time1 HH:MM] \
-  --date2 YYYY-MM-DD [--time2 HH:MM] \
-  [--name1 NAME] [--name2 NAME]
-```
-
-Combined report: harmony/challenge synergy score bar, key cross-aspects, composite chart positions, composite dignities, cross-midpoints.
+| Path | Holds |
+| --- | --- |
+| `astrology_engine.py` | Legacy CLI: 27 text subcommands |
+| `astroengine/` | Typed package: models, ephemeris, vedic, runic, CLI, agent |
+| `data/` | Immutable rule tables (`runic.json`, `vedic.json`, `western.json`, …) |
+| `tests/` | Offline fixtures and integration checks |
+| `tasks/` | Document-first work orders, one per slice |
+| `docs/` | References, decisions, images |
+| `ROADMAP.md` | The full Western/Vedic/location/relationship program |
+| `ROADMAP_RUNIC.md` | The nine-slice runic star-program |
+| `TODO.md` | Execution truth: what is done, what is next |
+| `DEVLOG.md` | The living build record |
+| `COMMANDS.md` | CLI reference |
+| `SKILL.md` | Hermes agent skill |
 
 ---
 
-![https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/c5c058a2-a770-49b1-a58d-637db801313e.jpg](https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/c5c058a2-a770-49b1-a58d-637db801313e.jpg)
+## Further reading
+
+- [ROADMAP.md](ROADMAP.md) — the complete expansion program
+- [ROADMAP_RUNIC.md](ROADMAP_RUNIC.md) — the runic star-program
+- [ARCHITECTURE.md](ARCHITECTURE.md) / [DESIGN_PRINCIPLES.md](DESIGN_PRINCIPLES.md)
+- [PHILOSOPHY.md](PHILOSOPHY.md) — why reproducible astrology matters
+- [VERIFICATION.md](VERIFICATION.md) — evidence and limits
+- [docs/README_classic.md](docs/README_classic.md) — the previous README, preserved
 
 ---
 
-### `solar-return` — Solar Return Chart
-
-```bash
-python3 astrology_engine.py solar-return \
-  --date YYYY-MM-DD --time HH:MM \
-  --city CITY --nation CC \
-  [--year YYYY]
-```
-
-Finds the exact moment the Sun returns to its natal degree for the target year (default: current year). Uses iterative convergence accurate to arc-seconds.
-
----
-
-### `progressions` — Secondary Progressions
-
-```bash
-python3 astrology_engine.py progressions \
-  --date YYYY-MM-DD --time HH:MM \
-  --city CITY --nation CC \
-  [--prog-date YYYY-MM-DD]
-```
-
-One day after birth = one progressed year. Default target is today. Shows all progressed positions plus tight-orb aspects to natal planets.
-
----
-
-### `lunar` — Lunar Intelligence
-
-```bash
-python3 astrology_engine.py lunar
-```
-
-No parameters needed. Returns: current phase name, illumination %, void-of-course status, next New Moon date, next Full Moon date, Moon's aspects to other planets.
-
----
-
-![https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/ccb952ab-e824-4c94-aea9-29651672549d.jpg](https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/ccb952ab-e824-4c94-aea9-29651672549d.jpg)
-
----
-
-### `planet-hours` — Chaldean Planetary Hours
-
-```bash
-python3 astrology_engine.py planet-hours \
-  [--date YYYY-MM-DD] \
-  [--city CITY --nation CC] \
-  [--lat LAT --lon LON]
-```
-
-Chaldean hour ruler sequence for the day, sunrise to sunset to sunrise. Each hour shows the planet ruler and its Norse god correspondence.
-
----
-
-### `lots` — Arabic Lots
-
-```bash
-python3 astrology_engine.py lots \
-  --date YYYY-MM-DD [--time HH:MM] \
-  --city CITY --nation CC
-```
-
-All seven Hermetic Parts with day/night chart switching: Fortune, Spirit, Eros, Necessity, Courage, Victory, Nemesis.
-
----
-
-### `hellenistic` — Hellenistic Analysis
-
-```bash
-python3 astrology_engine.py hellenistic \
-  --date YYYY-MM-DD [--time HH:MM] \
-  --city CITY --nation CC
-```
-
-Sect (day/night chart), sect light (Sun or Moon as chart ruler), planetary joys by house, triplicity rulers for each element, stelliums, mutual receptions.
-
----
-
-![https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/ecc1715c-605a-4575-bee5-0d91ade23108.jpg](https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/ecc1715c-605a-4575-bee5-0d91ade23108.jpg)
-
----
-
-### `dignity` — Essential Dignities Table
-
-```bash
-python3 astrology_engine.py dignity \
-  --date YYYY-MM-DD [--time HH:MM] \
-  --city CITY --nation CC
-```
-
-Standalone dignity table: all planets with their domicile/detriment/exaltation/fall/triplicity/terms/face status, scored and ranked. Shows mutual receptions.
-
----
-
-### `antiscia` — Antiscia Table
-
-```bash
-python3 astrology_engine.py antiscia \
-  --date YYYY-MM-DD [--time HH:MM]
-```
-
-Antiscia (solstice points) and contra-antiscia for all planets, with inter-planet connection detection when two antiscia are conjunct.
-
----
-
-### `predict` — Event Prediction
-
-```bash
-python3 astrology_engine.py predict \
-  --date YYYY-MM-DD [--time HH:MM] \
-  --city CITY --nation CC \
-  [--start YYYY-MM-DD] [--end YYYY-MM-DD] \
-  [--transit-planets LIST] [--natal-planets LIST]
-```
-
-Four prediction layers in one report:
-1. **Exact transit-to-natal aspects** — bisection search finds crossing dates to 0.01°
-2. **Planetary stations** — all retrograde and direct stations in window
-3. **Sign ingresses** — all planets crossing sign boundaries
-4. **Eclipses** — New/Full Moon eclipses in window
-
-Default window: today → one year ahead. Planet lists are comma-separated (e.g. `--transit-planets Jupiter,Saturn,Uranus`).
-
----
-
-### `geoastrology` — Astrocartography
-
-```bash
-python3 astrology_engine.py geoastrology \
-  --date YYYY-MM-DD [--time HH:MM] \
-  --city CITY --nation CC \
-  [--name NAME] \
-  [--query-lat LAT --query-lon LON]
-```
-
-MC/IC lines: exact Earth longitude where each planet culminates/anti-culminates. ASC/DSC lines: latitude-sampled table of where each planet rises/sets. Add `--query-lat`/`--query-lon` for a **power spot analysis** — finds which chart lines are within 3° of any location on Earth.
-
----
-
-### `aspect-grid` — Full Aspect Matrix
-
-```bash
-python3 astrology_engine.py aspect-grid \
-  --date YYYY-MM-DD [--time HH:MM]
-```
-
-Complete N×N aspect matrix for all 11 major and minor aspects between all planets.
-
----
-
-## Geocoding & Timezone Pipeline
-
-All location-dependent commands use a four-tier cascade:
-
-```
-1. --lat / --lon explicit override (always wins)
-        ↓ (if not provided)
-2. Nominatim (OpenStreetMap) — any world city, free, no API key
-        ↓ (if Nominatim fails or is offline)
-3. kerykeion geonames database (SQLite cache, ~60 cities)
-        ↓ (if kerykeion fails)
-4. Hardcoded fallback dict (~70 major world cities)
-        ↓ (if city unknown)
-   Warns and uses (0.0°N, 0.0°E) — Greenwich/Equator
-```
-
-Once coordinates are resolved, the **timezone pipeline**:
-
-```
-lat/lon → timezonefinder → IANA tz name (e.g. "America/Indiana/Indianapolis")
-                 ↓
-tz name + local birth time → pytz.localize(is_dst=None)
-                 ↓
-UTC hour for Swiss Ephemeris Julian Day calculation
-```
-
-The `is_dst=None` setting raises `AmbiguousTimeError` on genuinely ambiguous DST boundaries; the engine catches this and falls back to `is_dst=False` (standard time). This handles Indiana's complex DST history and all other edge cases correctly.
-
-Every chart header shows the resolved timezone label, for example:
-
-```
-Time: 14:30 LT  →  19:30 UTC  (UTC-05:00  America/Indiana/Indianapolis)
-```
-
----
-
-![https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/ff1930e8-65c4-4214-b3ca-936e7c6d0e67.jpg](https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/ff1930e8-65c4-4214-b3ca-936e7c6d0e67.jpg)
-
----
-
-## Norse & Hellenistic Layer
-
-### Planet → Norse Deity
-
-| Planet | Norse Correspondence |
-|--------|---------------------|
-| Sun | Sól — Ásgard's light, the burning road |
-| Moon | Máni — the measurer, Hrimfaxi's rider |
-| Mercury | Oðinn — seeker, rune-master, the wanderer |
-| Venus | Freyja — Vanaheim's queen, seiðr and war |
-| Mars | Týr — the one-handed, the oath-keeper |
-| Jupiter | Þórr — Miðgarðr's protector, the law |
-| Saturn | Allfather in his aspect of fate and age |
-| Uranus | Loki — the shape-changer, the unbound |
-| Neptune | Njörðr — sea-mist, dissolution, the deep |
-| Pluto | Hel — Niflheim's queen, death-door |
-| Chiron | Mímir — severed wisdom, the eternal wound |
-
-### Sign → Elder Futhark Rune
-
-Each sign maps to an Elder Futhark rune — see `SIGN_RUNES` constant in `astrology_engine.py` for the full table, and `references/` for the full rune grimoire with galdr chants and magical applications.
-
-### Hellenistic Techniques
-
-The engine implements:
-- **Sect** — day vs night chart (Sun above/below horizon)
-- **Sect light** — whether the chart runs on solar or lunar power
-- **Planetary joys** — traditional house joy assignments (Mercury/1st, Moon/3rd, etc.)
-- **Triplicity rulers** — fire/earth/air/water primary + secondary + participating rulers
-- **Mutual receptions** — planets in each other's domicile
-- **Stelliums** — three or more planets within 15° of longitude
-
-### Essential Dignity Scoring
-
-Points assigned by Ptolemaic hierarchy:
-
-| Dignity | Score |
-|---------|-------|
-| Domicile | +5 |
-| Exaltation | +4 |
-| Triplicity ruler | +3 |
-| Term (Egyptian) | +2 |
-| Face (Chaldean decan) | +1 |
-| Peregrine (none) | 0 |
-| Fall | −4 |
-| Detriment | −5 |
-
----
-
-## Hermes Agent Integration
-
-The engine is registered as a Hermes skill at:
-
-```
-/home/pi/.hermes/skills/divination/astrology/
-├── SKILL.md           ← Hermes skill manifest
-└── astrology_engine.py
-```
-
-`SKILL.md` contains the YAML frontmatter the Hermes dispatcher reads, plus full usage documentation for the AI agent layer. When Hermes receives an astrology request, it reads `SKILL.md`, determines the correct subcommand, runs the engine, and interprets the output through the Norse mythic framing.
-
-### Key agent rules from SKILL.md
-
-- Never fabricate planetary positions — always run the engine for current data
-- Birth time unknown → default to noon (12:00) and flag houses/ASC as approximate
-- City unknown → pass `--lat`/`--lon` directly if coordinates are available
-- Present Norse correspondences as living tradition overlay, not historical reconstruction
-
----
-
-## WYRD Protocol Hooks
-
-When called from the Norse Saga Engine or Ørlög system:
-
-| Astrological Output | WYRD Protocol Mapping |
-|--------------------|----------------------|
-| Lot of Fortune | Material wyrd — resource pool and luck |
-| Lot of Spirit | Seiðr capacity — inner alignment |
-| Sect light (Sun) | Solar channel — will, action, outer fate |
-| Sect light (Moon) | Lunar channel — intuition, inner fate |
-| Current transits | Potential Wyrd event triggers in active campaign |
-| Natal chart angles | ASC → PAD Valence axis; MC → Arousal axis |
-
-These are conceptual hooks. Code-level integration with the WYRD Protocol ECS lives in the Norse Saga Engine codebase, not here.
-
----
-
-## File Structure
-
-```
-astrology/
-├── README.md                    ← You are here
-├── SKILL.md                     ← Hermes Agent skill manifest
-├── ARCHITECTURE.md              ← Technical deep-dive for vibe coding
-├── COMMANDS.md                  ← Full CLI reference (every flag)
-├── CHANGELOG.md                 ← Version history
-├── ROADMAP.md                   ← Planned features and known gaps
-├── CONTRIBUTING.md              ← How to extend the engine
-├── astrology_engine.py          ← The engine (~2850 lines)
-├── cache/
-│   └── kerykeion_geonames_cache.sqlite
-└── references/
-    ├── engine-review-gaps.md    ← Original gap analysis (archived)
-    └── gaps-and-integration-notes.md
-```
-
----
-
-## Dependencies
-
-```
-pyswisseph>=2.10        Swiss Ephemeris bindings
-kerykeion>=5.0          Geocoding cache + chart helpers
-geopy>=2.4              Nominatim geocoder
-timezonefinder>=8.0     IANA timezone from coordinates
-pytz>=2024              DST-aware timezone conversion
-```
-
-All installed on the target Raspberry Pi 5. For a fresh environment:
-
-```bash
-pip install pyswisseph kerykeion geopy timezonefinder pytz
-```
-
----
-
-## Further Reading
-
-- [ARCHITECTURE.md](ARCHITECTURE.md) — How the engine is built, data flow, constants, function map
-- [COMMANDS.md](COMMANDS.md) — Exhaustive flag reference for every subcommand
-- [ROADMAP.md](ROADMAP.md) — What's planned, what's known to be imperfect
-- [CONTRIBUTING.md](CONTRIBUTING.md) — How to add subcommands, extend mappings, improve the engine
-- [CHANGELOG.md](CHANGELOG.md) — What changed in each version
-
----
-
-*Forged in the Longhall of Volmarr Wyrd. Read the sky; read the wyrd.*
-
----
-
-![https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/Viking_Apache_V2_1.jpg](https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/Viking_Apache_V2_1.jpg)
-
----
-
-## License
-
-Copyright (c) 2026 Volmarr Wyrd
-
-AI Agent Astrology Engine is licensed under the **Apache License, Version 2.0**. See the [LICENSE](LICENSE) file for the full license text and [NOTICE](NOTICE) for the project attribution.
-
-Unless required by applicable law or agreed to in writing, this project is distributed on an "AS IS" BASIS, without warranties or conditions of any kind, either express or implied.
-
----
-
-## Distribution and Privacy Position
-
-AI Agent Astrology Engine is published here as source code and project material.
-
-The author does not require users to provide age, identity, government ID, biometric data, or similar personal information in order to access or use the source code in this repository.
-
-The author may decline to provide official binaries, installers, hosted services, app-store releases, or other official distribution channels where doing so would require age verification, identity verification, or similar personal-data collection.
-
-Any third party who forks, packages, redistributes, deploys, hosts, or otherwise makes this software available does so independently and is solely responsible for compliance with applicable law, platform policy, and distribution requirements in their own jurisdiction and context.
-
-See [LEGAL-NOTICE.md](LEGAL-NOTICE.md) for details.
-
----
----
-
-## RuneForgeAI
-
-**RuneForgeAI** is my AI research, development, and creative systems forge: a Norse Pagan cyber-Viking workshop for building mythic AI architectures, memory systems, world engines, companion intelligence, and structured vibe coding tools.
-
-RuneForgeAI exists at the crossroads of:
-
-- **Mythic Engineering**
-- **AI memory and continuity systems**
-- **Viking-themed simulation and worldbuilding**
-- **AI companions with stable identity**
-- **small-model enhancement through architecture**
-- **retrieval, grounding, and truth-verification systems**
-- **cyber-Heathen software design**
-- **human + AI co-creation**
-
-The core idea is simple:
-
-> AI should not be treated as a disposable text generator.  
-> It should be shaped into structured, memory-bearing, meaning-aware systems that can preserve continuity, deepen creativity, and help humans build living worlds.
-
-RuneForgeAI is where I explore architectures that make AI more coherent, more persistent, and more useful: not through hype, but through structure. Memory, retrieval, world state, personality, routing, verification, symbolic logic, and mythic design language all become part of the same forge.
-
-This work connects directly to my larger ecosystem of projects, including the **Norse Saga Engine**, **Mythic Engineering**, **WYRD Protocol**, **Mímir-Vörðr**, cyber-Viking philosophy, AI companion design, and the broader vision of spiritually meaningful technology.
-
-### What RuneForgeAI Builds
-
-- AI-native memory frameworks
-- persistent personality and companion systems
-- Viking and mythic world simulation tools
-- roleplay and RPG intelligence architectures
-- structured prompt and documentation protocols
-- retrieval-augmented truth systems
-- small-model orchestration patterns
-- cyber-Viking AI aesthetics and interfaces
-- open frameworks for human-AI creative collaboration
-
-### Guiding Principle
-
-> Build AI like a living system, not a pile of prompts.
-
-RuneForgeAI is my digital forge for turning myth, memory, code, and consciousness into working architecture.
-
----
-
-![https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/image-23-RuneForgeAI.jpg](https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/image-23-RuneForgeAI.jpg)
-
----
-
-![https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/IMG_0407.jpeg](https://raw.githubusercontent.com/hrabanazviking/astrology-engine/refs/heads/main/IMG_0407.jpeg)
-
----
+*Heill, traveler. The stars are computed truly here — what you make of them
+is your own wyrd.* — **Yrsa Freydisdottir**, for **Volmarr**
