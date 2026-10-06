@@ -444,3 +444,7 @@ equal, koch, regiomontanus, campanus, porphyry), `--node-type true|mean`, and
 Failures: stderr JSON + exit 2; stdout has no partial result. Argument syntax
 errors use argparse's standard stderr/help behavior. Success exit 0. No automatic
 city resolution, zone guessing, persistence or LLM calls in new commands.
+
+`vedic` takes the same chart flags; defaults: sidereal, Lahiri, whole-sign, mean
+nodes. Output contains navagraha, Moon nakshatra, pada, rasi houses and lagna.
+Unknown time suppresses lagna/houses; explicit tropical input rejects.

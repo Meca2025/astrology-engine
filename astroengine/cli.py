@@ -34,6 +34,11 @@ def register_commands(subparsers: Any) -> None:
     chart = subparsers.add_parser("chart", help="Reproducible chart as JSON (explicit location/zone)")
     add_chart_arguments(chart)
     chart.set_defaults(modern_handler=lambda args: compute_chart(request_from_args(args)))
+    from .vedic import compute_vedic
+    vedic = subparsers.add_parser("vedic", help="Jyotisha D1, navagraha and nakshatras as JSON")
+    add_chart_arguments(vedic)
+    vedic.set_defaults(**load_rules("vedic.json")["defaults"],
+                       modern_handler=lambda args: compute_vedic(request_from_args(args)))
     discovery = subparsers.add_parser("capabilities", help="Technique availability and scope as JSON")
     discovery.set_defaults(modern_handler=lambda args: capabilities())
 

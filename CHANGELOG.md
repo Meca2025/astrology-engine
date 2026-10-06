@@ -107,3 +107,8 @@ Added typed chart requests, explicit tropical/sidereal profiles, full UTC date
 conversion, strict failures, JSON/discovery, packaging, test and cross-platform CI
 configuration. Legacy import no longer rewrites stdout. Mythic Engineering
 document suite and comprehensive method-level expansion roadmap published.
+
+### S02 additions
+
+Vedic D1 JSON, 27 nakshatras/108 padas, rasi houses, explicit ayanamsa/node
+variants and classical graha aliases.

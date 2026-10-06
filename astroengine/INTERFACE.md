@@ -26,3 +26,11 @@ Swiss Ephemeris state changes occur under an adapter lock; optional ephemeris pa
 are resolved dynamically. No data mutation, birth persistence, network or AI calls.
 The adapter does not serialize unrelated external direct Swiss Ephemeris calls.
 CLI catches known errors, logs structured diagnostics to stderr and returns 2.
+
+## Jyotisha D1 (S02)
+
+`vedic.compute_vedic(request)` requires sidereal inputs and returns navagraha
+positions/nakshatras/rasi houses, optional lagna and underlying chart provenance.
+`vedic.nakshatra(longitude)` returns 1-based index/pada, lord and fraction elapsed.
+CLI `vedic` shares chart arguments with sidereal/Lahiri/whole-sign/mean defaults.
+No interpretation, yoga, strength or marriage scoring is inferred.

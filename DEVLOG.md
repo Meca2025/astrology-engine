@@ -13,3 +13,9 @@ User authorized implementation/push loops; no repeated approval gate is needed.
 Implemented the typed/profile/data/provenance/CLI boundaries. 24 tests and wheel
 resource check passed. UTC midnight and DST/polar failures are explicit. Existing
 text commands preserved; their historical gaps remain separately documented.
+
+## S02 — Jyotisha D1
+
+Added data-defined navagraha/nakshatra profile and wired JSON command. All 34 tests
+passed, including direct Lahiri house/position checks and 108 pada interiors.
+Restored original ignore rules after detecting the initial ignore-file overwrite.

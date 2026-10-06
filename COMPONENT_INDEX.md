@@ -15,3 +15,6 @@
 
 Update this index when new public modules are introduced; their API is recorded in
 `astroengine/INTERFACE.md` with folder boundaries in `README_AI.md`.
+
+`astroengine/vedic.py` owns Jyotisha D1/nakshatras; `data/vedic.json` owns names,
+graha mappings and default profile. Input and astronomy domains stay independent.
