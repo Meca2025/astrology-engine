@@ -46,6 +46,24 @@ asserted; D30 uses unequal segments. The four extra vargas follow the
 Jaimini/Tajika tradition per the JHora Traditional method (not Parasara's
 scheme); D11 uses the new `scaled-relative` target mode.
 
+## Daily forecast (Vistara F01)
+
+`forecast.daily_forecast(natal_jd_ut, lat, lon, name, birth, target_iso)`
+gathers computed facts for one day — Western transits (active, exact,
+stations, ingresses), panchanga, Vimshottari dasha position, BaZi day
+pillar with pillar relations, Tibetan day-element relation, runic
+half-month, zodiac day ties — and renders a labeled symbolic reading.
+`computed` and `reading` are separate keys; `afflictions` exposes
+pressured planets, dasha lords and clashing pillars for F02.
+
+## Remedial mantras (Vistara F02)
+
+`mantras.mantras_for(planet)` / `mantras.all_mantras()` read
+data/mantras.json (traditional public-domain Navagraha verses only).
+`mantras.remedies_for(afflictions, active_transits)` recommends mantras
+for dasha lords then pressured planets, each with a reason string.
+Framed as devotional practice, never medical.
+
 ## Vimshottari (S04)
 
 `dashas.compute_dashas(request, years=None, year_model=None, as_of=None)` returns

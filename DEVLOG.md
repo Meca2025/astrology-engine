@@ -630,3 +630,12 @@ D8 Ashtamsha, D11 Rudramsha added to data/vargas.json (rule version 1.1) per
 the Jaimini/Tajika tradition, JHora Traditional method cross-verified by
 hora-prakash against JHora reference charts. New `scaled-relative` target mode
 for D11. 60 varga tests green; default vargas set is now 20.
+
+F01 (2026-10-06): `forecast` command — daily forecast across all systems
+(Western transits/stations/ingresses, panchanga, Vimshottari, BaZi day
+pillar, Tibetan day element, runic half-month, zodiac ties). Computed vs
+reading kept separate; afflictions block exposed. Acceptance: 2026-10-23
+shows Jupiter conjunct natal Mercury at 0.03° orb for Volmarr.
+F02 (2026-10-06): remedial Vedic mantras — data/mantras.json (nine grahas,
+traditional verses only), `mantras` module, `mantras` CLI, `forecast
+--mantras` flag. Devotional framing, never medical.

@@ -2403,6 +2403,60 @@ def cmd_dossier(args):
         print(json.dumps({"title": title, "dossier": dossier},
                          ensure_ascii=False, sort_keys=True))
         return {"dossier": dossier}
+
+
+def cmd_forecast(args):
+    from astroengine.forecast import daily_forecast, render_forecast
+    from astroengine.models import ChartRequest
+    if args.load:
+        title = _load_chart_into(args)
+    else:
+        apply_chart_load(args)
+        title = "Seeker"
+    require_date(args)
+    y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
+        args.date, args.time, args.city, args.nation,
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None))
+    natal_jd = julian_day(y, mo, d, utc_hour)
+    target = args.on or datetime.date.today().isoformat()
+    birth = ChartRequest(date=args.date, time=args.time, latitude=lat,
+                         longitude=lon, timezone=tz_name, zodiac="sidereal",
+                         house_system="whole-sign")
+    report = daily_forecast(natal_jd, lat, lon, title, birth, target)
+    if args.mantras:
+        from astroengine.mantras import remedies_for, render_remedies
+        aff = report["computed"]["afflictions"]
+        remedies = remedies_for(aff, report["computed"]["transits"]["active"])
+        report["remedies"] = remedies
+    if args.json:
+        print(json.dumps({"title": title, "forecast": report},
+                         ensure_ascii=False, sort_keys=True))
+        return {"forecast": report}
+    text = render_forecast(report)
+    if args.mantras:
+        text += "\n\n" + render_remedies(report["remedies"])
+    print(text)
+    return {"forecast": report}
+
+
+def cmd_mantras(args):
+    from astroengine.mantras import all_mantras, mantras_for, render_remedies
+    if args.planet:
+        entry = mantras_for(args.planet)
+        remedies = [{"planet": entry["planet"], "deity": entry["deity"],
+                     "reason": "requested by name",
+                     "mantras": entry["mantras"]}]
+    else:
+        remedies = [{"planet": p, "deity": v["deity"],
+                     "reason": "the full Navagraha set",
+                     "mantras": v["mantras"]}
+                    for p, v in sorted(all_mantras().items())]
+    if args.json:
+        print(json.dumps({"remedies": remedies}, ensure_ascii=False, sort_keys=True))
+        return {"remedies": remedies}
+    print(render_remedies(remedies))
+    return {"remedies": remedies}
     if args.out:
         with open(args.out, "w", encoding="utf-8") as f:
             f.write(text + "\n")
@@ -4294,6 +4348,21 @@ def main():
     add_geo(ds)
     add_chart_lib(ds)
 
+    fc = sub.add_parser("forecast", help="Daily forecast: every system, one seeker, one day")
+    fc.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
+    fc.add_argument("--time", default=None, help="HH:MM (24h)")
+    fc.add_argument("--on", default=None, help="Forecast date YYYY-MM-DD (default: today)")
+    fc.add_argument("--json", action="store_true")
+    fc.add_argument("--mantras", action="store_true",
+                    help="Append remedial Vedic mantras for the day's pressures")
+    add_geo(fc)
+    add_chart_lib(fc)
+
+    mn = sub.add_parser("mantras", help="Remedial Vedic mantras for the nine grahas")
+    mn.add_argument("--planet", default=None,
+                    help="Graha name: Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Rahu, Ketu")
+    mn.add_argument("--json", action="store_true")
+
     dr = sub.add_parser("draconic", help="Draconic chart: the soul-chart reckoned from the north node")
     dr.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
     dr.add_argument("--time", default=None, help="HH:MM (24h)")
@@ -4476,6 +4545,8 @@ def main():
         "asteroids":    cmd_asteroids,
         "draconic":     cmd_draconic,
         "dossier":      cmd_dossier,
+        "forecast":     cmd_forecast,
+        "mantras":      cmd_mantras,
         "midpoints":    cmd_midpoints,
     }
     _TWO_PERSON = {"synastry", "composite", "synergy"}
