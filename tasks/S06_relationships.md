@@ -15,3 +15,9 @@ contribution shown, never a measured compatibility probability.
 Gate: timezone independence, wrap/antipode midpoint/swap symmetry, no invented
 unknown-time overlays, exact aspect thresholds, deterministic score contributions,
 profile mismatch rejection and two-person CLI wiring. Retain legacy synergy text.
+
+## Receipt
+
+108 total tests passed. Swap invariance exposed floating-order sensitivity in
+midpoints; sorted normalized inputs now give deterministic symmetric results.
+Zones, uncertainty, antipodes, contribution trace and CLI checked.

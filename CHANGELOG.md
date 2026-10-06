@@ -124,3 +124,7 @@ Vimshottari maha/antar dates, birth balance, year clocks and active-period looku
 ### S05 additions
 
 Instant tithi/paksha, repeating/fixed karana, nakshatra and nitya yoga.
+
+### S06 additions
+
+Structured relationships and synergy with independent birth locations/timezones.

@@ -33,8 +33,9 @@
     },
     {
       "id": "relationship",
-      "status": "planned",
-      "scope": "Structured synastry/composite/synergy with separate locations/zones"
+      "status": "available",
+      "scope": "Structured synastry/composite/synergy with separate locations/zones",
+      "evidence": "separate-zone, circular/swap/antipodal, overlay and score-contribution tests"
     },
     {
       "id": "location",

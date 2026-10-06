@@ -459,3 +459,8 @@ and 365.2425-day tropical clock. Antars are clipped, preserving full boundaries.
 
 `panchanga` shares Vedic flags and returns instant elements plus local civil
 weekday. It does not compute sunrise vara, transitions or a festival calendar.
+
+`relationship` (alias `synergy-json`) takes `--date1/2`, optional `--time1/2`,
+required `--lat1/2 --lon1/2 --timezone1/2`, plus shared chart profile flags.
+This new command resolves real separate locations/zones; legacy `synergy` remains
+its historical text path. Scores include every contribution and method label.

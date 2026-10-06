@@ -27,3 +27,6 @@ owns year-clock choices and reporting defaults.
 
 `astroengine/panchanga.py` and data/panchanga.json own instant calendrical
 partitions; sunrise-based calendars remain a separate domain slice.
+
+`astroengine/aspects.py` owns circular/house/static aspect geometry;
+relationships.py owns comparisons/composites/synergy; western.json owns rules.

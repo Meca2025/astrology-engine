@@ -23,6 +23,11 @@ def add_chart_arguments(parser: argparse.ArgumentParser, suffix: str = "") -> No
     parser.add_argument(f"--timezone{suffix}", required=True)
     if suffix:
         return
+    add_profile_arguments(parser)
+
+
+def add_profile_arguments(parser: argparse.ArgumentParser) -> None:
+    rules = load_rules("profiles.json")
     parser.add_argument("--zodiac", choices=("tropical", "sidereal"), default=rules["defaults"]["zodiac"])
     parser.add_argument("--ayanamsa", choices=rules["ayanamsas"], default=rules["defaults"]["ayanamsa"])
     parser.add_argument("--house-system", choices=rules["houses"], default=rules["defaults"]["house_system"])
@@ -58,6 +63,14 @@ def register_commands(subparsers: Any) -> None:
     add_chart_arguments(panchanga)
     panchanga.set_defaults(**load_rules("vedic.json")["defaults"],
                           modern_handler=lambda args: compute_panchanga(request_from_args(args)))
+    from .relationships import compute_relationship
+    relationship = subparsers.add_parser("relationship", aliases=["synergy-json"],
+                                         help="Synastry, overlays, composite and explainable synergy")
+    add_chart_arguments(relationship, "1")
+    add_chart_arguments(relationship, "2")
+    add_profile_arguments(relationship)
+    relationship.set_defaults(modern_handler=lambda args: compute_relationship(
+        request_from_args(args, "1"), request_from_args(args, "2")))
     discovery = subparsers.add_parser("capabilities", help="Technique availability and scope as JSON")
     discovery.set_defaults(modern_handler=lambda args: capabilities())
 
@@ -65,6 +78,10 @@ def register_commands(subparsers: Any) -> None:
 def request_from_args(args: argparse.Namespace, suffix: str = "") -> ChartRequest:
     values = {field.name: getattr(args, field.name + suffix)
               for field in fields(ChartRequest) if hasattr(args, field.name + suffix)}
+    if suffix:
+        for field in fields(ChartRequest):
+            if field.name not in values and hasattr(args, field.name):
+                values[field.name] = getattr(args, field.name)
     return ChartRequest(**values)
 
 

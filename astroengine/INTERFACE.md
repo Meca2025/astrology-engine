@@ -58,3 +58,14 @@ As-of outside the report window returns null; no event interpretation is implied
 returns instantaneous tithi/paksha, karana, nakshatra and nitya yoga partitions.
 `compute_panchanga(request)` supplies D1/provenance and local civil weekday.
 Sunrise-based vara is null; no transition/festival/muhurta calculation is claimed.
+
+## Relationships (S06)
+
+`relationships.compute_relationship(first, second)` takes independent typed
+requests with a shared zodiac/ayanamsa/node frame. Returns both charts, static
+cross-aspects, bidirectional overlays, midpoint positions and score contributions.
+Receiving houses unknown -> corresponding overlay null; source positions remain
+flagged noon surrogates when time is missing. Composite houses are null. Antipodal
+midpoints are null with ambiguity metadata. `relationships.synergy(aspects)` uses
+versioned modern symbolic weights. It is not a compatibility probability.
+`aspects` owns signed arcs, symmetric midpoint, cusp assignment and cross-aspects.

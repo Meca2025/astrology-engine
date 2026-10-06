@@ -42,3 +42,10 @@ passed together with Linux/macOS on Python 3.11/3.12.
 
 101 total tests passed. Implemented instant lunar/solar partitions and explicit
 calendar limits. Local weekday tested across UTC date rollover.
+
+## S06 — relationships
+
+108 total tests passed. Separate birth zones, static aspects, receiving-chart
+certainty-aware overlays, deterministic circular composites and explainable
+symbolic synergy exposed via relationship/synergy-json. Exact antipodal midpoint
+ambiguity is retained. No applying/separating motion across birth epochs.
