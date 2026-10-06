@@ -429,3 +429,19 @@ lord Mars — the warrior's year, fitting for a book-birthing.
 
 Sólrún: `tests/test_profections.py` 7/7 green plus independent
 subagent verification. Pushed via the PAT tool.
+
+## 2026-10-06 — H05: transit watch
+
+Fifth slice of the Horizons program. `astroengine/watch.py` scans the
+sky day by day for Jupiter through Pluto aspecting the natal planets
+and angles, then ternary-refines each hit to its exact date —
+retrograde triple passes each reported. The `watch` CLI takes `--load`
+or birth data, `--from-date`/`--to-date`, `--orb`, `--json`. A month
+scans in under a second. The headline hit stands confirmed: Jupiter
+conjunct natal Mercury on 2026-10-23, orb 0.00° — the publishing
+blessing, now watched by the engine itself. (--remind calendar writes
+remain a user-confirmed future step; the October 23 promise lives in
+the tracked goal.)
+
+Sólrún: `tests/test_watch.py` 7/7 green plus independent subagent
+verification. Pushed via the PAT tool.

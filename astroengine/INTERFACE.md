@@ -313,3 +313,8 @@ ten new aspects with neutral weight 0 so synergy scoring is unchanged.
   target_iso, lord_longitude)` — annual profection (whole-sign houses
   assumed); `essential_dignity(planet, sign)` — traditional domicile /
   exaltation / detriment / fall / peregrine. CLI: `profection`.
+
+- `astroengine/watch.py`: `upcoming_transits(natal_jd_ut, from_jd_ut,
+  to_jd_ut, lat, lon, orb)` — outer-planet (Jupiter–Pluto)
+  conjunctions/oppositions/squares/trines to natal planets + ASC/MC;
+  daily scan with ternary-refined exact dates. CLI: `watch`.

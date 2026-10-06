@@ -2371,6 +2371,50 @@ def _loc_label(req: dict) -> str:
     return " ".join(x for x in (city, nation) if x)
 
 
+def cmd_watch(args):
+    from astroengine.watch import upcoming_transits
+    if args.load:
+        from astroengine.charts import load_chart
+        saved = load_chart(args.load, getattr(args, "chart_dir", None))
+        req = saved.get("request", {}) or {}
+        for k in ("date", "time", "lat", "lon", "timezone", "city", "nation"):
+            if getattr(args, k, None) in (None, "") and req.get(k) not in (None, ""):
+                setattr(args, k, req.get(k))
+        title = saved.get("name", "Seeker")
+        print(f"  Watching transits for saved chart '{args.load}'",
+              file=sys.stderr if args.json else sys.stdout)
+    else:
+        apply_chart_load(args)
+        title = "Seeker"
+    require_date(args)
+    y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
+        args.date, args.time, args.city, args.nation,
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None))
+    jd_natal = julian_day(y, mo, d, utc_hour)
+    try:
+        fy, fm, fd = (int(x) for x in (args.from_date or datetime.date.today().isoformat()).split("-"))
+        ty, tm, td = (int(x) for x in (args.to_date or (datetime.date.today() + datetime.timedelta(days=365)).isoformat()).split("-"))
+        jd_from = julian_day(fy, fm, fd, 12.0)
+        jd_to = julian_day(ty, tm, td, 12.0)
+    except (ValueError, TypeError):
+        raise CalculationError("use YYYY-MM-DD for --from-date/--to-date")
+    hits = upcoming_transits(jd_natal, jd_from, jd_to, lat, lon, orb=args.orb)
+    if args.json:
+        print(json.dumps({"title": title, "transits": hits},
+                         ensure_ascii=False, sort_keys=True))
+        return {"transits": hits}
+    header("TRANSIT WATCH", f"{title}")
+    if not hits:
+        print(f"  No outer-planet transits within {args.orb}° in this window.")
+    for h in hits:
+        print(f"  {h['date']}  {h['transit_body']:<8} {h['aspect']:<12} "
+              f"natal {h['natal_point']:<8} orb {h['orb']:.2f}°")
+    print()
+    print("  Symbolic timing, not prediction of events.")
+    return {"transits": hits}
+
+
 def cmd_profection(args):
     from astroengine.profections import profection
     if args.load:
@@ -3896,6 +3940,16 @@ def main():
     num.add_argument("--json", action="store_true")
     add_chart_lib(num, with_load=False)
 
+    wtc = sub.add_parser("watch", help="Watch for coming outer-planet transits to natal points")
+    wtc.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
+    wtc.add_argument("--time", default=None, help="HH:MM (24h)")
+    wtc.add_argument("--from-date", default=None, dest="from_date", help="Window start YYYY-MM-DD (default: today)")
+    wtc.add_argument("--to-date", default=None, dest="to_date", help="Window end YYYY-MM-DD (default: +1 year)")
+    wtc.add_argument("--orb", type=float, default=1.0)
+    wtc.add_argument("--json", action="store_true")
+    add_geo(wtc)
+    add_chart_lib(wtc)
+
     prf = sub.add_parser("profection", help="Annual profections: the Hellenistic time-lord wheel")
     prf.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
     prf.add_argument("--time", default=None, help="HH:MM (24h)")
@@ -3989,6 +4043,7 @@ def main():
         "wheel":        cmd_wheel,
         "solar-arc":    cmd_solar_arc,
         "profection":   cmd_profection,
+        "watch":        cmd_watch,
     }
     _TWO_PERSON = {"synastry", "composite", "synergy"}
     _DATE_FIELDS = {

@@ -83,6 +83,7 @@ and documented — never merely planned.
 | `wheel` | Chart wheels — the sky rendered as beautiful SVG, five house systems via `--houses` |
 | `solar-arc` | Solar arc directions — the great predictive art, directed-to-natal aspects |
 | `profection` | Annual profections — the Hellenistic time-lord wheel |
+| `watch` | Transit watch — coming outer-planet transits with exact dates |
 
 ---
 

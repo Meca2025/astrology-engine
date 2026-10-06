@@ -289,6 +289,18 @@ python3 astrology_engine.py runic --datetime 2026-05-16T16:45 \
 
 ---
 
+## `watch`
+
+Transit watch: a calendar of coming outer-planet transits
+(Jupiter–Pluto) to your natal planets and angles, with exact dates.
+
+```bash
+python3 astrology_engine.py watch --load volmarr --from-date 2026-10-06 --to-date 2026-11-06
+python3 astrology_engine.py watch --load volmarr --to-date 2027-12-31 --json
+```
+
+---
+
 ## `profection`
 
 Annual profections — the Hellenistic time-lord wheel. Each year of
