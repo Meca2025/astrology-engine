@@ -33,3 +33,5 @@ relationships.py owns comparisons/composites/synergy; western.json owns rules.
 
 `astroengine/locations.py` owns relocation and spherical horizon geometry;
 ephemeris.equatorial_positions supplies zodiac-independent equatorial snapshots.
+
+`astroengine/western.py` owns profections/harmonic/midpoint analysis.

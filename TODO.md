@@ -11,7 +11,7 @@ Read this first. Current work: 2026-10-06 expansion under Mythic Engineering.
 - [x] S05 — instant panchanga elements with named conventions.
 - [x] S06 — structured relationship analysis with real locations/zones.
 - [x] S07 — relocation and exact-latitude angular location lines.
-- [ ] S08 — profections, harmonics, midpoint sensitivity.
+- [x] S08 — profections, harmonics, midpoint sensitivity.
 
 See ROADMAP for the complete expansion, including later validation/research gates.
 Legacy paths still have known input/provenance limitations; do not advertise new

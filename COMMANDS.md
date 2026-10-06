@@ -468,3 +468,7 @@ its historical text path. Scores include every contribution and method label.
 `location` shares chart flags and requires `--query-lat LAT --query-lon LON`.
 Known birth time is required. Relocation holds birth UTC fixed. Results include
 MC/IC/ASC/DSC longitudes and query residuals in degrees, with circumpolar status.
+
+`western` shares chart flags and requires `--as-of YYYY-MM-DD`; optional
+`--harmonic POSITIVE_INTEGER` (default 9) and `--midpoint-orb DEGREES` (default 1).
+Whole-sign annual profection uses civil birthday age and traditional rulership.

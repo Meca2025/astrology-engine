@@ -132,3 +132,7 @@ Structured relationships and synergy with independent birth locations/timezones.
 ### S07 additions
 
 Relocation JSON and exact-latitude geometric MC/IC/ASC/DSC location lines.
+
+### S08 additions
+
+Annual profections, harmonics and midpoint sensitivity through structured APIs.

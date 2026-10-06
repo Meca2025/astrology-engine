@@ -25,3 +25,10 @@ as infallible. Other worked fixtures 11/12/14/16/17/19-26 agree with the rules.
 
 Nakshatra name/order reference:
 https://www.drikpanchang.com/tutorials/nakshatra/nakshatra.html
+
+## Annual profections
+
+Basic whole-sign time-lord description by Chris Brennan:
+https://theastrologypodcast.com/2018/04/26/annual-profections-a-basic-time-lord-technique/
+The implemented clock is explicit civil birthday age; solar-return timing remains
+a distinct option for a later timing slice.

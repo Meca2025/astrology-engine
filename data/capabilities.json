@@ -45,8 +45,9 @@
     },
     {
       "id": "western",
-      "status": "planned",
-      "scope": "Annual profections, harmonic positions and sensitive midpoints"
+      "status": "available",
+      "scope": "Annual profections, harmonic positions and sensitive midpoints",
+      "evidence": "birthday/leap/ruler, harmonic and midpoint sensitivity fixtures"
     },
     {
       "id": "legacy",

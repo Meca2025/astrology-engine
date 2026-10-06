@@ -14,3 +14,9 @@ Gate: age0/12/13, birthday and leap boundaries, traditional rulership, source-si
 wrap, positive integer harmonic, midpoint third-body orb thresholds and CLI.
 Also refactor growing CLI registration into domain-focused functions without
 changing any command flags or handlers; check complete registry parity.
+
+## Receipt
+
+122 total local tests passed. Birthdays/12-year cycles/leap policy, traditional
+lords, harmonic wrap/invalid factor, third-body orbs, missing-time output and
+complete modern command registry verified.

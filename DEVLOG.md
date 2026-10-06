@@ -55,3 +55,9 @@ ambiguity is retained. No applying/separating motion across birth epochs.
 113 total tests passed. Added fixed-instant relocation, Swiss equatorial positions
 and exact-latitude geometric angular lines with circumpolar states. Tested
 antimeridian normalization, horizon roots and zodiac-independent geometry.
+
+## S08 — Western starter tools
+
+122 total tests passed. Added whole-sign annual profections, configurable integer
+harmonics and midpoint sensitivity; CLI registration split by owning domain.
+Birthday/leap/missing-time conventions and mathematical coordinates are explicit.

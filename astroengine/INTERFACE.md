@@ -79,3 +79,13 @@ equatorial angular lines at the exact destination latitude.
 geometric horizon and meridians. Circumpolar/grazing/polar states are explicit.
 Residuals are signed longitude differences at that latitude, not km or shortest
 distances to curves. Equatorial coordinates never use sidereal zodiac offsets.
+
+## Western starter tools (S08)
+
+`western.compute_western(request, as_of, harmonic=None, midpoint_orb=None)`
+returns civil-calendar whole-sign annual profection (null without birth time),
+mathematical harmonic positions and sensitive third-body midpoint hits.
+`annual_profection`, `harmonic_positions` and `sensitive_midpoints` are pure domain
+functions. February 29 birthdays use February 28 in non-leap years. Profection
+clock is calendar birthday, not an exact solar-return instant. Midpoints preserve
+antipodal ambiguities; harmonics invent neither physical instants nor houses.
