@@ -93,3 +93,9 @@ Legacy DST ambiguity/gap and unavailable-zone fallbacks remain W09b work.
 The user requested immediate next-slice continuation. Activated a continuous
 Codex Goal and paused the prior hourly heartbeat. W09b1 is the next documented
 input-contract slice, followed by house/backend and event-root slices.
+
+W09a hosted Linux/macOS checks passed; Windows found the new import-based CLI
+test subprocess using cp1252. The script entry point normally installs its UTF-8
+wrapper, but the test intentionally imports main to mock timezone discovery.
+Set Python's UTF-8 mode in that child process and retain explicit UTF-8 decoding.
+Computation assertions stay unchanged; repaired hosted acceptance remains pending.

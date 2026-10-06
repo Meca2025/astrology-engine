@@ -37,3 +37,17 @@ W09b2 owns unknown-time house suppression, polar-house and optional-body/backend
 failure contracts. W09b3 owns precision-aware bracketed event roots; neither is
 claimed by this input slice. A default city deliberately supplied by an existing
 command remains an explicit documented legacy assumption until its own migration.
+
+## Caller audit prepared during W09a hosted verification
+
+Ten single-chart handlers share add_geo and resolve_birth. Synastry/composite
+have separate coordinate fields but no timezone overrides. Synergy still hardcodes
+London and has no location fields, so add the full paired input flags and pass
+them through explicitly. Composite Davison admission also uses coordinate
+truthiness and a latitude-zero sentinel; replace admission with actual input
+presence so explicit zero coordinates survive. Preserve the existing Davison
+formula here; spherical midpoint correctness belongs to R09. Aspect-grid and
+antiscia explicitly consume UTC without locations; planet-hours is a distinct
+civil-date/sunrise interface requiring its own migration review. Keep main's
+error handler before any successful output and avoid a broad catch-all that
+would hide computation defects.

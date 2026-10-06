@@ -227,3 +227,10 @@ S01-S08 and the local-contract portion of A01 are implemented and pushed with
 verification records. MCP/HTTP hosting and external agent installation remain
 future integration gates. W09 is divided into W09a (legacy time/coordinate truth)
 and W09b (strict inputs/provenance and event solvers). TODO names the next task.
+
+W09a is implemented with 150 passing local tests: UTC rollover, local-noon
+conversion, explicit coordinate certainty and zero-coordinate synastry overlays.
+W09b now proceeds through W09b1 strict legacy inputs, W09b2 house/backend contracts
+and W09b3 event roots. Continuous Codex Goal continuation replaces the earlier
+hourly heartbeat at the user's request; each verified slice leads immediately
+to the next ready work order when the thread becomes idle.

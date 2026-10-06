@@ -87,7 +87,8 @@ def test_zero_coordinate_synastry_overlays_use_actual_julian_days(monkeypatch, c
 @pytest.mark.parametrize('command', ['natal', 'geoastrology'])
 def test_legacy_cli_offline_rollover(command):
     script = "import astrology_engine as e; e.resolve_timezone=lambda lat,lon:'Asia/Kolkata'; e.main()"
-    result = subprocess.run([sys.executable, '-c', script, command, '--date', '2000-01-01',
+    # Imported main does not install the script's stdout wrapper; set child UTF-8.
+    result = subprocess.run([sys.executable, '-X', 'utf8', '-c', script, command, '--date', '2000-01-01',
                              '--time', '00:15', '--lat', '0', '--lon', '0'],
                             capture_output=True, text=True, encoding='utf-8')
     assert result.returncode == 0, result.stderr
