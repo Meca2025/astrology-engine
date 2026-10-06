@@ -54,3 +54,4 @@ coverage through an unmodified legacy command. Report exact implementation scope
 - [x] O02 Anglo-Saxon futhorc: data/runes_futhorc.json (33 runes, OE Rune Poem + Northumbrian tradition), runecast --system futhorc live, tests/test_futhorc.py 7/7 green.
 - [x] O03 Ogham readings: data/ogham.json (25 staves, Auraicept kennings per McManus 1988), astroengine/ogham.py + `ogham` CLI (single/triad/aicme/wheel/grove), tests/test_ogham.py 8/8 green.
 - [x] O04 Chinese zodiac: data/chinese_zodiac.json (stems/branches/NaYin/allies/clashes), astroengine/chinese.py + `chinese` CLI (lunardate CNY boundaries, verified 1984 anchor), tests/test_chinese_zodiac.py 5/5 green.
+- [x] O05 Four Pillars/BaZi: astroengine/bazi.py + `bazi` CLI (Lichun year turn, jie month branches via Swiss Ephemeris, Five Tigers/Rats, JDN day pillar from verified anchors), tests/test_bazi.py 6/6 green.

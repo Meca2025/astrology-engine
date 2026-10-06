@@ -2863,6 +2863,27 @@ def cmd_runecast(args):
     return {"reading": result}
 
 
+def cmd_bazi(args):
+    from astroengine.bazi import pillars
+    if args.time is None:
+        from astroengine.models import CalculationError
+        raise CalculationError("bazi requires a known birth time; supply --time HH:MM")
+    result = pillars(args.date, args.time, args.timezone or "UTC")
+    if args.json:
+        print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+        return {"bazi": result}
+    header("FOUR PILLARS", f"born {result['date']} {result['time']} {result['timezone']}")
+    for name in ("year", "month", "day", "hour"):
+        pl = result[name]
+        print(f"  {name.capitalize():6} {pl['ganzhi']:9} "
+              f"{pl['stem_element']}/{pl['branch_element']} — NaYin {pl['nayin']}")
+    print(f"\n  Day master: {result['day_master']} "
+          f"({result['day_master_element']})   Solar term: {result['solar_term']}")
+    print()
+    print("  Computed pillars; " + result["conventions"] + ".")
+    return {"bazi": result}
+
+
 def cmd_chinese(args):
     from astroengine.chinese import zodiac
     result = zodiac(args.date)
@@ -4325,6 +4346,12 @@ def main():
     add_houses(whl)
     add_chart_lib(whl)
 
+    bz = sub.add_parser("bazi", help="Four Pillars: year/month/day/hour ganzhi via solar terms")
+    bz.add_argument("--date", required=True, help="Birth date YYYY-MM-DD")
+    bz.add_argument("--time", default=None, help="Birth time HH:MM (required)")
+    bz.add_argument("--timezone", default="UTC", help="IANA zone (default UTC)")
+    bz.add_argument("--json", action="store_true")
+
     ch = sub.add_parser("chinese", help="Chinese zodiac: stem-branch year, NaYin, allies and clashes")
     ch.add_argument("date", help="Gregorian birth date, ISO YYYY-MM-DD")
     ch.add_argument("--json", action="store_true")
@@ -4406,6 +4433,7 @@ def main():
         "runecast":     cmd_runecast,
         "ogham":        cmd_ogham,
         "chinese":      cmd_chinese,
+        "bazi":         cmd_bazi,
         "wheel":        cmd_wheel,
         "solar-arc":    cmd_solar_arc,
         "profection":   cmd_profection,

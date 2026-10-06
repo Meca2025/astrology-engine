@@ -584,3 +584,19 @@ Mulberry Wood, allies Dragon/Monkey, secret friend Ox, clash Horse.
 
 Sólrún: `tests/test_chinese_zodiac.py` 5/5 green plus independent
 subagent verification. Pushed via the PAT tool.
+
+## 2026-10-06 — O05: Four Pillars / BaZi
+
+Fifth slice of the Oracles program. `astroengine/bazi.py` raises the
+four pillars: the year turns at Lichun (Swiss Ephemeris Sun crossing
+315° — verified Feb 4 08:27 UTC for 2024), month branches follow the
+twelve jie with stems by the Five Tigers rule, the day ganzhi comes
+from the Julian Day Number (offsets derived from the verified anchor
+1939-01-17 = Jia-Yin and cross-checked on three published charts),
+and hour stems follow the Five Rats. Conventions disclosed: local
+midnight day boundary, clock time as given, no early/late Zi
+refinement. Volmarr: Ren-Zi / Wu-Shen / Yi-Wei / Geng-Chen, Day
+Master Yi Wood.
+
+Sólrún: `tests/test_bazi.py` 6/6 green plus independent subagent
+verification. Pushed via the PAT tool.

@@ -490,6 +490,18 @@ allies are computed calendar math; animal keywords are interpretive.
 python3 astrology_engine.py chinese 1972-09-01
 python3 astrology_engine.py chinese 2024-02-09 --json
 ```
+
+## `bazi`
+
+Four Pillars (BaZi) for a birth moment: year, month, day, and hour
+ganzhi with NaYin and the Day Master. The year turns at Lichun and
+the month branches follow the twelve solar-term jie (Swiss
+Ephemeris); month stems by the Five Tigers rule, hour stems by the
+Five Rats. Requires --time.
+
+```bash
+python3 astrology_engine.py bazi --date 1972-09-01 --time 08:18 --timezone America/New_York
+```
 `nine-worlds`, `wheel`. The optional `--blank` adds the modern blank
 rune (a 1980s invention, flagged as such); `--no-merkstave` reads all
 runes upright.

@@ -363,3 +363,8 @@ ten new aspects with neutral weight 0 so synergy scoring is unchanged.
   NaYin per the Sixty Jiazi verse, trine allies / secret friend /
   clash; Lunar New Year boundaries via lunardate (round-trip
   guarded). CLI: `chinese`.
+
+- `astroengine/bazi.py`: `pillars(iso_date, time, timezone)` —
+  year/month/day/hour ganzhi + NaYin + Day Master; Lichun year turn
+  and jie month branches via Swiss Ephemeris; day ganzhi from JDN;
+  Five Tigers / Five Rats stem rules. CLI: `bazi`.
