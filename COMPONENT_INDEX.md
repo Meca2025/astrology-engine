@@ -44,6 +44,11 @@ convention); verified by `tests/test_runic_mansions.py`.
 R07 adds the overlays: `grimnismal_palace`, `world_rune`,
 `nine_worlds` (App. 7, Ch. 6; labeled correspondence overlays);
 verified by `tests/test_runic_palaces.py`.
+R08 adds the interpretive synthesis: `runic_reading` (Ch. 8),
+with an explicit computation/interpretation split and an
+anti-fabrication gate; corpus v1.2 gains the Ch. 8 planetary
+qualities and rune adverbs; verified by
+`tests/test_runic_reading.py`.
 
 `astroengine/vargas.py` owns divisional sign arithmetic; `data/vargas.json` owns
 the sixteen named mappings. Technique discrepancy ledger lives in docs/references.

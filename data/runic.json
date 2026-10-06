@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "source": "Pennick (2023)",
   "historical_claim": "modern synthesis",
   "edition": "Runes and Astrology: Symbol and Starcraft in the Northern Tradition, Nigel Pennick, 2023, 311 pp",
@@ -1586,5 +1586,48 @@
         "symbolic_event": "Completion — the circle turns."
       }
     ]
+  },
+  "interpretation": {
+    "source_note": "Pennick (2023), Ch. 8 'Chronomantic Methods'. Planetary qualities and rune adverbs transcribed verbatim; used ONLY for labeled interpretive synthesis, never presented as computed fact.",
+    "historical_claim": "modern synthesis",
+    "planetary_qualities": {
+      "Sól": "self-expression",
+      "Odin": "mentality",
+      "Frigg": "harmony",
+      "Tyr": "energy",
+      "Thor": "expansion",
+      "Loki": "limitation",
+      "Urd": "change",
+      "Aegir": "uncertainty",
+      "Máni": "response",
+      "Vili": "elimination",
+      "Vé": "elimination"
+    },
+    "rune_adverbs": {
+      "Feoh": "richly",
+      "Ur": "powerfully",
+      "Thorn": "protectively",
+      "As": "divinely",
+      "Rad": "actively",
+      "Ken": "enlighteningly",
+      "Gyfu": "generously",
+      "Wyn": "joyfully",
+      "Hagal": "transformingly",
+      "Nyd": "necessarily",
+      "Is": "statically",
+      "Jera": "completely",
+      "Eoh": "defensively",
+      "Peorth": "fatefully",
+      "Elhaz": "attackingly",
+      "Sigel": "brilliantly",
+      "Tyr": "energetically",
+      "Beorc": "purifyingly",
+      "Ehwaz": "conjoiningly",
+      "Man": "humanely",
+      "Lagu": "flowingly",
+      "Ing": "expansively",
+      "Odal": "possessively",
+      "Dag": "changingly"
+    }
   }
 }

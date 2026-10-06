@@ -225,3 +225,17 @@ each in its own terms and does not synthesize the two systems.
 fixed correspondence overlays (App. 7, Ch. 6) — sign → palace/meaning/deity
 and world → rune. Results carry `"kind": "correspondence overlay"`: they
 are looked up, not computed.
+
+## Runic reading (R08)
+
+`runic_reading(iso_datetime, longitude, timezone, age_years=None,
+moon_sidereal_longitude=None)` composes one structured reading: a
+`computation` section (raw layer results from the R02–R07 functions —
+half-month, hour, planetary hour, sele, tide, station, weekday, life
+period, mansion, name pair) and an `interpretation` section of
+deterministic symbolic statements drawn ONLY from the book's tables
+(Ch. 8 planetary qualities and rune adverbs, transcribed in
+`data/runic.json` v1.2). Every statement carries kind=interpretive,
+source Pennick (2023), historical_claim "modern synthesis". Anything the
+tables do not cover is omitted, never invented. The computation
+functions remain importable without the interpretive layer.

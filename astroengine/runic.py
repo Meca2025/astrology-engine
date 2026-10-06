@@ -678,3 +678,172 @@ def nine_worlds() -> list[dict]:
 
 
 __all__ += ["grimnismal_palace", "world_rune", "nine_worlds"]
+
+
+# ---------------------------------------------------------------------------
+# R08 — Interpretive synthesis (Ch. 8 "Chronomantic Methods")
+# ---------------------------------------------------------------------------
+
+def _deity_quality(corpus: dict, deity_str: str):
+    """Match an App. 1 deity string to a Ch. 8 planetary quality.
+
+    Returns (matched_key, quality) or (None, None) when nothing in the
+    book's quality table matches — the caller then omits the quality
+    clause rather than inventing one.
+    """
+    import re
+    import unicodedata
+    qualities = corpus["interpretation"]["planetary_qualities"]
+
+    def norm(s: str) -> str:
+        s = unicodedata.normalize("NFKD", s)
+        return "".join(ch for ch in s if not unicodedata.combining(ch)).lower()
+
+    tokens = re.findall(r"[A-Za-zÁáÉéÍíÓóÚúÝýÞþÐðÆæÖöÅå]+", deity_str or "")
+    for tok in tokens:
+        for key, quality in qualities.items():
+            if norm(tok) == norm(key):
+                return key, quality
+    return None, None
+
+
+def _rune_statement(corpus: dict, layer: str, rune: str,
+                    deity_str: str | None) -> dict:
+    """Build one interpretive statement for a rune-bearing layer."""
+    adverbs = corpus["interpretation"]["rune_adverbs"]
+    parts = [f"{layer} rune {rune}"]
+    if deity_str:
+        key, quality = _deity_quality(corpus, deity_str)
+        if quality:
+            parts.append(f"{key} ({quality})")
+        else:
+            parts.append(deity_str)
+    adverb = adverbs.get(rune)
+    if adverb:
+        parts.append(f"expressed {adverb}")
+    return {
+        "layer": layer,
+        "statement": " — ".join(parts) + ".",
+        "kind": "interpretive",
+        "source": "Pennick (2023)",
+        "historical_claim": "modern synthesis",
+    }
+
+
+def runic_reading(iso_datetime: str, longitude: float, timezone: str,
+                  age_years: float | None = None,
+                  moon_sidereal_longitude: float | None = None) -> dict:
+    """Compose a structured runic reading for a moment (Ch. 8).
+
+    `computation` holds the raw layer results (no interpretation);
+    `interpretation.statements` holds deterministic symbolic statements,
+    each tagged interpretive and drawn ONLY from the book's tables —
+    anything the tables do not cover is omitted, never invented.
+    """
+    corpus = _corpus()
+    naive = _parse_iso_datetime(iso_datetime)
+    zone = _zone(timezone)
+    if zone is None:
+        raise CalculationError("timezone is required for a runic reading")
+    aware = naive.replace(tzinfo=zone)
+
+    comp: dict = {}
+    comp["half_month"] = half_month_rune(naive.date().isoformat())
+    lat = to_local_apparent_time(iso_datetime, longitude, timezone)
+    comp["hour"] = runic_hour(lat["local_apparent_time"])
+    comp["planetary_hour"] = planetary_hour(
+        aware.strftime("%A"), aware.hour)
+    comp["sele"] = sele(iso_datetime, longitude, timezone)["sele"]
+    comp["tide"] = tide(f"{aware.hour:02d}:{aware.minute:02d}")
+    comp["station"] = year_station(naive.date().isoformat())
+    comp["weekday"] = weekday_rune(aware.strftime("%A"))
+    comp["name"] = runic_name(iso_datetime, longitude, timezone)
+    if age_years is not None:
+        comp["life_period"] = life_period(age_years)
+    if moon_sidereal_longitude is not None:
+        comp["mansion"] = lunar_mansion(moon_sidereal_longitude)
+
+    statements = []
+    hm = comp["half_month"]
+    statements.append(_rune_statement(
+        corpus, "Half-month", hm["rune"],
+        hm["correspondences"].get("deity")))
+    hr = comp["hour"]
+    statements.append(_rune_statement(
+        corpus, "Hour", hr["rune"],
+        hr["correspondences"].get("deity")))
+    if comp["sele"]:
+        statements.append({
+            "layer": "Sele",
+            "statement": "Sele — the hour-rune's deity correspondence "
+                         "contains the planetary hour's deity: an "
+                         "especially powerful coincidence (Ch. 4).",
+            "kind": "interpretive",
+            "source": "Pennick (2023)",
+            "historical_claim": "modern synthesis",
+        })
+    st = comp["station"]
+    statements.append({
+        "layer": "Station",
+        "statement": f"Station {st['name']} ({st['runes']}): "
+                     f"{st['symbolic_event']}",
+        "kind": "interpretive",
+        "source": "Pennick (2023)",
+        "historical_claim": "modern synthesis",
+    })
+    wd = comp["weekday"]
+    statements.append(_rune_statement(
+        corpus, "Weekday", wd["rune"], wd["deity"]))
+    if "life_period" in comp:
+        lp = comp["life_period"]
+        key, quality = _deity_quality(corpus, lp["deity"])
+        text = f"Life period: {lp['deity']}"
+        if quality:
+            text += f" ({quality})"
+        text += (f" — year {lp['years_elapsed']:.1f} of the reign, "
+                 f"{lp['years_remaining']:.1f} years remaining.")
+        statements.append({
+            "layer": "Life period", "statement": text,
+            "kind": "interpretive", "source": "Pennick (2023)",
+            "historical_claim": "modern synthesis",
+        })
+    if "mansion" in comp:
+        mn = comp["mansion"]
+        adverb = corpus["interpretation"]["rune_adverbs"].get(mn["rune"])
+        text = (f"Lunar mansion {mn['mansion']} ({mn['northern_name']}, "
+                f"{mn['star']})")
+        if adverb:
+            # Ch. 8 adverbs cover the Elder Futhark only; other runes
+            # are named without an adverb clause, never invented
+            text += f" — expressed {adverb}"
+        statements.append({
+            "layer": "Lunar mansion", "statement": text + ".",
+            "kind": "interpretive", "source": "Pennick (2023)",
+            "historical_claim": "modern synthesis",
+        })
+    nm = comp["name"]
+    statements.append({
+        "layer": "Runic name",
+        "statement": f"Runic-name pair {nm['pair']}: the book's rendered "
+                     "names (Kenneth, Ingrid, Darwin) are literary "
+                     "wordplay on such pairs, not mechanical output.",
+        "kind": "interpretive",
+        "source": "Pennick (2023)",
+        "historical_claim": "modern synthesis",
+    })
+
+    return {
+        "datetime": iso_datetime,
+        "computation": comp,
+        "interpretation": {
+            "kind": "interpretive",
+            "statements": statements,
+            "source": "Pennick (2023)",
+            "historical_claim": "modern synthesis",
+        },
+        "source": "Pennick (2023)",
+        "historical_claim": "modern synthesis",
+    }
+
+
+__all__ += ["runic_reading"]

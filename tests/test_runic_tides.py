@@ -18,7 +18,7 @@ CORPUS = json.load(open("/home/hatch/workspace/astrology-engine/data/runic.json"
 
 
 def test_corpus_version_bumped_for_stations():
-    assert CORPUS["version"] == "1.1"
+    assert CORPUS["version"] == "1.2"
     assert len(CORPUS["stations"]["stations"]) == 8
 
 

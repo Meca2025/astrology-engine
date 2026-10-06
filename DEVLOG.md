@@ -263,3 +263,20 @@ so (`"kind": "correspondence overlay"`), honoring the standing
 computation/interpretation split. Sólrún's `tests/test_runic_palaces.py`:
 3/3 green, full suite 353 green. Védis mapped the surface. Pushed via the
 PAT tool. Next: R08 interpretation synthesis.
+
+## 2026-10-06 — R08 complete: interpretation of runic cycles
+
+The eighth runic slice is forged. `astroengine/runic.py` gains
+`runic_reading()`, the Ch. 8 "Chronomantic Methods" synthesis: one
+structured object with a `computation` section (raw R02–R07 layer
+results) and an `interpretation` section of deterministic symbolic
+statements. The corpus grows to v1.2 with the Ch. 8 tables transcribed
+verbatim — planetary qualities (Sól=self-expression … Máni=response)
+and the 24 Elder Futhark adverbs (Feoh=richly … Dag=changingly). The
+anti-fabrication law is enforced in code: a quality clause appears only
+when a Ch. 8 key matches the rune's App. 1 deity; runes outside the 24
+get no adverb; anything uncovered is omitted, never invented. Sólrún's
+`tests/test_runic_reading.py`: 4/4 green (golden-output fixture pinned
+word-for-word, anti-fabrication sweep across four moments), full suite
+357 green. Védis mapped the split in INTERFACE.md. Pushed via the PAT
+tool. Next: R09, the `runic` command — the final slice.
