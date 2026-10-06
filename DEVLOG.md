@@ -69,3 +69,10 @@ whitelisted local service routing. Exact-pada audit found nine nominal floor
 partition failures; explicit half-open boundary lookup repaired them, with all
 108 boundaries and every equal-varga subdivision plus neighboring floats checked.
 Agent manifest is provided, not installed into an external host registry.
+
+## Continuation
+
+Hourly thread continuation configured in Codex as Astrology Engine Expansion.
+It continues documented, validated, verified pushes from W09a onward. Completion
+means roadmap acceptance criteria, not the initial eight slices. The automation
+reports completed slices or actionable failures and stays quiet on unchanged state.
