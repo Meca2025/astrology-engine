@@ -43,6 +43,38 @@ def _dispatch(name: str, parameters: dict[str, Any], defaults: dict[str, Any]) -
     from .western import compute_western
     if name == 'relationship':
         return compute_relationship(ChartRequest(**parameters['first']), ChartRequest(**parameters['second']))
+    if name == 'mantras':
+        from .mantras import all_mantras, mantras_for
+        if parameters.get('planet'):
+            return mantras_for(parameters['planet'])
+        return {'grahas': all_mantras()}
+    if name == 'forecast':
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        from .forecast import daily_forecast
+        from .inputs import resolve_utc
+        from .mantras import remedies_for
+        import swisseph as _swe
+        req = ChartRequest(**{**defaults, **parameters['request']})
+        utc = resolve_utc(req)
+        natal_jd = _swe.julday(utc.year, utc.month, utc.day,
+                               utc.hour + utc.minute / 60.0, _swe.GREG_CAL)
+        target = parameters.get('on') or datetime.now(
+            ZoneInfo(req.timezone)).date().isoformat()
+        sidereal_birth = ChartRequest(date=req.date, time=req.time,
+                                     latitude=req.latitude,
+                                     longitude=req.longitude,
+                                     timezone=req.timezone,
+                                     zodiac='sidereal',
+                                     house_system='whole-sign')
+        report = daily_forecast(natal_jd, req.latitude, req.longitude,
+                                parameters.get('name', 'Seeker'),
+                                sidereal_birth, target)
+        if parameters.get('mantras'):
+            aff = report['computed']['afflictions']
+            report['remedies'] = remedies_for(
+                aff, report['computed']['transits']['active'])
+        return report
     request = ChartRequest(**{**defaults, **parameters['request']})
     options = {key: value for key, value in parameters.items() if key != 'request'}
     services = {'chart': compute_chart, 'vedic': compute_vedic, 'vargas': compute_vargas,

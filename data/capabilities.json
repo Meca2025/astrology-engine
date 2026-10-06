@@ -131,6 +131,18 @@
    "status": "available",
    "scope": "Written natal dossier: all Horizons arts woven into one report",
    "evidence": "tests/test_dossier.py 6/6; full suite green"
+  },
+  {
+   "id": "forecast",
+   "status": "available",
+   "scope": "Daily forecast for one seeker and one day across all systems: Western transits, panchanga, Vimshottari dasha, BaZi day pillar, Tibetan day element, runic half-month, zodiac ties; computed facts kept separate from labeled symbolic reading",
+   "evidence": "tests/test_forecast.py 9/9; 2026-10-23 shows Jupiter conjunct natal Mercury at 0.03 orb"
+  },
+  {
+   "id": "mantras",
+   "status": "available",
+   "scope": "Remedial Vedic mantras for the nine grahas; traditional public-domain verses only, devotional framing",
+   "evidence": "tests/test_mantras.py 5/5; full suite green"
   }
  ]
 }

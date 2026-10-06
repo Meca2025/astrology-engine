@@ -2104,6 +2104,76 @@
     ],
     "additionalProperties": false
    }
+  },
+  {
+   "name": "forecast",
+   "capability_id": "forecast",
+   "description": "Daily forecast for one birth chart and one target date across every system: Western transits (active, exact, stations, ingresses), panchanga, Vimshottari dasha, BaZi day pillar with pillar relations, Tibetan day-element relation, runic half-month, zodiac day ties. Computed facts and labeled symbolic reading in separate keys.",
+   "request_defaults": {},
+   "input_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+     "request": {
+      "type": "object",
+      "description": "Birth data",
+      "properties": {
+       "date": {
+        "type": "string",
+        "description": "Birth date YYYY-MM-DD"
+       },
+       "time": {
+        "type": "string",
+        "description": "Birth time HH:MM (24h)"
+       },
+       "latitude": {
+        "type": "number",
+        "description": "Latitude in degrees north"
+       },
+       "longitude": {
+        "type": "number",
+        "description": "Longitude in degrees east"
+       },
+       "timezone": {
+        "type": "string",
+        "description": "IANA timezone, e.g. America/New_York"
+       },
+       "load": {
+        "type": "string",
+        "description": "Saved chart name from the chart library"
+       }
+      }
+     },
+     "on": {
+      "type": "string",
+      "description": "Forecast date YYYY-MM-DD (default: today in the birth timezone)"
+     },
+     "name": {
+      "type": "string",
+      "description": "Seeker name for the report"
+     },
+     "mantras": {
+      "type": "boolean",
+      "description": "Include remedial Vedic mantras for the day's pressures"
+     }
+    }
+   }
+  },
+  {
+   "name": "mantras",
+   "capability_id": "mantras",
+   "description": "Remedial Vedic mantras for the nine grahas (Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Rahu, Ketu). Traditional public-domain verses with repetition counts and purposes; devotional framing, never medical.",
+   "request_defaults": {},
+   "input_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+     "planet": {
+      "type": "string",
+      "description": "Graha name (omit for the full Navagraha set)"
+     }
+    }
+   }
   }
  ]
 }

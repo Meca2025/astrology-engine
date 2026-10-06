@@ -639,3 +639,8 @@ shows Jupiter conjunct natal Mercury at 0.03° orb for Volmarr.
 F02 (2026-10-06): remedial Vedic mantras — data/mantras.json (nine grahas,
 traditional verses only), `mantras` module, `mantras` CLI, `forecast
 --mantras` flag. Devotional framing, never medical.
+
+F03 (2026-10-06): polish sweep — forecast + mantras registered as agent
+tools (22/22 with capabilities), run_tool dispatch, SKILL.md and README
+(39 subcommands) updated, error paths verified clean.
+ROADMAP_VISTARA complete: V01 + F01 + F02 + F03, 564 tests green.
