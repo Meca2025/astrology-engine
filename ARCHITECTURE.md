@@ -25,8 +25,19 @@ IANA zone -> strict resolve_utc -> legacy_inputs compatibility tuple -> existing
 calculation handler. The monolith imports the typed domains; they never import it.
 Repeated paired geocoding was replaced by the already admitted coordinates.
 Typed profile data owns input format and legacy default settings. Known input
-errors are handled at the CLI boundary with stderr/nonzero status. Unknown-time
-houses and legacy astronomy fallback/provenance remain the next migration slice.
+errors are handled at the CLI boundary with stderr/nonzero status. W09b2
+house uncertainty and astronomy/provenance correction follows below.
+
+## W09b2 current astronomy migration
+
+The legacy body/house/planet-hour entry points now call public typed ephemeris
+boundaries which own the existing lock and reset frame/data settings. Frozen UT
+requests feed JSON registries; diagnostics/provenance sit outside legacy iterable
+body keys. Rendering preflights requested houses and propagates time certainty.
+The fabricated polar cusps/zero angles and 6am/6pm hour substitutes are removed
+by correcting their owning functions. No function/data definitions were deleted.
+Legacy raw event scans and approximate obliquity/GMST/location calculations remain
+outside this owner and are explicitly scheduled for W09b3/location migration.
 
 ## Preserved legacy reference
 

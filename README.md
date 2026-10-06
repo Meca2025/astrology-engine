@@ -43,8 +43,10 @@ The historical examples and precision claims below are preserved documentation,
 not independent validation. W09a/W09b1 now give legacy birth-aware commands strict
 UTC/date/coordinate admission and explicit `--timezone` controls; paired commands
 accept per-person locations/zones. Use explicit coordinates and zones for offline
-work. Unknown-time houses, legacy astronomy/backend fallbacks and event-root
-precision remain the next migration slices; see [INTERFACE.md](INTERFACE.md).
+work. W09b2 removes fabricated house/solar-hour fallbacks, suppresses unknown-time
+houses and dependent conclusions, and reports actual planetary backends and
+optional-body unavailability. Legacy event-root precision and approximate location
+helpers still need migration; see [INTERFACE.md](INTERFACE.md).
 
 ---
 

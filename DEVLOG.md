@@ -120,3 +120,28 @@ schemas already declare these date/time formats; no new tool is needed. Legacy
 house/backend failures and astronomical root solving remain W09b2/W09b3.
 
 W09b1 hosted/wheel acceptance: c6a3696718d87791b7cb87b98b3cbdfddd1eb0cc, [run 37447854001](https://github.com/hrabanazviking/astrology-engine/actions/runs/37447854001), all six jobs successful with 223 tests. A rebuilt wheel installed outside source passed strict adapter and nine-resource checks. Next: W09b2.
+
+## W09b2 — house uncertainty and real astronomy failures
+
+Pushed the adapter/rendering plan before code; reproduced fabricated polar houses,
+wrong South Node motion and silent optional absence. Added a frozen UT request,
+public lock-owned ephemeris boundaries and JSON required/optional body rules.
+Preserved legacy function names/dict iteration/house tuple while retaining actual
+backend flags and named optional diagnostics. Required failures reject; no invented
+cusps/angles/solar hours. Corrected South Node motion/latitude and derived marker.
+
+Text commands preflight requested houses and honor unknown time. Natal omits
+house/sect/lot conclusions; transit/progressions keep flagged noon positions.
+Receiving synastry overlays are independent; Davison requires both known times
+and locations. Dignity no longer makes an unused house calculation. Known-time
+requirements are explicit for house/instant-dependent commands. 283 local tests
+pass; exact hosted and installed-wheel receipts follow after push. W09b3 event
+roots are next; approximate location helpers and local sunrise calendars remain
+separate later migrations. No new cloud/LLM tool or external deployment is claimed.
+
+W09b2 installed-wheel check passed in a fresh Python 3.12 environment outside the
+source checkout: all ten JSON resources, frozen UT request/import, required and
+optional bodies with actual Moshier flags, same-motion nodes, requested houses and
+polar failure, ordered solar events, unknown-time chart and updated capability
+scope. The wheel ships the typed bridge; the legacy text script still runs from
+the source checkout. Hosted acceptance remains pending the implementation push.

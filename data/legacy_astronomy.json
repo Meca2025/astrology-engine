@@ -1,0 +1,9 @@
+{
+  "version": "1.0",
+  "defaults": {"zodiac": "tropical", "ayanamsa": "fagan-bradley", "house_system": "P"},
+  "required_bodies": {"Sun": "SUN", "Moon": "MOON", "Mercury": "MERCURY", "Venus": "VENUS", "Mars": "MARS", "Jupiter": "JUPITER", "Saturn": "SATURN", "Uranus": "URANUS", "Neptune": "NEPTUNE", "Pluto": "PLUTO", "N.Node": "TRUE_NODE"},
+  "optional_bodies": {"Chiron": "CHIRON", "Ceres": "CERES", "Pallas": "PALLAS", "Juno": "JUNO", "Vesta": "VESTA"},
+  "house_aliases": ["E"],
+  "solar_events": {"sequence": ["sunrise", "sunset", "next sunrise"], "modes": {"sunrise": "CALC_RISE", "sunset": "CALC_SET", "next sunrise": "CALC_RISE"}, "search_gap_days": 0.01},
+  "sources": ["https://www.astro.com/swisseph/swephprg.htm"]
+}

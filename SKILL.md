@@ -57,3 +57,8 @@ parans. Western: civil annual profection, integer harmonics and sensitive midpoi
 Shadbala, ashtakavarga, yoga/dosha engines, Jaimini/KP, alternate dashas, muhurta,
 Chinese/Tibetan calendars and further techniques remain in ROADMAP. Do not report
 that all astrology or all Jyotisha has already been implemented.
+
+Legacy text compatibility now validates inputs and suppresses unknown-time houses.
+It reports actual planetary backends and optional missing-body warnings, but raw
+event search/approximate location math still need migration. Prefer structured
+methods when available and keep capability states/evidence in the report.

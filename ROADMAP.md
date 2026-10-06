@@ -27,6 +27,10 @@ advance to the next ready slice. Never promote a failed or merely planned method
 | S07 | Relocation chart, exact query-latitude MC/IC/ASC/DSC lines, angular residuals, circumpolar status | S01 | Original UTC fixed; spherical geometry and horizon fixtures; antimeridian handling |
 | S08 | Advanced Western starter: whole-sign annual profections, harmonics and sensitive midpoints | S01 | Birthday/age boundaries, rulership provenance, exact oppositions and orb fixtures |
 
+Current execution: W09a, W09b1 and W09b2 have implementations/evidence;
+W09b3 event roots are next, delivered in bounded longitude/return, station/ingress
+and lunar/eclipse slices. W09 is not complete until every event submethod passes.
+
 ## Comprehensive Jyotisha program
 
 | Slice | Scope and school choices | Gate/dependencies |

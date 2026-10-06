@@ -17,9 +17,10 @@ Read this first. Current work: 2026-10-06 expansion under Mythic Engineering.
 - [x] W09a — repair legacy UTC date rollover and explicit coordinate certainty; 150 tests pass locally and across all six hosted jobs.
 - [ ] W09b — strict legacy timezone/house errors, schema migration and event roots.
 - [x] W09b1 — strict legacy civil/coordinate inputs, per-person timezone/location controls; 223 tests pass locally and in all six hosted jobs; installed wheel verified.
+- [x] W09b2 — explicit house/backend failures, unknown-time rendering and node-motion repair; 283 local tests pass; hosted/wheel receipt follows.
 - [ ] V09 — expanded classical Jyotisha mechanics, with named rule/source fixtures.
 
-Next ready work order: tasks/W09b2_legacy_astronomy.md. W09b is split into inputs,
+Next ready work order: tasks/W09b3_event_roots.md. W09b is split into inputs,
 house/backend errors and event roots so each has independent acceptance evidence.
 See ROADMAP for the complete expansion, including later validation/research gates.
 Legacy paths still have known input/provenance limitations; do not advertise new

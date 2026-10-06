@@ -43,3 +43,8 @@ SKILL.md is the portable agent manifest. partitions.py owns half-open partitions
 flags and secondary date windows/years. inputs.parse_civil is the shared strict
 civil admission boundary; profiles.json owns input formats and legacy defaults.
 The text CLI owns discovery and exposes explicit per-person location/zone flags.
+
+astroengine/legacy_astronomy.py owns dict-compatible astronomy snapshots and
+bridges to lock-owned ephemeris.positions_at_jd/houses_at_jd/solar_day_events.
+EphemerisRequest owns immutable UT settings; legacy_astronomy.json owns legacy
+body availability/frame/search rules. The monolith owns text uncertainty rendering.

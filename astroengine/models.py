@@ -23,3 +23,13 @@ class ChartRequest:
     house_system: str = _DEFAULTS["house_system"]
     node_type: str = _DEFAULTS["node_type"]
     ephemeris_path: str | None = None
+
+
+@dataclass(frozen=True)
+class EphemerisRequest:
+    """Explicit frame and data settings for an admitted UT Julian day."""
+
+    julian_day: float
+    zodiac: str = _DEFAULTS["zodiac"]
+    ayanamsa: str = _DEFAULTS["ayanamsa"]
+    ephemeris_path: str | None = None

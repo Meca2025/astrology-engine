@@ -11,7 +11,7 @@ python3 astrology_engine.py <subcommand> [options]
 ## Global Notes
 
 - `--date` always expects `YYYY-MM-DD` format
-- `--time` expects `HH:MM[:SS[.ffffff]]`; if omitted, local noon is used and legacy houses/ASC are still marked approximate pending W09b2
+- `--time` expects `HH:MM[:SS[.ffffff]]`; if omitted, flagged noon positions have no houses/ASC/MC. Lots, Hellenistic, solar-return, prediction with angles and geoastrology require known time
 - `--city` / `--nation` feed the geocoding pipeline (Nominatim → kerykeion → hardcoded fallback)
 - `--lat` / `--lon` always override geocoding when both are provided
 - `--nation` should be an ISO 2-letter country code (`US`, `GB`, `DE`, `NO`, etc.)
@@ -20,11 +20,12 @@ python3 astrology_engine.py <subcommand> [options]
 W09a preserves the UTC date when conversion crosses midnight. For example, local
 2000-01-01 00:15 in Asia/Kolkata computes 1999-12-31 18:45 UTC and displays that
 UTC date. With time omitted, noon means local noon in the resolved zone; birth
-time remains unknown and legacy houses are still labeled approximate. Explicit
+time remains unknown and houses/angles/sect/lots are unavailable. Explicit
 coordinates, including zero, bypass geocoding and count as resolved. Legacy
 timezone discovery still requires the geo extra. W09b1 provides explicit timezone
 overrides and rejects unresolved/ambiguous/nonexistent inputs in both text and
-typed commands. House/backend and event-root migration remains W09b2/W09b3.
+typed commands. W09b2 makes house/required-body failures explicit and reports
+actual backends/optional missing bodies. Event roots remain W09b3 work.
 
 ---
 
@@ -109,7 +110,9 @@ python3 astrology_engine.py synastry
     --lon2     DECIMAL      Person B lon override (optional)
 ```
 
-House overlay analysis (Person A's planets in Person B's houses, vice versa) is only available when **both** `--city1` and `--city2` are provided, or both `--lat`/`--lon` pairs are provided.
+House overlays are independent: each receiving chart needs its own known time
+and explicit city/location pair. One unknown birth time disables only that
+receiving overlay; its source positions remain flagged noon surrogates.
 
 **Example:**
 ```bash
@@ -141,7 +144,9 @@ python3 astrology_engine.py composite
     --lat1 / --lon1 / --lat2 / --lon2   coordinate overrides (optional)
 ```
 
-Davison chart requires both city/location pairs to derive the average location. Without cities, only the midpoint composite is shown.
+Davison requires both real city/location inputs and known times. Otherwise only
+the symbolic midpoint composite is shown. Geographic averaging remains legacy
+arithmetic pending the spherical midpoint/antipodal gate in R09.
 
 ---
 
@@ -516,3 +521,16 @@ follow start, and its one-civil-year default clamps February 29 to February 28.
 `planet-hours` still has its documented Indianapolis default and legacy sunrise
 engine, while its explicit date/coordinate admission is now strict. Legacy house,
 optional-body/backend and event-root behavior is still being migrated separately.
+
+## W09b2 calculation and uncertainty behavior
+
+Known-time house failures (including polar Placidus) reject before any chart
+header with stderr/status 2. No equal-house or zero-angle fallback is printed.
+Unknown-time natal omits sect/lots/Hellenistic house conclusions and house overview;
+transit/progressions retain positions/aspects without houses. Dignity uses no house
+calculation even at polar latitudes. UTC date-only antiscia/aspect-grid label noon.
+Synastry preflights known receiving houses before output; Davison preflights before
+composite output. Planetary positions disclose requested/actual backend flags and
+log named optional-body failures to stderr; required bodies must all calculate.
+Planetary hours reject missing/polar rise/set events, preserving the legacy UTC
+search/day-ruler convention. Local sunrise-calendar semantics remain V13 work.

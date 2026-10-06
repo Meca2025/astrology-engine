@@ -37,8 +37,12 @@ import io
 import math
 import textwrap
 import warnings
+import logging
+from typing import Any
 
 from astroengine.inputs import parse_civil
+from astroengine.ephemeris import solar_day_events
+from astroengine.legacy_astronomy import LegacyPositions, legacy_houses, legacy_positions, legacy_request
 from astroengine.legacy_inputs import (
     BirthTuple, birth_tuple, coordinate_pair, date_window, local_hour_to_utc, return_year,
 )
@@ -953,66 +957,20 @@ def geocode_city(city: str, nation: str = "", lat_override: float | str | None =
 # CORE CALCULATION ENGINE
 # ---------------------------------------------------------------------------
 
-def calc_planet_positions(jd, tropical=True):
-    """Calculate all planetary positions. Returns dict of planet -> data."""
+def calc_planet_positions(jd: float, tropical: bool = True) -> LegacyPositions:
+    """Required bodies or an error; optional failures have named diagnostics."""
     if not SWE:
-        return {}
-    flags = swe.FLG_SPEED
-    if not tropical:
-        flags |= swe.FLG_SIDEREAL
-        swe.set_sid_mode(swe.SIDM_FAGAN_BRADLEY)
+        raise CalculationError("pyswisseph is required for planetary calculations")
+    return legacy_positions(jd, tropical)
 
-    positions = {}
-    for name, pid in PLANETS.items():
-        if name == "S.Node":
-            continue
-        if pid < 0:
-            continue
-        try:
-            result, _ = swe.calc_ut(jd, pid, flags)
-            lon = result[0]
-            lat = result[1]
-            speed = result[3]
-            sign, sidx, deg, mins = deg_to_sign(lon)
-            positions[name] = {
-                "longitude": lon,
-                "sign": sign,
-                "sign_idx": sidx,
-                "degree": deg,
-                "minutes": mins,
-                "latitude": lat,
-                "speed": speed,
-                "retrograde": speed < 0,
-            }
-        except Exception:
-            pass
 
-    # South Node = opposite of North Node
-    if "N.Node" in positions:
-        nn = positions["N.Node"]["longitude"]
-        sn_lon = (nn + 180) % 360
-        sign, sidx, deg, mins = deg_to_sign(sn_lon)
-        positions["S.Node"] = {
-            "longitude": sn_lon,
-            "sign": sign, "sign_idx": sidx,
-            "degree": deg, "minutes": mins,
-            "latitude": 0, "speed": -positions["N.Node"]["speed"],
-            "retrograde": True,
-        }
-
-    return positions
-
-def calc_houses(jd, lat, lon, system=b"P"):
-    """Calculate house cusps using Placidus (default). Returns list of 12 cusp longitudes."""
+def calc_houses(jd: float, lat: float, lon: float,
+                system: bytes = b"P") -> tuple[list[float], float, float]:
+    """Requested twelve-house cusps and angles; failed houses never fabricate."""
     if not SWE:
-        return [i * 30.0 for i in range(12)], 0.0, 0.0
-    try:
-        cusps, ascmc = swe.houses(jd, lat, lon, system)
-        asc = ascmc[0]
-        mc  = ascmc[1]
-        return list(cusps), asc, mc  # 12 elements, index 0 = H1 cusp ... index 11 = H12 cusp
-    except Exception:
-        return [i * 30.0 for i in range(12)], 0.0, 0.0
+        raise CalculationError("pyswisseph is required for house calculations")
+    return legacy_houses(jd, lat, lon, system)
+
 
 def planet_house(planet_lon, cusps):
     """Determine which house a planet is in, given 12 cusp longitudes."""
@@ -1373,29 +1331,9 @@ def void_of_course(jd, moon_lon, positions):
 def planetary_hours(date, lat, lon):
     """Calculate planetary hours for a given date and location."""
     if not SWE:
-        return []
-    jd = julian_day(date.year, date.month, date.day, 12.0)
-    # Get sunrise and sunset. Chain the searches so each event is the first
-    # one after the previous: sunrise -> sunset -> next sunrise.
-    try:
-        _, tret = swe.rise_trans(jd - 0.5, swe.SUN,
-                                 swe.CALC_RISE | swe.BIT_DISC_CENTER,
-                                 (lon, lat, 0))
-        sunrise_jd = tret[0]
-        _, tret = swe.rise_trans(sunrise_jd + 0.01, swe.SUN,
-                                 swe.CALC_SET | swe.BIT_DISC_CENTER,
-                                 (lon, lat, 0))
-        sunset_jd = tret[0]
-        _, tret = swe.rise_trans(sunset_jd + 0.01, swe.SUN,
-                                 swe.CALC_RISE | swe.BIT_DISC_CENTER,
-                                 (lon, lat, 0))
-        next_sunrise_jd = tret[0]
-    except Exception:
-        # Fallback: approximate 6am-6pm UTC solar day
-        base = julian_day(date.year, date.month, date.day, 0)
-        sunrise_jd = base + 6 / 24
-        sunset_jd = base + 18 / 24
-        next_sunrise_jd = sunrise_jd + 1.0
+        raise CalculationError("pyswisseph is required for planetary hours")
+    jd = julian_day(date.year, date.month, date.day, 0.0)
+    sunrise_jd, sunset_jd, next_sunrise_jd = solar_day_events(legacy_request(jd), lat, lon)
 
     day_len  = (sunset_jd - sunrise_jd) / 12.0   # length of one day planetary hour
     night_len = (next_sunrise_jd - sunset_jd) / 12.0  # one night hour
@@ -2103,6 +2041,86 @@ def _print_pair_times(args: argparse.Namespace, first: str, second: str) -> None
     print()
 
 
+def _require_birth_time(known: bool, command: str) -> None:
+    if not known:
+        raise CalculationError(f"{command} requires a known birth time; supply --time")
+
+
+def _optional_houses(jd: float, latitude: float, longitude: float,
+                     known: bool) -> tuple[list[float] | None, float | None, float | None]:
+    return calc_houses(jd, latitude, longitude) if known else (None, None, None)
+
+
+def _print_time_certainty(known: bool, label: str | None = None) -> None:
+    if label:
+        print(f"  Time: {label}")
+    if not known:
+        print("  Time unknown: planetary positions use a noon surrogate.")
+        print("  Houses and angles unavailable without a known birth time.")
+    print()
+
+
+def _print_astronomy(positions: dict[str, dict[str, Any]], label: str = "Chart") -> None:
+    provenance = getattr(positions, "provenance", None)
+    if provenance:
+        groups: dict[tuple[str, int], list[str]] = {}
+        for name, position in positions.items():
+            if "backend" in position:
+                key = (position["backend"], position["returned_flags"])
+                groups.setdefault(key, []).append(name)
+        print(f"  {label} ephemeris: requested {provenance['requested_backend']} "
+              f"(flags {provenance['requested_flags']}); actual returned results:")
+        for (backend, flags), names in groups.items():
+            print(f"    {backend} (flags {flags}): {', '.join(names)}")
+        print(f"  Frame: {provenance['zodiac']} · Swiss version "
+              f"{provenance['swiss_ephemeris_version']} · rule {provenance['rule_version']}")
+        for name, reason in getattr(positions, "unavailable", {}).items():
+            logging.getLogger(__name__).warning("%s optional body %s unavailable: %s", label, name, reason)
+        print()
+
+
+def _print_house_overview(positions: dict[str, dict[str, Any]], cusps: list[float]) -> None:
+    section("HOUSE OVERVIEW")
+    for h_num, h_key in HOUSE_KEYWORDS:
+        c_sign, csidx, c_deg, c_min = deg_to_sign(cusps[h_num - 1])
+        in_house = [p for p, pd in positions.items()
+                    if planet_house(pd["longitude"], cusps) == h_num and p != "S.Node"]
+        in_str = f"  [{', '.join(in_house)}]" if in_house else ""
+        print(f"  │  H{h_num:2d} {c_sign} {SIGN_SYMBOL[csidx]} {c_deg:2d}°  {h_key}{in_str}")
+    print()
+
+
+def _print_overlay(positions: dict[str, dict[str, Any]], cusps: list[float] | None,
+                   source: str, receiver: str) -> None:
+    if cusps is None:
+        print(f"  Overlay into {receiver}'s houses unavailable: known time and location required.")
+        print()
+        return
+    section(f"HOUSE OVERLAYS — {source}'s planets in {receiver}'s houses")
+    print(f"  │  {'Planet':<12} {'Position':<24} {receiver+' House':>10}  Theme")
+    for pname in ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn",
+                  "Uranus", "Neptune", "Pluto", "Chiron", "N.Node"]:
+        if pname in positions:
+            h = planet_house(positions[pname]["longitude"], cusps)
+            _, kw = HOUSE_KEYWORDS[h - 1]
+            print(f"  │  {pname:<12} {fmt_position(positions[pname]):<24} "
+                  f"{'H'+str(h):>10}  {kw.split('·')[0].strip()}")
+    print()
+
+
+def _print_transit_houses(positions: dict[str, dict[str, Any]], cusps: list[float]) -> None:
+    section("TRANSITING PLANETS IN NATAL HOUSES")
+    print(f"  │  {'Planet':<12} {'Position':<24} {'Natal House':>12}  Natal house theme")
+    for name in ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn",
+                 "Uranus", "Neptune", "Pluto", "N.Node"]:
+        if name in positions:
+            h = planet_house(positions[name]["longitude"], cusps)
+            _, kw = HOUSE_KEYWORDS[h - 1]
+            print(f"  │  {name:<12} {fmt_position(positions[name]):<24} "
+                  f"{'H'+str(h):>12}  {kw.split('·')[0].strip()}")
+    print()
+
+
 def cmd_natal(args):
     y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, city_default_used = resolve_birth(
         args.date, args.time, args.city, args.nation,
@@ -2120,31 +2138,26 @@ def cmd_natal(args):
         lon_dir_co = 'E' if lon >= 0 else 'W'
         loc_label = f"{abs(lat):.4f}°{lat_dir_co} {abs(lon):.4f}°{lon_dir_co}"
 
+    positions = calc_planet_positions(jd)
+    cusps, asc, mc = _optional_houses(jd, lat, lon, time_known)
+
     header(
         f"NATAL CHART — {name.upper()}",
         f"{args.date}  ·  {loc_label}"
     )
-    print(f"  Time: {tz_label}")
-    print(f"  {'*time unknown — houses/ASC approximate*' if not time_known else ''}")
-    print()
-
-    positions = calc_planet_positions(jd)
-    cusps, asc, mc = calc_houses(jd, lat, lon)
-
-    asc_sign, asidx, asc_deg, asc_min = deg_to_sign(asc)
-    mc_sign,  msidx, mc_deg,  mc_min  = deg_to_sign(mc)
-
-    print(f"  ASC (Rising): {asc_sign} {SIGN_SYMBOL[asidx]} {asc_deg}°{asc_min:02d}'")
-    print(f"  MC  (Midheaven): {mc_sign} {SIGN_SYMBOL[msidx]} {mc_deg}°{mc_min:02d}'")
-    sun_sign = positions.get("Sun", {}).get("sign", "?")
-    moon_sign = positions.get("Moon", {}).get("sign", "?")
-    print(f"  Sun: {sun_sign}  ·  Moon: {moon_sign}  ·  Rising: {asc_sign}")
-    print()
-
-    # Day/night
-    sun_lon = positions.get("Sun", {}).get("longitude", 0)
-    day = is_day_chart(sun_lon, asc)
-    print(f"  Chart Type: {'Day (Diurnal)' if day else 'Night (Nocturnal)'}")
+    _print_time_certainty(time_known, tz_label)
+    _print_astronomy(positions)
+    sun_sign, moon_sign = positions["Sun"]["sign"], positions["Moon"]["sign"]
+    print(f"  Sun: {sun_sign}  ·  Moon: {moon_sign}")
+    if cusps is not None:
+        asc_sign, asidx, asc_deg, asc_min = deg_to_sign(asc)
+        mc_sign, msidx, mc_deg, mc_min = deg_to_sign(mc)
+        print(f"  ASC (Rising): {asc_sign} {SIGN_SYMBOL[asidx]} {asc_deg}°{asc_min:02d}'")
+        print(f"  MC  (Midheaven): {mc_sign} {SIGN_SYMBOL[msidx]} {mc_deg}°{mc_min:02d}'")
+        day = is_day_chart(positions["Sun"]["longitude"], asc)
+        print(f"  Chart Type: {'Day (Diurnal)' if day else 'Night (Nocturnal)'}")
+    else:
+        print("  Sect, lots and house interpretations unavailable without a known birth time.")
     print()
 
     print_planet_table(positions, cusps)
@@ -2152,31 +2165,22 @@ def cmd_natal(args):
     print_dignity_table(positions)
 
     # Lots
-    lots = calc_lots(positions, asc, day)
-    print_lots(lots, cusps)
+    if cusps is not None:
+        lots = calc_lots(positions, asc, day)
+        print_lots(lots, cusps)
 
     # Antiscia
     print_antiscia(calc_antiscia(positions))
 
     # Hellenistic
-    print_hellenistic(positions, cusps, asc)
+    if cusps is not None:
+        print_hellenistic(positions, cusps, asc)
 
     # Norse layer
     print_norse_layer(positions)
 
-    # House meanings
-    section("HOUSE OVERVIEW")
-    for h_num, h_key in HOUSE_KEYWORDS:
-        cusp_lon = cusps[h_num - 1]
-        c_sign, csidx, c_deg, c_min = deg_to_sign(cusp_lon)
-        sym = SIGN_SYMBOL[csidx]
-        # Planets in this house
-        in_house = [p for p, pd in positions.items()
-                    if planet_house(pd["longitude"], cusps) == h_num
-                    and p not in ("S.Node",)]
-        in_str = f"  [{', '.join(in_house)}]" if in_house else ""
-        print(f"  │  H{h_num:2d} {c_sign} {sym} {c_deg:2d}°  {h_key}{in_str}")
-    print()
+    if cusps is not None:
+        _print_house_overview(positions, cusps)
 
     print(f"  {hr()}")
     lat_dir = 'N' if lat >= 0 else 'S'
@@ -2210,25 +2214,17 @@ def cmd_transit(args):
 
     natal_pos   = calc_planet_positions(jd_natal)
     transit_pos = calc_planet_positions(jd_sky)
-    cusps, asc, mc = calc_houses(jd_natal, lat, lon)
+    cusps, asc, mc = _optional_houses(jd_natal, lat, lon, time_known)
 
     header("TRANSIT CHART", f"Natal: {args.date}  ·  Sky: {sky_label}")
 
+    _print_time_certainty(time_known, tz_label)
+    _print_astronomy(natal_pos, "Natal")
+    _print_astronomy(transit_pos, "Sky")
     print_planet_table(transit_pos, title=f"SKY POSITIONS  ({sky_label})")
 
-    # Transiting planets in natal houses
-    section("TRANSITING PLANETS IN NATAL HOUSES")
-    print(f"  │  {'Planet':<12} {'Position':<24} {'Natal House':>12}  Natal house theme")
-    print(f"  │  {'─'*12} {'─'*24} {'─'*12}  {'─'*30}")
-    for t_name in ["Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn",
-                   "Uranus","Neptune","Pluto","N.Node"]:
-        if t_name not in transit_pos:
-            continue
-        t_data = transit_pos[t_name]
-        h = planet_house(t_data["longitude"], cusps)
-        _, kw = HOUSE_KEYWORDS[h - 1]
-        print(f"  │  {t_name:<12} {fmt_position(t_data):<24} {'H'+str(h):>12}  {kw.split('·')[0].strip()}")
-    print()
+    if cusps is not None:
+        _print_transit_houses(transit_pos, cusps)
 
     # Transit-to-natal aspects
     section("TRANSIT-TO-NATAL ASPECTS")
@@ -2260,8 +2256,8 @@ def cmd_transit(args):
 
 
 def cmd_synastry(args):
-    y1, mo1, d1, h1, lat1, lon1, tz1, tzl1, _, _ = _resolve_paired_birth(args, 1)
-    y2, mo2, d2, h2, lat2, lon2, tz2, tzl2, _, _ = _resolve_paired_birth(args, 2)
+    y1, mo1, d1, h1, lat1, lon1, tz1, tzl1, known1, _ = _resolve_paired_birth(args, 1)
+    y2, mo2, d2, h2, lat2, lon2, tz2, tzl2, known2, _ = _resolve_paired_birth(args, 2)
     jd1 = julian_day(y1, mo1, d1, h1)
     jd2 = julian_day(y2, mo2, d2, h2)
 
@@ -2271,48 +2267,20 @@ def cmd_synastry(args):
     n1 = getattr(args, "name1", "Person A")
     n2 = getattr(args, "name2", "Person B")
 
+    cusps1, _, _ = _optional_houses(jd1, lat1, lon1, known1 and _paired_location_provided(args, 1))
+    cusps2, _, _ = _optional_houses(jd2, lat2, lon2, known2 and _paired_location_provided(args, 2))
     header("SYNASTRY CHART", f"{n1}  ×  {n2}")
     _print_pair_times(args, tzl1, tzl2)
-
-    # Use locations already validated once, including zero coordinates.
-    cusps1, asc1, mc1 = None, None, None
-    cusps2, asc2, mc2 = None, None, None
-    if _paired_location_provided(args, 1):
-        cusps1, asc1, mc1 = calc_houses(jd1, lat1, lon1)
-    if _paired_location_provided(args, 2):
-        cusps2, asc2, mc2 = calc_houses(jd2, lat2, lon2)
+    _print_time_certainty(known1)
+    _print_time_certainty(known2)
+    _print_astronomy(pos1, n1)
+    _print_astronomy(pos2, n2)
 
     print_planet_table(pos1, cusps1, title=f"CHART 1 — {n1}")
     print_planet_table(pos2, cusps2, title=f"CHART 2 — {n2}")
 
-    # House overlays
-    if cusps1 and cusps2:
-        section(f"HOUSE OVERLAYS — {n1}'s planets in {n2}'s houses")
-        print(f"  │  {'Planet':<12} {'Position':<24} {n2+' House':>10}  Theme")
-        print(f"  │  {'─'*12} {'─'*24} {'─'*10}  {'─'*30}")
-        for pname in ["Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn",
-                      "Uranus","Neptune","Pluto","Chiron","N.Node"]:
-            if pname not in pos1:
-                continue
-            h = planet_house(pos1[pname]["longitude"], cusps2)
-            _, kw = HOUSE_KEYWORDS[h - 1]
-            print(f"  │  {pname:<12} {fmt_position(pos1[pname]):<24} {'H'+str(h):>10}  {kw.split('·')[0].strip()}")
-        print()
-
-        section(f"HOUSE OVERLAYS — {n2}'s planets in {n1}'s houses")
-        print(f"  │  {'Planet':<12} {'Position':<24} {n1+' House':>10}  Theme")
-        print(f"  │  {'─'*12} {'─'*24} {'─'*10}  {'─'*30}")
-        for pname in ["Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn",
-                      "Uranus","Neptune","Pluto","Chiron","N.Node"]:
-            if pname not in pos2:
-                continue
-            h = planet_house(pos2[pname]["longitude"], cusps1)
-            _, kw = HOUSE_KEYWORDS[h - 1]
-            print(f"  │  {pname:<12} {fmt_position(pos2[pname]):<24} {'H'+str(h):>10}  {kw.split('·')[0].strip()}")
-        print()
-    else:
-        print("  (Add --city1/--nation1 and --city2/--nation2 to enable house overlays)")
-        print()
+    _print_overlay(pos1, cusps2, n1, n2)
+    _print_overlay(pos2, cusps1, n2, n1)
 
     # Cross-aspects
     section(f"CROSS-ASPECTS  {n1} → {n2}")
@@ -2352,10 +2320,10 @@ def cmd_solar_return(args):
     )
     jd_natal = julian_day(y, mo, d, utc_hour)
     target_year = return_year(getattr(args, "year", None))
+    _require_birth_time(time_known, "solar-return")
 
     if not SWE:
-        print("pyswisseph required for solar return calculation.")
-        return
+        raise CalculationError("pyswisseph is required for solar return calculation")
 
     # Find exact moment when Sun returns to natal Sun position
     natal_pos = calc_planet_positions(jd_natal)
@@ -2383,6 +2351,8 @@ def cmd_solar_return(args):
 
     sr_dt = jd_to_dt(jd_search)
     header("SOLAR RETURN CHART", f"Year {target_year}  ·  {sr_dt}  ·  {args.city}, {args.nation}")
+    _print_astronomy(natal_pos, "Natal")
+    _print_astronomy(sr_pos, "Solar return")
     print_planet_table(sr_pos, sr_cusps)
     print_aspects(calc_aspects(sr_pos))
     sr_asc_sign, saidx, sa_deg, sa_min = deg_to_sign(sr_asc)
@@ -2409,13 +2379,16 @@ def cmd_progressions(args):
     jd_prog = jd_natal + years_elapsed  # 1 day per year
 
     prog_pos = calc_planet_positions(jd_prog)
-    prog_cusps, prog_asc, prog_mc = calc_houses(jd_prog, lat, lon)
+    prog_cusps, prog_asc, prog_mc = _optional_houses(jd_prog, lat, lon, time_known)
     natal_pos = calc_planet_positions(jd_natal)
 
     header(
         "SECONDARY PROGRESSIONS",
         f"Natal: {args.date}  ·  Progressed to: {prog_date_str}  ({years_elapsed:.1f} years)"
     )
+    _print_time_certainty(time_known, tz_label)
+    _print_astronomy(natal_pos, "Natal")
+    _print_astronomy(prog_pos, "Progressed")
     print_planet_table(prog_pos, prog_cusps, title="PROGRESSED PLANETS")
 
     # Aspects: progressed to natal
@@ -2440,8 +2413,7 @@ def cmd_progressions(args):
 
 def cmd_lunar(args):
     if not SWE:
-        print("pyswisseph required.")
-        return
+        raise CalculationError("pyswisseph is required for lunar calculations")
 
     now = datetime.datetime.utcnow()
     jd_now = julian_day(now.year, now.month, now.day,
@@ -2457,6 +2429,7 @@ def cmd_lunar(args):
 
     header("LUNAR INTELLIGENCE", now.strftime("%Y-%m-%d  %H:%M UTC"))
 
+    _print_astronomy(pos)
     print(f"  Current Phase:    {phase_glyph}  {phase_name}")
     print(f"  Moon Position:    {moon_sign} {SIGN_SYMBOL[msidx]} {m_deg}°{m_min:02d}'")
     print(f"  Sun Position:     {sun_sign}  {SIGN_SYMBOL[ssidx]} {s_deg}°{s_min:02d}'")
@@ -2509,11 +2482,7 @@ def cmd_planet_hours(args):
         defaults = load_rules("profiles.json")["legacy_defaults"]
         lat, lon = defaults["planet_hours_latitude"], defaults["planet_hours_longitude"]
 
-    try:
-        hours_data, day_ruler, sunrise_jd, sunset_jd = planetary_hours(date, lat, lon)
-    except Exception as e:
-        print(f"Error calculating planetary hours: {e}")
-        return
+    hours_data, day_ruler, sunrise_jd, sunset_jd = planetary_hours(date, lat, lon)
 
     header("PLANETARY HOURS", f"{date}  ·  Day Ruler: {day_ruler}  ·  Lat {lat:.2f}° Lon {lon:.2f}°")
 
@@ -2547,12 +2516,14 @@ def cmd_lots(args):
         getattr(args, "timezone", None)
     )
     jd = julian_day(y, mo, d, utc_hour)
+    _require_birth_time(time_known, "lots")
     positions = calc_planet_positions(jd)
     cusps, asc, mc = calc_houses(jd, lat, lon)
     sun_lon = positions.get("Sun", {}).get("longitude", 0)
     day = is_day_chart(sun_lon, asc)
 
     header("ARABIC LOTS / HERMETIC PARTS", f"{args.date}  ·  {'Day' if day else 'Night'} Chart")
+    _print_astronomy(positions)
     lots = calc_lots(positions, asc, day)
     print_lots(lots, cusps)
 
@@ -2564,10 +2535,12 @@ def cmd_hellenistic(args):
         getattr(args, "timezone", None)
     )
     jd = julian_day(y, mo, d, utc_hour)
+    _require_birth_time(time_known, "hellenistic")
     positions = calc_planet_positions(jd)
     cusps, asc, mc = calc_houses(jd, lat, lon)
 
     header("HELLENISTIC ASTROLOGY ANALYSIS", f"{args.date}  {args.time or ''}")
+    _print_astronomy(positions)
     print_hellenistic(positions, cusps, asc)
     print_dignity_table(positions)
     print_antiscia(calc_antiscia(positions))
@@ -2579,6 +2552,8 @@ def cmd_aspect_grid(args):
     positions = calc_planet_positions(jd)
 
     header("FULL ASPECT GRID", args.date)
+    _print_time_certainty(args.time is not None)
+    _print_astronomy(positions)
     print_aspects(calc_aspects(positions), max_show=200)
 
 
@@ -2590,9 +2565,10 @@ def cmd_dignity(args):
     )
     jd = julian_day(y, mo, d, utc_hour)
     positions = calc_planet_positions(jd)
-    cusps, asc, mc = calc_houses(jd, lat, lon)
 
     header("ESSENTIAL DIGNITIES", f"{args.date}  {args.time or ''}")
+    _print_time_certainty(time_known, tz_label)
+    _print_astronomy(positions)
     print_dignity_table(positions)
 
     # Mutual receptions
@@ -2642,6 +2618,8 @@ def cmd_antiscia(args):
     print()
 
     antiscia_data = calc_antiscia(positions)
+    _print_time_certainty(args.time is not None)
+    _print_astronomy(positions)
     print_antiscia(antiscia_data)
 
     # Check for antiscia conjunctions between planets
@@ -2673,8 +2651,8 @@ def cmd_antiscia(args):
 
 def cmd_composite(args):
     """Composite chart (midpoint method) for two people. Optionally show Davison chart too."""
-    y1, mo1, d1, h1, _lat1, _lon1, _, tzl1, _, _ = _resolve_paired_birth(args, 1)
-    y2, mo2, d2, h2, _lat2, _lon2, _, tzl2, _, _ = _resolve_paired_birth(args, 2)
+    y1, mo1, d1, h1, _lat1, _lon1, _, tzl1, known1, _ = _resolve_paired_birth(args, 1)
+    y2, mo2, d2, h2, _lat2, _lon2, _, tzl2, known2, _ = _resolve_paired_birth(args, 2)
     jd1 = julian_day(y1, mo1, d1, h1)
     jd2 = julian_day(y2, mo2, d2, h2)
     n1 = getattr(args, "name1", "Person A")
@@ -2684,17 +2662,24 @@ def cmd_composite(args):
     pos2 = calc_planet_positions(jd2)
     comp = calc_composite(pos1, pos2)
 
+    davison_available = (known1 and known2 and _paired_location_provided(args, 1)
+                         and _paired_location_provided(args, 2))
+    if davison_available:
+        jd_dav, lat_dav, lon_dav = calc_davison(jd1, jd2, _lat1, _lon1, _lat2, _lon2)
+        dav_pos = calc_planet_positions(jd_dav)
+        dav_cusps, dav_asc, dav_mc = calc_houses(jd_dav, lat_dav, lon_dav)
+
     header("COMPOSITE CHART", f"{n1}  +  {n2}  (Midpoint Method)")
     _print_pair_times(args, tzl1, tzl2)
+    _print_astronomy(pos1, n1)
+    _print_astronomy(pos2, n2)
+    print("  Composite positions are symbolic midpoints, with no physical houses or ephemeris backend.")
     print_planet_table(comp, title="COMPOSITE PLANETS")
     print_aspects(calc_aspects(comp))
     print_dignity_table(comp)
 
-    # Davison requires both actual location inputs; zero is not an absence sentinel.
-    if _paired_location_provided(args, 1) and _paired_location_provided(args, 2):
-        jd_dav, lat_dav, lon_dav = calc_davison(jd1, jd2, _lat1, _lon1, _lat2, _lon2)
-        dav_pos = calc_planet_positions(jd_dav)
-        dav_cusps, dav_asc, dav_mc = calc_houses(jd_dav, lat_dav, lon_dav)
+    if davison_available:
+        _print_astronomy(dav_pos, "Davison")
         dav_dt   = jd_to_dt(jd_dav)
         section(f"DAVISON RELATIONSHIP CHART  ({dav_dt}  ·  {lat_dav:.2f}°N {lon_dav:.2f}°E)")
         print_planet_table(dav_pos, dav_cusps, title="DAVISON PLANETS")
@@ -2704,7 +2689,7 @@ def cmd_composite(args):
         print(f"  Davison MC:  {mc_sign}  {SIGN_SYMBOL[msidx]} {mc_deg}°{mc_min:02d}'")
         print()
     else:
-        print("  (Add --city1/--nation1 and --city2/--nation2 to enable the Davison chart)")
+        print("  Davison chart unavailable: both known birth times and actual locations required.")
         print()
 
 
@@ -2723,6 +2708,9 @@ def cmd_synergy(args):
 
     header("SYNERGY ANALYSIS", f"{n1}  ×  {n2}")
     _print_pair_times(args, tzl1, tzl2)
+
+    _print_astronomy(pos1, n1)
+    _print_astronomy(pos2, n2)
 
     # Cross-aspects and score
     core = ("Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Chiron","N.Node")
@@ -2829,6 +2817,7 @@ def cmd_predict(args):
         start_str = datetime.datetime.utcnow().strftime("%Y-%m-%d")
     start_date, end_date = date_window(start_str, getattr(args, "end", None))
     start_str, end_str = start_date.isoformat(), end_date.isoformat()
+    _require_birth_time(time_known, "predict")
     sy, smo, sd = start_date.year, start_date.month, start_date.day
     ey, emo, ed = end_date.year, end_date.month, end_date.day
     start_jd = julian_day(sy, smo, sd, 0.0)
@@ -2854,6 +2843,8 @@ def cmd_predict(args):
                         "latitude": 0, "speed": 0, "retrograde": False}
 
     header("EVENT PREDICTION", f"Natal: {args.date}  ·  Window: {start_str} → {end_str}")
+
+    _print_astronomy(natal_pos, "Natal")
 
     # Step size: fine for inner planets, coarse for outer
     step = 0.5 if "Sun" in t_planets or "Moon" in t_planets or "Mercury" in t_planets else 1.0
@@ -2925,13 +2916,15 @@ def cmd_geoastrology(args):
         getattr(args, "lat", None), getattr(args, "lon", None),
         getattr(args, "timezone", None)
     )
+    _require_birth_time(time_known, "geoastrology")
     jd = julian_day(y, mo, d, utc_hour)
     positions = calc_planet_positions(jd)
     name = args.name or "Seeker"
 
+    lines = calc_astrocartography(jd, positions)
     header("GEOASTROLOGY — ASTROCARTOGRAPHY", f"{name}  ·  {args.date}  ·  {tz_label}")
 
-    lines = calc_astrocartography(jd, positions)
+    _print_astronomy(positions)
 
     # MC / IC lines table
     section("MC AND IC LINES  (planet on upper/lower meridian)")
@@ -3219,7 +3212,7 @@ def main():
         try:
             fn(args)
         except CalculationError as exc:
-            print(f"Input error: {exc}", file=sys.stderr)
+            print(f"Calculation error: {exc}", file=sys.stderr)
             raise SystemExit(2) from exc
     else:
         p.print_help()

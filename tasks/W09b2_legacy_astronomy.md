@@ -1,6 +1,6 @@
 # W09b2: legacy house uncertainty and astronomy failures
 
-Status: active slice; documented before code, 2026-10-06.
+Status: implemented locally; hosted/install acceptance pending; documented before code, 2026-10-06.
 Owner: legacy computation adapters and text rendering; part of W09b.
 
 ## Problem and required end state
@@ -98,3 +98,13 @@ cusps and zero angles; South Node speed is the opposite of its North Node;
 missing five optional bodies have no diagnostic. Swiss programming documentation
 confirms polar Placidus failure and returned-backend fallback behavior:
 https://www.astro.com/swisseph/swephprg.htm (sections 3.3 and 13).
+
+Local result: 283 tests pass; full wiring and diff/AST review complete.
+Hosted acceptance and installed-wheel evidence will close this slice by exact SHA.
+
+W09b2 installed-wheel check passed in a fresh Python 3.12 environment outside the
+source checkout: all ten JSON resources, frozen UT request/import, required and
+optional bodies with actual Moshier flags, same-motion nodes, requested houses and
+polar failure, ordered solar events, unknown-time chart and updated capability
+scope. The wheel ships the typed bridge; the legacy text script still runs from
+the source checkout. Hosted acceptance remains pending the implementation push.

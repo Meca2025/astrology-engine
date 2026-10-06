@@ -37,3 +37,26 @@ stdlib ZoneInfo and the bundled tzdata fallback instead.
 New typed APIs and JSON commands are owned/documented in `astroengine/INTERFACE.md`.
 Successful JSON goes to stdout; failures use stderr and nonzero status. No birth
 storage, networking or LLM inference occurs in the new computation package.
+
+## W09b2 legacy astronomy contract
+
+calc_planet_positions keeps planet-key iteration and dict access, now returning a
+LegacyPositions dict subclass. Every available body retains its old text fields
+plus backend/requested_flags/returned_flags. unavailable and provenance attributes
+are outside body keys. The eleven required major bodies/node fail as a complete
+snapshot; five optional bodies can be absent with named diagnostics. South Node
+is a derived antipode with mirrored latitude and the same speed/retrograde state.
+calc_houses keeps its (12 cusps, ASC, MC) tuple; only supported requested systems
+return. Swiss failure raises CalculationError, never a substituted house system.
+Settings/data paths are reset under the same ephemeris lock used by typed charts.
+
+Known requested houses/bodies preflight before chart headers. Unknown-time natal,
+transit/progressions retain flagged noon positions, with no houses/angles/sect/lots
+or house-dependent conclusions. Dignity does not require houses. Lots/Hellenistic,
+solar return, prediction with angle targets and geoastrology require a known time.
+Synastry receiving overlays are independent; each needs known time and real location.
+Davison needs both known times/locations, while midpoint composite stays symbolic.
+UTC-only date charts label noon. Planetary-hour rise/set status and ordered times
+must be valid; missing/polar events are errors, not fabricated clock hours.
+Legacy text errors use stderr/status 2; optional-body diagnostics are warnings.
+Text planetary provenance does not certify legacy event/approximate location math.

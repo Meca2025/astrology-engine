@@ -114,3 +114,27 @@ legacy compatibility tuple with actual UTC date/clock, offset and uncertainty.
 end; `return_year` validates integer solar-return years. Offset/clock formatting
 retains historical seconds. None of these adapters imports the legacy monolith,
 geocodes, stores birth data or fabricates houses.
+
+## UT ephemeris and legacy astronomy bridge (W09b2)
+
+EphemerisRequest(julian_day, zodiac, ayanamsa, ephemeris_path) is frozen; UT JD
+must be finite. ephemeris.positions_at_jd(request, required, optional=None) takes
+internal, named Swiss constant registries and returns positions, named unavailable
+optional bodies and provenance. Required Swiss errors reject; optional Swiss errors
+are recorded; unexpected programming errors propagate. Actual/requested flags live
+on every available body. Registry identifiers are implementation data, not free
+user-selected plugins. All settings changes/calculations hold the core owner lock.
+
+houses_at_jd(request, latitude, longitude, system=b"P") returns twelve finite cusps
+and ASC/MC or CalculationError. Profile house codes plus equal alias E are supported;
+failed/polar systems never substitute. solar_day_events(request, latitude, longitude)
+returns ordered sunrise/sunset/next-sunrise instants after a UT starting JD; nonzero
+rise status, bad event times or Swiss errors reject. Its requested Swiss flag is
+not an independently reported actual backend (rise_trans exposes no returned flags).
+It preserves the legacy UT search convention, not a local calendrical-day API.
+
+legacy_astronomy.legacy_positions provides dict-compatible text fields plus
+unavailable/provenance attributes outside body iteration. legacy_houses preserves
+the three-item tuple; legacy_request declares tropical or Fagan-Bradley sidereal.
+legacy_astronomy.json owns the required/optional body registry and search settings.
+The bridge never imports the monolith, prints, persists or performs network calls.

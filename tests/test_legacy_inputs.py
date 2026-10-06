@@ -200,8 +200,9 @@ def test_planet_hours_accepts_zero_pair_and_rejects_partial(monkeypatch):
         received.append((day.isoformat(), lat, lon))
         raise StopBeforeAstronomy
     monkeypatch.setattr(legacy, 'planetary_hours', capture)
-    # Existing broad astronomy catch remains W09b2; admission is verified here.
-    legacy.cmd_planet_hours(SimpleNamespace(date='2000-01-01', lat=0, lon=0, city=None, nation=None))
+    # W09b2 preserves admission and lets unexpected astronomy errors propagate.
+    with pytest.raises(StopBeforeAstronomy):
+        legacy.cmd_planet_hours(SimpleNamespace(date='2000-01-01', lat=0, lon=0, city=None, nation=None))
     assert received == [('2000-01-01', 0, 0)]
     with pytest.raises(CalculationError, match='both'):
         legacy.cmd_planet_hours(SimpleNamespace(date='2000-01-01', lat=0, lon=None, city=None, nation=None))

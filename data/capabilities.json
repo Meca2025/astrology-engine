@@ -52,8 +52,8 @@
     {
       "id": "legacy",
       "status": "legacy",
-      "scope": "16 text commands with strict time/location admission and per-person overrides; house/backend/event-root migration remains",
-      "evidence": "W09a/W09b1 UTC/DST, coordinate/overflow, every birth-handler propagation, paired Julian day and offline CLI error fixtures"
+      "scope": "16 text commands with strict time/location, explicit house/body failures, unknown-time rendering and planetary backend diagnostics; event roots and approximate location math still await migration",
+      "evidence": "W09a/W09b1 input/UTC fixtures plus W09b2 polar, optional/required errors, returned flags, node motion and single/paired uncertainty tests"
     },
     {
       "id": "advanced-jyotisha",

@@ -67,3 +67,25 @@ expected UTC 11:50:39 is separately subtracted. Hosted acceptance and fresh whee
 resource/import evidence are recorded separately after implementation push.
 
 W09b1 hosted/wheel acceptance: c6a3696718d87791b7cb87b98b3cbdfddd1eb0cc, [run 37447854001](https://github.com/hrabanazviking/astrology-engine/actions/runs/37447854001), all six jobs successful with 223 tests. A rebuilt wheel installed outside source passed strict adapter and nine-resource checks. Next: W09b2.
+
+## W09b2 local acceptance
+
+2026-10-06: 283 local Linux/Python 3.12 tests pass, retaining prior admission/UTC
+coverage and adding 60 astronomy/uncertainty cases. Tests cover seven direct Swiss
+house comparisons, real polar Placidus rejection, no chart stdout on requested
+house/body failure, partial unknown-time output, independent receiving overlays,
+Davison admission/preflight, strict optional diagnostics with empty ephemeris data,
+actual Moshier flags, same-motion antipodal nodes, mixed Fagan/Lahiri thread calls,
+real ordered rise/set/day-length checks, polar event status and invalid data.
+The prior planet-hours admission test now asserts unexpected exceptions propagate
+instead of depending on the corrected broad successful-error catch. AST audit
+preserves all 72 existing top-level legacy functions. Hosted/wheel evidence follows
+by exact implementation SHA; arithmetic/library tests are not physical-device or
+independent ephemeris/practitioner validation.
+
+W09b2 installed-wheel check passed in a fresh Python 3.12 environment outside the
+source checkout: all ten JSON resources, frozen UT request/import, required and
+optional bodies with actual Moshier flags, same-motion nodes, requested houses and
+polar failure, ordered solar events, unknown-time chart and updated capability
+scope. The wheel ships the typed bridge; the legacy text script still runs from
+the source checkout. Hosted acceptance remains pending the implementation push.

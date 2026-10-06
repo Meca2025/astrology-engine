@@ -42,3 +42,16 @@ through 1911-03-11. The 1890 fixture subtracts 9 minutes 21 seconds from local n
 to expect UTC 11:50:39. This verifies handling of IANA's rule, not the historical
 certainty of every supplied birth record. ZoneInfo uses installed system tzdb or
 the packaged tzdata fallback; freezing/digesting that source remains I01 work.
+
+## W09b2 failure and provenance fixtures
+
+Swiss programmer documentation, accessed 2026-10-06, sections 3.3 and 13:
+https://www.astro.com/swisseph/swephprg.htm
+It specifies actual ephemeris selection/fallback flags and polar Placidus/Koch
+failure. Python pyswisseph 2.10.3.2 raises swe.Error on house failure, so accepting
+substitute cusps would violate the declared system. Installed rise_trans API
+documentation states status 0 means found and -2 means circumpolar/unavailable.
+Direct-library tests exercise J2000 houses and rise times; an empty data directory
+reproduces Moshier major-body fallback and five unavailable optional bodies.
+Injected node-motion/error fixtures verify adapter semantics, not independent
+astronomical accuracy. No external ephemeris-file corpus was provisioned here.
