@@ -2243,6 +2243,121 @@ def maybe_save_chart(args, chart_type, result):
     print(f"  Saved chart '{name}' -> {path}")
 
 
+def cmd_tarot(args):
+    from astroengine.tarot import draw, spreads
+    if args.list_spreads:
+        header("TAROT SPREADS", f"{len(spreads())} layouts")
+        for name, positions in sorted(spreads().items()):
+            print(f"  {name:<14} {len(positions):>2} cards — {', '.join(positions[:4])}"
+                  + ("…" if len(positions) > 4 else ""))
+        print()
+        return {"spreads": sorted(spreads())}
+    result = draw(spread=args.spread, seed=args.seed,
+                  reversals=not args.no_reversals, question=args.question)
+    if args.json:
+        print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+        return {"reading": result}
+    header("TAROT", f"{result['spread']}  ·  {len(result['cards'])} cards"
+           + (f"  ·  seed {args.seed}" if args.seed is not None else ""))
+    if args.question:
+        print(f"  Question: {args.question}\n")
+    for c in result["cards"]:
+        rev = " (reversed)" if c["reversed"] else ""
+        print(f"  {c['position']}:")
+        print(f"    {c['card']}{rev} — {', '.join(c['keywords'])}")
+        print(f"    {c['meaning']}")
+    print()
+    print("  Interpretive — symbolic counsel, not computed fact.")
+    return {"reading": result}
+
+
+def cmd_reading(args):
+    from astroengine.readings import reading as weave
+    positions, asc_sign, mc_sign = None, None, None
+    if args.load:
+        from astroengine.charts import load_chart
+        saved = load_chart(args.load, getattr(args, "chart_dir", None))
+        result = saved.get("result") or {}
+        positions = result.get("positions") or result.get("natal") or {}
+        for _key, _var in (("asc", "asc_sign"), ("mc", "mc_sign")):
+            _lon = result.get(_key)
+            if isinstance(_lon, (int, float)):
+                if _var == "asc_sign":
+                    asc_sign = deg_to_sign(_lon)[0]
+                else:
+                    mc_sign = deg_to_sign(_lon)[0]
+        print(f"  Reading from saved chart '{args.load}'")
+    else:
+        apply_chart_load(args)
+        require_date(args)
+        y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
+            args.date, args.time, args.city, args.nation,
+            getattr(args, "lat", None), getattr(args, "lon", None),
+            getattr(args, "timezone", None))
+        jd = julian_day(y, mo, d, utc_hour)
+        positions = calc_planet_positions(jd)
+        cusps, asc, mc = _optional_houses(jd, lat, lon, time_known)
+        if asc is not None:
+            asc_sign = deg_to_sign(asc)[0]
+        if mc is not None:
+            mc_sign = deg_to_sign(mc)[0]
+    woven = weave(kind=args.kind, positions=positions,
+                  asc_sign=asc_sign, mc_sign=mc_sign)
+    if args.json:
+        print(json.dumps(woven, ensure_ascii=False, sort_keys=True))
+        return {"reading": woven}
+    header("ASTROLOGY READING", args.kind.upper())
+    for para in woven["paragraphs"]:
+        print(f"  {para['text']}\n")
+    print(f"  {woven['label']}")
+    return {"reading": woven}
+
+
+def cmd_numerology(args):
+    from astroengine.numerology import full_reading
+    if not args.name:
+        raise CalculationError("--name is required for numerology")
+    result = full_reading(args.date, args.name, for_year=args.year)
+    if args.json:
+        print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+        return {"reading": result}
+    header("NUMEROLOGY", f"{args.name}  ·  {args.date}")
+    for key in ("life_path", "destiny", "soul_urge", "personality",
+                "birthday", "personal_year"):
+        n = result[key]
+        master = " ★ master" if n["master_number"] else ""
+        print(f"  {n['kind']:<13} {n['number']}{master} — {n['title']}")
+        print(f"    {n['meaning']}")
+    print()
+    print("  Interpretive — symbolic counsel, not computed fact.")
+    return {"reading": result}
+
+
+def cmd_iching(args):
+    from astroengine.iching import cast
+    result = cast(question=args.question, method=args.method, seed=args.seed)
+    if args.json:
+        print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+        return {"reading": result}
+    header("I-CHING", f"{result['method']}"
+           + (f"  ·  seed {args.seed}" if args.seed is not None else ""))
+    if args.question:
+        print(f"  Question: {args.question}\n")
+    p = result["primary"]
+    print(f"  Primary — #{p['number']} {p['name']} ({p['chinese']})")
+    print(f"    {p['judgment']}")
+    if result["changing_lines"]:
+        print(f"\n  Changing lines: {', '.join(map(str, result['changing_lines']))}")
+        r = result["relating"]
+        print(f"  Relating — #{r['number']} {r['name']} ({r['chinese']})")
+        print(f"    {r['judgment']}")
+    else:
+        print("\n  No changing lines — the oracle stands as cast.")
+    print()
+    print("  Interpretive — symbolic counsel, not computed fact.")
+    return {"reading": result}
+
+
 def cmd_charts(args):
     from astroengine.charts import list_charts, chart_dir
     rows = list_charts(getattr(args, "chart_dir", None))
@@ -3491,6 +3606,38 @@ def main():
     runic.add_argument("--json", action="store_true", help="JSON output instead of text")
     add_chart_lib(runic, with_load=False)
 
+    trt = sub.add_parser("tarot", help="Tarot reading with classic spreads")
+    trt.add_argument("--spread", default="three",
+                     help="Spread name (see --list-spreads)")
+    trt.add_argument("--list-spreads", action="store_true", dest="list_spreads")
+    trt.add_argument("--seed", type=int, default=None)
+    trt.add_argument("--no-reversals", action="store_true", dest="no_reversals")
+    trt.add_argument("--question", default=None)
+    trt.add_argument("--json", action="store_true")
+    add_chart_lib(trt, with_load=False)
+
+    rdg = sub.add_parser("reading", help="Interpretive astrology reading (general/love/career)")
+    rdg.add_argument("--kind", default="general", choices=("general", "love", "career"))
+    rdg.add_argument("--date", required=False, help="YYYY-MM-DD (or --load NAME)")
+    rdg.add_argument("--time", default=None, help="HH:MM (24h)")
+    rdg.add_argument("--json", action="store_true")
+    add_geo(rdg)
+    add_chart_lib(rdg)
+
+    num = sub.add_parser("numerology", help="Pythagorean numerology reading")
+    num.add_argument("--date", required=True, help="Birth date YYYY-MM-DD")
+    num.add_argument("--name", required=True, help="Full birth name")
+    num.add_argument("--year", type=int, default=None, help="Year for the Personal Year number")
+    num.add_argument("--json", action="store_true")
+    add_chart_lib(num, with_load=False)
+
+    ich = sub.add_parser("iching", help="I-Ching oracle: cast a hexagram")
+    ich.add_argument("--question", default=None)
+    ich.add_argument("--method", default="coins", choices=("coins", "yarrow"))
+    ich.add_argument("--seed", type=int, default=None)
+    ich.add_argument("--json", action="store_true")
+    add_chart_lib(ich, with_load=False)
+
     mgmt = sub.add_parser("charts", help="List saved charts in the chart library")
     mgmt.add_argument("--chart-dir", default=None, dest="chart_dir")
     mgmt.set_defaults(_mgmt="charts")
@@ -3531,6 +3678,10 @@ def main():
         "charts":       cmd_charts,
         "chart-show":   cmd_chart_show,
         "chart-delete": cmd_chart_delete,
+        "tarot":        cmd_tarot,
+        "reading":      cmd_reading,
+        "numerology":   cmd_numerology,
+        "iching":       cmd_iching,
     }
     _TWO_PERSON = {"synastry", "composite", "synergy"}
     _DATE_FIELDS = {

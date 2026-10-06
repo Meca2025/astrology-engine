@@ -1,0 +1,1548 @@
+{
+  "version": "1.0",
+  "source": "Rider-Waite-Smith lineage",
+  "historical_claim": "modern synthesis",
+  "major_arcana": [
+    {
+      "number": 0,
+      "name": "The Fool",
+      "upright": {
+        "keywords": [
+          "beginnings",
+          "innocence",
+          "spontaneity"
+        ],
+        "meaning": "The Fool steps toward the cliff's edge in joyous trust, and the universe catches every sincere leap of faith."
+      },
+      "reversed": {
+        "keywords": [
+          "recklessness",
+          "folly",
+          "naivety"
+        ],
+        "meaning": "The same leap taken blindly becomes a stumble, so look before the heart hurls itself forward."
+      }
+    },
+    {
+      "number": 1,
+      "name": "The Magician",
+      "upright": {
+        "keywords": [
+          "will",
+          "skill",
+          "manifestation"
+        ],
+        "meaning": "Every tool lies on the table before him, because everything needed to begin the great work is already in your hands."
+      },
+      "reversed": {
+        "keywords": [
+          "manipulation",
+          "untapped talent"
+        ],
+        "meaning": "Power misdirected curdles into trickery, or talent left sleeping gathers dust instead of gold."
+      }
+    },
+    {
+      "number": 2,
+      "name": "The High Priestess",
+      "upright": {
+        "keywords": [
+          "intuition",
+          "mystery",
+          "stillness"
+        ],
+        "meaning": "Behind her veil the moonlit waters hold answers that only silence and patience can draw to the surface."
+      },
+      "reversed": {
+        "keywords": [
+          "ignored instincts",
+          "surface noise"
+        ],
+        "meaning": "When the inner voice is drowned out by chatter, you grope in a darkness of your own making."
+      }
+    },
+    {
+      "number": 3,
+      "name": "The Empress",
+      "upright": {
+        "keywords": [
+          "abundance",
+          "nurturing",
+          "creativity"
+        ],
+        "meaning": "She reclines in a field of ripening wheat, and everything she touches grows lush, generous, and alive."
+      },
+      "reversed": {
+        "keywords": [
+          "smothering",
+          "creative block"
+        ],
+        "meaning": "Care curdles into control, or the garden of your making withers from neglect."
+      }
+    },
+    {
+      "number": 4,
+      "name": "The Emperor",
+      "upright": {
+        "keywords": [
+          "authority",
+          "structure",
+          "protection"
+        ],
+        "meaning": "His stone throne is built on order, and from that order rises the safety in which empires and families can thrive."
+      },
+      "reversed": {
+        "keywords": [
+          "rigidity",
+          "domination"
+        ],
+        "meaning": "Command hardens into tyranny when the scepter forgets that it serves the realm, not the reverse."
+      }
+    },
+    {
+      "number": 5,
+      "name": "The Hierophant",
+      "upright": {
+        "keywords": [
+          "tradition",
+          "guidance",
+          "faith"
+        ],
+        "meaning": "Between the pillars of established wisdom he raises a hand in blessing, for some truths are carried, not invented."
+      },
+      "reversed": {
+        "keywords": [
+          "dogma",
+          "rebellion"
+        ],
+        "meaning": "When the ritual matters more than the meaning, the wise break the rule to save the faith."
+      }
+    },
+    {
+      "number": 6,
+      "name": "The Lovers",
+      "upright": {
+        "keywords": [
+          "union",
+          "choice",
+          "harmony"
+        ],
+        "meaning": "Two souls stand beneath the blessing angel, and the heart's true choice aligns desire with conscience."
+      },
+      "reversed": {
+        "keywords": [
+          "misalignment",
+          "disharmony"
+        ],
+        "meaning": "A bond strained by divided loyalties, or a choice made against the grain of your own values."
+      }
+    },
+    {
+      "number": 7,
+      "name": "The Chariot",
+      "upright": {
+        "keywords": [
+          "victory",
+          "direction",
+          "willpower"
+        ],
+        "meaning": "He drives the sphinxes of opposing forces with a steady gaze, and disciplined will carries him to triumph."
+      },
+      "reversed": {
+        "keywords": [
+          "scattered drive",
+          "stalled momentum"
+        ],
+        "meaning": "The reins slip when the destination is unclear, and force without direction merely spins in place."
+      }
+    },
+    {
+      "number": 8,
+      "name": "Strength",
+      "upright": {
+        "keywords": [
+          "courage",
+          "patience",
+          "gentle power"
+        ],
+        "meaning": "She closes the lion's mouth with a soft hand, proving that true strength tames rather than crushes."
+      },
+      "reversed": {
+        "keywords": [
+          "self-doubt",
+          "raw force"
+        ],
+        "meaning": "When gentleness fails, the inner beast either cowers in fear or lashes out unchecked."
+      }
+    },
+    {
+      "number": 9,
+      "name": "The Hermit",
+      "upright": {
+        "keywords": [
+          "introspection",
+          "wisdom",
+          "solitude"
+        ],
+        "meaning": "His lantern lights only the next step, because wisdom is found by walking inward, alone, in the dark."
+      },
+      "reversed": {
+        "keywords": [
+          "isolation",
+          "withdrawal"
+        ],
+        "meaning": "Solitude sours into exile when the lamp is shuttered and no one is let in at all."
+      }
+    },
+    {
+      "number": 10,
+      "name": "Wheel of Fortune",
+      "upright": {
+        "keywords": [
+          "cycles",
+          "fate",
+          "turning point"
+        ],
+        "meaning": "The great wheel turns above sphinx and serpent alike, lifting the low and lowering the high in its endless round."
+      },
+      "reversed": {
+        "keywords": [
+          "bad timing",
+          "resisting change"
+        ],
+        "meaning": "Clinging to the rim while the wheel spins only bruises you; the turn comes whether you bless it or not."
+      }
+    },
+    {
+      "number": 11,
+      "name": "Justice",
+      "upright": {
+        "keywords": [
+          "fairness",
+          "truth",
+          "accountability"
+        ],
+        "meaning": "Her scales weigh every deed without flinching, and what is sown in truth is reaped in kind."
+      },
+      "reversed": {
+        "keywords": [
+          "injustice",
+          "bias"
+        ],
+        "meaning": "The scales tip when judgment is bought, bent, or dodged, and the debt of truth always comes due."
+      }
+    },
+    {
+      "number": 12,
+      "name": "The Hanged Man",
+      "upright": {
+        "keywords": [
+          "surrender",
+          "new perspective",
+          "pause"
+        ],
+        "meaning": "He hangs willingly, upside down, and in that stillness the world rearranges itself into a clearer pattern."
+      },
+      "reversed": {
+        "keywords": [
+          "stalling",
+          "martyrdom"
+        ],
+        "meaning": "A pause stretched past its purpose becomes mere delay, or sacrifice offered where none was asked."
+      }
+    },
+    {
+      "number": 13,
+      "name": "Death",
+      "upright": {
+        "keywords": [
+          "endings",
+          "transformation",
+          "release"
+        ],
+        "meaning": "The skeletal knight rides on, and what falls before him clears the ground where a new life is already stirring."
+      },
+      "reversed": {
+        "keywords": [
+          "clinging",
+          "stagnation"
+        ],
+        "meaning": "Refusing to bury what is already dead only chains you to a corpse instead of freeing the living."
+      }
+    },
+    {
+      "number": 14,
+      "name": "Temperance",
+      "upright": {
+        "keywords": [
+          "balance",
+          "moderation",
+          "healing"
+        ],
+        "meaning": "She pours water between the cups in an unbroken stream, blending opposites into a golden, healing middle way."
+      },
+      "reversed": {
+        "keywords": [
+          "excess",
+          "imbalance"
+        ],
+        "meaning": "Too much of anything, even a good thing, spills the vessel and sours the mixture."
+      }
+    },
+    {
+      "number": 15,
+      "name": "The Devil",
+      "upright": {
+        "keywords": [
+          "bondage",
+          "shadow",
+          "temptation"
+        ],
+        "meaning": "The chained figures could slip their loose collars at any time, yet stay: such is the grip of appetite mistaken for need."
+      },
+      "reversed": {
+        "keywords": [
+          "breaking chains",
+          "shadow work"
+        ],
+        "meaning": "The collar is seen for what it is at last, and the first honest step out of the old compulsion begins."
+      }
+    },
+    {
+      "number": 16,
+      "name": "The Tower",
+      "upright": {
+        "keywords": [
+          "upheaval",
+          "revelation",
+          "collapse"
+        ],
+        "meaning": "Lightning strikes the crown of the false tower, and though the fall is terrifying, only lies are destroyed."
+      },
+      "reversed": {
+        "keywords": [
+          "delayed disaster",
+          "inner shake-up"
+        ],
+        "meaning": "The crack spreads quietly within, or a collapse long feared finally forces the rebuilding to begin."
+      }
+    },
+    {
+      "number": 17,
+      "name": "The Star",
+      "upright": {
+        "keywords": [
+          "hope",
+          "renewal",
+          "inspiration"
+        ],
+        "meaning": "She pours starlight into pool and earth alike, and after the storm the soul breathes easy in naked, quiet hope."
+      },
+      "reversed": {
+        "keywords": [
+          "dimmed faith",
+          "discouragement"
+        ],
+        "meaning": "The stars are still there, only clouded; hope deferred is not hope destroyed, but it needs tending."
+      }
+    },
+    {
+      "number": 18,
+      "name": "The Moon",
+      "upright": {
+        "keywords": [
+          "illusion",
+          "anxiety",
+          "the subconscious"
+        ],
+        "meaning": "Between the twin towers the moon drips its pale light, and half-seen shapes stir the fears that daylight keeps at bay."
+      },
+      "reversed": {
+        "keywords": [
+          "clarity dawning",
+          "release of fear"
+        ],
+        "meaning": "The fog thins and the imagined monsters shrink back into shadow as truth steps into the moonlight."
+      }
+    },
+    {
+      "number": 19,
+      "name": "The Sun",
+      "upright": {
+        "keywords": [
+          "joy",
+          "vitality",
+          "success"
+        ],
+        "meaning": "The child rides out under the blazing sun, and everything ripens in the warmth of simple, unashamed happiness."
+      },
+      "reversed": {
+        "keywords": [
+          "clouded joy",
+          "overconfidence"
+        ],
+        "meaning": "A brief eclipse dims the light: happiness delayed or taken for granted, but never truly gone."
+      }
+    },
+    {
+      "number": 20,
+      "name": "Judgement",
+      "upright": {
+        "keywords": [
+          "awakening",
+          "calling",
+          "rebirth"
+        ],
+        "meaning": "The trumpet sounds and the dead rise from their coffins, answering at last the higher calling they were born for."
+      },
+      "reversed": {
+        "keywords": [
+          "self-doubt",
+          "ignored calling"
+        ],
+        "meaning": "The call sounds but you cover your ears, or the past is judged again instead of forgiven."
+      }
+    },
+    {
+      "number": 21,
+      "name": "The World",
+      "upright": {
+        "keywords": [
+          "completion",
+          "wholeness",
+          "triumph"
+        ],
+        "meaning": "She dances within the laurel wreath as the four beasts watch, and the long journey closes in perfect, joyful completion."
+      },
+      "reversed": {
+        "keywords": [
+          "loose ends",
+          "incompletion"
+        ],
+        "meaning": "The wreath is woven but one strand hangs loose; finish the final task and the circle will close."
+      }
+    }
+  ],
+  "minor_arcana": [
+    {
+      "suit": "Wands",
+      "rank": "Ace",
+      "name": "Ace of Wands",
+      "upright": {
+        "keywords": [
+          "inspiration",
+          "new venture",
+          "creative spark"
+        ],
+        "meaning": "A hand offers a blazing wand from the clouds: pure fire to ignite any new enterprise."
+      },
+      "reversed": {
+        "keywords": [
+          "delays",
+          "false start",
+          "scattered energy"
+        ],
+        "meaning": "The spark sputters when scattered in too many directions or struck before its time."
+      }
+    },
+    {
+      "suit": "Wands",
+      "rank": "Two",
+      "name": "Two of Wands",
+      "upright": {
+        "keywords": [
+          "planning",
+          "first decisions",
+          "personal power"
+        ],
+        "meaning": "He holds the world in one hand and a wand in the other, choosing which horizon his ambition will conquer."
+      },
+      "reversed": {
+        "keywords": [
+          "indecision",
+          "poor planning"
+        ],
+        "meaning": "Grand plans wither when choice is endlessly postponed or made without counsel."
+      }
+    },
+    {
+      "suit": "Wands",
+      "rank": "Three",
+      "name": "Three of Wands",
+      "upright": {
+        "keywords": [
+          "foresight",
+          "enterprise rewarded",
+          "progress"
+        ],
+        "meaning": "His ships return laden across the water: ventures launched with vision come home bearing fruit."
+      },
+      "reversed": {
+        "keywords": [
+          "delays",
+          "frustration"
+        ],
+        "meaning": "The ships are becalmed; progress stalls and foresight goes unrewarded for a season."
+      }
+    },
+    {
+      "suit": "Wands",
+      "rank": "Four",
+      "name": "Four of Wands",
+      "upright": {
+        "keywords": [
+          "celebration",
+          "harmony",
+          "milestone"
+        ],
+        "meaning": "Garlands crown the four wands as dancers celebrate a foundation well and truly laid."
+      },
+      "reversed": {
+        "keywords": [
+          "transition",
+          "restlessness"
+        ],
+        "meaning": "The celebration is postponed, or the milestone reveals the next road already calling."
+      }
+    },
+    {
+      "suit": "Wands",
+      "rank": "Five",
+      "name": "Five of Wands",
+      "upright": {
+        "keywords": [
+          "conflict",
+          "competition",
+          "rivalry"
+        ],
+        "meaning": "Five youths clash their staves in mock battle: friction that tests strength and sharpens skill."
+      },
+      "reversed": {
+        "keywords": [
+          "conflict ending",
+          "inner tension"
+        ],
+        "meaning": "The skirmish burns itself out, though embers of tension may still smolder within."
+      }
+    },
+    {
+      "suit": "Wands",
+      "rank": "Six",
+      "name": "Six of Wands",
+      "upright": {
+        "keywords": [
+          "victory",
+          "recognition",
+          "triumph"
+        ],
+        "meaning": "Crowned with laurel he rides through the cheering crowd: effort recognized and victory made public."
+      },
+      "reversed": {
+        "keywords": [
+          "delayed victory",
+          "pride"
+        ],
+        "meaning": "The laurel is delayed, or triumph curdles into vanity when applause becomes the goal."
+      }
+    },
+    {
+      "suit": "Wands",
+      "rank": "Seven",
+      "name": "Seven of Wands",
+      "upright": {
+        "keywords": [
+          "defense",
+          "conviction",
+          "standing ground"
+        ],
+        "meaning": "From the high ground he beats back six attackers: one person's conviction holding against the many."
+      },
+      "reversed": {
+        "keywords": [
+          "overwhelm",
+          "giving ground"
+        ],
+        "meaning": "The high ground is lost, or the fight costs more than the hill was ever worth."
+      }
+    },
+    {
+      "suit": "Wands",
+      "rank": "Eight",
+      "name": "Eight of Wands",
+      "upright": {
+        "keywords": [
+          "swift action",
+          "news",
+          "momentum"
+        ],
+        "meaning": "Eight wands fly straight as arrows through clear air: things move fast now, and messages fly true."
+      },
+      "reversed": {
+        "keywords": [
+          "delays",
+          "miscommunication"
+        ],
+        "meaning": "The arrows scatter in a crosswind; haste tangles what patience would have ordered."
+      }
+    },
+    {
+      "suit": "Wands",
+      "rank": "Nine",
+      "name": "Nine of Wands",
+      "upright": {
+        "keywords": [
+          "resilience",
+          "perseverance",
+          "last defense"
+        ],
+        "meaning": "Wounded but upright, he guards the line of wands behind him: one more effort will see it through."
+      },
+      "reversed": {
+        "keywords": [
+          "exhaustion",
+          "defensiveness"
+        ],
+        "meaning": "The guard is worn past bearing, or old battles are refought long after the war is won."
+      }
+    },
+    {
+      "suit": "Wands",
+      "rank": "Ten",
+      "name": "Ten of Wands",
+      "upright": {
+        "keywords": [
+          "burden",
+          "responsibility",
+          "overwork"
+        ],
+        "meaning": "He staggers under ten heavy wands toward a distant town: the price of carrying everything alone."
+      },
+      "reversed": {
+        "keywords": [
+          "release",
+          "delegation"
+        ],
+        "meaning": "The bundle is set down at last, or dropped in collapse, and the load is finally shared."
+      }
+    },
+    {
+      "suit": "Wands",
+      "rank": "Page",
+      "name": "Page of Wands",
+      "upright": {
+        "keywords": [
+          "enthusiasm",
+          "exploration",
+          "discovery"
+        ],
+        "meaning": "A bright-eyed youth lifts his wand toward unmapped horizons: the fearless messenger of new adventures."
+      },
+      "reversed": {
+        "keywords": [
+          "hasty plans",
+          "scattered focus"
+        ],
+        "meaning": "Enthusiasm outruns preparation, and the eager messenger arrives with the wrong news."
+      }
+    },
+    {
+      "suit": "Wands",
+      "rank": "Knight",
+      "name": "Knight of Wands",
+      "upright": {
+        "keywords": [
+          "bold action",
+          "adventure",
+          "charisma"
+        ],
+        "meaning": "He charges into the fray with plume flying: the bold champion who acts first and apologizes later."
+      },
+      "reversed": {
+        "keywords": [
+          "recklessness",
+          "impulsiveness"
+        ],
+        "meaning": "The charge becomes a rout when courage forgets counsel and fire forgets its hearth."
+      }
+    },
+    {
+      "suit": "Wands",
+      "rank": "Queen",
+      "name": "Queen of Wands",
+      "upright": {
+        "keywords": [
+          "confidence",
+          "warmth",
+          "magnetic leadership"
+        ],
+        "meaning": "She rules from a throne of lions and sunflowers: warm, commanding, and impossible to ignore."
+      },
+      "reversed": {
+        "keywords": [
+          "jealousy",
+          "domineering"
+        ],
+        "meaning": "Her fire turns inward to smolder as envy, or outward to scorch all who approach."
+      }
+    },
+    {
+      "suit": "Wands",
+      "rank": "King",
+      "name": "King of Wands",
+      "upright": {
+        "keywords": [
+          "vision",
+          "enterprise",
+          "natural command"
+        ],
+        "meaning": "He surveys his realm with a wand of living wood: the entrepreneur-king who turns vision into dominion."
+      },
+      "reversed": {
+        "keywords": [
+          "impulsiveness",
+          "overbearing pride"
+        ],
+        "meaning": "Command hardens into bluster, and grand visions burn out for lack of steady tending."
+      }
+    },
+    {
+      "suit": "Cups",
+      "rank": "Ace",
+      "name": "Ace of Cups",
+      "upright": {
+        "keywords": [
+          "new love",
+          "emotional opening",
+          "intuition"
+        ],
+        "meaning": "A hand offers an overflowing cup beneath the dove of spirit: the heart opens to love, art, or grace."
+      },
+      "reversed": {
+        "keywords": [
+          "blocked feelings",
+          "emotional drought"
+        ],
+        "meaning": "The cup is stoppered; feelings dammed up turn stagnant instead of flowing."
+      }
+    },
+    {
+      "suit": "Cups",
+      "rank": "Two",
+      "name": "Two of Cups",
+      "upright": {
+        "keywords": [
+          "partnership",
+          "mutual love",
+          "union"
+        ],
+        "meaning": "Two cups are exchanged beneath the winged lion: a bond of equals, sealed in trust and tenderness."
+      },
+      "reversed": {
+        "keywords": [
+          "imbalance",
+          "broken bond"
+        ],
+        "meaning": "The exchange falters when giving and taking fall out of rhythm, or trust is bent."
+      }
+    },
+    {
+      "suit": "Cups",
+      "rank": "Three",
+      "name": "Three of Cups",
+      "upright": {
+        "keywords": [
+          "friendship",
+          "celebration",
+          "community"
+        ],
+        "meaning": "Three maidens dance with raised cups: joy multiplied by friendship and shared in good company."
+      },
+      "reversed": {
+        "keywords": [
+          "gossip",
+          "overindulgence"
+        ],
+        "meaning": "The dance grows rowdy, or whispered words sour the sweetness of the gathering."
+      }
+    },
+    {
+      "suit": "Cups",
+      "rank": "Four",
+      "name": "Four of Cups",
+      "upright": {
+        "keywords": [
+          "contemplation",
+          "reevaluation",
+          "apathy"
+        ],
+        "meaning": "He sits beneath the tree, arms crossed, blind to the fourth cup offered by spirit: a pause to reconsider what truly satisfies."
+      },
+      "reversed": {
+        "keywords": [
+          "renewed interest",
+          "seizing opportunity"
+        ],
+        "meaning": "The offered cup is noticed at last, and stagnant discontent gives way to fresh engagement."
+      }
+    },
+    {
+      "suit": "Cups",
+      "rank": "Five",
+      "name": "Five of Cups",
+      "upright": {
+        "keywords": [
+          "loss",
+          "grief",
+          "regret"
+        ],
+        "meaning": "Cloaked in black he mourns the three spilled cups, not yet seeing the two that stand unbroken behind him."
+      },
+      "reversed": {
+        "keywords": [
+          "acceptance",
+          "moving on"
+        ],
+        "meaning": "Mourning lifts; the spilled wine is forgiven and the cups still standing are lifted again."
+      }
+    },
+    {
+      "suit": "Cups",
+      "rank": "Six",
+      "name": "Six of Cups",
+      "upright": {
+        "keywords": [
+          "nostalgia",
+          "childhood joy",
+          "innocence"
+        ],
+        "meaning": "Children exchange cups of flowers in a sunlit courtyard: the sweetness of memory and simple kindness."
+      },
+      "reversed": {
+        "keywords": [
+          "stuck in the past",
+          "naivety"
+        ],
+        "meaning": "The past becomes a cage instead of a garden when memory is clung to instead of cherished."
+      }
+    },
+    {
+      "suit": "Cups",
+      "rank": "Seven",
+      "name": "Seven of Cups",
+      "upright": {
+        "keywords": [
+          "fantasy",
+          "choices",
+          "wishful thinking"
+        ],
+        "meaning": "Seven cups float in a glittering cloud of visions: dreams dazzle, but not every shining cup holds wine."
+      },
+      "reversed": {
+        "keywords": [
+          "clarity",
+          "grounded choice"
+        ],
+        "meaning": "The mist clears and one true cup is chosen; illusion yields to committed choice."
+      }
+    },
+    {
+      "suit": "Cups",
+      "rank": "Eight",
+      "name": "Eight of Cups",
+      "upright": {
+        "keywords": [
+          "walking away",
+          "seeking deeper meaning"
+        ],
+        "meaning": "He abandons the stacked cups beneath an eclipsed moon, turning toward higher ground the heart cannot name."
+      },
+      "reversed": {
+        "keywords": [
+          "fear of change",
+          "stagnation"
+        ],
+        "meaning": "The road is seen but not taken, and the soul sits among cups it has outgrown."
+      }
+    },
+    {
+      "suit": "Cups",
+      "rank": "Nine",
+      "name": "Nine of Cups",
+      "upright": {
+        "keywords": [
+          "wishes fulfilled",
+          "contentment",
+          "indulgence"
+        ],
+        "meaning": "The satisfied merchant sits before his nine arranged cups: the wish granted and savored in full."
+      },
+      "reversed": {
+        "keywords": [
+          "dissatisfaction",
+          "hollow indulgence"
+        ],
+        "meaning": "The wish granted proves empty, or pleasure pursued for its own sake leaves the heart hungry."
+      }
+    },
+    {
+      "suit": "Cups",
+      "rank": "Ten",
+      "name": "Ten of Cups",
+      "upright": {
+        "keywords": [
+          "lasting joy",
+          "family harmony",
+          "fulfillment"
+        ],
+        "meaning": "Beneath the rainbow of ten cups a family dances in the cottage garden: love made complete and enduring."
+      },
+      "reversed": {
+        "keywords": [
+          "domestic strain",
+          "broken harmony"
+        ],
+        "meaning": "The rainbow fades when home's harmony is strained, though the cups themselves remain unbroken."
+      }
+    },
+    {
+      "suit": "Cups",
+      "rank": "Page",
+      "name": "Page of Cups",
+      "upright": {
+        "keywords": [
+          "sensitivity",
+          "new feelings",
+          "creative spark"
+        ],
+        "meaning": "A dreamy youth gazes at the fish rising from his cup: tender new feelings surfacing from the deep."
+      },
+      "reversed": {
+        "keywords": [
+          "emotional immaturity",
+          "blocked creativity"
+        ],
+        "meaning": "Feelings spill sideways into sulks or daydreams when the young heart cannot name them."
+      }
+    },
+    {
+      "suit": "Cups",
+      "rank": "Knight",
+      "name": "Knight of Cups",
+      "upright": {
+        "keywords": [
+          "romance",
+          "idealism",
+          "charm"
+        ],
+        "meaning": "He rides gently forward, cup extended: the romantic who follows his heart with grace and courtesy."
+      },
+      "reversed": {
+        "keywords": [
+          "unrealistic promises",
+          "moodiness"
+        ],
+        "meaning": "The suitor's vows dissolve like mist, or charm masks a heart that will not commit."
+      }
+    },
+    {
+      "suit": "Cups",
+      "rank": "Queen",
+      "name": "Queen of Cups",
+      "upright": {
+        "keywords": [
+          "compassion",
+          "intuition",
+          "emotional wisdom"
+        ],
+        "meaning": "She contemplates her ornate cup in stillness: the empath whose quiet waters run fathomlessly deep."
+      },
+      "reversed": {
+        "keywords": [
+          "insecurity",
+          "emotional overwhelm"
+        ],
+        "meaning": "Her waters flood their banks: feeling everything, she drowns in others' tides or her own."
+      }
+    },
+    {
+      "suit": "Cups",
+      "rank": "King",
+      "name": "King of Cups",
+      "upright": {
+        "keywords": [
+          "emotional mastery",
+          "diplomacy",
+          "calm counsel"
+        ],
+        "meaning": "He sits steady upon his throne amid tossing waves: mastery of feeling expressed as calm, wise counsel."
+      },
+      "reversed": {
+        "keywords": [
+          "emotional manipulation",
+          "volatility"
+        ],
+        "meaning": "The calm sea hides a riptide: feelings weaponized, or composure cracking under hidden strain."
+      }
+    },
+    {
+      "suit": "Swords",
+      "rank": "Ace",
+      "name": "Ace of Swords",
+      "upright": {
+        "keywords": [
+          "breakthrough",
+          "truth",
+          "mental clarity"
+        ],
+        "meaning": "A hand grips a sword crowned with laurel and olive: truth cutting through confusion in one decisive stroke."
+      },
+      "reversed": {
+        "keywords": [
+          "confusion",
+          "misused intellect"
+        ],
+        "meaning": "The blade is double-edged when turned carelessly: clarity muddied, or truth wielded as a weapon."
+      }
+    },
+    {
+      "suit": "Swords",
+      "rank": "Two",
+      "name": "Two of Swords",
+      "upright": {
+        "keywords": [
+          "stalemate",
+          "difficult choice",
+          "truce"
+        ],
+        "meaning": "Blindfolded she balances two crossed swords beneath the moon: a fragile peace while a hard choice waits."
+      },
+      "reversed": {
+        "keywords": [
+          "information overload",
+          "release of stalemate"
+        ],
+        "meaning": "The blindfold slips, or is torn off, and the long-avoided decision can no longer wait."
+      }
+    },
+    {
+      "suit": "Swords",
+      "rank": "Three",
+      "name": "Three of Swords",
+      "upright": {
+        "keywords": [
+          "heartbreak",
+          "painful truth",
+          "sorrow"
+        ],
+        "meaning": "Three swords pierce the floating heart beneath gray rain: sorrow that must be felt to be healed."
+      },
+      "reversed": {
+        "keywords": [
+          "healing",
+          "forgiveness"
+        ],
+        "meaning": "The swords are drawn out one by one; the wound closes and the heart learns to beat freely again."
+      }
+    },
+    {
+      "suit": "Swords",
+      "rank": "Four",
+      "name": "Four of Swords",
+      "upright": {
+        "keywords": [
+          "rest",
+          "recovery",
+          "contemplation"
+        ],
+        "meaning": "The knight lies in effigy above his tomb while one sword rests below: sacred rest before the next battle."
+      },
+      "reversed": {
+        "keywords": [
+          "restlessness",
+          "burnout"
+        ],
+        "meaning": "Rest refused becomes exhaustion; the tomb is no place to sleep when the battle still calls."
+      }
+    },
+    {
+      "suit": "Swords",
+      "rank": "Five",
+      "name": "Five of Swords",
+      "upright": {
+        "keywords": [
+          "hollow victory",
+          "conflict",
+          "tension"
+        ],
+        "meaning": "He gathers the fallen swords with a smirk while the defeated walk away: winning at too high a cost."
+      },
+      "reversed": {
+        "keywords": [
+          "reconciliation",
+          "lingering resentment"
+        ],
+        "meaning": "The swords are laid down and peace is attempted, though old wounds may still ache beneath."
+      }
+    },
+    {
+      "suit": "Swords",
+      "rank": "Six",
+      "name": "Six of Swords",
+      "upright": {
+        "keywords": [
+          "transition",
+          "moving on",
+          "calmer waters"
+        ],
+        "meaning": "The ferryman poles toward the far shore where the water smooths: sorrowful passage toward quieter days."
+      },
+      "reversed": {
+        "keywords": [
+          "stuck",
+          "resisting transition"
+        ],
+        "meaning": "The boat circles in rough water; the far shore is refused or the passage is delayed."
+      }
+    },
+    {
+      "suit": "Swords",
+      "rank": "Seven",
+      "name": "Seven of Swords",
+      "upright": {
+        "keywords": [
+          "strategy",
+          "stealth",
+          "resourcefulness"
+        ],
+        "meaning": "He slips away with five swords while two stand planted: cunning that wins the prize, or steals it."
+      },
+      "reversed": {
+        "keywords": [
+          "coming clean",
+          "conscience"
+        ],
+        "meaning": "The theft is discovered or confessed; what was taken by stealth must now be reckoned with."
+      }
+    },
+    {
+      "suit": "Swords",
+      "rank": "Eight",
+      "name": "Eight of Swords",
+      "upright": {
+        "keywords": [
+          "restriction",
+          "self-imposed prison",
+          "victimhood"
+        ],
+        "meaning": "Bound and blindfolded among eight swords, she could walk free: the cage is built mostly of her own thoughts."
+      },
+      "reversed": {
+        "keywords": [
+          "liberation",
+          "new perspective"
+        ],
+        "meaning": "The bindings loosen as the mind clears; the first step out of the prison is finally taken."
+      }
+    },
+    {
+      "suit": "Swords",
+      "rank": "Nine",
+      "name": "Nine of Swords",
+      "upright": {
+        "keywords": [
+          "anxiety",
+          "nightmares",
+          "worry"
+        ],
+        "meaning": "She sits upright in bed, head in hands, beneath nine hanging swords: the terrors that daylight dissolves."
+      },
+      "reversed": {
+        "keywords": [
+          "release from worry",
+          "dawn breaking"
+        ],
+        "meaning": "The long night ends; fears faced in daylight shrink to their proper, manageable size."
+      }
+    },
+    {
+      "suit": "Swords",
+      "rank": "Ten",
+      "name": "Ten of Swords",
+      "upright": {
+        "keywords": [
+          "rock bottom",
+          "painful ending",
+          "release"
+        ],
+        "meaning": "Face down beneath ten swords at dawn's red edge: the worst has happened, and with it the end of suffering."
+      },
+      "reversed": {
+        "keywords": [
+          "recovery",
+          "lingering pain"
+        ],
+        "meaning": "The swords are being drawn from the back one by one; healing begins, though scars remain tender."
+      }
+    },
+    {
+      "suit": "Swords",
+      "rank": "Page",
+      "name": "Page of Swords",
+      "upright": {
+        "keywords": [
+          "curiosity",
+          "vigilance",
+          "new ideas"
+        ],
+        "meaning": "A keen youth raises his sword to a shifting sky: the sharp mind ever watchful for the next new idea."
+      },
+      "reversed": {
+        "keywords": [
+          "cynicism",
+          "gossip"
+        ],
+        "meaning": "The keen edge turns to cutting remarks, or cleverness chases rumors instead of truth."
+      }
+    },
+    {
+      "suit": "Swords",
+      "rank": "Knight",
+      "name": "Knight of Swords",
+      "upright": {
+        "keywords": [
+          "swift intellect",
+          "ambition",
+          "directness"
+        ],
+        "meaning": "He charges headlong into the storm, sword raised: intellect at full gallop, brilliant and unstoppable."
+      },
+      "reversed": {
+        "keywords": [
+          "haste",
+          "aggression"
+        ],
+        "meaning": "The charge outruns judgment; brilliance becomes bluster and words become weapons."
+      }
+    },
+    {
+      "suit": "Swords",
+      "rank": "Queen",
+      "name": "Queen of Swords",
+      "upright": {
+        "keywords": [
+          "clear perception",
+          "independence",
+          "honesty"
+        ],
+        "meaning": "She raises her sword upright on a throne of air: sorrow has sharpened her into truth's clearest witness."
+      },
+      "reversed": {
+        "keywords": [
+          "coldness",
+          "bitterness"
+        ],
+        "meaning": "Clarity curdles into cruelty when the heart's frost silences its warmth entirely."
+      }
+    },
+    {
+      "suit": "Swords",
+      "rank": "King",
+      "name": "King of Swords",
+      "upright": {
+        "keywords": [
+          "intellectual authority",
+          "fairness",
+          "strategy"
+        ],
+        "meaning": "Enthroned among butterflies of transformation, he rules by reason: the just strategist none can deceive."
+      },
+      "reversed": {
+        "keywords": [
+          "manipulation",
+          "abuse of power"
+        ],
+        "meaning": "Reason becomes rationalization, and the sharp mind schemes for itself instead of serving justice."
+      }
+    },
+    {
+      "suit": "Pentacles",
+      "rank": "Ace",
+      "name": "Ace of Pentacles",
+      "upright": {
+        "keywords": [
+          "new opportunity",
+          "prosperity",
+          "manifestation"
+        ],
+        "meaning": "A hand offers a golden coin above a flowering garden: the seed of material blessing, ready to be planted."
+      },
+      "reversed": {
+        "keywords": [
+          "missed opportunity",
+          "financial wobble"
+        ],
+        "meaning": "The coin slips through careless fingers, or the seed is planted in barren, unready ground."
+      }
+    },
+    {
+      "suit": "Pentacles",
+      "rank": "Two",
+      "name": "Two of Pentacles",
+      "upright": {
+        "keywords": [
+          "balance",
+          "adaptability",
+          "juggling"
+        ],
+        "meaning": "He dances with two coins in an endless loop amid the waves: keeping everything in the air with grace."
+      },
+      "reversed": {
+        "keywords": [
+          "overwhelm",
+          "disorganization"
+        ],
+        "meaning": "Too many coins in the air at once; the dance falters and something precious drops."
+      }
+    },
+    {
+      "suit": "Pentacles",
+      "rank": "Three",
+      "name": "Three of Pentacles",
+      "upright": {
+        "keywords": [
+          "craftsmanship",
+          "teamwork",
+          "mastery"
+        ],
+        "meaning": "The artisan's work rises in the cathedral while patrons admire: skill honored through collaboration."
+      },
+      "reversed": {
+        "keywords": [
+          "poor workmanship",
+          "lack of teamwork"
+        ],
+        "meaning": "Shoddy craft or clashing egos; the cathedral suffers when the builders will not listen."
+      }
+    },
+    {
+      "suit": "Pentacles",
+      "rank": "Four",
+      "name": "Four of Pentacles",
+      "upright": {
+        "keywords": [
+          "security",
+          "control",
+          "holding tight"
+        ],
+        "meaning": "Crowned and enthroned, he clutches his coins: the safety of what is held, and the fear of letting go."
+      },
+      "reversed": {
+        "keywords": [
+          "release",
+          "generosity"
+        ],
+        "meaning": "The grip loosens into generosity, or the coins are flung away in a panic of release."
+      }
+    },
+    {
+      "suit": "Pentacles",
+      "rank": "Five",
+      "name": "Five of Pentacles",
+      "upright": {
+        "keywords": [
+          "hardship",
+          "exclusion",
+          "worry"
+        ],
+        "meaning": "Two beggars limp past the lit church window in the snow: hard times endured outside the warmth."
+      },
+      "reversed": {
+        "keywords": [
+          "recovery",
+          "aid arriving"
+        ],
+        "meaning": "The church door opens at last; help is found, or the worst of the winter passes."
+      }
+    },
+    {
+      "suit": "Pentacles",
+      "rank": "Six",
+      "name": "Six of Pentacles",
+      "upright": {
+        "keywords": [
+          "generosity",
+          "charity",
+          "giving and receiving"
+        ],
+        "meaning": "The merchant weighs coins into open hands: wealth flowing where it is needed, given with grace."
+      },
+      "reversed": {
+        "keywords": [
+          "debt",
+          "strings attached"
+        ],
+        "meaning": "Giving comes with hooks, or the scales of debt tip beyond what can be repaid."
+      }
+    },
+    {
+      "suit": "Pentacles",
+      "rank": "Seven",
+      "name": "Seven of Pentacles",
+      "upright": {
+        "keywords": [
+          "patience",
+          "long-term view",
+          "assessment"
+        ],
+        "meaning": "He leans on his hoe, studying the growing vines: honest work appraised with a farmer's patient eye."
+      },
+      "reversed": {
+        "keywords": [
+          "impatience",
+          "wasted effort"
+        ],
+        "meaning": "The harvest is judged too soon, or labor poured into soil that was never going to bear."
+      }
+    },
+    {
+      "suit": "Pentacles",
+      "rank": "Eight",
+      "name": "Eight of Pentacles",
+      "upright": {
+        "keywords": [
+          "skill",
+          "apprenticeship",
+          "diligence"
+        ],
+        "meaning": "The craftsman hammers coin after coin at his bench: mastery built one careful repetition at a time."
+      },
+      "reversed": {
+        "keywords": [
+          "perfectionism",
+          "lack of focus"
+        ],
+        "meaning": "The bench becomes a treadmill: endless detail with no craft, or skill left unlearned."
+      }
+    },
+    {
+      "suit": "Pentacles",
+      "rank": "Nine",
+      "name": "Nine of Pentacles",
+      "upright": {
+        "keywords": [
+          "self-sufficiency",
+          "refinement",
+          "luxury earned"
+        ],
+        "meaning": "She stands in her walled garden with falcon on wrist: independence cultivated into graceful abundance."
+      },
+      "reversed": {
+        "keywords": [
+          "overwork",
+          "materialism"
+        ],
+        "meaning": "The garden walls become a gilded cage, or abundance is chased until it owns the chaser."
+      }
+    },
+    {
+      "suit": "Pentacles",
+      "rank": "Ten",
+      "name": "Ten of Pentacles",
+      "upright": {
+        "keywords": [
+          "legacy",
+          "lasting wealth",
+          "family prosperity"
+        ],
+        "meaning": "Three generations gather beneath the arch of ten coins: prosperity rooted deep enough to outlast its makers."
+      },
+      "reversed": {
+        "keywords": [
+          "family disputes",
+          "fleeting wealth"
+        ],
+        "meaning": "The arch cracks when kin quarrel over the coins, or riches prove as temporary as seasons."
+      }
+    },
+    {
+      "suit": "Pentacles",
+      "rank": "Page",
+      "name": "Page of Pentacles",
+      "upright": {
+        "keywords": [
+          "studiousness",
+          "new venture",
+          "practical learning"
+        ],
+        "meaning": "The youth studies his single coin with total absorption: the patient student of the material world."
+      },
+      "reversed": {
+        "keywords": [
+          "distraction",
+          "missed lesson"
+        ],
+        "meaning": "The coin is gazed at but never spent; study without application bears no harvest."
+      }
+    },
+    {
+      "suit": "Pentacles",
+      "rank": "Knight",
+      "name": "Knight of Pentacles",
+      "upright": {
+        "keywords": [
+          "reliability",
+          "hard work",
+          "routine"
+        ],
+        "meaning": "He sits motionless upon his heavy horse, coin in hand: the plodding guardian who never abandons his post."
+      },
+      "reversed": {
+        "keywords": [
+          "stubbornness",
+          "stagnation"
+        ],
+        "meaning": "Steadfastness hardens into stubborn ruts, or duty becomes drudgery without end."
+      }
+    },
+    {
+      "suit": "Pentacles",
+      "rank": "Queen",
+      "name": "Queen of Pentacles",
+      "upright": {
+        "keywords": [
+          "nurturing abundance",
+          "practicality",
+          "resourcefulness"
+        ],
+        "meaning": "She cradles her coin amid rabbits and roses: the earth-mother who makes prosperity feel like home."
+      },
+      "reversed": {
+        "keywords": [
+          "work-life imbalance",
+          "neglect"
+        ],
+        "meaning": "The garden or the household suffers while she tends the other; care itself needs caring for."
+      }
+    },
+    {
+      "suit": "Pentacles",
+      "rank": "King",
+      "name": "King of Pentacles",
+      "upright": {
+        "keywords": [
+          "mastery",
+          "prosperity",
+          "dependable leadership"
+        ],
+        "meaning": "Enthroned among vines and bulls, he rests a foot on abundance itself: wealth built to shelter generations."
+      },
+      "reversed": {
+        "keywords": [
+          "greed",
+          "corruption"
+        ],
+        "meaning": "The throne is gilded but hollow when profit is worshipped and the kingdom's soul is sold."
+      }
+    }
+  ]
+}

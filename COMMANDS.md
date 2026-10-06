@@ -289,6 +289,63 @@ python3 astrology_engine.py runic --datetime 2026-05-16T16:45 \
 
 ---
 
+## `tarot`
+
+Tarot readings from the 78-card Rider-Waite-Smith deck (original
+distillations, modern synthesis), with ten spreads and optional reversals.
+Draws are seeded and reproducible.
+
+```bash
+python3 astrology_engine.py tarot --spread celtic-cross --seed 7
+python3 astrology_engine.py tarot --list-spreads
+python3 astrology_engine.py tarot --spread horseshoe --question "What of my path?" --no-reversals
+```
+
+Spreads: `single`, `three`, `five-cross`, `celtic-cross`, `horseshoe`,
+`relationship`, `career`, `choice`, `year-ahead`, `chakra`.
+
+---
+
+## `reading`
+
+Interpretive astrology readings — general, love, or career — woven from a
+computed chart. Reads a saved chart (`--load NAME`) or computes from birth
+data. Every paragraph is labeled interpretive: symbolic counsel, never
+computed fact.
+
+```bash
+python3 astrology_engine.py reading --load volmarr --kind love
+python3 astrology_engine.py reading --date 1972-09-01 --time 08:18 \
+  --lat 42.81 --lon -73.94 --timezone America/New_York --kind career
+```
+
+---
+
+## `numerology`
+
+Pythagorean numerology: Life Path, Destiny, Soul Urge, Personality,
+Birthday, and Personal Year numbers. Master numbers 11/22/33 are held,
+never reduced.
+
+```bash
+python3 astrology_engine.py numerology --date 1972-09-01 --name "Volmarr Godi"
+```
+
+---
+
+## `iching`
+
+The I-Ching oracle: cast by coins or simulated yarrow stalks, with
+changing lines and the relating hexagram. All 64 hexagrams in King Wen
+order, with original renderings.
+
+```bash
+python3 astrology_engine.py iching --question "What of the morrow?"
+python3 astrology_engine.py iching --method yarrow --seed 42
+```
+
+---
+
 ## Chart library — save, load, reuse
 
 Every chart-producing command accepts `--save NAME`; birth-data commands

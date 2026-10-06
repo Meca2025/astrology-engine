@@ -87,3 +87,7 @@ body availability/frame/search rules. The monolith owns text uncertainty renderi
   saved charts (`~/.astroengine/charts`); wired into every
   chart-producing command via `--save`/`--load`; verified by
   `tests/test_chart_library.py`.
+- `astroengine/tarot.py`, `astroengine/readings.py`,
+  `astroengine/numerology.py`, `astroengine/iching.py` — the
+  divination quartet (tarot spreads, astrology readings,
+  numerology, I-Ching); verified by `tests/test_divination.py`.

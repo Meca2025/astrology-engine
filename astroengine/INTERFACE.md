@@ -268,3 +268,19 @@ maps each to major/minor/quintile/septile/novile/harmonic, and
 `calc_aspects(..., families=...)` filters (the pseudo-family "obscure"
 selects the four non-classical families). `data/western.json` mirrors the
 ten new aspects with neutral weight 0 so synergy scoring is unchanged.
+
+## Divination quartet
+
+- `astroengine/tarot.py` + `data/tarot.json`: 78-card RWS deck, ten
+  spreads (`draw(spread, seed, reversals, question)`), seeded
+  reproducibility. CLI: `tarot`.
+- `astroengine/readings.py`: `reading(kind, positions, asc_sign,
+  mc_sign)` — general/love/career interpretive narratives from chart
+  data; every paragraph tagged interpretive. CLI: `reading` (with
+  `--load`).
+- `astroengine/numerology.py` + `data/numerology.json`: Pythagorean
+  life_path/destiny/soul_urge/personality/birthday/personal_year;
+  masters 11/22/33 held. CLI: `numerology`.
+- `astroengine/iching.py` + `data/iching.json`: 64 hexagrams (King Wen
+  order, original renderings); `cast(question, method, seed)` by coins
+  or yarrow with changing lines + relating hexagram. CLI: `iching`.

@@ -326,3 +326,32 @@ obscure}`. `data/western.json` mirrors the ten with weight 0, so synergy
 scores do not shift; the high-noise inline loops (transit, synastry,
 predict, progressions) keep their strong-aspect focus. Sólrún's new
 suites: 21/21 green, full suite 384 green. Pushed via the PAT tool.
+
+## 2026-10-06 — The divination quartet: tarot, readings, numerology, I-Ching
+
+Volmarr asked for them separately, and separately they stand — four new
+divination systems, each its own module, data, and CLI command, all held
+to the house honesty standard (labeled interpretive, never computed
+fact).
+
+**Tarot** (`astroengine/tarot.py`, `data/tarot.json`): the full 78-card
+RWS deck with original one-line meanings, ten spreads (single, three,
+five-cross, celtic-cross, horseshoe, relationship, career, choice,
+year-ahead, chakra), reversals, and seeded reproducible draws.
+
+**Astrology readings** (`astroengine/readings.py`): general/love/career
+narratives woven from real chart data — elemental temperament, Sun/Moon/
+Ascendant lines, the tightest major aspects, Venus/MC foregrounding for
+love/career. Reads `--load NAME` saved charts or computes fresh.
+
+**Numerology** (`astroengine/numerology.py`, `data/numerology.json`):
+Pythagorean life path, destiny, soul urge, personality, birthday,
+personal year; masters 11/22/33 held; ð/þ/æ/ø transliterated for Norse
+names. (Volmarr: Life Path 11, Soul Urge 22 — a double master.)
+
+**I-Ching** (`astroengine/iching.py`, `data/iching.json`): 64 hexagrams
+in King Wen order with original renderings; coin or yarrow casting with
+true changing lines and the relating hexagram.
+
+Sólrún's `tests/test_divination.py`: 17/17 green, full suite 401 green.
+Pushed via the PAT tool.

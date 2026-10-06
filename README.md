@@ -79,6 +79,7 @@ and documented — never merely planned.
 | `location` | Relocation and angular lines at a destination |
 | `western` | Annual profections, harmonics, sensitive midpoints |
 | `runic` | The runic star-program: Pennick's runic astrology as layer flags, text + JSON |
+| `tarot` / `reading` / `numerology` / `iching` | The divination quartet: tarot spreads, astrology readings, numerology, I-Ching |
 
 ---
 

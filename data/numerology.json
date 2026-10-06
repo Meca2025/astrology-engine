@@ -1,0 +1,115 @@
+{
+  "version": "1.0",
+  "source": "Pythagorean numerology",
+  "historical_claim": "modern synthesis",
+  "numbers": {
+    "1": {
+      "title": "The Leader",
+      "keywords": [
+        "independence",
+        "initiative",
+        "originality"
+      ],
+      "meaning": "The number of the pioneer: self-reliant, driven, and first through the door. Its shadow is dominance and isolation."
+    },
+    "2": {
+      "title": "The Diplomat",
+      "keywords": [
+        "cooperation",
+        "sensitivity",
+        "patience"
+      ],
+      "meaning": "The number of partnership and tact: gentle, intuitive, thriving behind the scenes. Its shadow is oversensitivity and indecision."
+    },
+    "3": {
+      "title": "The Creator",
+      "keywords": [
+        "expression",
+        "joy",
+        "imagination"
+      ],
+      "meaning": "The number of the artist: expressive, sociable, sparkling with ideas. Its shadow is scattered chatter and melodrama."
+    },
+    "4": {
+      "title": "The Builder",
+      "keywords": [
+        "stability",
+        "order",
+        "endurance"
+      ],
+      "meaning": "The number of foundations: practical, disciplined, built to last. Its shadow is rigidity and joyless grind."
+    },
+    "5": {
+      "title": "The Freedom-Seeker",
+      "keywords": [
+        "change",
+        "adventure",
+        "versatility"
+      ],
+      "meaning": "The number of motion: curious, adaptable, hungry for experience. Its shadow is restlessness and excess."
+    },
+    "6": {
+      "title": "The Nurturer",
+      "keywords": [
+        "responsibility",
+        "harmony",
+        "care"
+      ],
+      "meaning": "The number of home and service: warm, protective, devoted to loved ones. Its shadow is worry and self-sacrifice."
+    },
+    "7": {
+      "title": "The Seeker",
+      "keywords": [
+        "analysis",
+        "mystery",
+        "introspection"
+      ],
+      "meaning": "The number of the mystic and scholar: deep, analytical, drawn to hidden truths. Its shadow is withdrawal and skepticism."
+    },
+    "8": {
+      "title": "The Powerhouse",
+      "keywords": [
+        "abundance",
+        "authority",
+        "mastery"
+      ],
+      "meaning": "The number of material mastery: ambitious, authoritative, built for achievement. Its shadow is workaholism and greed."
+    },
+    "9": {
+      "title": "The Humanitarian",
+      "keywords": [
+        "compassion",
+        "wisdom",
+        "completion"
+      ],
+      "meaning": "The number of universal love: wise, generous, devoted to the greater good. Its shadow is martyrdom and letting go too late."
+    },
+    "11": {
+      "title": "The Illuminator (Master)",
+      "keywords": [
+        "inspiration",
+        "intuition",
+        "idealism"
+      ],
+      "meaning": "A master number: spiritual messenger energy, electrifying intuition and idealism. Its shadow is nervous tension and impracticality."
+    },
+    "22": {
+      "title": "The Master Builder (Master)",
+      "keywords": [
+        "vision",
+        "practicality",
+        "legacy"
+      ],
+      "meaning": "A master number: grand visions made real through discipline. Its shadow is crushing pressure and overreach."
+    },
+    "33": {
+      "title": "The Master Teacher (Master)",
+      "keywords": [
+        "healing",
+        "devotion",
+        "upliftment"
+      ],
+      "meaning": "A master number: selfless healing and inspired teaching. Its shadow is burnout from carrying everyone."
+    }
+  }
+}

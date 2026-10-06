@@ -38,3 +38,4 @@ coverage through an unmodified legacy command. Report exact implementation scope
 - [x] Chart library: --save/--load(--load1/--load2)/--chart-dir on all 16 legacy commands + --save on modern JSON commands; charts/chart-show/chart-delete; astroengine/charts.py; tests/test_chart_library.py green.
 - [x] Full aspect spectrum: 10 obscure aspects (biseptile→vigintile) in ASPECTS + western.json (neutral weights); ASPECT_FAMILIES + calc_aspects families filter; aspect-grid --aspects {all,major,minor,obscure}; tests/test_aspects_full.py green.
 - [x] Full suite 384 green.
+- [x] Divination quartet: tarot (78 cards, 10 spreads, reversals, seeds), astrology readings (general/love/career, --load), numerology (life path/destiny/soul urge/personality/personal year, masters held), i-ching (64 hexagrams, coins/yarrow, changing lines); tests/test_divination.py 17/17 green; full suite 401 green.

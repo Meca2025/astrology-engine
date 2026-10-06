@@ -1,0 +1,519 @@
+{
+  "version": "1.0",
+  "source": "Classical I-Ching lineage",
+  "historical_claim": "modern synthesis; original renderings, not a translation",
+  "hexagrams": [
+    {
+      "number": 1,
+      "name": "The Creative",
+      "chinese": "乾 qián",
+      "binary": "111111",
+      "judgment": "Sublime success. Persevere in the right, and the way opens before you like the open sky.",
+      "meaning": "Pure creative force; the time favors bold, principled action."
+    },
+    {
+      "number": 2,
+      "name": "The Receptive",
+      "chinese": "坤 kūn",
+      "binary": "000000",
+      "judgment": "Sublime success through devotion. Yield, serve, and follow the lead of what is right, as the earth bears all things.",
+      "meaning": "Receptive endurance; strength lies in support, patience, and quiet persistence."
+    },
+    {
+      "number": 3,
+      "name": "Difficulty at the Beginning",
+      "chinese": "屯 zhūn",
+      "binary": "100010",
+      "judgment": "Sublime success, but do not force the issue. Gather helpers and lay foundations while the sprout is still tender.",
+      "meaning": "Birth-pangs of a new undertaking; chaos that will resolve with steady care."
+    },
+    {
+      "number": 4,
+      "name": "Youthful Folly",
+      "chinese": "蒙 méng",
+      "binary": "010001",
+      "judgment": "It is not I who seek the young fool; the young fool seeks me. Ask with sincerity and teaching will come; ask in jest and it will not.",
+      "meaning": "Inexperience needing guidance; learn before you act."
+    },
+    {
+      "number": 5,
+      "name": "Waiting",
+      "chinese": "需 xū",
+      "binary": "111010",
+      "judgment": "If you are sincere, waiting brings light and success. Do not cross the great water yet; the time ripens of itself.",
+      "meaning": "Patient, confident waiting; nourishment comes to those who do not rush."
+    },
+    {
+      "number": 6,
+      "name": "Conflict",
+      "chinese": "訟 sòng",
+      "binary": "010111",
+      "judgment": "There is sincerity, but also obstruction. Turn back midway and seek the great person; crossing the great water now brings no gain.",
+      "meaning": "Dispute and contention; seek mediation rather than victory."
+    },
+    {
+      "number": 7,
+      "name": "The Army",
+      "chinese": "師 shī",
+      "binary": "010000",
+      "judgment": "The army needs perseverance and a strong leader. If the cause is just and the commander worthy, there is no blame.",
+      "meaning": "Disciplined collective effort under firm, just leadership."
+    },
+    {
+      "number": 8,
+      "name": "Holding Together",
+      "chinese": "比 bǐ",
+      "binary": "000010",
+      "judgment": "Good fortune. Hold to the source of union with sincerity; those who come late meet misfortune.",
+      "meaning": "Alliance and belonging; choose your fellowship with care and loyalty."
+    },
+    {
+      "number": 9,
+      "name": "Small Taming",
+      "chinese": "小畜 xiǎo chù",
+      "binary": "111011",
+      "judgment": "Success. Dense clouds gather but no rain falls yet; gentle restraint stores strength for the moment of release.",
+      "meaning": "Minor restraint; small accumulations preparing a greater advance."
+    },
+    {
+      "number": 10,
+      "name": "Treading",
+      "chinese": "履 lǚ",
+      "binary": "110111",
+      "judgment": "Treading on the tiger's tail: it does not bite. Conduct yourself with care and there is success.",
+      "meaning": "Careful conduct in delicate circumstances; courtesy disarms danger."
+    },
+    {
+      "number": 11,
+      "name": "Peace",
+      "chinese": "泰 tài",
+      "binary": "111000",
+      "judgment": "The small departs, the great approaches. Good fortune and success; heaven and earth in communion.",
+      "meaning": "Harmony and flourishing; all things in their proper, fruitful order."
+    },
+    {
+      "number": 12,
+      "name": "Standstill",
+      "chinese": "否 pǐ",
+      "binary": "000111",
+      "judgment": "The great departs, the small approaches. Preserve your integrity and do not strive; the noble endures the standstill.",
+      "meaning": "Stagnation and blockage; withdraw and keep your integrity intact."
+    },
+    {
+      "number": 13,
+      "name": "Fellowship",
+      "chinese": "同人 tóng rén",
+      "binary": "101111",
+      "judgment": "Success in the open field. It furthers one to cross the great water; the noble person's perseverance brings gain.",
+      "meaning": "Fellowship with others in a common cause; unity of purpose."
+    },
+    {
+      "number": 14,
+      "name": "Great Possession",
+      "chinese": "大有 dà yǒu",
+      "binary": "111101",
+      "judgment": "Supreme success. Great holdings rightly kept bring honor and lasting good.",
+      "meaning": "Abundance held with generosity and restraint; prosperity rightly managed."
+    },
+    {
+      "number": 15,
+      "name": "Modesty",
+      "chinese": "謙 qiān",
+      "binary": "001000",
+      "judgment": "Success. The noble person carries things through by modesty; the lowly is exalted and the proud brought down.",
+      "meaning": "Humility as strength; the modest one completes the work."
+    },
+    {
+      "number": 16,
+      "name": "Enthusiasm",
+      "chinese": "豫 yù",
+      "binary": "000100",
+      "judgment": "It furthers one to appoint helpers and set things in motion. Enthusiasm moves others when it is sincere.",
+      "meaning": "Joyful readiness and inspiration; the music that sets people moving."
+    },
+    {
+      "number": 17,
+      "name": "Following",
+      "chinese": "隨 suí",
+      "binary": "100110",
+      "judgment": "Supreme success. Perseverance brings no blame; follow what is right and timely, and others will follow you.",
+      "meaning": "Adaptation and timely following; go with the current of what is true."
+    },
+    {
+      "number": 18,
+      "name": "Decay / Work on the Decayed",
+      "chinese": "蠱 gǔ",
+      "binary": "011001",
+      "judgment": "Supreme success. It furthers one to cross the great water; weigh three days before the turning and three days after.",
+      "meaning": "Corruption to be repaired; deliberate work restores what was neglected."
+    },
+    {
+      "number": 19,
+      "name": "Approach",
+      "chinese": "臨 lín",
+      "binary": "110000",
+      "judgment": "Supreme success. What approaches must be met rightly while the tide is high; in the eighth month, misfortune.",
+      "meaning": "A favorable approach; guide what comes with dignified condescension."
+    },
+    {
+      "number": 20,
+      "name": "Contemplation",
+      "chinese": "觀 guān",
+      "binary": "000011",
+      "judgment": "The cleansing is done but not yet the offering; with full sincerity, contemplate — and let yourself be contemplated.",
+      "meaning": "Observation and reflection; the example set by quiet, reverent watching."
+    },
+    {
+      "number": 21,
+      "name": "Biting Through",
+      "chinese": "噬嗑 shì kè",
+      "binary": "100101",
+      "judgment": "Success. It furthers one to apply the law; bite through the obstruction and the way clears.",
+      "meaning": "Decisive action against obstruction; justice that removes what blocks."
+    },
+    {
+      "number": 22,
+      "name": "Grace",
+      "chinese": "賁 bì",
+      "binary": "101001",
+      "judgment": "Success, but little gain in going far. Grace adorns without carrying weight; attend to substance beneath the form.",
+      "meaning": "Beauty and ornament; form that should serve substance, not replace it."
+    },
+    {
+      "number": 23,
+      "name": "Splitting Apart",
+      "chinese": "剝 bō",
+      "binary": "000001",
+      "judgment": "It does not further one to go anywhere. The lower splits away the higher; hold fast and do not contend.",
+      "meaning": "Erosion and decay; endure quietly while the tide of dissolution passes."
+    },
+    {
+      "number": 24,
+      "name": "Return",
+      "chinese": "復 fù",
+      "binary": "100000",
+      "judgment": "Success. Going out and coming in without error; friends arrive, and the way of return brings no blame.",
+      "meaning": "The turning point; renewal after decline, the light returning."
+    },
+    {
+      "number": 25,
+      "name": "Innocence",
+      "chinese": "無妄 wú wàng",
+      "binary": "100111",
+      "judgment": "Supreme success when the heart is true. If your intent strays from what is right, misfortune follows; act without artifice.",
+      "meaning": "Naturalness and sincerity without calculation; follow the heart, not the scheme."
+    },
+    {
+      "number": 26,
+      "name": "Great Taming",
+      "chinese": "大畜 dà chù",
+      "binary": "111001",
+      "judgment": "Perseverance brings gain. Do not eat at home; cross the great water — great restraint gathers great power.",
+      "meaning": "Strong restraint accumulating force; study and discipline storing up energy."
+    },
+    {
+      "number": 27,
+      "name": "Nourishment",
+      "chinese": "頤 yí",
+      "binary": "100001",
+      "judgment": "Perseverance brings good fortune. Watch what you nourish and how you seek nourishment; the jaws reveal the person.",
+      "meaning": "Care of body and spirit; what feeds you shapes what you become."
+    },
+    {
+      "number": 28,
+      "name": "Great Excess",
+      "chinese": "大過 dà guò",
+      "binary": "011110",
+      "judgment": "The ridgepole sags. It furthers one to have somewhere to go; extraordinary times call for extraordinary measures.",
+      "meaning": "Excess and strain beyond the norm; the beam bends — act decisively or it breaks."
+    },
+    {
+      "number": 29,
+      "name": "The Abysmal",
+      "chinese": "坎 kǎn",
+      "binary": "010010",
+      "judgment": "If you are sincere, the heart succeeds. Move forward in sincerity and your conduct gains honor even amid danger.",
+      "meaning": "Repeated danger; the abyss crossed by sincerity and steady courage."
+    },
+    {
+      "number": 30,
+      "name": "The Clinging",
+      "chinese": "離 lí",
+      "binary": "101101",
+      "judgment": "Perseverance in the right brings success; tending the cow brings good fortune — cling to the light.",
+      "meaning": "Clarity and attachment to what illuminates; brightness that depends on its fuel."
+    },
+    {
+      "number": 31,
+      "name": "Influence",
+      "chinese": "咸 xián",
+      "binary": "001110",
+      "judgment": "Success. Perseverance brings gain; sincere feeling moves all — influence works through the heart.",
+      "meaning": "Mutual attraction and resonance; the stirring that moves hearts together."
+    },
+    {
+      "number": 32,
+      "name": "Duration",
+      "chinese": "恆 héng",
+      "binary": "011100",
+      "judgment": "Success, no blame. Perseverance brings gain; it furthers one to have somewhere to go — endure in the right way.",
+      "meaning": "Constancy and lasting commitment; the long road held without wavering."
+    },
+    {
+      "number": 33,
+      "name": "Retreat",
+      "chinese": "遯 dùn",
+      "binary": "001111",
+      "judgment": "Success. Slight perseverance brings gain; the noble one withdraws in dignity before the inferior advance.",
+      "meaning": "Strategic withdrawal; retreat with honor rather than contend in vain."
+    },
+    {
+      "number": 34,
+      "name": "Great Power",
+      "chinese": "大壯 dà zhuàng",
+      "binary": "111100",
+      "judgment": "Perseverance brings gain, but great strength must follow rightness — lest the ram butt the hedge and entangle its horns.",
+      "meaning": "Great strength that must be tempered; power rightly directed, not recklessly spent."
+    },
+    {
+      "number": 35,
+      "name": "Progress",
+      "chinese": "晉 jìn",
+      "binary": "000101",
+      "judgment": "The prince is honored with many horses and received in audience day after day; advance brings reward.",
+      "meaning": "Advancement and recognition; rising like the sun through merit."
+    },
+    {
+      "number": 36,
+      "name": "Darkening of the Light",
+      "chinese": "明夷 míng yí",
+      "binary": "101000",
+      "judgment": "In adversity it furthers one to persevere. Hide your brightness and endure; the light is wounded but not extinguished.",
+      "meaning": "The light obscured by darkness; protect your inner clarity in hard times."
+    },
+    {
+      "number": 37,
+      "name": "The Family",
+      "chinese": "家人 jiā rén",
+      "binary": "101011",
+      "judgment": "The woman's perseverance brings gain; order within brings order without — the family is the root of the state.",
+      "meaning": "The household rightly ordered; duty and affection in their proper places."
+    },
+    {
+      "number": 38,
+      "name": "Opposition",
+      "chinese": "睽 kuí",
+      "binary": "110101",
+      "judgment": "In small matters, good fortune. Opposition need not be enmity; where views diverge, lesser things can still succeed.",
+      "meaning": "Estrangement and contrary views; find the small common ground."
+    },
+    {
+      "number": 39,
+      "name": "Obstruction",
+      "chinese": "蹇 jiǎn",
+      "binary": "001010",
+      "judgment": "The southwest furthers, the northeast does not. It furthers one to see the great person; perseverance brings good fortune amid the lame advance.",
+      "meaning": "Obstruction and difficulty; turn inward and seek wise counsel."
+    },
+    {
+      "number": 40,
+      "name": "Deliverance",
+      "chinese": "解 xiè",
+      "binary": "010100",
+      "judgment": "The southwest furthers. Where there is nowhere left to go, return brings good fortune; where there is somewhere to go, hasten — the tension releases.",
+      "meaning": "Release from tension; forgiveness and the loosening of bonds."
+    },
+    {
+      "number": 41,
+      "name": "Decrease",
+      "chinese": "損 sǔn",
+      "binary": "110001",
+      "judgment": "With sincerity there is supreme good fortune and no blame. Decrease what is excessive to serve what is higher.",
+      "meaning": "Sacrifice and simplification; giving up the lesser to strengthen the greater."
+    },
+    {
+      "number": 42,
+      "name": "Increase",
+      "chinese": "益 yì",
+      "binary": "100011",
+      "judgment": "It furthers one to undertake something and to cross the great water; increase flows to the sincere.",
+      "meaning": "Growth and benefit; wind and thunder strengthening each other."
+    },
+    {
+      "number": 43,
+      "name": "Breakthrough",
+      "chinese": "夬 guài",
+      "binary": "111110",
+      "judgment": "Resolutely proclaim the matter at the court. There is danger; warn your own city and do not take up arms.",
+      "meaning": "Resolute breakthrough; the decision spoken openly at the decisive moment."
+    },
+    {
+      "number": 44,
+      "name": "Coming to Meet",
+      "chinese": "姤 gòu",
+      "binary": "011111",
+      "judgment": "The maiden is strong; do not wed such a maiden. What comes to meet you unbidden must be met with firmness.",
+      "meaning": "An unexpected encounter; the yielding meets the strong — meet it with resolve."
+    },
+    {
+      "number": 45,
+      "name": "Gathering Together",
+      "chinese": "萃 cuì",
+      "binary": "000110",
+      "judgment": "Success. The king approaches the temple; see the great person and undertake something — sincerity gathers all.",
+      "meaning": "Assembly and union; people drawn together around a worthy center."
+    },
+    {
+      "number": 46,
+      "name": "Pushing Upward",
+      "chinese": "升 shēng",
+      "binary": "011000",
+      "judgment": "Supreme success. See the great person and have no fear; set forth southward — steady ascent brings good fortune.",
+      "meaning": "Gradual, steady rise; the sprout pushing upward through patient effort."
+    },
+    {
+      "number": 47,
+      "name": "Oppression",
+      "chinese": "困 kùn",
+      "binary": "010110",
+      "judgment": "Success through perseverance. The great person brings good fortune by steadfastness; in oppression, hold to truth in silence.",
+      "meaning": "Exhaustion and constraint; dignity maintained when resources fail."
+    },
+    {
+      "number": 48,
+      "name": "The Well",
+      "chinese": "井 jǐng",
+      "binary": "011010",
+      "judgment": "The town may change, but the well cannot be changed. It neither decreases nor increases; draw, and it is ever full.",
+      "meaning": "The inexhaustible common source; the deep resource that serves all."
+    },
+    {
+      "number": 49,
+      "name": "Revolution",
+      "chinese": "革 gé",
+      "binary": "101110",
+      "judgment": "On your own day you are believed. Supreme success when the change is timely and just; remorse disappears.",
+      "meaning": "Radical transformation; the old skin shed when the season is ripe."
+    },
+    {
+      "number": 50,
+      "name": "The Cauldron",
+      "chinese": "鼎 dǐng",
+      "binary": "011101",
+      "judgment": "Supreme good fortune and success. The sacred vessel nourishes the wise and sustains the state; take up the new order.",
+      "meaning": "The vessel of transformation; nourishment refined into culture and stability."
+    },
+    {
+      "number": 51,
+      "name": "The Arousing",
+      "chinese": "震 zhèn",
+      "binary": "100100",
+      "judgment": "Success. Thunder comes with terror, yet one remains smiling and composed; it startles a hundred miles and the ladle is not spilled.",
+      "meaning": "Shocking movement that awakens; terror that clears the air and restores order."
+    },
+    {
+      "number": 52,
+      "name": "Keeping Still",
+      "chinese": "艮 gèn",
+      "binary": "001001",
+      "judgment": "Keeping the back still, he no longer feels the body; walking the courtyard, he does not see the people — no blame in true stillness.",
+      "meaning": "Stillness and meditation; rest in what is right, unmoved by externals."
+    },
+    {
+      "number": 53,
+      "name": "Development",
+      "chinese": "漸 jiàn",
+      "binary": "001011",
+      "judgment": "The maiden marries with good fortune; perseverance brings gain — advance step by step like the wild geese.",
+      "meaning": "Gradual, orderly progress; each stage secured before the next."
+    },
+    {
+      "number": 54,
+      "name": "The Marrying Maiden",
+      "chinese": "歸妹 guī mèi",
+      "binary": "110100",
+      "judgment": "Undertakings bring misfortune; nothing is furthered — the maiden marries out of order, and impropriety spoils the union.",
+      "meaning": "An ill-suited or improper union; desire outrunning right order."
+    },
+    {
+      "number": 55,
+      "name": "Abundance",
+      "chinese": "豐 fēng",
+      "binary": "101100",
+      "judgment": "Success. The king attains it; be not sad but like the sun at midday — abundance at its peak must be guarded.",
+      "meaning": "Fullness at its zenith; greatness that must be sustained with care."
+    },
+    {
+      "number": 56,
+      "name": "The Wanderer",
+      "chinese": "旅 lǚ",
+      "binary": "001101",
+      "judgment": "Slight success. The wanderer's perseverance brings good fortune — travel light, be courteous, hold to the right.",
+      "meaning": "The sojourner far from home; humility and adaptability on the road."
+    },
+    {
+      "number": 57,
+      "name": "The Gentle",
+      "chinese": "巽 xùn",
+      "binary": "011011",
+      "judgment": "Slight success. It furthers one to have somewhere to go and to see the great person; gentle penetration prevails.",
+      "meaning": "Gentle, persistent influence; the wind that wears away resistance."
+    },
+    {
+      "number": 58,
+      "name": "The Joyous",
+      "chinese": "兌 duì",
+      "binary": "110110",
+      "judgment": "Success. Perseverance brings gain; joy shared in sincerity binds hearts together.",
+      "meaning": "Joy and open exchange; gladness that gathers friends."
+    },
+    {
+      "number": 59,
+      "name": "Dispersion",
+      "chinese": "渙 huàn",
+      "binary": "010011",
+      "judgment": "Success. The king approaches the temple; cross the great water and persevere — dissolve what has congealed.",
+      "meaning": "Dissolution of blockage; scattering the frozen, reuniting the scattered."
+    },
+    {
+      "number": 60,
+      "name": "Limitation",
+      "chinese": "節 jié",
+      "binary": "110010",
+      "judgment": "Success. Bitter limitation must not be persevered in; set the right measure and there is no blame.",
+      "meaning": "Boundaries and measure; the right limit protects, the bitter one strangles."
+    },
+    {
+      "number": 61,
+      "name": "Inner Truth",
+      "chinese": "中孚 zhōng fú",
+      "binary": "110011",
+      "judgment": "Even dolphins and pigs are moved: good fortune. Cross the great water; perseverance brings gain — sincerity reaches the distant.",
+      "meaning": "Inner sincerity; truthfulness that moves hearts across every divide."
+    },
+    {
+      "number": 62,
+      "name": "Small Excess",
+      "chinese": "小過 xiǎo guò",
+      "binary": "001100",
+      "judgment": "Success. Perseverance brings gain; do small things, not great ones — the bird ascends in song but descends in rest.",
+      "meaning": "Modest overstepping in small matters; humility in ambition, care in detail."
+    },
+    {
+      "number": 63,
+      "name": "After Completion",
+      "chinese": "既濟 jì jì",
+      "binary": "101010",
+      "judgment": "Success in small matters; perseverance brings gain. At the beginning good fortune, at the end disorder — guard what is complete.",
+      "meaning": "Order achieved; the work done — stay vigilant, lest success unravel."
+    },
+    {
+      "number": 64,
+      "name": "Before Completion",
+      "chinese": "未濟 wèi jì",
+      "binary": "010101",
+      "judgment": "Success. The young fox nearly crosses but wets its tail; no direction brings gain yet — the end is near, hold steady.",
+      "meaning": "The work not yet done; the final step demands the greatest care."
+    }
+  ]
+}
