@@ -45,3 +45,4 @@ coverage through an unmodified legacy command. Report exact implementation scope
 - [x] H03 solar arc directions: astroengine/directions.py (arc from progressed Sun, directed ASC/MC, applying/separating), `solar-arc` CLI, tests/test_directions.py 6/6 green.
 - [x] H04 annual profections: astroengine/profections.py (time-lord wheel, traditional rulers/dignities), `profection` CLI, tests/test_profections.py 7/7 green.
 - [x] H05 transit watch: astroengine/watch.py (outer-planet scan, refined exact dates), `watch` CLI, tests/test_watch.py 7/7 green.
+- [x] H06 electional astrology: astroengine/electional.py (Moon state, Mercury rx, planetary hours, window search), `elect` CLI, tests/test_electional.py 7/7 green.

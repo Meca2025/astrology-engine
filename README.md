@@ -84,6 +84,7 @@ and documented — never merely planned.
 | `solar-arc` | Solar arc directions — the great predictive art, directed-to-natal aspects |
 | `profection` | Annual profections — the Hellenistic time-lord wheel |
 | `watch` | Transit watch — coming outer-planet transits with exact dates |
+| `elect` | Electional astrology — choose the most fortunate windows |
 
 ---
 

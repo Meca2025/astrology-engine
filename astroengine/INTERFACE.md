@@ -318,3 +318,8 @@ ten new aspects with neutral weight 0 so synergy scoring is unchanged.
   to_jd_ut, lat, lon, orb)` — outer-planet (Jupiter–Pluto)
   conjunctions/oppositions/squares/trines to natal planets + ASC/MC;
   daily scan with ternary-refined exact dates. CLI: `watch`.
+
+- `astroengine/electional.py`: `score_moment(jd_ut, lat, lon)`,
+  `moon_void_of_course(jd_ut)`, `planetary_hour(jd_ut, lat, lon)`,
+  `find_windows(from_jd, to_jd, lat, lon, step_hours, timezone)` —
+  traditional electional scoring and window search. CLI: `elect`.

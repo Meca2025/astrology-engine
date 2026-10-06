@@ -104,3 +104,5 @@ body availability/frame/search rules. The monolith owns text uncertainty renderi
   `tests/test_profections.py`.
 - `astroengine/watch.py` — transit watch; verified by
   `tests/test_watch.py`.
+- `astroengine/electional.py` — electional astrology; verified by
+  `tests/test_electional.py`.

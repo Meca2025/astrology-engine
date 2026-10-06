@@ -2371,6 +2371,46 @@ def _loc_label(req: dict) -> str:
     return " ".join(x for x in (city, nation) if x)
 
 
+def cmd_elect(args):
+    from astroengine.electional import find_windows, score_moment
+    if args.load:
+        from astroengine.charts import load_chart
+        saved = load_chart(args.load, getattr(args, "chart_dir", None))
+        req = saved.get("request", {}) or {}
+        for k in ("lat", "lon", "timezone", "city", "nation"):
+            if getattr(args, k, None) in (None, "") and req.get(k) not in (None, ""):
+                setattr(args, k, req.get(k))
+        title = saved.get("name", "Seeker")
+    else:
+        apply_chart_load(args)
+        title = "Seeker"
+    if getattr(args, "lat", None) is None or getattr(args, "lon", None) is None:
+        raise CalculationError("elections need a place: --lat/--lon or --load NAME")
+    tz_name = getattr(args, "timezone", None) or "UTC"
+    try:
+        fy, fm, fd = (int(x) for x in (args.from_date or datetime.date.today().isoformat()).split("-"))
+        ty, tm, td = (int(x) for x in (args.to_date or (datetime.date.today() + datetime.timedelta(days=7)).isoformat()).split("-"))
+        jd_from = julian_day(fy, fm, fd, 12.0)
+        jd_to = julian_day(ty, tm, td, 12.0)
+    except (ValueError, TypeError):
+        raise CalculationError("use YYYY-MM-DD for --from-date/--to-date")
+    windows = find_windows(jd_from, jd_to, args.lat, args.lon,
+                           step_hours=args.step_hours, timezone=tz_name)
+    top = windows[:args.top]
+    if args.json:
+        print(json.dumps({"title": title, "windows": top},
+                         ensure_ascii=False, sort_keys=True))
+        return {"windows": top}
+    header("ELECTIONAL WINDOWS", f"{title}")
+    for w in top:
+        print(f"  {w['datetime']}  score {w['score']:+d}  {w['verdict']:<11} Moon in {w['moon_sign']}")
+        for n in w["notes"][:4]:
+            print(f"      · {n}")
+    print()
+    print("  Symbolic timing, not prediction of events.")
+    return {"windows": top}
+
+
 def cmd_watch(args):
     from astroengine.watch import upcoming_transits
     if args.load:
@@ -3940,6 +3980,17 @@ def main():
     num.add_argument("--json", action="store_true")
     add_chart_lib(num, with_load=False)
 
+    elc = sub.add_parser("elect", help="Electional astrology: find the most fortunate windows")
+    elc.add_argument("--from-date", default=None, dest="from_date", help="Search start YYYY-MM-DD (default: today)")
+    elc.add_argument("--to-date", default=None, dest="to_date", help="Search end YYYY-MM-DD (default: +7 days)")
+    elc.add_argument("--lat", type=float, default=None)
+    elc.add_argument("--lon", type=float, default=None)
+    elc.add_argument("--timezone", default=None)
+    elc.add_argument("--step-hours", type=float, default=6.0)
+    elc.add_argument("--top", type=int, default=10)
+    elc.add_argument("--json", action="store_true")
+    add_chart_lib(elc)
+
     wtc = sub.add_parser("watch", help="Watch for coming outer-planet transits to natal points")
     wtc.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
     wtc.add_argument("--time", default=None, help="HH:MM (24h)")
@@ -4044,6 +4095,7 @@ def main():
         "solar-arc":    cmd_solar_arc,
         "profection":   cmd_profection,
         "watch":        cmd_watch,
+        "elect":        cmd_elect,
     }
     _TWO_PERSON = {"synastry", "composite", "synergy"}
     _DATE_FIELDS = {

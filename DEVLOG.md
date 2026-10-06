@@ -445,3 +445,19 @@ the tracked goal.)
 
 Sólrún: `tests/test_watch.py` 7/7 green plus independent subagent
 verification. Pushed via the PAT tool.
+
+## 2026-10-06 — H06: electional astrology
+
+Sixth slice of the Horizons program. `astroengine/electional.py`
+turns the art around: instead of reading the moment, choose it. Each
+candidate hour is scored on the Moon (waxing, dignity, void of course,
+combust, applying aspects to benefics/malefics), Mercury retrograde,
+and the planetary hour. `moon_void_of_course()` samples the Moon to
+its sign's end against the classical planets; `planetary_hour()` walks
+the Chaldean order from sunrise. The `elect` CLI searches a date
+window and ranks the best hours. Notably: Mercury stations retrograde
+2026-10-24, making the already-blessed 2026-10-23 the last clear day
+before the shadow.
+
+Sólrún: `tests/test_electional.py` 7/7 green plus independent subagent
+verification. Pushed via the PAT tool.

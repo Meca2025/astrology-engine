@@ -289,6 +289,18 @@ python3 astrology_engine.py runic --datetime 2026-05-16T16:45 \
 
 ---
 
+## `elect`
+
+Electional astrology: choose the moment instead of reading it. Scores
+candidate hours by the Moon's state, Mercury retrograde, and planetary
+hours, and ranks the most fortunate windows.
+
+```bash
+python3 astrology_engine.py elect --load volmarr --from-date 2026-10-20 --to-date 2026-10-27 --top 5
+```
+
+---
+
 ## `watch`
 
 Transit watch: a calendar of coming outer-planet transits
