@@ -2440,6 +2440,32 @@ def cmd_forecast(args):
     return {"forecast": report}
 
 
+def cmd_yogas(args):
+    from astroengine.yogas import detect_yogas, render_yogas
+    from astroengine.models import ChartRequest
+    if args.load:
+        title = _load_chart_into(args)
+    else:
+        apply_chart_load(args)
+        title = "Seeker"
+    require_date(args)
+    y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
+        args.date, args.time, args.city, args.nation,
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None))
+    birth = ChartRequest(date=args.date, time=args.time, latitude=lat,
+                         longitude=lon, timezone=tz_name, zodiac="sidereal",
+                         house_system="whole-sign")
+    report = detect_yogas(birth)
+    if args.json:
+        print(json.dumps({"title": title, "yogas": report},
+                         ensure_ascii=False, sort_keys=True))
+        return {"yogas": report}
+    print(f"The great yogas of {title}")
+    print(render_yogas(report))
+    return {"yogas": report}
+
+
 def cmd_mantras(args):
     from astroengine.mantras import all_mantras, mantras_for, render_remedies
     if args.planet:
@@ -4363,6 +4389,13 @@ def main():
                     help="Graha name: Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Rahu, Ketu")
     mn.add_argument("--json", action="store_true")
 
+    yg = sub.add_parser("yogas", help="The great yogas: classical combinations of the chart")
+    yg.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
+    yg.add_argument("--time", default=None, help="HH:MM (24h)")
+    yg.add_argument("--json", action="store_true")
+    add_geo(yg)
+    add_chart_lib(yg)
+
     dr = sub.add_parser("draconic", help="Draconic chart: the soul-chart reckoned from the north node")
     dr.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
     dr.add_argument("--time", default=None, help="HH:MM (24h)")
@@ -4546,6 +4579,7 @@ def main():
         "draconic":     cmd_draconic,
         "dossier":      cmd_dossier,
         "forecast":     cmd_forecast,
+        "yogas":        cmd_yogas,
         "mantras":      cmd_mantras,
         "midpoints":    cmd_midpoints,
     }

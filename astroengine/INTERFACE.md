@@ -64,6 +64,15 @@ data/mantras.json (traditional public-domain Navagraha verses only).
 for dasha lords then pressured planets, each with a reason string.
 Framed as devotional practice, never medical.
 
+## Yoga engine (Gambhira G01)
+
+`yogas.detect_yogas(request)` finds the great combinations from D1
+(whole-sign houses from Lagna): Pancha Mahapurusha, Gaja Kesari,
+Budha-Aditya, Dhana, Raja (basic kendra-trikona sambandha), Kemadruma,
+Sakata. Definitions, sources and variants in data/yogas.json (rule
+version 1.0); each detection carries rule, signification, source.
+Sambandha = conjunction, mutual kendra, or exchange of signs.
+
 ## Vimshottari (S04)
 
 `dashas.compute_dashas(request, years=None, year_model=None, as_of=None)` returns

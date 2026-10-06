@@ -301,6 +301,20 @@ python3 astrology_engine.py dossier --load volmarr --target-date 2026-10-23 --ou
 
 ---
 
+## `yogas`
+
+The great yogas computed from D1: Pancha Mahapurusha (Ruchaka,
+Bhadra, Hamsa, Malavya, Shasha), Gaja Kesari, Budha-Aditya,
+Dhana, Raja (basic kendra-trikona sambandha), Kemadruma,
+Sakata. Definitions, sources and lineage variants live in
+`data/yogas.json`; each detection carries its rule and lore.
+
+```bash
+python3 astrology_engine.py yogas --load volmarr
+```
+
+---
+
 ## `draconic`
 
 The soul-chart: every position reckoned from the natal north node,

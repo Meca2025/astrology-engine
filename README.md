@@ -7,7 +7,7 @@
 The Astrology Engine is a **reproducible computation forge** for astrology: real
 ephemeris positions, strict time and location handling, and machine-readable
 output — no cloud, no API keys, no lookup tables, no fabricated chart
-positions. Thirty-nine CLI subcommands span Western, Hellenistic, Vedic
+positions. Forty CLI subcommands span Western, Hellenistic, Vedic
 (Jyotisha), Northern runic, divination, Chinese, and Tibetan
 traditions, with every technique carrying its
 provenance, its limits, and its evidence.
@@ -50,7 +50,7 @@ and documented — never merely planned.
 
 ---
 
-## The 39 subcommands
+## The 40 subcommands
 
 | Command | Art |
 | --- | --- |
@@ -93,6 +93,7 @@ and documented — never merely planned.
 | `midpoints` | The 45 planetary midpoints and the planets standing upon them |
 | `forecast` | Daily forecast — every system, one seeker, one day: transits, panchanga, dasha, BaZi day pillar, Tibetan elements, runic half-month, with `--mantras` remedies |
 | `mantras` | Remedial Vedic mantras for the nine grahas — traditional verses, devotional framing |
+| `yogas` | The great yogas — Pancha Mahapurusha, Gaja Kesari, Budha-Aditya, Dhana, Raja, Kemadruma, Sakata, computed from D1 |
 
 ---
 
@@ -281,7 +282,7 @@ and [RULES.AI.md](RULES.AI.md) before touching code.
 
 | Path | Holds |
 | --- | --- |
-| `astrology_engine.py` | Legacy CLI: 39 text subcommands |
+| `astrology_engine.py` | Legacy CLI: 40 text subcommands |
 | `astroengine/` | Typed package: models, ephemeris, vedic, runic, CLI, agent |
 | `data/` | Immutable rule tables (`runic.json`, `vedic.json`, `western.json`, …) |
 | `tests/` | Offline fixtures and integration checks |

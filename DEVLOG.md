@@ -644,3 +644,9 @@ F03 (2026-10-06): polish sweep — forecast + mantras registered as agent
 tools (22/22 with capabilities), run_tool dispatch, SKILL.md and README
 (39 subcommands) updated, error paths verified clean.
 ROADMAP_VISTARA complete: V01 + F01 + F02 + F03, 564 tests green.
+
+G01 (2026-10-06): yoga engine — data/yogas.json (definitions, sources,
+variants, sign lords, exaltations) + astroengine/yogas.py
+(detect_yogas, render_yogas) + `yogas` CLI. Volmarr's chart: Hamsa,
+Dhana (Moon+Saturn), Raja (Jupiter+Venus mutual kendra), Sakata;
+Gaja Kesari/Budha-Aditya/Kemadruma absent — all hand-verified.
