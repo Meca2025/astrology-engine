@@ -1,6 +1,6 @@
 # W09b2: legacy house uncertainty and astronomy failures
 
-Status: next ready slice; documented before code, 2026-10-06.
+Status: active slice; documented before code, 2026-10-06.
 Owner: legacy computation adapters and text rendering; part of W09b.
 
 ## Problem and required end state
@@ -62,3 +62,39 @@ Planet-hours catches any astronomy error, prints stdout and returns success;
 that error path is in this slice, while sunrise calendrical semantics need their
 own later V13/planetary-hour migration. Preserve all legacy function names; do
 not treat a negative/zero fabricated value as a substitute for unavailable data.
+
+## Chosen interface and rendering plan
+
+Add frozen EphemerisRequest for an admitted UT Julian day, zodiac, ayanamsa and
+optional data directory. Public ephemeris.positions_at_jd, houses_at_jd and
+solar_day_events own the existing lock and reset their settings on every request.
+The legacy bridge reads a versioned JSON required/optional body registry and
+preserves the position dict and three-item house tuple. A dict-compatible snapshot
+has unavailable-body and provenance attributes outside the iterable body keys;
+each available position retains actual returned flags/backend. No metadata is
+mistaken for a planet. Optional Swiss errors become named diagnostics; required
+errors reject and arbitrary Python errors propagate. South Node inherits North
+Node motion and mirrors latitude, with an explicit derived marker.
+
+Preflight planets and all requested known-time houses before a chart header.
+Unknown-time natal/transit/progressions retain clearly labeled noon planetary
+surrogates and omit houses and dependent conclusions. Dignity needs no houses.
+Lots/Hellenistic, solar-return, prediction with angle targets and location lines
+require a known birth time. Synastry evaluates each receiving chart independently;
+one unknown time removes only its own houses/receiving overlay. Midpoint composite
+remains symbolic; Davison is unavailable unless both real locations and times
+exist, and its requested calculations also preflight before composite output.
+UTC-only date charts explicitly label an omitted-clock noon surrogate.
+
+Planetary-hour rise/set calls check Swiss event status and strictly ordered finite
+sunrise/sunset/next-sunrise instants. Polar/unavailable events reject, never become
+6am/6pm substitutes. This preserves the legacy UTC search window and day-ruler
+convention; local-date/sunrise calendar semantics are still V13 work. Legacy event
+searches and approximate obliquity/GMST helpers are outside this bridge and remain
+explicit W09b3/location-migration limitations.
+
+Reproduced baseline at J2000: latitude 80 Placidus returns fabricated 0,30,...330
+cusps and zero angles; South Node speed is the opposite of its North Node;
+missing five optional bodies have no diagnostic. Swiss programming documentation
+confirms polar Placidus failure and returned-backend fallback behavior:
+https://www.astro.com/swisseph/swephprg.htm (sections 3.3 and 13).
