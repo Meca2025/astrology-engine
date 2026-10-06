@@ -289,6 +289,18 @@ python3 astrology_engine.py runic --datetime 2026-05-16T16:45 \
 
 ---
 
+## `stars`
+
+Fixed stars: the bright ones — Regulus, Spica, Antares — and their
+conjunctions to your planets and angles, precessed to the birth date.
+
+```bash
+python3 astrology_engine.py stars --load volmarr
+python3 astrology_engine.py stars --list
+```
+
+---
+
 ## `elect`
 
 Electional astrology: choose the moment instead of reading it. Scores

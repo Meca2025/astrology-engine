@@ -1,0 +1,240 @@
+{
+ "source": "J2000 ecliptic positions derived from the Swiss Ephemeris sefstars.txt (aloistr/swisseph, Moshier data); natures per the Ptolemaic tradition via Vivian Robson (1923)",
+ "note": "Positions are J2000, precessed to date without proper motion or nutation (sub-arcminute). Interpretive natures are traditional lore, not measurement.",
+ "stars": [
+  {
+   "name": "Aldebaran",
+   "constellation": "Taurus",
+   "j2000_lon": 69.7903,
+   "j2000_lat": -5.4676,
+   "magnitude": 0.86,
+   "nature": "Mars",
+   "meaning": "Watcher of the East; integrity, honor, popularity"
+  },
+  {
+   "name": "Regulus",
+   "constellation": "Leo",
+   "j2000_lon": 149.829,
+   "j2000_lat": 0.4648,
+   "magnitude": 1.4,
+   "nature": "Mars/Jupiter",
+   "meaning": "the royal star; success, leadership, preferment"
+  },
+  {
+   "name": "Antares",
+   "constellation": "Scorpius",
+   "j2000_lon": 249.7534,
+   "j2000_lat": -4.5697,
+   "magnitude": 0.91,
+   "nature": "Mars/Jupiter",
+   "meaning": "Watcher of the West; intensity, extremes of passion"
+  },
+  {
+   "name": "Spica",
+   "constellation": "Virgo",
+   "j2000_lon": 203.8361,
+   "j2000_lat": -2.0543,
+   "magnitude": 0.97,
+   "nature": "Venus/Mars",
+   "meaning": "the fortunate one; gifts, brilliance, distinction"
+  },
+  {
+   "name": "Fomalhaut",
+   "constellation": "Piscis Austrinus",
+   "j2000_lon": 333.8527,
+   "j2000_lat": -21.1373,
+   "magnitude": 1.16,
+   "nature": "Venus/Mercury",
+   "meaning": "Watcher of the South; idealism, dreams"
+  },
+  {
+   "name": "Algol",
+   "constellation": "Perseus",
+   "j2000_lon": 56.1682,
+   "j2000_lat": 22.4301,
+   "magnitude": 2.12,
+   "nature": "Saturn/Jupiter",
+   "meaning": "the Demon Star; intensity and extremes, handle with care"
+  },
+  {
+   "name": "Sirius",
+   "constellation": "Canis Major",
+   "j2000_lon": 104.0853,
+   "j2000_lat": -39.6051,
+   "magnitude": -1.46,
+   "nature": "Jupiter/Mars",
+   "meaning": "the Dog Star; ambition, pride, fame"
+  },
+  {
+   "name": "Alcyone",
+   "constellation": "Taurus",
+   "j2000_lon": 59.9929,
+   "j2000_lat": 4.0512,
+   "magnitude": 2.87,
+   "nature": "Moon/Mars",
+   "meaning": "heart of the Pleiades; vision, mysticism, sorrow"
+  },
+  {
+   "name": "Alnilam",
+   "constellation": "Orion",
+   "j2000_lon": 83.4659,
+   "j2000_lat": -24.5071,
+   "magnitude": 1.69,
+   "nature": "Jupiter/Saturn",
+   "meaning": "belt of Orion; fleeting honors"
+  },
+  {
+   "name": "Betelgeuse",
+   "constellation": "Orion",
+   "j2000_lon": 88.7566,
+   "j2000_lat": -16.0273,
+   "magnitude": 0.42,
+   "nature": "Mars/Mercury",
+   "meaning": "the Hunter's shoulder; martial success"
+  },
+  {
+   "name": "Rigel",
+   "constellation": "Orion",
+   "j2000_lon": 76.8319,
+   "j2000_lat": -31.124,
+   "magnitude": 0.13,
+   "nature": "Jupiter/Saturn",
+   "meaning": "the Hunter's foot; knowledge, technical mastery"
+  },
+  {
+   "name": "Procyon",
+   "constellation": "Canis Minor",
+   "j2000_lon": 115.7875,
+   "j2000_lat": -16.0192,
+   "magnitude": 0.37,
+   "nature": "Mercury/Mars",
+   "meaning": "sudden preferment — and sudden falls"
+  },
+  {
+   "name": "Pollux",
+   "constellation": "Gemini",
+   "j2000_lon": 113.2175,
+   "j2000_lat": 6.6841,
+   "magnitude": 1.14,
+   "nature": "Mars",
+   "meaning": "the boxer; courage with a violent edge"
+  },
+  {
+   "name": "Castor",
+   "constellation": "Gemini",
+   "j2000_lon": 110.2421,
+   "j2000_lat": 10.0956,
+   "magnitude": 1.58,
+   "nature": "Mercury",
+   "meaning": "intellect, horsemanship, the mortal twin"
+  },
+  {
+   "name": "Denebola",
+   "constellation": "Leo",
+   "j2000_lon": 171.6156,
+   "j2000_lat": 12.2657,
+   "magnitude": 2.13,
+   "nature": "Saturn/Venus",
+   "meaning": "the Lion's tail; nonconformity, disgrace then vindication"
+  },
+  {
+   "name": "Arcturus",
+   "constellation": "Boötes",
+   "j2000_lon": 204.2282,
+   "j2000_lat": 30.7334,
+   "magnitude": -0.05,
+   "nature": "Mars/Jupiter",
+   "meaning": "the Bear-watcher; pioneering success"
+  },
+  {
+   "name": "Alphecca",
+   "constellation": "Corona Borealis",
+   "j2000_lon": 222.2877,
+   "j2000_lat": 44.3201,
+   "magnitude": 2.24,
+   "nature": "Venus/Mercury",
+   "meaning": "the Jewel; artistic gifts, love"
+  },
+  {
+   "name": "Altair",
+   "constellation": "Aquila",
+   "j2000_lon": 301.7663,
+   "j2000_lat": 29.3045,
+   "magnitude": 0.76,
+   "nature": "Mars/Jupiter",
+   "meaning": "the Eagle; boldness, rapid rise"
+  },
+  {
+   "name": "Vega",
+   "constellation": "Lyra",
+   "j2000_lon": 285.3003,
+   "j2000_lat": 61.7333,
+   "magnitude": 0.03,
+   "nature": "Venus/Mercury",
+   "meaning": "the Harp; refinement, charm, artistry"
+  },
+  {
+   "name": "Deneb",
+   "constellation": "Cygnus",
+   "j2000_lon": 335.3187,
+   "j2000_lat": 59.9102,
+   "magnitude": 1.25,
+   "nature": "Venus/Mercury",
+   "meaning": "the Swan's tail; ingenuity, a mission"
+  },
+  {
+   "name": "Dubhe",
+   "constellation": "Ursa Major",
+   "j2000_lon": 135.2009,
+   "j2000_lat": 49.6778,
+   "magnitude": 1.79,
+   "nature": "Mars",
+   "meaning": "the Bear; psychic force"
+  },
+  {
+   "name": "Capella",
+   "constellation": "Auriga",
+   "j2000_lon": 81.86,
+   "j2000_lat": 22.865,
+   "magnitude": 0.08,
+   "nature": "Mercury/Mars",
+   "meaning": "the Goat; curiosity, inquisitiveness"
+  },
+  {
+   "name": "Alpheratz",
+   "constellation": "Andromeda",
+   "j2000_lon": 14.305,
+   "j2000_lat": 25.6829,
+   "magnitude": 2.06,
+   "nature": "Jupiter/Venus",
+   "meaning": "independence, grace"
+  },
+  {
+   "name": "Markab",
+   "constellation": "Pegasus",
+   "j2000_lon": 353.4799,
+   "j2000_lat": 19.4079,
+   "magnitude": 2.48,
+   "nature": "Mars/Mercury",
+   "meaning": "honors through writing and speech"
+  },
+  {
+   "name": "Scheat",
+   "constellation": "Pegasus",
+   "j2000_lon": 359.369,
+   "j2000_lat": 31.1434,
+   "magnitude": 2.42,
+   "nature": "Mars/Mercury",
+   "meaning": "extreme fortune — and extreme misfortune"
+  },
+  {
+   "name": "Deneb Algedi",
+   "constellation": "Capricornus",
+   "j2000_lon": 323.5344,
+   "j2000_lat": -2.6019,
+   "magnitude": 2.83,
+   "nature": "Saturn/Jupiter",
+   "meaning": "the Goat's tail; justice, the defender"
+  }
+ ]
+}

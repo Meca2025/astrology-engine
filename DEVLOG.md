@@ -461,3 +461,19 @@ before the shadow.
 
 Sólrún: `tests/test_electional.py` 7/7 green plus independent subagent
 verification. Pushed via the PAT tool.
+
+## 2026-10-06 — H07: fixed stars
+
+Seventh slice of the Horizons program. `data/fixed_stars.json` holds
+26 bright stars with J2000 ecliptic positions derived from the Swiss
+Ephemeris sefstars.txt (Moshier data), magnitudes, and Ptolemaic
+natures via Robson — provenance labeled, lore held lightly.
+`astroengine/stars.py` precesses them to the birth date with the IAU
+1976 theory (hand-implemented; this pyswisseph lacks swe.precess) and
+reports conjunctions to natal planets and angles. The `stars` CLI
+takes `--load`, `--orb`, `--list`, `--json`. For Volmarr: Capella on
+the Moon (curiosity, inquisitiveness) and Pollux on Venus (courage
+with a violent edge) — both within 0.6°.
+
+Sólrún: `tests/test_stars.py` 8/8 green plus independent subagent
+verification. Pushed via the PAT tool.

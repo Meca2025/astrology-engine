@@ -2371,6 +2371,56 @@ def _loc_label(req: dict) -> str:
     return " ".join(x for x in (city, nation) if x)
 
 
+def cmd_stars(args):
+    from astroengine.stars import load_stars, star_hits
+    if args.list:
+        # the catalog needs no birth data at all
+        stars = load_stars()
+        if args.json:
+            print(json.dumps({"stars": stars}, ensure_ascii=False,
+                             sort_keys=True))
+            return {"stars": stars}
+        header("FIXED STARS", "the bright ones")
+        for st in stars:
+            print(f"  {st['name']:<14} {st['constellation']:<16} "
+                  f"{st['nature']:<14} mag {st['magnitude']}")
+        return {"stars": stars}
+    if args.load:
+        from astroengine.charts import load_chart
+        saved = load_chart(args.load, getattr(args, "chart_dir", None))
+        req = saved.get("request", {}) or {}
+        for k in ("date", "time", "lat", "lon", "timezone", "city", "nation"):
+            if getattr(args, k, None) in (None, "") and req.get(k) not in (None, ""):
+                setattr(args, k, req.get(k))
+        title = saved.get("name", "Seeker")
+        print(f"  Reading the fixed stars for saved chart '{args.load}'",
+              file=sys.stderr if args.json else sys.stdout)
+    else:
+        apply_chart_load(args)
+        title = "Seeker"
+    require_date(args)
+    y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
+        args.date, args.time, args.city, args.nation,
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None))
+    jd = julian_day(y, mo, d, utc_hour)
+    hits = star_hits(jd, lat, lon, orb=args.orb)
+    if args.json:
+        print(json.dumps({"title": title, "hits": hits},
+                         ensure_ascii=False, sort_keys=True))
+        return {"hits": hits}
+    header("FIXED STARS", f"{title}")
+    if not hits:
+        print(f"  No star within {args.orb}° of a planet or angle.")
+    for h in hits:
+        print(f"  {h['star']:<14} conjunct {h['natal_point']:<8} "
+              f"orb {h['orb']:.2f}°  [{h['nature']}]")
+        print(f"      {h['meaning']}")
+    print()
+    print("  Traditional lore, held lightly; the planets do the talking.")
+    return {"hits": hits}
+
+
 def cmd_elect(args):
     from astroengine.electional import find_windows, score_moment
     if args.load:
@@ -3980,6 +4030,15 @@ def main():
     num.add_argument("--json", action="store_true")
     add_chart_lib(num, with_load=False)
 
+    stc = sub.add_parser("stars", help="Fixed stars: the bright ones and their contacts to the chart")
+    stc.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
+    stc.add_argument("--time", default=None, help="HH:MM (24h)")
+    stc.add_argument("--orb", type=float, default=1.0)
+    stc.add_argument("--list", action="store_true", help="List the star catalog")
+    stc.add_argument("--json", action="store_true")
+    add_geo(stc)
+    add_chart_lib(stc)
+
     elc = sub.add_parser("elect", help="Electional astrology: find the most fortunate windows")
     elc.add_argument("--from-date", default=None, dest="from_date", help="Search start YYYY-MM-DD (default: today)")
     elc.add_argument("--to-date", default=None, dest="to_date", help="Search end YYYY-MM-DD (default: +7 days)")
@@ -4096,6 +4155,7 @@ def main():
         "profection":   cmd_profection,
         "watch":        cmd_watch,
         "elect":        cmd_elect,
+        "stars":        cmd_stars,
     }
     _TWO_PERSON = {"synastry", "composite", "synergy"}
     _DATE_FIELDS = {

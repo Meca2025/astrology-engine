@@ -323,3 +323,7 @@ ten new aspects with neutral weight 0 so synergy scoring is unchanged.
   `moon_void_of_course(jd_ut)`, `planetary_hour(jd_ut, lat, lon)`,
   `find_windows(from_jd, to_jd, lat, lon, step_hours, timezone)` —
   traditional electional scoring and window search. CLI: `elect`.
+
+- `astroengine/stars.py`: `load_stars()`, `star_longitude(name, jd_ut)`,
+  `star_hits(natal_jd_ut, lat, lon, orb)` — 26 bright stars from
+  `data/fixed_stars.json`, IAU 1976 precession to date. CLI: `stars`.

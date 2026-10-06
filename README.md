@@ -85,6 +85,7 @@ and documented — never merely planned.
 | `profection` | Annual profections — the Hellenistic time-lord wheel |
 | `watch` | Transit watch — coming outer-planet transits with exact dates |
 | `elect` | Electional astrology — choose the most fortunate windows |
+| `stars` | Fixed stars — the bright ones and their contacts to your chart |
 
 ---
 

@@ -46,3 +46,4 @@ coverage through an unmodified legacy command. Report exact implementation scope
 - [x] H04 annual profections: astroengine/profections.py (time-lord wheel, traditional rulers/dignities), `profection` CLI, tests/test_profections.py 7/7 green.
 - [x] H05 transit watch: astroengine/watch.py (outer-planet scan, refined exact dates), `watch` CLI, tests/test_watch.py 7/7 green.
 - [x] H06 electional astrology: astroengine/electional.py (Moon state, Mercury rx, planetary hours, window search), `elect` CLI, tests/test_electional.py 7/7 green.
+- [x] H07 fixed stars: data/fixed_stars.json (26 bright stars, Swiss Ephemeris positions), astroengine/stars.py (IAU 1976 precession), `stars` CLI, tests/test_stars.py 8/8 green.
