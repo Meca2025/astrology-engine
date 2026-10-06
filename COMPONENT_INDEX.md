@@ -113,3 +113,5 @@ body availability/frame/search rules. The monolith owns text uncertainty renderi
   `tests/test_asteroids_midpoints.py`.
 - `astroengine/draconic.py` — draconic charts; verified by
   `tests/test_draconic.py`.
+- `astroengine/dossier.py` — written natal dossiers; verified by
+  `tests/test_dossier.py`.

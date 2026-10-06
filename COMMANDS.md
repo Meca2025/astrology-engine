@@ -289,6 +289,18 @@ python3 astrology_engine.py runic --datetime 2026-05-16T16:45 \
 
 ---
 
+## `dossier`
+
+The whole chart as one written story: pillars, wanderers, aspects,
+fixed stars, midpoints, the draconic deep, solar arc directions, the
+year-lord, and the coming ninety days.
+
+```bash
+python3 astrology_engine.py dossier --load volmarr --target-date 2026-10-23 --out dossier.md
+```
+
+---
+
 ## `draconic`
 
 The soul-chart: every position reckoned from the natal north node,

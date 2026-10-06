@@ -76,6 +76,60 @@
       "status": "available",
       "scope": "SVG natal chart wheel rendering: zodiac ring, houses, planet glyphs, aspect lines",
       "evidence": "tests/test_wheel.py, 10/10 green"
+    },
+    {
+      "id": "solar-arc",
+      "status": "available",
+      "scope": "Solar arc directions: directed-to-natal aspects, applying/separating and exact-hit flags",
+      "evidence": "tests/test_directions.py; independent Swiss Ephemeris cross-check <1e-6"
+    },
+    {
+      "id": "profection",
+      "status": "available",
+      "scope": "Annual profections: the Hellenistic time-lord wheel with traditional dignities",
+      "evidence": "tests/test_profections.py 7/7; 30/30 dignity spot-checks"
+    },
+    {
+      "id": "watch",
+      "status": "available",
+      "scope": "Transit watch: outer-planet transits to natal points with refined exact dates",
+      "evidence": "tests/test_watch.py 8/8; raw-swisseph missed-hit audit, zero misses"
+    },
+    {
+      "id": "elect",
+      "status": "available",
+      "scope": "Electional astrology: scored windows by Moon state, Mercury retrograde, planetary hours",
+      "evidence": "tests/test_electional.py 9/9; independent planetary-hour verification"
+    },
+    {
+      "id": "stars",
+      "status": "available",
+      "scope": "Fixed stars: 26 bright stars, precessed, with contacts to natal planets and angles",
+      "evidence": "tests/test_stars.py 9/9; precession verified to 0.002° against raw swisseph"
+    },
+    {
+      "id": "asteroids",
+      "status": "available",
+      "scope": "Asteroids (Chiron, Ceres, Pallas, Juno, Vesta); honest about missing ephemeris files",
+      "evidence": "tests/test_asteroids_midpoints.py; missing-.se1 honesty contract verified"
+    },
+    {
+      "id": "midpoints",
+      "status": "available",
+      "scope": "The 45 planetary midpoints and the planets/angles standing upon them",
+      "evidence": "tests/test_asteroids_midpoints.py 9/9; hand-verified midpoint math"
+    },
+    {
+      "id": "draconic",
+      "status": "available",
+      "scope": "Draconic chart: the soul-chart reckoned from the natal north node",
+      "evidence": "tests/test_draconic.py 6/6; rotation verified to 0.0003° against raw swisseph"
+    },
+    {
+      "id": "dossier",
+      "status": "available",
+      "scope": "Written natal dossier: all Horizons arts woven into one report",
+      "evidence": "tests/test_dossier.py 6/6; full suite green"
     }
   ]
 }

@@ -1,3 +1,7 @@
+# Horizons Roadmap — COMPLETE (2026-10-06)
+
+All ten slices forged, tested, Sólrún-verified, and pushed.
+
 # ROADMAP — Horizons: the Skyward Program
 
 Volmarr's commission (2026-10-06): a Mythic Engineering roadmap adding

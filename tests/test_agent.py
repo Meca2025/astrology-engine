@@ -57,4 +57,4 @@ def test_unsupported_tool_and_tool_cli():
     result = subprocess.run([sys.executable, '-m', 'astroengine', 'tools'],
                             capture_output=True, text=True, encoding='utf-8')
     assert result.returncode == 0, result.stderr
-    assert len(json.loads(result.stdout)['tools']) == 10  # wheel joined the catalog
+    assert len(json.loads(result.stdout)['tools']) == 19  # all nine Horizons commands joined the catalog

@@ -2382,6 +2382,36 @@ def _load_chart_into(args):
     return saved.get("name", "Seeker")
 
 
+def cmd_dossier(args):
+    from astroengine.dossier import natal_dossier, render_dossier
+    if args.load:
+        title = _load_chart_into(args)
+    else:
+        apply_chart_load(args)
+        title = "Seeker"
+    require_date(args)
+    y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
+        args.date, args.time, args.city, args.nation,
+        getattr(args, "lat", None), getattr(args, "lon", None),
+        getattr(args, "timezone", None))
+    jd = julian_day(y, mo, d, utc_hour)
+    target = args.target_date or datetime.date.today().isoformat()
+    dossier = natal_dossier(jd, lat, lon, title, args.date, target,
+                            houses=args.houses)
+    text = render_dossier(dossier)
+    if args.json:
+        print(json.dumps({"title": title, "dossier": dossier},
+                         ensure_ascii=False, sort_keys=True))
+        return {"dossier": dossier}
+    if args.out:
+        with open(args.out, "w", encoding="utf-8") as f:
+            f.write(text + "\n")
+        print(f"  Dossier written to {args.out}")
+    else:
+        print(text)
+    return {"dossier": dossier}
+
+
 def cmd_draconic(args):
     from astroengine.draconic import draconic_chart, draconic_contacts
     if args.load:
@@ -4155,6 +4185,17 @@ def main():
     num.add_argument("--json", action="store_true")
     add_chart_lib(num, with_load=False)
 
+    ds = sub.add_parser("dossier", help="Written natal dossier: the whole chart as one story")
+    ds.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
+    ds.add_argument("--time", default=None, help="HH:MM (24h)")
+    ds.add_argument("--target-date", default=None, dest="target_date",
+                    help="Directions/profections/transits reckoned to this date (default: today)")
+    ds.add_argument("--houses", default="placidus")
+    ds.add_argument("--out", default=None, help="Write the report to FILE")
+    ds.add_argument("--json", action="store_true")
+    add_geo(ds)
+    add_chart_lib(ds)
+
     dr = sub.add_parser("draconic", help="Draconic chart: the soul-chart reckoned from the north node")
     dr.add_argument("--date", required=False, help="Birth date YYYY-MM-DD (or --load NAME)")
     dr.add_argument("--time", default=None, help="HH:MM (24h)")
@@ -4306,6 +4347,7 @@ def main():
         "stars":        cmd_stars,
         "asteroids":    cmd_asteroids,
         "draconic":     cmd_draconic,
+        "dossier":      cmd_dossier,
         "midpoints":    cmd_midpoints,
     }
     _TWO_PERSON = {"synastry", "composite", "synergy"}

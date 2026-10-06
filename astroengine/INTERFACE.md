@@ -341,3 +341,8 @@ ten new aspects with neutral weight 0 so synergy scoring is unchanged.
   node_lon)`, `draconic_chart(natal_jd_ut, lat, lon)`,
   `draconic_contacts(natal_jd_ut, lat, lon, orb)` — the draconic
   zodiac reckoned from the true north node. CLI: `draconic`.
+
+- `astroengine/dossier.py`: `natal_dossier(natal_jd_ut, lat, lon, name,
+  birth_iso, target_iso, houses)`, `render_dossier(d)` — the nine-part
+  written natal dossier assembled from all Horizons modules. CLI:
+  `dossier`.

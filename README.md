@@ -87,6 +87,7 @@ and documented — never merely planned.
 | `elect` | Electional astrology — choose the most fortunate windows |
 | `stars` | Fixed stars — the bright ones and their contacts to your chart |
 | `draconic` | Draconic chart — the soul-chart reckoned from the north node |
+| `dossier` | Written natal dossier — the whole chart as one story |
 | `asteroids` | Chiron, Ceres, Pallas, Juno, Vesta — honest about missing ephemeris files |
 | `midpoints` | The 45 planetary midpoints and the planets standing upon them |
 

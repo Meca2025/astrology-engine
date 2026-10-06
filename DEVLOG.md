@@ -508,3 +508,23 @@ takes `--load`, `--orb`, `--json`.
 
 Sólrún: `tests/test_draconic.py` 6/6 green plus independent subagent
 verification. Pushed via the PAT tool.
+
+## 2026-10-06 — H10: written natal dossiers (Horizons complete)
+
+Tenth and final slice of the Horizons program. `astroengine/dossier.py`
+gathers every art — pillars, wanderers, chords, bright ones, secret
+chords, the soul beneath, directions of the year, the year-lord, the
+coming sky — into one written report, descriptive synthesis from
+computed facts with the lore labeled and the humble footer kept. The
+`dossier` CLI takes `--load`, `--target-date`, `--houses`, `--out`,
+`--json`. All nine Horizons commands are now registered in
+`data/capabilities.json` and `data/tool_schemas.json` (22
+capabilities, 19 tools). The Horizons roadmap is complete: H01 chart
+wheels, H02 house systems, H03 solar arc directions, H04 annual
+profections, H05 transit watch, H06 electional astrology, H07 fixed
+stars, H08 asteroids and midpoints, H09 draconic charts, H10 written
+natal dossiers — ten slices, each with its task scroll, typed module,
+independent Sólrún verification, green suite, and verified push.
+
+Sólrún: `tests/test_dossier.py` 6/6 green plus independent subagent
+verification. Pushed via the PAT tool.

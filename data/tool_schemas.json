@@ -1673,6 +1673,370 @@
         ],
         "additionalProperties": false
       }
+    },
+    {
+      "name": "solar-arc",
+      "capability_id": "solar-arc",
+      "description": "Solar arc directions for a target date: the day-for-a-year directed chart against the natal",
+      "request_defaults": {},
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Birth date YYYY-MM-DD"
+          },
+          "time": {
+            "type": "string",
+            "description": "Birth time HH:MM (24h)"
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude in degrees north"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude in degrees east"
+          },
+          "timezone": {
+            "type": "string",
+            "description": "IANA timezone, e.g. America/New_York"
+          },
+          "load": {
+            "type": "string",
+            "description": "Saved chart name from the chart library"
+          },
+          "target_date": {
+            "type": "string",
+            "description": "Option: target_date"
+          }
+        }
+      }
+    },
+    {
+      "name": "profection",
+      "capability_id": "profection",
+      "description": "Annual profection for a target date: profected sign, house, lord of the year and its dignity",
+      "request_defaults": {},
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Birth date YYYY-MM-DD"
+          },
+          "time": {
+            "type": "string",
+            "description": "Birth time HH:MM (24h)"
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude in degrees north"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude in degrees east"
+          },
+          "timezone": {
+            "type": "string",
+            "description": "IANA timezone, e.g. America/New_York"
+          },
+          "load": {
+            "type": "string",
+            "description": "Saved chart name from the chart library"
+          },
+          "target_date": {
+            "type": "string",
+            "description": "Option: target_date"
+          }
+        }
+      }
+    },
+    {
+      "name": "watch",
+      "capability_id": "watch",
+      "description": "Coming outer-planet (Jupiter–Pluto) transits to natal planets and angles in a date window",
+      "request_defaults": {},
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Birth date YYYY-MM-DD"
+          },
+          "time": {
+            "type": "string",
+            "description": "Birth time HH:MM (24h)"
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude in degrees north"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude in degrees east"
+          },
+          "timezone": {
+            "type": "string",
+            "description": "IANA timezone, e.g. America/New_York"
+          },
+          "load": {
+            "type": "string",
+            "description": "Saved chart name from the chart library"
+          },
+          "from_date": {
+            "type": "string",
+            "description": "Option: from_date"
+          },
+          "to_date": {
+            "type": "string",
+            "description": "Option: to_date"
+          }
+        }
+      }
+    },
+    {
+      "name": "elect",
+      "capability_id": "elect",
+      "description": "The most fortunate hours in a date window, best first, for choosing a moment",
+      "request_defaults": {},
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Birth date YYYY-MM-DD"
+          },
+          "time": {
+            "type": "string",
+            "description": "Birth time HH:MM (24h)"
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude in degrees north"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude in degrees east"
+          },
+          "timezone": {
+            "type": "string",
+            "description": "IANA timezone, e.g. America/New_York"
+          },
+          "load": {
+            "type": "string",
+            "description": "Saved chart name from the chart library"
+          },
+          "from_date": {
+            "type": "string",
+            "description": "Option: from_date"
+          },
+          "to_date": {
+            "type": "string",
+            "description": "Option: to_date"
+          }
+        }
+      }
+    },
+    {
+      "name": "stars",
+      "capability_id": "stars",
+      "description": "Conjunctions of the bright fixed stars to natal planets, ASC and MC",
+      "request_defaults": {},
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Birth date YYYY-MM-DD"
+          },
+          "time": {
+            "type": "string",
+            "description": "Birth time HH:MM (24h)"
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude in degrees north"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude in degrees east"
+          },
+          "timezone": {
+            "type": "string",
+            "description": "IANA timezone, e.g. America/New_York"
+          },
+          "load": {
+            "type": "string",
+            "description": "Saved chart name from the chart library"
+          },
+          "orb": {
+            "type": "string",
+            "description": "Option: orb"
+          }
+        }
+      }
+    },
+    {
+      "name": "asteroids",
+      "capability_id": "asteroids",
+      "description": "Asteroid positions when their Swiss Ephemeris files resolve; clear errors when absent",
+      "request_defaults": {},
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Birth date YYYY-MM-DD"
+          },
+          "time": {
+            "type": "string",
+            "description": "Birth time HH:MM (24h)"
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude in degrees north"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude in degrees east"
+          },
+          "timezone": {
+            "type": "string",
+            "description": "IANA timezone, e.g. America/New_York"
+          },
+          "load": {
+            "type": "string",
+            "description": "Saved chart name from the chart library"
+          }
+        }
+      }
+    },
+    {
+      "name": "midpoints",
+      "capability_id": "midpoints",
+      "description": "Midpoint activations: third bodies on the axis of a planetary pair",
+      "request_defaults": {},
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Birth date YYYY-MM-DD"
+          },
+          "time": {
+            "type": "string",
+            "description": "Birth time HH:MM (24h)"
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude in degrees north"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude in degrees east"
+          },
+          "timezone": {
+            "type": "string",
+            "description": "IANA timezone, e.g. America/New_York"
+          },
+          "load": {
+            "type": "string",
+            "description": "Saved chart name from the chart library"
+          },
+          "orb": {
+            "type": "string",
+            "description": "Option: orb"
+          }
+        }
+      }
+    },
+    {
+      "name": "draconic",
+      "capability_id": "draconic",
+      "description": "Draconic longitudes and draconic–natal contacts, the soul touching the personality",
+      "request_defaults": {},
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Birth date YYYY-MM-DD"
+          },
+          "time": {
+            "type": "string",
+            "description": "Birth time HH:MM (24h)"
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude in degrees north"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude in degrees east"
+          },
+          "timezone": {
+            "type": "string",
+            "description": "IANA timezone, e.g. America/New_York"
+          },
+          "load": {
+            "type": "string",
+            "description": "Saved chart name from the chart library"
+          },
+          "orb": {
+            "type": "string",
+            "description": "Option: orb"
+          }
+        }
+      }
+    },
+    {
+      "name": "dossier",
+      "capability_id": "dossier",
+      "description": "A complete written natal dossier — pillars, aspects, stars, midpoints, draconic, directions, year-lord, coming sky",
+      "request_defaults": {},
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Birth date YYYY-MM-DD"
+          },
+          "time": {
+            "type": "string",
+            "description": "Birth time HH:MM (24h)"
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude in degrees north"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude in degrees east"
+          },
+          "timezone": {
+            "type": "string",
+            "description": "IANA timezone, e.g. America/New_York"
+          },
+          "load": {
+            "type": "string",
+            "description": "Saved chart name from the chart library"
+          },
+          "target_date": {
+            "type": "string",
+            "description": "Option: target_date"
+          }
+        }
+      }
     }
   ]
 }
