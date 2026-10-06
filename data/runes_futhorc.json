@@ -1,0 +1,620 @@
+{
+ "version": "1.0",
+ "source": "Anglo-Saxon futhorc — meanings for runes 1–29 drawn from the Old English Rune Poem (historical); Cweorth, Calc, Stan, Gar per Northumbrian manuscript tradition (no poem stanzas)",
+ "historical_claim": "traditional with modern synthesis",
+ "note": "Gyfu, Haegl, Is, Eoh, Sigel, Ing, Ethel and Daeg are symmetric and traditionally read the same face-up or face-down; their merkstave is null.",
+ "runes": [
+  {
+   "name": "Feoh",
+   "glyph": "ᚠ",
+   "transliteration": "f",
+   "upright": {
+    "keywords": [
+     "wealth",
+     "comfort",
+     "generosity"
+    ],
+    "meaning": "Wealth is a comfort to all — yet the poem bids every man bestow it freely, for it must leave his grasp. Prosperity that circulates."
+   },
+   "merkstave": {
+    "keywords": [
+     "hoarded wealth",
+     "greed"
+    ],
+    "meaning": "Murk-stave: wealth clutched till it sours. Greed, or resources slipping through closed fingers."
+   }
+  },
+  {
+   "name": "Ur",
+   "glyph": "ᚢ",
+   "transliteration": "u",
+   "upright": {
+    "keywords": [
+     "strength",
+     "vitality",
+     "the wild"
+    ],
+    "meaning": "The aurochs — proud, great-horned, very savage. Untamed vitality; the wild strength that bows to no master."
+   },
+   "merkstave": {
+    "keywords": [
+     "spent strength",
+     "tameness"
+    ],
+    "meaning": "Murk-stave: the wild ox yoked or spent. Vitality drained; do not mistake exhaustion for peace."
+   }
+  },
+  {
+   "name": "Thorn",
+   "glyph": "ᚦ",
+   "transliteration": "þ",
+   "upright": {
+    "keywords": [
+     "thorn",
+     "defense",
+     "sharp trial"
+    ],
+    "meaning": "The thorn — exceedingly sharp, an evil thing for any knight to touch, yet every thorn guards a rose. A sharp trial; defense that wounds."
+   },
+   "merkstave": {
+    "keywords": [
+     "thorn inward",
+     "malice"
+    ],
+    "meaning": "Murk-stave: the thorn turned inward. Defensive cruelty, or a trial made sharper by your own hand."
+   }
+  },
+  {
+   "name": "Os",
+   "glyph": "ᚩ",
+   "transliteration": "o",
+   "upright": {
+    "keywords": [
+     "word",
+     "wisdom",
+     "eloquence"
+    ],
+    "meaning": "The mouth — source of all language, pillar of wisdom, comfort of the wise. The spoken word rightly wielded."
+   },
+   "merkstave": {
+    "keywords": [
+     "empty speech",
+     "lies"
+    ],
+    "meaning": "Murk-stave: the mouth as snare. Empty speech, flattery, or wisdom withheld when it was needed."
+   }
+  },
+  {
+   "name": "Rad",
+   "glyph": "ᚱ",
+   "transliteration": "r",
+   "upright": {
+    "keywords": [
+     "journey",
+     "rhythm",
+     "right motion"
+    ],
+    "meaning": "Riding — easy to the warrior indoors, and courageous on the high road astride a stout horse. The journey taken at the right pace."
+   },
+   "merkstave": {
+    "keywords": [
+     "wrong road",
+     "restlessness"
+    ],
+    "meaning": "Murk-stave: the rider astray. Haste without rhythm, or a road that only looks right from indoors."
+   }
+  },
+  {
+   "name": "Cen",
+   "glyph": "ᚳ",
+   "transliteration": "c",
+   "upright": {
+    "keywords": [
+     "torch",
+     "clarity",
+     "revelation"
+    ],
+    "meaning": "The torch — known to every living man by its pale bright flame, burning where princes sit within. Clarity; revelation that shows the hall as it is."
+   },
+   "merkstave": {
+    "keywords": [
+     "false light",
+     "burnout"
+    ],
+    "meaning": "Murk-stave: the torch gutters. False clarity, or light that burns the bearer — rest the flame."
+   }
+  },
+  {
+   "name": "Gyfu",
+   "glyph": "ᚷ",
+   "transliteration": "g",
+   "upright": {
+    "keywords": [
+     "gift",
+     "generosity",
+     "honor"
+    ],
+    "meaning": "Generosity — the gift that brings credit and honour and upholds dignity. Given freely, it binds giver and receiver in honor."
+   },
+   "merkstave": null
+  },
+  {
+   "name": "Wynn",
+   "glyph": "ᚹ",
+   "transliteration": "w",
+   "upright": {
+    "keywords": [
+     "joy",
+     "bliss",
+     "harmony"
+    ],
+    "meaning": "Bliss — joy to him who knows little of woe, who has prosperity and happiness and a good enough house. Harmony; the reward of right living."
+   },
+   "merkstave": {
+    "keywords": [
+     "sorrow",
+     "false joy"
+    ],
+    "meaning": "Murk-stave: joy's shadow. Sorrow, or happiness built on sand — check what the bliss is standing on."
+   }
+  },
+  {
+   "name": "Haegl",
+   "glyph": "ᚻ",
+   "transliteration": "h",
+   "upright": {
+    "keywords": [
+     "hail",
+     "sudden trial",
+     "nature's will"
+    ],
+    "meaning": "Hail — whitest of grain, whirled from heaven's vault by gusts of wind, then melting to water. Sudden trial from above; it passes, and waters what follows."
+   },
+   "merkstave": null
+  },
+  {
+   "name": "Nyd",
+   "glyph": "ᚾ",
+   "transliteration": "n",
+   "upright": {
+    "keywords": [
+     "need",
+     "endurance",
+     "hardship's gift"
+    ],
+    "meaning": "Trouble — oppressive to the heart, yet often it proves a source of help and salvation, if heeded in time. Hardship that teaches."
+   },
+   "merkstave": {
+    "keywords": [
+     "despair",
+     "unheeded warning"
+    ],
+    "meaning": "Murk-stave: trouble unheeded till it hardens. Despair, or the help that was offered too late."
+   }
+  },
+  {
+   "name": "Is",
+   "glyph": "ᛁ",
+   "transliteration": "i",
+   "upright": {
+    "keywords": [
+     "stillness",
+     "ice",
+     "suspension"
+    ],
+    "meaning": "Ice — very cold and immeasurably slippery, glittering like gems over the field. All things suspended in bright stillness."
+   },
+   "merkstave": null
+  },
+  {
+   "name": "Ger",
+   "glyph": "ᛄ",
+   "transliteration": "j",
+   "upright": {
+    "keywords": [
+     "harvest",
+     "season",
+     "right timing"
+    ],
+    "meaning": "Harvest — summer's joy, when the holy King of Heaven lets the earth bring forth shining fruits for rich and poor. The season honored; reaping in its time."
+   },
+   "merkstave": {
+    "keywords": [
+     "missed season",
+     "impatience"
+    ],
+    "meaning": "Murk-stave: sowing against the season. Impatience, or the harvest left to rot in the field."
+   }
+  },
+  {
+   "name": "Eoh",
+   "glyph": "ᛇ",
+   "transliteration": "eo",
+   "upright": {
+    "keywords": [
+     "yew",
+     "endurance",
+     "the bent bow"
+    ],
+    "meaning": "The yew — rough-barked, hard and fast in the earth, the bow-tree. Endurance rooted deep; flexibility that does not break."
+   },
+   "merkstave": null
+  },
+  {
+   "name": "Peorth",
+   "glyph": "ᛈ",
+   "transliteration": "p",
+   "upright": {
+    "keywords": [
+     "play",
+     "chance",
+     "fellowship"
+    ],
+    "meaning": "The dice-cup — recreation and amusement where warriors sit blithely in the beerhall. Play, fellowship, the honest gamble."
+   },
+   "merkstave": {
+    "keywords": [
+     "reckless gamble",
+     "addiction"
+    ],
+    "meaning": "Murk-stave: play curdles. The gamble that stops being honest — know when to leave the hall."
+   }
+  },
+  {
+   "name": "Eolhx",
+   "glyph": "ᛉ",
+   "transliteration": "x",
+   "upright": {
+    "keywords": [
+     "sedge",
+     "defense",
+     "the marsh"
+    ],
+    "meaning": "The elk-sedge of the marsh — it grows in water and makes a ghastly wound on any hand that grasps it. Defense by position; the ground itself fights for you."
+   },
+   "merkstave": {
+    "keywords": [
+     "entrapment",
+     "false refuge"
+    ],
+    "meaning": "Murk-stave: the marsh traps its defender. A refuge that becomes a snare — choose your ground."
+   }
+  },
+  {
+   "name": "Sigel",
+   "glyph": "ᛋ",
+   "transliteration": "s",
+   "upright": {
+    "keywords": [
+     "sun",
+     "victory",
+     "hope"
+    ],
+    "meaning": "The sun — ever a joy in the hopes of seafarers journeying over the fishes' bath, till the sea-horse brings them to land. Victory; the light that guides home."
+   },
+   "merkstave": null
+  },
+  {
+   "name": "Tir",
+   "glyph": "ᛏ",
+   "transliteration": "t",
+   "upright": {
+    "keywords": [
+     "guiding star",
+     "honor",
+     "faith kept"
+    ],
+    "meaning": "Tir the star — it keeps faith with princes, ever on its course over night's mists and never failing. Honor as navigation; the fixed point."
+   },
+   "merkstave": {
+    "keywords": [
+     "lost bearing",
+     "broken faith"
+    ],
+    "meaning": "Murk-stave: the star obscured. Faith broken or bearings lost — steer by something smaller and nearer."
+   }
+  },
+  {
+   "name": "Beorc",
+   "glyph": "ᛒ",
+   "transliteration": "b",
+   "upright": {
+    "keywords": [
+     "birch",
+     "growth",
+     "new shoots"
+    ],
+    "meaning": "The birch — bearing no fruit, yet bringing forth suckers without seed, bright-branched and lovely. Growth from unexpected shoots; renewal."
+   },
+   "merkstave": {
+    "keywords": [
+     "stunted growth",
+     "barren effort"
+    ],
+    "meaning": "Murk-stave: shoots that will not take. Effort without fruit — tend the roots, not the branches."
+   }
+  },
+  {
+   "name": "Eh",
+   "glyph": "ᛖ",
+   "transliteration": "e",
+   "upright": {
+    "keywords": [
+     "horse",
+     "trust",
+     "partnership"
+    ],
+    "meaning": "The horse — joy of princes before warriors, the mettled steed proud on its hooves. Trust between rider and ridden; partnership that carries."
+   },
+   "merkstave": {
+    "keywords": [
+     "broken trust",
+     "unruly steed"
+    ],
+    "meaning": "Murk-stave: the horse shies. Trust strained, or a partnership pulling in two directions."
+   }
+  },
+  {
+   "name": "Mann",
+   "glyph": "ᛗ",
+   "transliteration": "m",
+   "upright": {
+    "keywords": [
+     "man",
+     "kinship",
+     "the human"
+    ],
+    "meaning": "Man — dear to his kinsmen, yet every man is doomed to fail his fellow, for the Lord's decree takes the wretched flesh to earth. Kinship, and its limits."
+   },
+   "merkstave": {
+    "keywords": [
+     "betrayal",
+     "isolation"
+    ],
+    "meaning": "Murk-stave: kinship fails. Betrayal, or the loneliness of the one no kin will claim."
+   }
+  },
+  {
+   "name": "Lagu",
+   "glyph": "ᛚ",
+   "transliteration": "l",
+   "upright": {
+    "keywords": [
+     "sea",
+     "flow",
+     "the deep road"
+    ],
+    "meaning": "The ocean — interminable to those who venture on the rolling bark, whom the briny waves frighten and the sea-horse heeds not. The deep road; surrender to the flow."
+   },
+   "merkstave": {
+    "keywords": [
+     "drowning",
+     "overwhelm"
+    ],
+    "meaning": "Murk-stave: the sea takes. Overwhelm — do not sail till the weather turns."
+   }
+  },
+  {
+   "name": "Ing",
+   "glyph": "ᛜ",
+   "transliteration": "ŋ",
+   "upright": {
+    "keywords": [
+     "Ing",
+     "seed",
+     "potential"
+    ],
+    "meaning": "Ing — first seen among the East-Danes, departing eastward over the waves in his chariot, the Wagoner following. The seed-god; potential held in the dark, waiting."
+   },
+   "merkstave": null
+  },
+  {
+   "name": "Ethel",
+   "glyph": "ᛟ",
+   "transliteration": "œ",
+   "upright": {
+    "keywords": [
+     "homeland",
+     "inheritance",
+     "right dwelling"
+    ],
+    "meaning": "The estate — very dear to every man who may enjoy in his house whatever is right and proper in constant prosperity. Homeland; rightful dwelling."
+   },
+   "merkstave": null
+  },
+  {
+   "name": "Daeg",
+   "glyph": "ᛞ",
+   "transliteration": "d",
+   "upright": {
+    "keywords": [
+     "day",
+     "dawn",
+     "breakthrough"
+    ],
+    "meaning": "Day — the glorious light of the Creator, sent by the Lord, beloved of men, a joy and hope to rich and poor. Breakthrough; the dawn that ends every night."
+   },
+   "merkstave": null
+  },
+  {
+   "name": "Ac",
+   "glyph": "ᚪ",
+   "transliteration": "a",
+   "upright": {
+    "keywords": [
+     "oak",
+     "strength",
+     "endurance"
+    ],
+    "meaning": "The oak — fattening the pigs' flesh for heroes, often traversing the gannet's bath to try the ocean. Strength that feeds others; endurance tested by the sea."
+   },
+   "merkstave": {
+    "keywords": [
+     "rigidity",
+     "the unbent"
+    ],
+    "meaning": "Murk-stave: the oak that will not bend. Strength turned to rigidity — what cannot flex will break."
+   }
+  },
+  {
+   "name": "Aesc",
+   "glyph": "ᚫ",
+   "transliteration": "æ",
+   "upright": {
+    "keywords": [
+     "ash",
+     "the world-tree",
+     "stature"
+    ],
+    "meaning": "The ash — very tall and precious to men, hard on its base, holding its place though many attack it. Stature; the tree that holds the worlds."
+   },
+   "merkstave": {
+    "keywords": [
+     "toppled pride",
+     "shallow roots"
+    ],
+    "meaning": "Murk-stave: the tall tree with shallow roots. Pride before the felling — deepen, or fall."
+   }
+  },
+  {
+   "name": "Yr",
+   "glyph": "ᚣ",
+   "transliteration": "y",
+   "upright": {
+    "keywords": [
+     "bow",
+     "craft",
+     "aim"
+    ],
+    "meaning": "Yr — joy and honour to prince and knight, looking well on a horse, steady gear on a journey. The bow: craft aimed true."
+   },
+   "merkstave": {
+    "keywords": [
+     "misaimed",
+     "broken gear"
+    ],
+    "meaning": "Murk-stave: the bow unstrung or misaimed. Craft without aim, or gear failing on the road."
+   }
+  },
+  {
+   "name": "Ior",
+   "glyph": "ᛡ",
+   "transliteration": "ia",
+   "upright": {
+    "keywords": [
+     "the river-beast",
+     "duality",
+     "the between"
+    ],
+    "meaning": "Ior — the river-fish that takes its food on land, at home in both elements. The between-creature: duality held without tearing."
+   },
+   "merkstave": {
+    "keywords": [
+     "torn between",
+     "neither-nor"
+    ],
+    "meaning": "Murk-stave: the between becomes the trap. Torn by two elements, at home in neither — choose a shore."
+   }
+  },
+  {
+   "name": "Ear",
+   "glyph": "ᛠ",
+   "transliteration": "ea",
+   "upright": {
+    "keywords": [
+     "grave",
+     "ending",
+     "the dust"
+    ],
+    "meaning": "The grave — horrible to every knight when the corpse quickly begins to cool and is laid in the darkness. Ending; the dust that claims all flesh. Mourn, then release."
+   },
+   "merkstave": {
+    "keywords": [
+     "clung ending",
+     "rot"
+    ],
+    "meaning": "Murk-stave: the grave clung to. An ending refused till it rots — bury it and walk on."
+   }
+  },
+  {
+   "name": "Cweorth",
+   "glyph": "ᛢ",
+   "transliteration": "q",
+   "upright": {
+    "keywords": [
+     "fire-drill",
+     "sacred fire",
+     "transformation"
+    ],
+    "meaning": "The fire-drill — the Northumbrian rune of sacred fire, kindled by friction. Transformation through effort; the hearth lit by will. (No rune-poem stanza; manuscript tradition.)"
+   },
+   "merkstave": {
+    "keywords": [
+     "wildfire",
+     "burnout"
+    ],
+    "meaning": "Murk-stave: fire without hearth. Wildfire, or the self burned out by its own kindling."
+   }
+  },
+  {
+   "name": "Calc",
+   "glyph": "ᛣ",
+   "transliteration": "k",
+   "upright": {
+    "keywords": [
+     "chalice",
+     "offering",
+     "the cup"
+    ],
+    "meaning": "The chalice — the Northumbrian cup-rune. Offering poured out; the vessel that holds blessing. (No rune-poem stanza; manuscript tradition.)"
+   },
+   "merkstave": {
+    "keywords": [
+     "empty cup",
+     "poured out"
+    ],
+    "meaning": "Murk-stave: the cup overturned. Offerings wasted, or the vessel cracked — mend it before pouring."
+   }
+  },
+  {
+   "name": "Stan",
+   "glyph": "ᛥ",
+   "transliteration": "st",
+   "upright": {
+    "keywords": [
+     "stone",
+     "foundation",
+     "endurance"
+    ],
+    "meaning": "The stone — the Northumbrian rune of what endures. Foundation, landmark, the altar-stone. (No rune-poem stanza; manuscript tradition.)"
+   },
+   "merkstave": {
+    "keywords": [
+     "sinking stone",
+     "rigid ground"
+    ],
+    "meaning": "Murk-stave: foundation on sand. What seemed stone sinks — test the ground before building."
+   }
+  },
+  {
+   "name": "Gar",
+   "glyph": "ᚸ",
+   "transliteration": "g",
+   "upright": {
+    "keywords": [
+     "spear",
+     "the god's weapon",
+     "direct hit"
+    ],
+    "meaning": "The spear — the Northumbrian rune of Gár, the god's own weapon. The direct hit; force aimed by higher hands. (No rune-poem stanza; manuscript tradition.)"
+   },
+   "merkstave": {
+    "keywords": [
+     "friendly fire",
+     "the thrown spear"
+    ],
+    "meaning": "Murk-stave: the spear thrown amiss. Force misdirected — or aimed at you. Duck, or aim better."
+   }
+  }
+ ]
+}

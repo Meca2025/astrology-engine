@@ -77,8 +77,3 @@ def test_corpus_provenance():
     assert "Norwegian" in doc["source"] and "Icelandic" in doc["source"]
     assert doc["historical_claim"] == "traditional with modern synthesis"
 
-
-def test_missing_corpus_is_calculation_error():
-    # Sólrún O01-D1: an advertised-but-unforged corpus must fail cleanly
-    with pytest.raises(CalculationError, match="not yet forged"):
-        cast(system="futhorc")

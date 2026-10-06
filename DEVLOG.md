@@ -540,3 +540,17 @@ the default; futhorc arrives in O02). Provenance labeled throughout.
 
 Sólrún: `tests/test_younger_futhark.py` 10/10 green plus independent
 subagent verification. Pushed via the PAT tool.
+
+## 2026-10-06 — O02: Anglo-Saxon futhorc
+
+Second slice of the Oracles program. `data/runes_futhorc.json` holds
+all thirty-three staves of the English row — the old twenty-four
+(including oft-forgotten Wynn) plus Ac, Aesc, Yr, Ior, Ear from the
+Old English Rune Poem, and Cweorth, Calc, Stan, Gar from Northumbrian
+manuscript tradition (labeled as having no poem stanzas). No module
+changes were needed: O01's system-aware engine lit up the moment the
+corpus landed. `runecast --system futhorc` reads in all seven
+layouts.
+
+Sólrún: `tests/test_futhorc.py` 7/7 green plus independent subagent
+verification. Pushed via the PAT tool.
