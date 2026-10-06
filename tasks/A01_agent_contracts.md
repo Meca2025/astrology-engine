@@ -12,3 +12,11 @@ ignore invented arguments. Core strict request validation stays authoritative.
 Gate: schema/service command parity, valid Vedic/relationship routing, unsupported
 method refusal, unknown field/type errors, no namespace mutation and CLI wiring.
 Also audit/install final wheel with all JSON profiles, update README and next task.
+
+## Boundary audit amendment (before repair)
+
+The final audit found nine nominal pada boundaries vulnerable to floating-point
+floor arithmetic. Add astroengine/partitions.py with explicit half-open boundary
+lookup and apply it to nakshatra/varga/panchanga partitions. Test every exact
+boundary plus neighboring representable floats, preserving genuine side selection
+without arbitrary epsilon snapping. This is a correctness repair, not new scope.
