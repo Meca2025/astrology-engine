@@ -138,3 +138,17 @@ unavailable/provenance attributes outside body iteration. legacy_houses preserve
 the three-item tuple; legacy_request declares tropical or Fagan-Bradley sidereal.
 legacy_astronomy.json owns the required/optional body registry and search settings.
 The bridge never imports the monolith, prints, persists or performs network calls.
+
+## Runic cycles (R02)
+
+`runic.RunicDateRequest(date, time, timezone)` is a frozen request. `date` is
+ISO YYYY-MM-DD (required); `time` ISO HH:MM (optional, refines boundary days);
+`timezone` IANA/UTC (optional, only with `time`). Unknown zones, bad dates and
+timezone-without-time raise `CalculationError`.
+
+`runic.half_month_rune(iso_date, time, timezone)` returns a JSON-safe dict:
+ruling rune, half-month start/end, days remaining, next rune, corpus
+correspondences (data, not interpretation), source and historical_claim.
+Boundary rule per Pennick App. 2: latest start on/before the date; pre-01-13
+dates belong to Eoh; on a start date with a clock time, the new rune begins at
+the book's local-apparent start time. No ephemeris, no interpretation.

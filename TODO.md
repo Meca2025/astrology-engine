@@ -19,6 +19,7 @@ Read this first. Current work: 2026-10-06 expansion under Mythic Engineering.
 - [x] W09b1 — strict legacy civil/coordinate inputs, per-person timezone/location controls; 223 tests pass locally and in all six hosted jobs; installed wheel verified.
 - [x] W09b2 — explicit house/backend failures, unknown-time rendering and node-motion repair; 283 tests pass locally and in all six hosted jobs; installed wheel verified.
 - [x] R01 — runic corpus: data/runic.json transcribes all Pennick (2023) tables (32 runes, 24 half-months, 24 runic hours, 168 planetary-hour cells, weekdays, zodiac+variants, 8 tides, 28 mansions, 12 palaces, 9 worlds, 7 life-periods/98 years); tests/test_runic.py 12/12 green; full suite 295 green; print quirks documented, not corrected.
+- [x] R02 — half-months engine: astroengine/runic.py half_month_rune(date, time, timezone) per Pennick App. 2 (latest-start rule, Eoh wrap, boundary-time refinement, explicit CalculationError on bad date/time/zone); tests/test_runic_half_months.py 7/7 green; full suite 302 green.
 - [ ] V09 — expanded classical Jyotisha mechanics, with named rule/source fixtures.
 
 Next ready work order: tasks/W09b3_event_roots.md. W09b is split into inputs,

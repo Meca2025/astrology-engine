@@ -166,3 +166,16 @@ cross-confirmed by the tide breakdown, is encoded. All tables labeled
 historical_claim: modern synthesis. Védis registered the corpus in
 data/README.md and COMPONENT_INDEX.md; no CLI surface in R01 (R09). Next: R02
 runic half-months engine.
+
+## 2026-10-06 — R02 Half-Months Engine complete
+
+Skald/Rúnhild set the contract: frozen RunicDateRequest, half_month_rune with
+explicit boundary/timezone rules. Eldra built astroengine/runic.py (datetime +
+zoneinfo only, no ephemeris — the wheel is calendrical). Sólrún verified with
+tests/test_runic_half_months.py (7/7 green, full suite 302 green) against the
+book's fixtures: Peorth 13 Jan, Elhaz 28 Jan (05:00 refinement tested),
+Ken 13 Sep, Ing 14 May, Feoh 29 Jun, Eoh year-wrap both ends. Two defects found
+and fixed in-slice: a parameter shadowing datetime.date, and a wrong test
+fixture (01-28 is Elhaz's start, not Peorth's). Védis recorded the module in
+astroengine/INTERFACE.md and COMPONENT_INDEX.md. No CLI surface (R09). Next: R03
+runic hours + planetary hours.
