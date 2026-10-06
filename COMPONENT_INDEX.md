@@ -38,6 +38,9 @@ R05 adds the sign/day/age layers: `zodiac_rune` (App. 5, labeled
 variants), `weekday_rune` (App. 4), `life_period` (Ch. 6, 0–98 wheel),
 and `metonic_cycle` (Ch. 6 Golden Number, ephemeris cross-checked in
 tests); verified by `tests/test_runic_layers.py`.
+R06 adds the lunar mansions: `lunar_mansion` / `lunar_mansions`
+(Ch. 7, 28 equal sidereal segments anchored at Alcyone, declared
+convention); verified by `tests/test_runic_mansions.py`.
 
 `astroengine/vargas.py` owns divisional sign arithmetic; `data/vargas.json` owns
 the sixteen named mappings. Technique discrepancy ledger lives in docs/references.

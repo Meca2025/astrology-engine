@@ -552,3 +552,80 @@ def metonic_cycle(year: int) -> dict:
 
 
 __all__ += ["zodiac_rune", "weekday_rune", "life_period", "metonic_cycle"]
+
+
+# ---------------------------------------------------------------------------
+# R06 — The 28 lunar mansions (Ch. 7)
+# ---------------------------------------------------------------------------
+
+# Declared modern convention (not historical fact): 28 equal sidereal
+# segments of 360/28 degrees; mansion 1 (Feoh, "Boars' Throng") begins at
+# Alcyone's J2000 sidereal longitude, per the book's "mansions began with
+# the star Alcyone (eta Tauri)". Derived: Alcyone J2000 RA 3h47m24.3s Dec
+# +24d06'18" -> tropical 59.9746 deg; minus Lahiri ayanamsa 23.8571 deg.
+MANSION_ANCHOR_DEG = 36.1175
+MANSION_WIDTH_DEG = 360.0 / 28.0
+
+
+def _mansion_row(corpus: dict, number: int) -> dict:
+    return next(m for m in corpus["mansions"]["mansions"]
+                if m["number"] == number)
+
+
+def lunar_mansion(sidereal_longitude_deg: float) -> dict:
+    """Return the lunar mansion (Ch. 7) for a sidereal longitude in degrees.
+
+    The caller supplies the Moon's sidereal longitude (runic.py stays
+    ephemeris-free); this function maps it onto the 28 equal mansion
+    segments anchored at Alcyone (see MANSION_ANCHOR_DEG).
+    """
+    try:
+        lon = float(sidereal_longitude_deg) % 360.0
+    except (TypeError, ValueError):
+        raise CalculationError(
+            f"invalid longitude '{sidereal_longitude_deg}': must be a "
+            "number of sidereal degrees")
+    corpus = _corpus()
+    # epsilon keeps exact-boundary longitudes in the mansion they open
+    # (float dust would otherwise drop them into the previous segment)
+    index = int(((lon - MANSION_ANCHOR_DEG) % 360.0 + 1e-9)
+                // MANSION_WIDTH_DEG)
+    row = _mansion_row(corpus, index + 1)
+    start = (MANSION_ANCHOR_DEG + index * MANSION_WIDTH_DEG) % 360.0
+    end = (start + MANSION_WIDTH_DEG) % 360.0
+    return {
+        "sidereal_longitude": round(lon, 6),
+        "mansion": row["number"],
+        "rune": row["rune"],
+        "northern_name": row["northern_name"],
+        "star": row["star"],
+        "designation": row["designation"],
+        "segment": [round(start, 4), round(end, 4)],
+        "method": "28 equal sidereal segments anchored at Alcyone "
+                  "(declared modern convention)",
+        "source": "Pennick (2023)",
+        "historical_claim": "modern synthesis",
+    }
+
+
+def lunar_mansions() -> list[dict]:
+    """Return all 28 lunar mansions with their computed segment bounds."""
+    corpus = _corpus()
+    out = []
+    for i in range(28):
+        row = _mansion_row(corpus, i + 1)
+        start = (MANSION_ANCHOR_DEG + i * MANSION_WIDTH_DEG) % 360.0
+        end = (start + MANSION_WIDTH_DEG) % 360.0
+        out.append({
+            "mansion": row["number"],
+            "rune": row["rune"],
+            "northern_name": row["northern_name"],
+            "star": row["star"],
+            "designation": row["designation"],
+            "segment": [round(start, 4), round(end, 4)],
+        })
+    return out
+
+
+__all__ += ["MANSION_ANCHOR_DEG", "MANSION_WIDTH_DEG",
+            "lunar_mansion", "lunar_mansions"]

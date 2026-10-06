@@ -201,3 +201,20 @@ years elapsed and remaining; ages outside 0–98 raise CalculationError.
 and the year's place in the 19-year Sun/Moon reconciliation cycle, with the
 Aun 310-year recalibration noted. runic.py stays ephemeris-free by design;
 the Metonic recurrence is cross-checked against the ephemeris in tests.
+
+## Lunar mansions (R06)
+
+`lunar_mansion(sidereal_longitude_deg)` maps a sidereal longitude onto the
+28 Ch. 7 lunar mansions (rune, Old Norse name, star, designation, segment
+bounds). `lunar_mansions()` lists all 28. Declared modern convention (not
+historical fact): 28 equal sidereal segments of 360/28 degrees, mansion 1
+(Feoh, "Boars' Throng") opening at Alcyone's J2000 sidereal longitude
+36.1175° (Lahiri). runic.py stays ephemeris-free: the caller supplies the
+Moon's sidereal longitude.
+
+Contrast note vs. Vedic nakshatras: nakshatras are 27 in the classical
+count (28 with Abhijit), anchored at 0° sidereal Aries (Ashwini), each
+13°20' wide. Pennick's mansions are 28 equal segments of 12°51' anchored
+at Alcyone — a different zero point and a different count convention.
+Both are "lunar zodiacs" in their own traditions; the engine computes
+each in its own terms and does not synthesize the two systems.

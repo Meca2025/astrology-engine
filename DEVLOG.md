@@ -234,3 +234,20 @@ green, including the roadmap's ephemeris gate: full moons 19 years apart
 runic.py remains ephemeris-free by design. Védis mapped the surface in
 INTERFACE.md and COMPONENT_INDEX.md. Pushed via the PAT tool — no approval
 prompts, binary-safe. Next: R06 lunar mansions + palaces.
+
+## 2026-10-06 — R06 complete: the 28 lunar mansions
+
+The sixth runic slice is forged. `astroengine/runic.py` gains
+`lunar_mansion()` and `lunar_mansions()` for the Ch. 7 wheel: 28 equal
+sidereal segments of 360/28 degrees, mansion 1 (Feoh, "Boars' Throng",
+Alcyone) opening at Alcyone's J2000 sidereal longitude 36.1175° (Lahiri;
+derived from RA 3h47m24.3s Dec +24°06'18"). The anchor is a declared
+modern convention, labeled as such — the book says the mansions "began
+with the star Alcyone" but gives no degree. runic.py stays
+ephemeris-free: the caller supplies the Moon's sidereal longitude.
+Sólrún's `tests/test_runic_mansions.py`: 6/6 green, full suite 350 green.
+One float-dust defect fixed in-slice (exact-boundary longitudes need an
+epsilon, else 0.99999… floors into the previous mansion). Védis mapped the
+surface in INTERFACE.md incl. the contrast note vs. Vedic nakshatras (27
+vs 28, Ashwini zero point vs Alcyone — computed separately, never
+synthesized). Pushed via the PAT tool. Next: R07 palaces and nine worlds.
