@@ -96,3 +96,5 @@ body availability/frame/search rules. The monolith owns text uncertainty renderi
   `tests/test_runecast.py`.
 - `astroengine/wheel.py` — SVG natal chart wheels; verified by
   `tests/test_wheel.py`.
+- `astroengine/houses.py` — five house systems; verified by
+  `tests/test_houses.py`.

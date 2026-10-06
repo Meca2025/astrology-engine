@@ -301,6 +301,15 @@ python3 astrology_engine.py wheel --date 1972-09-01 --time 08:18 \
   --lat 42.81 --lon -73.94 --timezone America/New_York -o wheel.svg
 ```
 
+Five house systems are available on every chart-bearing command
+(`natal`, `transit`, `synastry`, `solar-return`, `composite`, `wheel`,
+`reading`) via `--houses`: `placidus` (default), `whole-sign`, `equal`,
+`koch`, `regiomontanus`.
+
+```bash
+python3 astrology_engine.py wheel --load volmarr --houses whole-sign -o volmarr-ws.svg
+```
+
 ---
 
 ## `tarot`

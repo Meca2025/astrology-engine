@@ -2091,9 +2091,20 @@ def _require_birth_time(known: bool, command: str) -> None:
         raise CalculationError(f"{command} requires a known birth time; supply --time")
 
 
+def _print_house_system(args) -> None:
+    """Name a non-default house system so output never misleads."""
+    system = getattr(args, "houses", "placidus") or "placidus"
+    if system != "placidus":
+        print(f"  House system: {system}")
+
+
 def _optional_houses(jd: float, latitude: float, longitude: float,
-                     known: bool) -> tuple[list[float] | None, float | None, float | None]:
-    return calc_houses(jd, latitude, longitude) if known else (None, None, None)
+                     known: bool, system: str = "placidus"
+                     ) -> tuple[list[float] | None, float | None, float | None]:
+    if not known:
+        return (None, None, None)
+    from astroengine.houses import house_cusps
+    return house_cusps(jd, latitude, longitude, system)
 
 
 def _print_time_certainty(known: bool, label: str | None = None) -> None:
@@ -2171,7 +2182,8 @@ def _print_transit_houses(positions: dict[str, dict[str, Any]], cusps: list[floa
 # Chart library wiring (--save / --load on every chart-producing command)
 # ---------------------------------------------------------------------------
 
-_LOAD_FIELDS = ("date", "time", "city", "nation", "lat", "lon", "timezone")
+_LOAD_FIELDS = ("date", "time", "city", "nation", "lat", "lon",
+                "timezone", "houses")
 
 
 def add_chart_lib(parser, two_person=False, with_load=True):
@@ -2211,12 +2223,18 @@ def apply_chart_load(args, suffix=""):
         saved_val = req.get(field)
         if saved_val in (None, ""):
             continue
+        # only fill defaulted fields: the user's explicit choices always win
         if field in ("city", "nation"):
-            # only fill when the user left the legacy default in place
-            if current == legacy_defaults.get(field):
-                setattr(args, key, saved_val)
-                filled.append(key)
-        elif current in (None, ""):
+            default = legacy_defaults.get(field)
+        elif field == "houses":
+            default = "placidus"
+        else:
+            default = None
+        if default is not None:
+            fill = current == default
+        else:
+            fill = current in (None, "")
+        if fill:
             setattr(args, key, saved_val)
             filled.append(key)
     if filled:
@@ -2296,7 +2314,8 @@ def cmd_reading(args):
             getattr(args, "timezone", None))
         jd = julian_day(y, mo, d, utc_hour)
         positions = calc_planet_positions(jd)
-        cusps, asc, mc = _optional_houses(jd, lat, lon, time_known)
+        cusps, asc, mc = _optional_houses(jd, lat, lon, time_known,
+                                          getattr(args, "houses", "placidus"))
         if asc is not None:
             asc_sign = deg_to_sign(asc)[0]
         if mc is not None:
@@ -2307,6 +2326,7 @@ def cmd_reading(args):
         print(json.dumps(woven, ensure_ascii=False, sort_keys=True))
         return {"reading": woven}
     header("ASTROLOGY READING", args.kind.upper())
+    _print_house_system(args)
     for para in woven["paragraphs"]:
         print(f"  {para['text']}\n")
     print(f"  {woven['label']}")
@@ -2353,9 +2373,12 @@ def _loc_label(req: dict) -> str:
 
 def cmd_wheel(args):
     from astroengine.wheel import wheel_svg, PLANET_GLYPHS
+    houses_system = getattr(args, "houses", "placidus") or "placidus"
+    saved = None
     if args.load:
         from astroengine.charts import load_chart
         saved = load_chart(args.load, getattr(args, "chart_dir", None))
+    if saved is not None and houses_system == "placidus":
         result = saved.get("result") or {}
         positions = result.get("positions") or result.get("natal") or {}
         cusps = result.get("cusps")
@@ -2368,6 +2391,8 @@ def cmd_wheel(args):
             _loc_label(req)) if x)
         print(f"  Wheel for saved chart '{args.load}'")
     else:
+        # Fresh computation; --load fills birth data via dispatch, and a
+        # non-default --houses recomputes cusps in the requested system.
         apply_chart_load(args)
         require_date(args)
         y, mo, d, utc_hour, lat, lon, tz_name, tz_label, time_known, _ = resolve_birth(
@@ -2376,8 +2401,14 @@ def cmd_wheel(args):
             getattr(args, "timezone", None))
         jd = julian_day(y, mo, d, utc_hour)
         positions = calc_planet_positions(jd)
-        cusps, asc, mc = _optional_houses(jd, lat, lon, time_known)
-        title = "Natal Chart"
+        cusps, asc, mc = _optional_houses(jd, lat, lon, time_known,
+                                          houses_system)
+        title = (saved.get("name", "Natal Chart") if saved
+                 else "Natal Chart")
+        if houses_system != "placidus":
+            title += f" ({houses_system})"
+            print(f"  Wheel for saved chart '{args.load}' "
+                  f"with {houses_system} houses")
         subtitle = f"{args.date} {args.time or ''} {_loc_label(vars(args))}".strip()
     planets = []
     for body in _WHEEL_BODIES:
@@ -2516,12 +2547,14 @@ def cmd_natal(args):
         loc_label = f"{abs(lat):.4f}°{lat_dir_co} {abs(lon):.4f}°{lon_dir_co}"
 
     positions = calc_planet_positions(jd)
-    cusps, asc, mc = _optional_houses(jd, lat, lon, time_known)
+    cusps, asc, mc = _optional_houses(jd, lat, lon, time_known,
+                                          getattr(args, "houses", "placidus"))
 
     header(
         f"NATAL CHART — {name.upper()}",
         f"{args.date}  ·  {loc_label}"
     )
+    _print_house_system(args)
     _print_time_certainty(time_known, tz_label)
     _print_astronomy(positions)
     sun_sign, moon_sign = positions["Sun"]["sign"], positions["Moon"]["sign"]
@@ -2592,9 +2625,11 @@ def cmd_transit(args):
 
     natal_pos   = calc_planet_positions(jd_natal)
     transit_pos = calc_planet_positions(jd_sky)
-    cusps, asc, mc = _optional_houses(jd_natal, lat, lon, time_known)
+    cusps, asc, mc = _optional_houses(jd_natal, lat, lon, time_known,
+                                          getattr(args, "houses", "placidus"))
 
     header("TRANSIT CHART", f"Natal: {args.date}  ·  Sky: {sky_label}")
+    _print_house_system(args)
 
     _print_time_certainty(time_known, tz_label)
     _print_astronomy(natal_pos, "Natal")
@@ -2647,9 +2682,12 @@ def cmd_synastry(args):
     n1 = getattr(args, "name1", "Person A")
     n2 = getattr(args, "name2", "Person B")
 
-    cusps1, _, _ = _optional_houses(jd1, lat1, lon1, known1 and _paired_location_provided(args, 1))
-    cusps2, _, _ = _optional_houses(jd2, lat2, lon2, known2 and _paired_location_provided(args, 2))
+    cusps1, _, _ = _optional_houses(jd1, lat1, lon1, known1 and _paired_location_provided(args, 1),
+                                        getattr(args, "houses", "placidus"))
+    cusps2, _, _ = _optional_houses(jd2, lat2, lon2, known2 and _paired_location_provided(args, 2),
+                                        getattr(args, "houses", "placidus"))
     header("SYNASTRY CHART", f"{n1}  ×  {n2}")
+    _print_house_system(args)
     _print_pair_times(args, tzl1, tzl2)
     _print_time_certainty(known1)
     _print_time_certainty(known2)
@@ -2729,10 +2767,13 @@ def cmd_solar_return(args):
         jd_search += diff / 0.9856
 
     sr_pos = calc_planet_positions(jd_search)
-    sr_cusps, sr_asc, sr_mc = calc_houses(jd_search, lat, lon)
+    from astroengine.houses import house_cusps as _hc
+    sr_cusps, sr_asc, sr_mc = _hc(jd_search, lat, lon,
+                                     getattr(args, "houses", "placidus"))
 
     sr_dt = jd_to_dt(jd_search)
     header("SOLAR RETURN CHART", f"Year {target_year}  ·  {sr_dt}  ·  {args.city}, {args.nation}")
+    _print_house_system(args)
     _print_astronomy(natal_pos, "Natal")
     _print_astronomy(sr_pos, "Solar return")
     print_planet_table(sr_pos, sr_cusps)
@@ -3143,9 +3184,12 @@ def cmd_composite(args):
     if davison_available:
         jd_dav, lat_dav, lon_dav = calc_davison(jd1, jd2, _lat1, _lon1, _lat2, _lon2)
         dav_pos = calc_planet_positions(jd_dav)
-        dav_cusps, dav_asc, dav_mc = calc_houses(jd_dav, lat_dav, lon_dav)
+        from astroengine.houses import house_cusps as _hc2
+        dav_cusps, dav_asc, dav_mc = _hc2(jd_dav, lat_dav, lon_dav,
+                                             getattr(args, "houses", "placidus"))
 
     header("COMPOSITE CHART", f"{n1}  +  {n2}  (Midpoint Method)")
+    _print_house_system(args)
     _print_pair_times(args, tzl1, tzl2)
     _print_astronomy(pos1, n1)
     _print_astronomy(pos2, n2)
@@ -3532,6 +3576,12 @@ def main():
         parser.add_argument("--timezone", default=None,
                             help="Explicit IANA zone, bypassing optional discovery; UTC for known UTC input")
 
+    def add_houses(parser: argparse.ArgumentParser) -> None:
+        """Add the --houses flag: placidus (default), whole-sign, equal, koch, regiomontanus."""
+        from astroengine.houses import SYSTEMS
+        parser.add_argument("--houses", default="placidus", choices=SYSTEMS,
+                            help="House system (default: placidus)")
+
     def add_pair_geo(parser: argparse.ArgumentParser) -> None:
         for index in (1, 2):
             parser.add_argument(f"--city{index}", default=None, help=f"Person {index} birth city")
@@ -3546,6 +3596,7 @@ def main():
     natal.add_argument("--time", default=None,  help="HH:MM (24h)")
     natal.add_argument("--name", default=None)
     add_geo(natal)
+    add_houses(natal)
     add_chart_lib(natal)
 
     # transit  (gap 2: --transit-date / --transit-time)
@@ -3557,6 +3608,7 @@ def main():
     transit.add_argument("--transit-time", default=None,  dest="transit_time",
                          help="Sky time HH:MM (default: noon if transit-date given)")
     add_geo(transit)
+    add_houses(transit)
     add_chart_lib(transit)
 
     # synastry  (gap 6: --city1/2 --nation1/2 --lat1/2 --lon1/2)
@@ -3568,6 +3620,7 @@ def main():
     syn.add_argument("--name1",    default="Person A")
     syn.add_argument("--name2",    default="Person B")
     add_pair_geo(syn)
+    add_houses(syn)
     add_chart_lib(syn, two_person=True)
 
     # solar return
@@ -3576,6 +3629,7 @@ def main():
     sr.add_argument("--time",  default=None)
     sr.add_argument("--year",  default=None)
     add_geo(sr)
+    add_houses(sr)
     add_chart_lib(sr)
 
     # progressions
@@ -3635,6 +3689,7 @@ def main():
     comp_p.add_argument("--name1",   default="Person A")
     comp_p.add_argument("--name2",   default="Person B")
     add_pair_geo(comp_p)
+    add_houses(comp_p)
     add_chart_lib(comp_p, two_person=True)
 
     # synergy
@@ -3722,6 +3777,7 @@ def main():
     rdg.add_argument("--time", default=None, help="HH:MM (24h)")
     rdg.add_argument("--json", action="store_true")
     add_geo(rdg)
+    add_houses(rdg)
     add_chart_lib(rdg)
 
     num = sub.add_parser("numerology", help="Pythagorean numerology reading")
@@ -3736,6 +3792,7 @@ def main():
     whl.add_argument("--time", default=None, help="HH:MM (24h)")
     whl.add_argument("-o", "--output", default="wheel.svg")
     add_geo(whl)
+    add_houses(whl)
     add_chart_lib(whl)
 
     rnc = sub.add_parser("runecast", help="Rune casting: Elder Futhark readings in many layouts")

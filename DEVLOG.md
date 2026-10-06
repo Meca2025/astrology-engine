@@ -385,3 +385,18 @@ coordinates over legacy default city names ("London GB" quirk).
 
 Sólrún: `tests/test_wheel.py` 10/10 green plus independent subagent
 verification. Pushed via the PAT tool.
+
+## 2026-10-06 — H02: house systems
+
+Second slice of the Horizons program. `astroengine/houses.py` exposes
+`house_cusps()` for five systems — placidus, whole-sign, equal, koch,
+regiomontanus — with system codes read from data/profiles.json (nothing
+hardcoded) and explicit errors on unknown systems. The `--houses` flag
+now rides on natal, transit, synastry, solar-return, composite, wheel,
+and reading; `_optional_houses` defaults to placidus so existing
+behavior is untouched, and `wheel --load NAME --houses whole-sign`
+recomputes cusps in the requested system. Saved charts record the flag
+in their request automatically.
+
+Sólrún: `tests/test_houses.py` 8/8 green plus independent subagent
+verification. Pushed via the PAT tool.

@@ -296,3 +296,9 @@ ten new aspects with neutral weight 0 so synergy scoring is unchanged.
   planet glyphs, aspect chords colored by kind, ASC rotated to 9
   o'clock). Pure data in, SVG out; never imports the legacy monolith.
   CLI: `wheel` (`--load` or birth data, `-o` output file).
+
+- `astroengine/houses.py`: `house_cusps(jd_ut, lat, lon, system)` —
+  twelve cusps + ASC/MC for placidus | whole-sign | equal | koch |
+  regiomontanus; system codes from data/profiles.json; explicit
+  CalculationError on unknown systems. Threaded through the monolith
+  via `_optional_houses(..., system)` and the `--houses` flag.

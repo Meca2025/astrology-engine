@@ -68,12 +68,13 @@ def test_explicit_coordinates_are_resolved_without_geocoding(monkeypatch, coords
 
 def test_zero_coordinate_synastry_overlays_use_actual_julian_days(monkeypatch, capsys):
     monkeypatch.setattr(legacy, 'resolve_timezone', lambda lat, lon: 'Asia/Kolkata')
-    original = legacy.calc_houses
+    import astroengine.houses as houses_mod
+    original = houses_mod.house_cusps
     calls = []
-    def recorded_houses(jd, lat, lon):
+    def recorded_houses(jd, lat, lon, system="placidus"):
         calls.append((jd, lat, lon))
-        return original(jd, lat, lon)
-    monkeypatch.setattr(legacy, 'calc_houses', recorded_houses)
+        return original(jd, lat, lon, system)
+    monkeypatch.setattr(houses_mod, 'house_cusps', recorded_houses)
     args = SimpleNamespace(date1='2000-01-01', time1='00:15', date2='2000-01-01',
                            time2='12:00', lat1=0, lon1=0, lat2=0, lon2=30,
                            city1=None, nation1=None, city2=None, nation2=None,
