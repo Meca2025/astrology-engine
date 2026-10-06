@@ -1,3 +1,105 @@
+# Expansion roadmap — active plan
+
+Updated 2026-10-06. This plan supersedes the historical backlog retained below.
+"All astrology" is an extensible program: schools disagree, traditions evolve,
+and some methods lack adequate sources. Coverage is tracked method by method.
+Availability means working computation + CLI/API + tests + documented limits;
+independent validation is a separate evidence level.
+
+## Starting point and delivery loop
+
+16 Western text commands already exist, including basic synergy and location
+lines. Expand their correctness, structure and depth while adding Jyotisha and
+other traditions. Each slice: document/push work order -> implement -> verify ->
+update capability/interface/TODO/devlog -> commit/push -> confirm remote HEAD ->
+advance to the next ready slice. Never promote a failed or merely planned method.
+
+## First implementation wave
+
+| Slice | Deliverable | Depends on | Acceptance gate |
+| --- | --- | --- | --- |
+| S01 | Typed chart request, complete UTC conversion, tropical/sidereal profiles, JSON, backend provenance, discovery, packaging and OS CI | baseline | Date rollover/DST/invalid-input tests; direct Swiss comparisons; JSON subprocess contract |
+| S02 | Jyotisha D1: Lahiri/Raman/Krishnamurti/Fagan options, mean/true Rahu-Ketu, whole-sign/rasi houses, nakshatra/pada | S01 | Same frame for houses/planets; 27/108 segment boundaries; nodes exactly opposite, same motion |
+| S03 | Classical vargas D1/D2/D3/D4/D7/D9/D10/D12/D16/D20/D24/D27/D30/D40/D45/D60 | S02 | Named Parashari mapping variants; odd/even/modality boundaries; no false harmonic substitution |
+| S04 | Vimshottari 120-year maha/antar timeline, balance at birth, chosen year length and as-of lookup | S02 | Full cycle/order/sum/half-open intervals, independent timeline examples |
+| S05 | Instant panchanga: tithi, paksha, karana, nakshatra, nitya yoga, civil weekday | S02 | Wrap/boundary examples; explicitly separate instant from sunrise calendar |
+| S06 | JSON relationship workbench: locations/zones per person, cross-aspects, house overlays, midpoint composite and explainable synergy | S01 | Independent zones; no unknown-time overlays; circular/swap symmetry and score evidence |
+| S07 | Relocation chart, exact query-latitude MC/IC/ASC/DSC lines, angular residuals, circumpolar status | S01 | Original UTC fixed; spherical geometry and horizon fixtures; antimeridian handling |
+| S08 | Advanced Western starter: whole-sign annual profections, harmonics and sensitive midpoints | S01 | Birthday/age boundaries, rulership provenance, exact oppositions and orb fixtures |
+
+## Comprehensive Jyotisha program
+
+| Slice | Scope and school choices | Gate/dependencies |
+| --- | --- | --- |
+| V09 | D1-D60 extended variants, bhava/chalit (Sripati/equal), karakas (7/8), planetary/sign drishti, avasthas, combustion, planetary war | S02-S03; source variants and independent fixtures for each rule |
+| V10 | Shadbala six components, ishta/kashta, bhava bala, vimsopaka, ashtakavarga/bhinna/sarva, shodhana | V09; each component benchmarked and summed with units |
+| V11 | Yoga catalog: raja/dhana/pancha mahapurusha/nabhasa/viparita, cancellation and strength conditions; named dosha rules | V09-V10; declarative conditions, counterexamples and severity trace |
+| V12 | Dasha framework: Vimshottari nested levels, Yogini/Ashtottari/Kalachakra, Chara and Narayana variants, conditional eligibility | S04/V09; school-specific clocks, independent reference timelines |
+| V13 | Sunrise-based local panchanga, transition roots, sunrise/sunset, vara, rahu/gulika/yamaganda, hora, muhurta, festivals | S05 + robust event solver; location/day-length/DST/polar/lunisolar calendar gates |
+| V14 | Gochara with natal Moon/lagna reference, vedha, sade sati, transit/dasha overlays; prashna, Tajika/varshaphala, KP cusp/sub-lord methods | V09-V13; declare traditions separately and test exact partitions |
+| V15 | Ashtakoota 8 components/36 points, regional exceptions, mangala matching, multi-factor relationship explanations | S06/V09; validated table provenance; no deterministic marriage verdict |
+| V16 | Jaimini arudhas/upapada/argala/chara karakas/drishti and optional Nadi research adapters | V09/V12; distinct rule profiles; no claimed lost/secret tradition coverage |
+
+## Advanced Western, location and relationship program
+
+| Slice | Scope | Acceptance gate |
+| --- | --- | --- |
+| W09 | Time/geo correctness migration for all 16 legacy commands; precision-aware event root finder, stations/VOC/eclipses/general planetary returns | S01; legacy regression plus motion/wrap/multiple-root fixtures |
+| W10 | Sect correction, Dorothean/Ptolemaic triplicity, bounds/faces, reception, bonification/maltreatment, fixed stars, asteroids | Source profiles and actual ephemeris files; verified dignity/day/night examples |
+| W11 | Firdaria, zodiacal releasing, decennials, primary directions, solar arcs, converse/tertiary progressions, progressed angles, return locations | S08/W09/W10; clock/direction conventions and independent references |
+| W12 | Horary/electional rule engines, mundane/ingress charts, historical calendars, astronomical/lunation charts | W09-W11; explicit classical vs modern rule choices, calendars and limits |
+| L09 | Map-ready GeoJSON/SVG, globe/2D rendering, geographic distances to curved lines, local-space azimuth, zenith/nadir, parans, relocated returns | S07/W09; geodesic distance, projection and polar/antimeridian fixtures |
+| R09 | Davison with spherical geographic midpoint, progressed composite, relationship transits, declination parallels, multi-person/team analysis | S06/W09; midpoint ambiguity, time uncertainty and scoring normalization |
+| W13 | Harmonic/dial (90/45), Uranian/midpoint trees, draconic charts, evolutionary/psychological overlays | S08/W10; school-tagged computational definitions and test datasets |
+
+## Other traditions and research adapters
+
+| Program | Required scope | Readiness gate |
+| --- | --- | --- |
+| Chinese | BaZi four pillars, solar terms/Li Chun boundaries, true solar time options, luck pillars; Zi Wei Dou Shu | Authoritative calendar algorithms, sexagenary fixtures, regional/time conventions |
+| Tibetan | Element/animal/mewa/parkha calendars and named lineages | Source review, rights, calendar correlations and independent practitioner examples |
+| Hellenistic/Arabic/Persian | expanded lots, distributions, planetary periods, historical house/rulership profiles | Critical source conventions, calendar/time scales and expected charts |
+| Sidereal schools | Fagan/Bradley, true-star/constellation profiles and distinct zodiac definitions | Ayanamsa provenance; unequal constellations never mislabeled 12 equal signs |
+| Mayan and other calendars | Tzolkin/Haab correlation choices and named cultural interpretations | Calendar correlation and contemporary community/source review; no generic "ancient" claims |
+| Cultural/modern overlays | modern Norse/rune, decan images, lunar mansions and symbolic correspondences | Explicit modern vs historical labeling, optional overlays, source ownership |
+
+These adapters use their own calendars and rule domains. Chinese/Tibetan methods
+are not implemented by applying a sidereal offset to a Western chart. Medical,
+financial and political symbolism remains interpretive material, not a validated
+predictor or advice engine. Rectification is hypothesis exploration with explicit
+uncertainty, never recovery of a supposedly proven birth time.
+
+## Agent, product and infrastructure expansion
+
+- A01: checked-in Hermes skill, capability/JSON schemas, request clarification,
+  profile comparison and cited explanations; Python tool adapter now, MCP/OpenAPI later.
+- A02: bounded batch jobs, cancellation/progress, event caching keyed by all settings,
+  deterministic replay manifests and export/import profiles without automatic storage.
+- A03: report/chart wheels, accessible labels, SVG/PDF/Markdown and interactive maps;
+  separate computation from narrative and preserve calculation provenance on export.
+- A04: optional local-model interpretation, retrieval with source/version trace,
+  tool selection evaluation, cross-tradition comparisons and anti-fabrication tests.
+- I01: dependency/license inventory, ephemeris data provisioning/checksums, frozen
+  environment, CI platform matrix and resource measurements on Raspberry Pi.
+- I02: offline gazetteer, ambiguity resolution and historical timezone confidence.
+- I03: desktop/mobile/browser adapters and native packaging, each with build/runtime
+  checks; do not imply pyswisseph runs natively on every target without a port.
+- I04: independent reference corpus, property/fuzz tests, multilingual Sanskrit
+  transliteration, source registry, documented tolerance and release evidence.
+
+## Release criteria and uncertainty
+
+Every result records conventions, input certainty, backend/version and warnings.
+Tests distinguish formula fixtures, direct library checks, third-party/published
+reference evidence and physical-device evidence. A 16-varga implementation does
+not mean all Jyotisha is complete; panchanga snapshots do not mean festival timing
+is complete. Technique profiles with unmet sources/fixtures stay planned.
+
+## Historical roadmap (preserved)
+
+The following backlog describes the pre-expansion engine. Its accepted limitations
+are superseded by the active correctness gates above where they conflict.
+
 # Roadmap — Astrology Engine
 
 > Planned improvements, known gaps, and integration goals. Ordered roughly by value/effort ratio.

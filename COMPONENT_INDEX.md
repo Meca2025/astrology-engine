@@ -1,0 +1,17 @@
+# Component index
+
+| Path | Responsibility | State at orientation |
+| --- | --- | --- |
+| `astrology_engine.py` | 16 legacy text commands and legacy arithmetic | Existing |
+| `astroengine/` | New typed request and computation boundaries | S01 target |
+| `data/` | Technique profiles and capability states | S01 target |
+| `tests/` | Independent fixtures and integration/error checks | S01 target |
+| `.github/workflows/` | Python/platform validation | S01 target |
+| `docs/references/` | Historical gap analyses | Existing, may be stale |
+| `docs/DECISIONS/` | Architectural decisions | Added |
+| `tasks/` | Document-first work orders and acceptance evidence | Added |
+| `COMMANDS.md` | CLI reference | Existing; extend each slice |
+| `ROADMAP.md`, `TODO.md` | Sequence and current execution truth | Added/extended |
+
+Update this index when new public modules are introduced; their API is recorded in
+`astroengine/INTERFACE.md` with folder boundaries in `README_AI.md`.

@@ -1,3 +1,17 @@
+# Current expansion architecture
+
+Updated 2026-10-06. See DOMAIN_MAP, DATA_FLOW, COMPONENT_INDEX and
+astroengine/INTERFACE for the additive typed computation package. The legacy
+reference below describes the baseline, including unsafe fallback/time assumptions
+that are being migrated in explicit slices. Its worked chart values are historical
+examples, not independently verified fixtures.
+
+New flow: strict request -> full UTC -> serialized ephemeris -> provenance-bearing
+chart -> named technique -> versioned JSON/CLI. New rule content lives in data.
+No new module imports the legacy monolith or rewrites global output streams.
+
+## Preserved legacy reference
+
 # Architecture — Astrology Engine
 
 > Technical reference for vibe coding, extensions, and deep modifications to `astrology_engine.py`.
