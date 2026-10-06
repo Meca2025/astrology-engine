@@ -118,3 +118,5 @@ bypass, numeric overflow, every birth handler's zone propagation, independent
 paired Julian days, real subprocess errors and historical IANA seconds. Agent
 schemas already declare these date/time formats; no new tool is needed. Legacy
 house/backend failures and astronomical root solving remain W09b2/W09b3.
+
+W09b1 hosted/wheel acceptance: c6a3696718d87791b7cb87b98b3cbdfddd1eb0cc, [run 37447854001](https://github.com/hrabanazviking/astrology-engine/actions/runs/37447854001), all six jobs successful with 223 tests. A rebuilt wheel installed outside source passed strict adapter and nine-resource checks. Next: W09b2.

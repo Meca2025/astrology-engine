@@ -65,3 +65,5 @@ empty-time errors, civil/UTC calendar boundaries, secondary dates and leap windo
 The Paris 1890 offset +00:09:21 comes from IANA's Europe/Paris zone record, and the
 expected UTC 11:50:39 is separately subtracted. Hosted acceptance and fresh wheel
 resource/import evidence are recorded separately after implementation push.
+
+W09b1 hosted/wheel acceptance: c6a3696718d87791b7cb87b98b3cbdfddd1eb0cc, [run 37447854001](https://github.com/hrabanazviking/astrology-engine/actions/runs/37447854001), all six jobs successful with 223 tests. A rebuilt wheel installed outside source passed strict adapter and nine-resource checks. Next: W09b2.

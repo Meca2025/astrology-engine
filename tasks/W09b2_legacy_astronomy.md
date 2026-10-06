@@ -45,3 +45,20 @@ remote SHA and all six hosted jobs before closing.
 W09b3 owns precision-aware bracketed astronomical event roots and date-window
 results; R09 owns spherical Davison geography. Broader ephemeris provisioning,
 license/environment freeze and historical timezone source confidence remain I01/I02.
+
+## Initial caller/backend audit
+
+calc_houses currently returns fabricated equal cusps and zero ASC/MC after either
+missing Swiss or any exception. calc_planet_positions discards actual backend flags
+and catches every body failure silently; its derived South Node negates North
+Node speed and hardcodes retrograde. Correct the node motion when migrating this
+shared body adapter and add an explicit regression. The typed ephemeris owner
+already uses a reentrant lock, settings reset, actual flags and optional null
+houses, so any new legacy bridge must coordinate through its public boundary
+instead of importing its private lock or leaving raw sidereal state unprotected.
+Nine single birth handlers and paired overlays/Davison still discard or bypass
+time_known. Date-only antiscia/aspect-grid have no location/house contract.
+Planet-hours catches any astronomy error, prints stdout and returns success;
+that error path is in this slice, while sunrise calendrical semantics need their
+own later V13/planetary-hour migration. Preserve all legacy function names; do
+not treat a negative/zero fabricated value as a substitute for unavailable data.

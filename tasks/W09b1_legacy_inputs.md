@@ -1,6 +1,6 @@
 # W09b1: strict legacy time and location input contracts
 
-Status: local acceptance passed; hosted matrix pending, 2026-10-06.
+Status: complete; local, hosted and installed-wheel acceptance passed, 2026-10-06.
 Owner: legacy input adapter and CLI; part of W09b.
 
 ## Problem and intended behavior
@@ -101,3 +101,5 @@ confirms all 75 existing legacy function names remain. New typed functions are
 under fifty lines. The IANA Paris record supports the historical seconds fixture;
 no broader certainty for historical birth records is claimed. Hosted/wheel evidence
 is tracked separately for the pushed implementation.
+
+Hosted implementation c6a3696718d87791b7cb87b98b3cbdfddd1eb0cc passed all six Linux/macOS/Windows Python 3.11/3.12 jobs in [run 37447854001](https://github.com/hrabanazviking/astrology-engine/actions/runs/37447854001). A freshly installed wheel outside the checkout verified signed UTC hours, normalized birth tuples, strict DST/empty-time rejection and all nine JSON resources. W09b1 has no pending acceptance checks.

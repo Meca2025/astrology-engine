@@ -234,3 +234,9 @@ W09b now proceeds through W09b1 strict legacy inputs, W09b2 house/backend contra
 and W09b3 event roots. Continuous Codex Goal continuation replaces the earlier
 hourly heartbeat at the user's request; each verified slice leads immediately
 to the next ready work order when the thread becomes idle.
+
+W09b1 is verified: strict shared civil/location validation, explicit single and
+per-person zone controls, synergy location inputs, secondary dates/windows and
+zero-coordinate query admission. 223 tests pass locally and in the six-platform
+matrix. Legacy house uncertainty/backend failures remain W09b2; robust event
+roots remain W09b3. Neither parent W09 nor the full expansion is complete.
