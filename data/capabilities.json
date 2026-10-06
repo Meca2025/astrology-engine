@@ -27,8 +27,9 @@
     },
     {
       "id": "panchanga",
-      "status": "planned",
-      "scope": "Instant five-limb snapshot; sunrise calendars later"
+      "status": "available",
+      "scope": "Instant five-limb snapshot; sunrise calendars later",
+      "evidence": "tithi/karana/yoga wrap and fixed-cycle fixtures; civil weekday contract"
     },
     {
       "id": "relationship",

@@ -53,6 +53,11 @@ def register_commands(subparsers: Any) -> None:
     dashas.add_argument("--as-of", help="ISO timestamp with explicit UTC offset")
     dashas.set_defaults(**load_rules("vedic.json")["defaults"],
                         modern_handler=lambda args: compute_dashas(request_from_args(args), args.years, args.year_model, args.as_of))
+    from .panchanga import compute_panchanga
+    panchanga = subparsers.add_parser("panchanga", help="Instant panchanga angular elements and civil weekday")
+    add_chart_arguments(panchanga)
+    panchanga.set_defaults(**load_rules("vedic.json")["defaults"],
+                          modern_handler=lambda args: compute_panchanga(request_from_args(args)))
     discovery = subparsers.add_parser("capabilities", help="Technique availability and scope as JSON")
     discovery.set_defaults(modern_handler=lambda args: capabilities())
 

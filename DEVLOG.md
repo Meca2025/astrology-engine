@@ -37,3 +37,8 @@ or exhaustive school coverage claimed.
 clocks and as-of lookup. Example 50 balance matched; subperiods are anchored before
 birth and exact boundary belongs to next period. Hosted repaired Windows matrix
 passed together with Linux/macOS on Python 3.11/3.12.
+
+## S05 — panchanga snapshot
+
+101 total tests passed. Implemented instant lunar/solar partitions and explicit
+calendar limits. Local weekday tested across UTC date rollover.

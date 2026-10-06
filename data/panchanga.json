@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "tithis": ["Pratipada", "Dwitiya", "Tritiya", "Chaturthi", "Panchami", "Shashthi", "Saptami", "Ashtami", "Navami", "Dashami", "Ekadashi", "Dwadashi", "Trayodashi", "Chaturdashi"],
+  "full_moon_tithi": "Purnima",
+  "new_moon_tithi": "Amavasya",
+  "pakshas": ["Shukla", "Krishna"],
+  "karanas_repeating": ["Bava", "Balava", "Kaulava", "Taitila", "Garaja", "Vanija", "Vishti"],
+  "karanas_fixed": {"0": "Kimstughna", "57": "Shakuni", "58": "Chatushpada", "59": "Naga"},
+  "yogas": ["Vishkambha", "Priti", "Ayushman", "Saubhagya", "Shobhana", "Atiganda", "Sukarma", "Dhriti", "Shula", "Ganda", "Vriddhi", "Dhruva", "Vyaghata", "Harshana", "Vajra", "Siddhi", "Vyatipata", "Variyana", "Parigha", "Shiva", "Siddha", "Sadhya", "Shubha", "Shukla", "Brahma", "Indra", "Vaidhriti"],
+  "civil_weekdays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+  "method": "Instant geocentric angular partitions; civil weekday is not sunrise-based vara",
+  "source": "https://www.vedicastrologer.org/articles/vedic_astro_textbook.pdf"
+}

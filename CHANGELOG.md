@@ -120,3 +120,7 @@ Sixteen classical divisional charts with explicit mappings and source fractions.
 ### S04 additions
 
 Vimshottari maha/antar dates, birth balance, year clocks and active-period lookup.
+
+### S05 additions
+
+Instant tithi/paksha, repeating/fixed karana, nakshatra and nitya yoga.

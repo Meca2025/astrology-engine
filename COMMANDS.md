@@ -456,3 +456,6 @@ example discrepancy recorded in docs/references/technique-sources.md.
 `dashas` shares Vedic flags and accepts `--years NUMBER`, `--year-model
 tropical|julian|savana` and `--as-of ISO_TIMESTAMP_WITH_OFFSET`. Defaults: 120 years
 and 365.2425-day tropical clock. Antars are clipped, preserving full boundaries.
+
+`panchanga` shares Vedic flags and returns instant elements plus local civil
+weekday. It does not compute sunrise vara, transitions or a festival calendar.

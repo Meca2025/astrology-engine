@@ -24,3 +24,6 @@ the sixteen named mappings. Technique discrepancy ledger lives in docs/reference
 
 `astroengine/dashas.py` owns continuous-day Vimshottari arithmetic; timing.json
 owns year-clock choices and reporting defaults.
+
+`astroengine/panchanga.py` and data/panchanga.json own instant calendrical
+partitions; sunrise-based calendars remain a separate domain slice.

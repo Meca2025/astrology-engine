@@ -51,3 +51,10 @@ optional active pair. `vimshottari_timeline(birth, moon_longitude, years, year_d
 is pure period arithmetic with an aware birth datetime; `active_period` uses
 half-open intervals. Antars originate at full maha start before birth, then clip.
 As-of outside the report window returns null; no event interpretation is implied.
+
+## Panchanga snapshot (S05)
+
+`panchanga.panchanga_elements(sun, moon)` takes same-frame sidereal degrees and
+returns instantaneous tithi/paksha, karana, nakshatra and nitya yoga partitions.
+`compute_panchanga(request)` supplies D1/provenance and local civil weekday.
+Sunrise-based vara is null; no transition/festival/muhurta calculation is claimed.
