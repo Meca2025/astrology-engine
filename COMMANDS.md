@@ -495,6 +495,25 @@ Spreads: `single`, `three`, `five-cross`, `celtic-cross`, `horseshoe`,
 
 ---
 
+## `lenormand`
+
+Petit Lenormand readings from the traditional 36-card deck (folk
+cartomancy, 19th century): line spreads read in combination — pairs and
+chains carry the sentence — plus the full Grand Tableau with houses,
+knighting, mirroring, corners, and the significator's fate line. No
+reversals in this tradition. Draws are seeded and reproducible.
+
+```bash
+python3 astrology_engine.py lenormand --spread line3 --seed 7
+python3 astrology_engine.py lenormand --spread tableau --seed 7 --significator woman
+python3 astrology_engine.py lenormand --list-spreads
+python3 astrology_engine.py lenormand --spread nine --question "What of the venture?" --json
+```
+
+Spreads: `single`, `line3`, `line5`, `line7`, `nine`, `tableau`.
+
+---
+
 ## `runecast`
 
 Rune casting in three rows: Elder Futhark (24), Younger Futhark (16),

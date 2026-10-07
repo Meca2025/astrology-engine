@@ -2289,6 +2289,61 @@ def cmd_tarot(args):
     return {"reading": result}
 
 
+def cmd_lenormand(args):
+    from astroengine.lenormand import draw, spreads, tableau
+    if args.list_spreads:
+        header("LENORMAND SPREADS", f"{len(spreads())} layouts")
+        for name, positions in sorted(spreads().items()):
+            print(f"  {name:<10} {len(positions):>2} cards — {', '.join(positions[:4])}"
+                  + ("…" if len(positions) > 4 else ""))
+        print()
+        return {"spreads": sorted(spreads())}
+    if args.spread.strip().lower() == "tableau":
+        result = tableau(seed=args.seed, question=args.question,
+                         significator=args.significator)
+    else:
+        result = draw(spread=args.spread, seed=args.seed,
+                      question=args.question)
+    if args.json:
+        print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+        return {"reading": result}
+    header("LENORMAND", f"{result['spread']}  ·  {len(result['grid']) if result['spread'] == 'tableau' else len(result['cards'])} cards"
+           + (f"  ·  seed {args.seed}" if args.seed is not None else ""))
+    if args.question:
+        print(f"  Question: {args.question}\n")
+    if result["spread"] == "tableau":
+        sig = result["significator"]
+        print(f"  Significator: {sig['card']} at position {sig['position']} "
+              f"(row {sig['row']}, column {sig['col']})\n")
+        for row in range(1, 5):
+            cells = [c for c in result["grid"] if c["row"] == row]
+            print("  " + "  ".join(f"{c['position']:>2}:{c['card']['name'][:10]:<10}"
+                                   for c in cells))
+        print(f"\n  Corners (theme): {', '.join(result['corners'])}")
+        print(f"  Fate line (row {sig['row']}): {', '.join(result['fate_line'])}")
+        print("  Knighting the significator:")
+        for k in result["knighting"]:
+            print(f"    position {k['position']:>2}: {k['card']}")
+        print("  Mirroring (position pairs):")
+        for m in result["mirroring"][:6]:
+            a, b = m["positions"]
+            ca, cb = m["cards"]
+            print(f"    {a:>2} <-> {b:>2}: {ca} / {cb}")
+        print("    … (18 pairs in --json)")
+    else:
+        for c in result["cards"]:
+            print(f"  {c['position']}:")
+            print(f"    {c['card']['name']} ({c['playing_card']}) — {', '.join(c['keywords'])}")
+            print(f"    {c['meaning']} Timing: {c['timing']}.")
+        if result.get("chain"):
+            print("\n  The chain (pairs carry the sentence):")
+            for link in result["chain"]:
+                print(f"    {link}")
+    print()
+    print("  Interpretive — symbolic counsel, not computed fact.")
+    return {"reading": result}
+
+
 def cmd_reading(args):
     from astroengine.readings import reading as weave
     positions, asc_sign, mc_sign = None, None, None
@@ -4442,6 +4497,17 @@ def main():
     trt.add_argument("--json", action="store_true")
     add_chart_lib(trt, with_load=False)
 
+    lnr = sub.add_parser("lenormand", help="Lenormand card reading with classic spreads")
+    lnr.add_argument("--spread", default="line3",
+                     help="Spread name (see --list-spreads)")
+    lnr.add_argument("--list-spreads", action="store_true", dest="list_spreads")
+    lnr.add_argument("--seed", type=int, default=None)
+    lnr.add_argument("--question", default=None)
+    lnr.add_argument("--significator", default="woman", choices=("man", "woman"),
+                     help="Significator card for the Grand Tableau")
+    lnr.add_argument("--json", action="store_true")
+    add_chart_lib(lnr, with_load=False)
+
     rdg = sub.add_parser("reading", help="Interpretive astrology reading (general/love/career)")
     rdg.add_argument("--kind", default="general", choices=("general", "love", "career"))
     rdg.add_argument("--date", required=False, help="YYYY-MM-DD (or --load NAME)")
@@ -4678,6 +4744,7 @@ def main():
         "chart-show":   cmd_chart_show,
         "chart-delete": cmd_chart_delete,
         "tarot":        cmd_tarot,
+        "lenormand":    cmd_lenormand,
         "reading":      cmd_reading,
         "numerology":   cmd_numerology,
         "iching":       cmd_iching,

@@ -688,3 +688,16 @@ forecast's Jaimini/Tibetan/runic sections and the dossier's
 Vedic Depths, JSON error objects, --debug flag. Scope note: the
 forecast's BaZi/Chinese core stays strict (pure functions of
 validated input; placeholders would mislead).
+
+L01 (2026-10-07): Lenormand cartomancy — new `lenormand` CLI subcommand
+(Volmarr's commission; muse: Isabella Rotman's Might Hurt Lenormand
+Kickstarter launch). data/lenormand.json: traditional 36-card Petit
+Lenormand corpus (order, names, French-suited inserts, folk meanings
+written fresh, timing notes). astroengine/lenormand.py: spreads
+single/line3/line5/line7/nine, pair fusion + chains (pairs carry the
+sentence, per tradition), Grand Tableau (4x9) with houses (position N =
+house of card N), knighting (hand-verified fixtures), mirroring (i/37-i),
+corners, significator fate line; no reversals (not traditional);
+near-miss spread/significator names get S01 suggest() hints. CLI-only
+like its divination siblings (no agent tool). Docs: COMMANDS.md section,
+README 45->46 subcommands + divination table row. 17 new tests.

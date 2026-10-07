@@ -7,7 +7,7 @@
 The Astrology Engine is a **reproducible computation forge** for astrology: real
 ephemeris positions, strict time and location handling, and machine-readable
 output — no cloud, no API keys, no lookup tables, no fabricated chart
-positions. Forty-five CLI subcommands span Western, Hellenistic, Vedic
+positions. Forty-six CLI subcommands span Western, Hellenistic, Vedic
 (Jyotisha), Northern runic, divination, Chinese, and Tibetan
 traditions, with every technique carrying its
 provenance, its limits, and its evidence.
@@ -50,7 +50,7 @@ and documented — never merely planned.
 
 ---
 
-## The 45 subcommands
+## The 46 subcommands
 
 | Command | Art |
 | --- | --- |
@@ -81,7 +81,7 @@ and documented — never merely planned.
 | `location` | Relocation and angular lines at a destination |
 | `western` | Annual profections, harmonics, sensitive midpoints |
 | `runic` | The runic star-program: Pennick's runic astrology as layer flags, text + JSON |
-| `tarot` / `reading` / `numerology` / `iching` / `runecast` / `ogham` / `chinese` / `bazi` / `tibetan` | The divination line: tarot spreads, astrology readings, numerology, I-Ching, rune casting (Elder/Younger Futhark, futhorc), ogham readings, Chinese zodiac, Four Pillars/BaZi, Tibetan astrology |
+| `tarot` / `lenormand` / `reading` / `numerology` / `iching` / `runecast` / `ogham` / `chinese` / `bazi` / `tibetan` | The divination line: tarot spreads, Lenormand lines and Grand Tableau, astrology readings, numerology, I-Ching, rune casting (Elder/Younger Futhark, futhorc), ogham readings, Chinese zodiac, Four Pillars/BaZi, Tibetan astrology |
 | `wheel` | Chart wheels — the sky rendered as beautiful SVG, five house systems via `--houses` |
 | `solar-arc` | Solar arc directions — the great predictive art, directed-to-natal aspects |
 | `profection` | Annual profections — the Hellenistic time-lord wheel |
@@ -286,7 +286,7 @@ and [RULES.AI.md](RULES.AI.md) before touching code.
 
 | Path | Holds |
 | --- | --- |
-| `astrology_engine.py` | Legacy CLI: 45 text subcommands |
+| `astrology_engine.py` | Legacy CLI: 46 text subcommands |
 | `astroengine/` | Typed package: models, ephemeris, vedic, runic, CLI, agent |
 | `data/` | Immutable rule tables (`runic.json`, `vedic.json`, `western.json`, …) |
 | `tests/` | Offline fixtures and integration checks |
