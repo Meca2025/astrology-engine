@@ -514,6 +514,25 @@ Spreads: `single`, `line3`, `line5`, `line7`, `nine`, `tableau`.
 
 ---
 
+## `cartomancy`
+
+Fortune-telling with the standard 52-card French deck (old European folk
+cartomancy): Hearts rule love and home, Diamonds money and enterprise,
+Clubs work and action, Spades challenges and transformation. Read in
+combination — pairs and chains carry the sentence. Draws are seeded and
+reproducible.
+
+```bash
+python3 astrology_engine.py cartomancy --spread line3 --seed 7
+python3 astrology_engine.py cartomancy --spread fifteen --seed 7
+python3 astrology_engine.py cartomancy --list-spreads
+python3 astrology_engine.py cartomancy --spread nine --question "What of the venture?" --json
+```
+
+Spreads: `single`, `line3`, `line5`, `line7`, `nine`, `fifteen`.
+
+---
+
 ## `runecast`
 
 Rune casting in three rows: Elder Futhark (24), Younger Futhark (16),

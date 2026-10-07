@@ -2289,6 +2289,45 @@ def cmd_tarot(args):
     return {"reading": result}
 
 
+def cmd_cartomancy(args):
+    from astroengine.cartomancy import draw, spreads, suits
+    if args.list_spreads:
+        header("CARTOMANCY SPREADS", f"{len(spreads())} layouts")
+        for name, positions in sorted(spreads().items()):
+            print(f"  {name:<10} {len(positions):>2} cards — {', '.join(positions[:4])}"
+                  + ("…" if len(positions) > 4 else ""))
+        print()
+        print("  Suits: " + "; ".join(
+            f"{s} ({', '.join(d[:2])})" for s, d in suits().items()))
+        print()
+        return {"spreads": sorted(spreads())}
+    result = draw(spread=args.spread, seed=args.seed,
+                  question=args.question)
+    if args.json:
+        print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+        return {"reading": result}
+    header("CARTOMANCY", f"{result['spread']}  ·  {len(result['cards'])} cards"
+           + (f"  ·  seed {args.seed}" if args.seed is not None else ""))
+    if args.question:
+        print(f"  Question: {args.question}\n")
+    for c in result["cards"]:
+        print(f"  {c['position']}:")
+        print(f"    {c['card']['name']} — {', '.join(c['keywords'])}")
+        print(f"    {c['meaning']}")
+    if result.get("chain"):
+        print("\n  The chain (pairs carry the sentence):")
+        for link in result["chain"]:
+            print(f"    {link}")
+    dom = result["dominant_suit"]
+    print(f"\n  Dominant suit: {dom['suit'].title()} ({dom['count']} cards) — "
+          f"{', '.join(dom['domain'])}")
+    if result["courts"]:
+        print(f"  Courts present: {', '.join(result['courts'])}")
+    print()
+    print("  Interpretive — symbolic counsel, not computed fact.")
+    return {"reading": result}
+
+
 def cmd_lenormand(args):
     from astroengine.lenormand import draw, spreads, tableau
     if args.list_spreads:
@@ -4508,6 +4547,15 @@ def main():
     lnr.add_argument("--json", action="store_true")
     add_chart_lib(lnr, with_load=False)
 
+    crt = sub.add_parser("cartomancy", help="Playing-card cartomancy readings")
+    crt.add_argument("--spread", default="line3",
+                     help="Spread name (see --list-spreads)")
+    crt.add_argument("--list-spreads", action="store_true", dest="list_spreads")
+    crt.add_argument("--seed", type=int, default=None)
+    crt.add_argument("--question", default=None)
+    crt.add_argument("--json", action="store_true")
+    add_chart_lib(crt, with_load=False)
+
     rdg = sub.add_parser("reading", help="Interpretive astrology reading (general/love/career)")
     rdg.add_argument("--kind", default="general", choices=("general", "love", "career"))
     rdg.add_argument("--date", required=False, help="YYYY-MM-DD (or --load NAME)")
@@ -4745,6 +4793,7 @@ def main():
         "chart-delete": cmd_chart_delete,
         "tarot":        cmd_tarot,
         "lenormand":    cmd_lenormand,
+        "cartomancy":   cmd_cartomancy,
         "reading":      cmd_reading,
         "numerology":   cmd_numerology,
         "iching":       cmd_iching,

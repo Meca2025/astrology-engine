@@ -1,0 +1,605 @@
+{
+ "system": "Playing-card cartomancy",
+ "version": "1.0",
+ "lineage": "Standard 52-card French deck folk cartomancy. Suit domains and card meanings follow the traditional shared folk system, written fresh for this corpus. Like Lenormand, this tradition reads in combination — pairs and chains carry the sentence.",
+ "suit_domains": {
+  "hearts": [
+   "love",
+   "emotions",
+   "home",
+   "happiness"
+  ],
+  "diamonds": [
+   "money",
+   "material matters",
+   "enterprise",
+   "energy"
+  ],
+  "clubs": [
+   "work",
+   "action",
+   "ambition",
+   "creativity"
+  ],
+  "spades": [
+   "challenges",
+   "obstacles",
+   "endings",
+   "transformation"
+  ]
+ },
+ "cards": [
+  {
+   "suit": "hearts",
+   "rank": "ace",
+   "name": "Ace of Hearts",
+   "keywords": [
+    "love",
+    "new romance",
+    "the home"
+   ],
+   "meaning": "New love or deep affection blossoms; the heart finds its home."
+  },
+  {
+   "suit": "hearts",
+   "rank": "2",
+   "name": "2 of Hearts",
+   "keywords": [
+    "partnership",
+    "good fortune",
+    "unity"
+   ],
+   "meaning": "A lucky partnership; two hearts moving as one."
+  },
+  {
+   "suit": "hearts",
+   "rank": "3",
+   "name": "3 of Hearts",
+   "keywords": [
+    "caution",
+    "indecision",
+    "tenderness"
+   ],
+   "meaning": "Caution in matters of the heart; do not rush what is tender."
+  },
+  {
+   "suit": "hearts",
+   "rank": "4",
+   "name": "4 of Hearts",
+   "keywords": [
+    "change",
+    "a journey",
+    "restlessness"
+   ],
+   "meaning": "Change stirs the heart; love may travel or transform."
+  },
+  {
+   "suit": "hearts",
+   "rank": "5",
+   "name": "5 of Hearts",
+   "keywords": [
+    "jealousy",
+    "resentment",
+    "friction"
+   ],
+   "meaning": "Jealousy clouds affection; clear the air before it festers."
+  },
+  {
+   "suit": "hearts",
+   "rank": "6",
+   "name": "6 of Hearts",
+   "keywords": [
+    "harmony",
+    "good fortune",
+    "ease"
+   ],
+   "meaning": "Harmony and good fortune; the heart rests easy."
+  },
+  {
+   "suit": "hearts",
+   "rank": "7",
+   "name": "7 of Hearts",
+   "keywords": [
+    "broken promises",
+    "disappointment",
+    "letdown"
+   ],
+   "meaning": "A promise bends or breaks; guard against disappointment."
+  },
+  {
+   "suit": "hearts",
+   "rank": "8",
+   "name": "8 of Hearts",
+   "keywords": [
+    "visits",
+    "invitations",
+    "company"
+   ],
+   "meaning": "Visits and invitations; company comes bearing warmth."
+  },
+  {
+   "suit": "hearts",
+   "rank": "9",
+   "name": "9 of Hearts",
+   "keywords": [
+    "wishes fulfilled",
+    "dreams",
+    "joy"
+   ],
+   "meaning": "The wish card: a heartfelt dream comes true."
+  },
+  {
+   "suit": "hearts",
+   "rank": "10",
+   "name": "10 of Hearts",
+   "keywords": [
+    "happiness",
+    "good luck",
+    "celebration"
+   ],
+   "meaning": "Deep happiness and good luck; joy overflows."
+  },
+  {
+   "suit": "hearts",
+   "rank": "jack",
+   "name": "Jack of Hearts",
+   "keywords": [
+    "a fair youth",
+    "thoughtfulness",
+    "kindness"
+   ],
+   "meaning": "A fair, thoughtful young man; kind intentions."
+  },
+  {
+   "suit": "hearts",
+   "rank": "queen",
+   "name": "Queen of Hearts",
+   "keywords": [
+    "a fair woman",
+    "affection",
+    "warmth"
+   ],
+   "meaning": "A fair, affectionate woman; warmth you can trust."
+  },
+  {
+   "suit": "hearts",
+   "rank": "king",
+   "name": "King of Hearts",
+   "keywords": [
+    "a fair man",
+    "good counsel",
+    "honesty"
+   ],
+   "meaning": "A fair, good-natured man; honest counsel in love."
+  },
+  {
+   "suit": "diamonds",
+   "rank": "ace",
+   "name": "Ace of Diamonds",
+   "keywords": [
+    "money news",
+    "a gift",
+    "enterprise"
+   ],
+   "meaning": "News of money or a valued gift; enterprise stirs."
+  },
+  {
+   "suit": "diamonds",
+   "rank": "2",
+   "name": "2 of Diamonds",
+   "keywords": [
+    "opposition",
+    "clashing values",
+    "friction"
+   ],
+   "meaning": "Opposition in money matters; a clash of values."
+  },
+  {
+   "suit": "diamonds",
+   "rank": "3",
+   "name": "3 of Diamonds",
+   "keywords": [
+    "quarrels",
+    "legal wrangles",
+    "fine print"
+   ],
+   "meaning": "Quarrels over money or papers; mind the fine print."
+  },
+  {
+   "suit": "diamonds",
+   "rank": "4",
+   "name": "4 of Diamonds",
+   "keywords": [
+    "inheritance",
+    "steady gain",
+    "security"
+   ],
+   "meaning": "Steady financial gain; an inheritance or solid improvement."
+  },
+  {
+   "suit": "diamonds",
+   "rank": "5",
+   "name": "5 of Diamonds",
+   "keywords": [
+    "business success",
+    "prosperity",
+    "shared wealth"
+   ],
+   "meaning": "Success in enterprise; prosperity shared."
+  },
+  {
+   "suit": "diamonds",
+   "rank": "6",
+   "name": "6 of Diamonds",
+   "keywords": [
+    "new venture",
+    "financial warning",
+    "caution"
+   ],
+   "meaning": "A new venture begun; heed the warning in the accounts."
+  },
+  {
+   "suit": "diamonds",
+   "rank": "7",
+   "name": "7 of Diamonds",
+   "keywords": [
+    "gossip",
+    "money talk",
+    "rumors"
+   ],
+   "meaning": "Gossip circles your finances; keep your own counsel."
+  },
+  {
+   "suit": "diamonds",
+   "rank": "8",
+   "name": "8 of Diamonds",
+   "keywords": [
+    "unexpected money",
+    "late reward",
+    "windfall"
+   ],
+   "meaning": "Unexpected money arrives; a late reward."
+  },
+  {
+   "suit": "diamonds",
+   "rank": "9",
+   "name": "9 of Diamonds",
+   "keywords": [
+    "new opportunity",
+    "enterprise",
+    "initiative"
+   ],
+   "meaning": "A new business opportunity knocks; answer it."
+  },
+  {
+   "suit": "diamonds",
+   "rank": "10",
+   "name": "10 of Diamonds",
+   "keywords": [
+    "money",
+    "travel for gain",
+    "commerce"
+   ],
+   "meaning": "Money in motion; travel or effort brings gain."
+  },
+  {
+   "suit": "diamonds",
+   "rank": "jack",
+   "name": "Jack of Diamonds",
+   "keywords": [
+    "an unreliable youth",
+    "cleverness",
+    "caution"
+   ],
+   "meaning": "A clever but unreliable young person; verify before trusting."
+  },
+  {
+   "suit": "diamonds",
+   "rank": "queen",
+   "name": "Queen of Diamonds",
+   "keywords": [
+    "a gossip",
+    "chatter",
+    "a talkative woman"
+   ],
+   "meaning": "A talkative woman; not all she says is gold."
+  },
+  {
+   "suit": "diamonds",
+   "rank": "king",
+   "name": "King of Diamonds",
+   "keywords": [
+    "a man of enterprise",
+    "boldness",
+    "acumen"
+   ],
+   "meaning": "A sharp man of business; deal boldly but wisely."
+  },
+  {
+   "suit": "clubs",
+   "rank": "ace",
+   "name": "Ace of Clubs",
+   "keywords": [
+    "good news",
+    "wealth",
+    "rewarded effort"
+   ],
+   "meaning": "Good news and wealth through effort; work bears fruit."
+  },
+  {
+   "suit": "clubs",
+   "rank": "2",
+   "name": "2 of Clubs",
+   "keywords": [
+    "opposition",
+    "blocked plans",
+    "resistance"
+   ],
+   "meaning": "Plans meet opposition; hold your ground."
+  },
+  {
+   "suit": "clubs",
+   "rank": "3",
+   "name": "3 of Clubs",
+   "keywords": [
+    "fortunate union",
+    "ambition",
+    "alliance"
+   ],
+   "meaning": "A fortunate union; ambition marries well."
+  },
+  {
+   "suit": "clubs",
+   "rank": "4",
+   "name": "4 of Clubs",
+   "keywords": [
+    "change",
+    "possible deceit",
+    "vigilance"
+   ],
+   "meaning": "Change in work; stay alert for deceit."
+  },
+  {
+   "suit": "clubs",
+   "rank": "5",
+   "name": "5 of Clubs",
+   "keywords": [
+    "new friendships",
+    "alliances",
+    "fellowship"
+   ],
+   "meaning": "New friendships and alliances form around your work."
+  },
+  {
+   "suit": "clubs",
+   "rank": "6",
+   "name": "6 of Clubs",
+   "keywords": [
+    "business success",
+    "prosperity",
+    "growth"
+   ],
+   "meaning": "Success in business; the enterprise prospers."
+  },
+  {
+   "suit": "clubs",
+   "rank": "7",
+   "name": "7 of Clubs",
+   "keywords": [
+    "success",
+    "opposition overcome",
+    "persistence"
+   ],
+   "meaning": "Success won against opposition; persistence pays."
+  },
+  {
+   "suit": "clubs",
+   "rank": "8",
+   "name": "8 of Clubs",
+   "keywords": [
+    "work troubles",
+    "friction",
+    "labor"
+   ],
+   "meaning": "Friction in work matters; labor through it."
+  },
+  {
+   "suit": "clubs",
+   "rank": "9",
+   "name": "9 of Clubs",
+   "keywords": [
+    "achievement",
+    "recognition",
+    "admiration"
+   ],
+   "meaning": "Achievement recognized; admiration follows effort."
+  },
+  {
+   "suit": "clubs",
+   "rank": "10",
+   "name": "10 of Clubs",
+   "keywords": [
+    "travel",
+    "business journey",
+    "movement"
+   ],
+   "meaning": "A journey for work; business travel succeeds."
+  },
+  {
+   "suit": "clubs",
+   "rank": "jack",
+   "name": "Jack of Clubs",
+   "keywords": [
+    "a loyal youth",
+    "friendship",
+    "trust"
+   ],
+   "meaning": "A loyal young friend; trust offered freely."
+  },
+  {
+   "suit": "clubs",
+   "rank": "queen",
+   "name": "Queen of Clubs",
+   "keywords": [
+    "a confident woman",
+    "capability",
+    "ally"
+   ],
+   "meaning": "A confident, capable woman; a strong ally."
+  },
+  {
+   "suit": "clubs",
+   "rank": "king",
+   "name": "King of Clubs",
+   "keywords": [
+    "an honest man",
+    "reliability",
+    "judgment"
+   ],
+   "meaning": "An honest, reliable man; sound judgment."
+  },
+  {
+   "suit": "spades",
+   "rank": "ace",
+   "name": "Ace of Spades",
+   "keywords": [
+    "transformation",
+    "endings",
+    "intensity"
+   ],
+   "meaning": "A powerful ending or transformation; intensity reshapes."
+  },
+  {
+   "suit": "spades",
+   "rank": "2",
+   "name": "2 of Spades",
+   "keywords": [
+    "deceit",
+    "separation",
+    "division"
+   ],
+   "meaning": "Deceit or separation; something divides."
+  },
+  {
+   "suit": "spades",
+   "rank": "3",
+   "name": "3 of Spades",
+   "keywords": [
+    "unhappiness",
+    "parting",
+    "sorrow"
+   ],
+   "meaning": "Sorrow or parting; a difficult passage."
+  },
+  {
+   "suit": "spades",
+   "rank": "4",
+   "name": "4 of Spades",
+   "keywords": [
+    "small misfortune",
+    "low spirits",
+    "rest"
+   ],
+   "meaning": "Small misfortunes or low spirits; rest and recover."
+  },
+  {
+   "suit": "spades",
+   "rank": "5",
+   "name": "5 of Spades",
+   "keywords": [
+    "success after struggle",
+    "perseverance",
+    "victory"
+   ],
+   "meaning": "Success earned through struggle; the obstacle yields."
+  },
+  {
+   "suit": "spades",
+   "rank": "6",
+   "name": "6 of Spades",
+   "keywords": [
+    "improvement",
+    "hardship passing",
+    "relief"
+   ],
+   "meaning": "Improvement follows hardship; the road clears."
+  },
+  {
+   "suit": "spades",
+   "rank": "7",
+   "name": "7 of Spades",
+   "keywords": [
+    "loss",
+    "sorrow",
+    "grief"
+   ],
+   "meaning": "A loss or sorrow; grieve, then go on."
+  },
+  {
+   "suit": "spades",
+   "rank": "8",
+   "name": "8 of Spades",
+   "keywords": [
+    "bad news",
+    "opposition",
+    "resistance"
+   ],
+   "meaning": "Unwelcome news or opposition; brace and respond."
+  },
+  {
+   "suit": "spades",
+   "rank": "9",
+   "name": "9 of Spades",
+   "keywords": [
+    "deep loss",
+    "the hard card",
+    "endurance"
+   ],
+   "meaning": "The hardest card: deep loss or illness; endure with courage."
+  },
+  {
+   "suit": "spades",
+   "rank": "10",
+   "name": "10 of Spades",
+   "keywords": [
+    "worry",
+    "confinement",
+    "burden"
+   ],
+   "meaning": "Worry weighs heavy; a confining situation."
+  },
+  {
+   "suit": "spades",
+   "rank": "jack",
+   "name": "Jack of Spades",
+   "keywords": [
+    "a hostile youth",
+    "scheming",
+    "guardedness"
+   ],
+   "meaning": "A hostile or scheming young person; stay guarded."
+  },
+  {
+   "suit": "spades",
+   "rank": "queen",
+   "name": "Queen of Spades",
+   "keywords": [
+    "a sharp woman",
+    "experience",
+    "survival"
+   ],
+   "meaning": "A sharp, experienced woman; she has survived worse."
+  },
+  {
+   "suit": "spades",
+   "rank": "king",
+   "name": "King of Spades",
+   "keywords": [
+    "an ambitious man",
+    "power",
+    "reach"
+   ],
+   "meaning": "An ambitious, powerful man; respect his reach."
+  }
+ ]
+}

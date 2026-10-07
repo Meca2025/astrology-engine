@@ -701,3 +701,12 @@ corners, significator fate line; no reversals (not traditional);
 near-miss spread/significator names get S01 suggest() hints. CLI-only
 like its divination siblings (no agent tool). Docs: COMMANDS.md section,
 README 45->46 subcommands + divination table row. 17 new tests.
+
+C01 (2026-10-07): playing-card cartomancy — new `cartomancy` CLI
+subcommand (Volmarr's commission, same day as L01). data/playing_cards.json:
+52-card French deck corpus (suit domains + per-card folk meanings written
+fresh). astroengine/cartomancy.py: spreads single/line3/line5/line7/nine/
+fifteen, pair fusion + chains, dominant-suit summary with traditional
+domain, courts listing, S01 suggest() hints for near-miss spreads;
+no reversals per folk tradition. CLI-only like its divination siblings.
+Docs: COMMANDS.md section, README 46->47 subcommands. 13 new tests.
